@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.CvsPage"
+             Title="CV-urile mele">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label x:Name="WelcomeLabel"
+               FontSize="22"
+               FontAttributes="Bold" />
+
+        <Button Text="Creează CV nou"
+                Clicked="OnCreateCvClicked" />
+
+        <CollectionView x:Name="CvsCollectionView"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="15"
+                            Margin="0,8"
+                            Stroke="LightGray">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <Label Text="{Binding Title}"
+                                   FontSize="20"
+                                   FontAttributes="Bold" />
+
+                            <Label Text="{Binding Language}"
+                                   FontSize="14" />
+
+                            <Label Text="{Binding Summary}"
+                                   FontSize="14" />
+
+                            <Button Text="Șterge"
+                                    Clicked="OnDeleteCvClicked"
+                                    CommandParameter="{Binding Id}" />
+
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>

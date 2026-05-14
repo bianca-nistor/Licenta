@@ -1,0 +1,331 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\pages\\createcvpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:pages\\createcvpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\pages\\createcvpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:pages\\createcvpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\pages\\cvspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:pages\\cvspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\pages\\cvspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:pages\\cvspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\pages\\registerpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:pages\\registerpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\pages\\registerpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:pages\\registerpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:services\\apiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\models\\createcvrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:models\\createcvrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\models\\cvdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:models\\cvdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\models\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:models\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\models\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:models\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.mobile\\jobcv.mobile.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6EA47F29-CDD3-489C-B91A-FE9FAD754F78}|JobCv.Mobile.csproj|solutionrelative:jobcv.mobile.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateCvPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CreateCvPage.xaml.cs",
+              "RelativeDocumentMoniker": "Pages\\CreateCvPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CreateCvPage.xaml.cs*",
+              "RelativeToolTip": "Pages\\CreateCvPage.xaml.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAwC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T21:13:13.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CreateCvPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CreateCvPage.xaml",
+              "RelativeDocumentMoniker": "Pages\\CreateCvPage.xaml",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CreateCvPage.xaml*",
+              "RelativeToolTip": "Pages\\CreateCvPage.xaml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAgwCcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-06T21:12:53.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CvsPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CvsPage.xaml.cs",
+              "RelativeDocumentMoniker": "Pages\\CvsPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CvsPage.xaml.cs*",
+              "RelativeToolTip": "Pages\\CvsPage.xaml.cs*",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwEEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T21:12:26.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CvsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CvsPage.xaml",
+              "RelativeDocumentMoniker": "Pages\\CvsPage.xaml",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\CvsPage.xaml*",
+              "RelativeToolTip": "Pages\\CvsPage.xaml*",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAgwDEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-06T21:12:08.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\MainPage.xaml",
+              "RelativeDocumentMoniker": "MainPage.xaml",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\MainPage.xaml*",
+              "RelativeToolTip": "MainPage.xaml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-06T21:02:00.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\MainPage.xaml.cs*",
+              "RelativeToolTip": "MainPage.xaml.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T21:08:44.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RegisterPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\RegisterPage.xaml.cs",
+              "RelativeDocumentMoniker": "Pages\\RegisterPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\RegisterPage.xaml.cs*",
+              "RelativeToolTip": "Pages\\RegisterPage.xaml.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T21:11:24.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RegisterPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\RegisterPage.xaml",
+              "RelativeDocumentMoniker": "Pages\\RegisterPage.xaml",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Pages\\RegisterPage.xaml*",
+              "RelativeToolTip": "Pages\\RegisterPage.xaml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-06T21:11:08.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\App.xaml.cs*",
+              "RelativeToolTip": "App.xaml.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T21:09:57.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\AppShell.xaml",
+              "RelativeDocumentMoniker": "AppShell.xaml",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\AppShell.xaml",
+              "RelativeToolTip": "AppShell.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-05-06T21:09:39.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Services\\ApiService.cs",
+              "RelativeDocumentMoniker": "Services\\ApiService.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Services\\ApiService.cs",
+              "RelativeToolTip": "Services\\ApiService.cs",
+              "ViewState": "AgIAADIAAAAA7mn0yKAlwEkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T21:01:31.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateCvRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\CreateCvRequest.cs",
+              "RelativeDocumentMoniker": "Models\\CreateCvRequest.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\CreateCvRequest.cs",
+              "RelativeToolTip": "Models\\CreateCvRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T20:46:03.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CvDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\CvDto.cs",
+              "RelativeDocumentMoniker": "Models\\CvDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\CvDto.cs",
+              "RelativeToolTip": "Models\\CvDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T20:45:33.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RegisterRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\RegisterRequest.cs",
+              "RelativeDocumentMoniker": "Models\\RegisterRequest.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\RegisterRequest.cs*",
+              "RelativeToolTip": "Models\\RegisterRequest.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T20:44:55.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "Models\\LoginRequest.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\LoginRequest.cs*",
+              "RelativeToolTip": "Models\\LoginRequest.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T20:44:25.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\UserDto.cs",
+              "RelativeDocumentMoniker": "Models\\UserDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\Models\\UserDto.cs*",
+              "RelativeToolTip": "Models\\UserDto.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T20:43:46.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "JobCv.Mobile",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\JobCv.Mobile.csproj",
+              "RelativeDocumentMoniker": "JobCv.Mobile.csproj",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\JobCv.Mobile\\JobCv.Mobile.csproj*",
+              "RelativeToolTip": "JobCv.Mobile.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-06T20:41:45.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 60,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

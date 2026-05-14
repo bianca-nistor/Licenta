@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.CreateCvPage"
+             Title="Creează CV">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="18">
+
+            <Label Text="CV nou"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Entry x:Name="TitleEntry"
+                   Placeholder="Titlu CV, ex: CV General" />
+
+            <Picker x:Name="LanguagePicker"
+                    Title="Limba CV-ului">
+                <Picker.Items>
+                    <x:String>ro</x:String>
+                    <x:String>en</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Editor x:Name="SummaryEditor"
+                    Placeholder="Descriere scurtă"
+                    HeightRequest="120" />
+
+            <Button Text="Salvează CV"
+                    Clicked="OnSaveClicked" />
+
+            <Label x:Name="MessageLabel"
+                   TextColor="Red"
+                   HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

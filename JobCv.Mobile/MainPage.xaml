@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.MainPage"
+             Title="Autentificare">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="18">
+
+            <Label Text="JobCV"
+                   FontSize="34"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Autentificare"
+                   FontSize="22"
+                   HorizontalOptions="Center" />
+
+            <Entry x:Name="EmailEntry"
+                   Placeholder="Email"
+                   Keyboard="Email" />
+
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Parolă"
+                   IsPassword="True" />
+
+            <Button Text="Login"
+                    Clicked="OnLoginClicked" />
+
+            <Button Text="Nu ai cont? Creează cont"
+                    Clicked="OnGoToRegisterClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="Blue" />
+
+            <Label x:Name="MessageLabel"
+                   TextColor="Red"
+                   HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

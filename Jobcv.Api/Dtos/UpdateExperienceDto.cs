@@ -1,0 +1,17 @@
+﻿namespace JobCv.Api.Dtos
+{
+    public class UpdateExperienceDto
+    {
+        public string JobTitle { get; set; } = string.Empty;
+
+        public string Company { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        public bool IsCurrent { get; set; }
+    }
+}
