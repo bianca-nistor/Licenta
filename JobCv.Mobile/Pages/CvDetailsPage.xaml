@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.CvDetailsPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="20">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*"
+                  Margin="0,20,0,0">
+
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4"
+                                     Margin="14,0,0,0">
+                    <Label x:Name="TitleLabel"
+                           Text="CV Details"
+                           FontSize="30"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label x:Name="SubtitleLabel"
+                           Text="Preview and manage your CV."
+                           FontSize="14"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Actions -->
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="12">
+
+                <Button Text="Edit CV"
+                        Clicked="OnEditClicked"
+                        BackgroundColor="#1D4ED8"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="16"
+                        HeightRequest="52" />
+
+                <Button Grid.Column="1"
+                        Text="Export PDF"
+                        Clicked="OnExportPdfClicked"
+                        BackgroundColor="#DCFCE7"
+                        TextColor="#166534"
+                        FontAttributes="Bold"
+                        CornerRadius="16"
+                        HeightRequest="52" />
+            </Grid>
+
+            <!-- CV preview card -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="24">
+
+                <VerticalStackLayout Spacing="18">
+
+                    <!-- CV header -->
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="FullNameLabel"
+                               Text="Full Name"
+                               FontSize="30"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label x:Name="ContactLabel"
+                               Text="Email • Phone • Location"
+                               FontSize="13"
+                               TextColor="#64748B" />
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#E2E8F0" />
+
+                    <!-- Links -->
+                    <VerticalStackLayout x:Name="LinksSection"
+                                         Spacing="4">
+                        <Label Text="Links"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label x:Name="LinkedInLabel"
+                               FontSize="13"
+                               TextColor="#1D4ED8" />
+
+                        <Label x:Name="GitHubLabel"
+                               FontSize="13"
+                               TextColor="#1D4ED8" />
+
+                        <Label x:Name="PortfolioLabel"
+                               FontSize="13"
+                               TextColor="#1D4ED8" />
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#E2E8F0" />
+
+                    <!-- Summary -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Professional Summary"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label x:Name="SummaryLabel"
+                               Text="No summary added yet."
+                               FontSize="14"
+                               TextColor="#334155"
+                               LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#E2E8F0" />
+
+                    <!-- Metadata -->
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="10">
+
+                        <Border BackgroundColor="#DBEAFE"
+                                Stroke="#BFDBFE"
+                                StrokeShape="RoundRectangle 16"
+                                Padding="12">
+
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Language"
+                                       FontSize="12"
+                                       TextColor="#64748B" />
+                                <Label x:Name="LanguageLabel"
+                                       Text="en"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D4ED8" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                BackgroundColor="#DCFCE7"
+                                Stroke="#BBF7D0"
+                                StrokeShape="RoundRectangle 16"
+                                Padding="12">
+
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Template"
+                                       FontSize="12"
+                                       TextColor="#64748B" />
+                                <Label x:Name="TemplateLabel"
+                                       Text="modern-blue"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#166534" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Border x:Name="BaseCvBadge"
+                            BackgroundColor="#0F172A"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="12"
+                            IsVisible="False">
+
+                        <Label Text="Base CV"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                    </Border>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Coming next -->
+            <Border BackgroundColor="#F1F5F9"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 24"
+                    Padding="18">
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Next sections"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Skills, education, experience, projects, languages and certifications will be editable from this page."
+                           FontSize="14"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

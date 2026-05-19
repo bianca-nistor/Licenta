@@ -1,6 +1,7 @@
 ﻿using JobCv.Mobile.Models;
 using JobCv.Mobile.Pages;
 using JobCv.Mobile.Services;
+using System.Net.Mail;
 
 namespace JobCv.Mobile
 {
@@ -17,10 +18,27 @@ namespace JobCv.Mobile
         {
             MessageLabel.Text = "";
 
+            if (string.IsNullOrWhiteSpace(EmailEntry.Text) ||
+                string.IsNullOrWhiteSpace(PasswordEntry.Text))
+            {
+                MessageLabel.TextColor = Colors.Red;
+                MessageLabel.Text = "Email and password are required.";
+                return;
+            }
+
+            var email = EmailEntry.Text.Trim();
+
+            if (!IsValidEmail(email))
+            {
+                MessageLabel.TextColor = Colors.Red;
+                MessageLabel.Text = "Please enter a valid email address.";
+                return;
+            }
+
             var request = new LoginRequest
             {
-                Email = EmailEntry.Text ?? "",
-                Password = PasswordEntry.Text ?? ""
+                Email = email,
+                Password = PasswordEntry.Text
             };
 
             var user = await _apiService.LoginAsync(request);
@@ -28,7 +46,7 @@ namespace JobCv.Mobile
             if (user == null)
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Email sau parolă incorectă.";
+                MessageLabel.Text = "Invalid email or password.";
                 return;
             }
 
@@ -38,6 +56,19 @@ namespace JobCv.Mobile
         private async void OnGoToRegisterClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RegisterPage(_apiService));
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var mailAddress = new MailAddress(email);
+                return mailAddress.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

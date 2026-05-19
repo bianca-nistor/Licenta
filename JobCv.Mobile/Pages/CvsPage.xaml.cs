@@ -1,5 +1,6 @@
 ﻿using JobCv.Mobile.Models;
 using JobCv.Mobile.Services;
+using Microsoft.Maui.ApplicationModel;
 
 namespace JobCv.Mobile.Pages
 {
@@ -15,19 +16,35 @@ namespace JobCv.Mobile.Pages
             _user = user;
             _apiService = apiService;
 
-            WelcomeLabel.Text = $"Bun venit, {_user.FullName}";
+            WelcomeLabel.Text = $"Welcome, {_user.FullName}. Manage your CVs here.";
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await LoadCvsAsync();
+            await LoadDataAsync();
         }
 
-        private async Task LoadCvsAsync()
+        private T GetControl<T>(string name) where T : Element
         {
-            var cvs = await _apiService.GetUserCvsAsync(_user.Id);
-            CvsCollectionView.ItemsSource = cvs;
+            var control = this.FindByName<T>(name);
+
+            if (control == null)
+                throw new Exception($"Control '{name}' was not found in CvsPage.xaml.");
+
+            return control;
+        }
+
+        private async Task LoadDataAsync()
+        {
+            var createdCvs = await _apiService.GetUserCvsAsync(_user.Id);
+            var uploadedCvs = await _apiService.GetUploadedCvFilesAsync(_user.Id);
+
+            GetControl<CollectionView>("CvsCollectionView").ItemsSource = createdCvs;
+            GetControl<CollectionView>("UploadedCvsCollectionView").ItemsSource = uploadedCvs;
+
+            GetControl<Border>("EmptyCreatedCvsState").IsVisible = createdCvs.Count == 0;
+            GetControl<Border>("EmptyUploadedCvsState").IsVisible = uploadedCvs.Count == 0;
         }
 
         private async void OnCreateCvClicked(object sender, EventArgs e)
@@ -35,19 +52,74 @@ namespace JobCv.Mobile.Pages
             await Navigation.PushAsync(new CreateCvPage(_user, _apiService));
         }
 
-        private async void OnDeleteCvClicked(object sender, EventArgs e)
+        private async void OnUploadCvClicked(object sender, EventArgs e)
         {
-            if (sender is not Button button)
+            await Navigation.PushAsync(new UploadCvPage(_user, _apiService));
+        }
+
+        private async void OnViewDetailsClicked(object sender, EventArgs e)
+        {
+            if ((sender as Button)?.CommandParameter is not int cvId)
                 return;
 
-            if (button.CommandParameter is not int cvId)
+            await Navigation.PushAsync(new CvDetailsPage(cvId, _apiService));
+        }
+
+        private async void OnOpenUploadedCvClicked(object sender, EventArgs e)
+        {
+            if ((sender as Button)?.CommandParameter is not UploadedCvFileDto uploadedFile)
+                return;
+
+            var extension = Path.GetExtension(uploadedFile.OriginalFileName).ToLowerInvariant();
+
+            var downloadUrl = _apiService.GetUploadedCvDownloadUrl(uploadedFile.Id);
+
+            if (extension == ".pdf")
+            {
+                var previewUrl = _apiService.GetUploadedCvPreviewUrl(uploadedFile.Id);
+
+                await Navigation.PushAsync(
+                    new UploadedCvPreviewPage(
+                        uploadedFile.OriginalFileName,
+                        previewUrl,
+                        downloadUrl));
+
+                return;
+            }
+
+            try
+            {
+                await Launcher.OpenAsync(downloadUrl);
+            }
+            catch
+            {
+                await DisplayAlert("Error", "The file could not be opened.", "OK");
+            }
+        }
+        private async void OnPreviewCvPdfClicked(object sender, EventArgs e)
+        {
+            if ((sender as Button)?.CommandParameter is not CvDto cv)
+                return;
+
+            var previewUrl = _apiService.GetCvPdfPreviewUrl(cv.Id);
+            var downloadUrl = _apiService.GetCvPdfDownloadUrl(cv.Id);
+
+            await Navigation.PushAsync(
+                new UploadedCvPreviewPage(
+                    cv.Title,
+                    previewUrl,
+                    downloadUrl));
+        }
+        private async void OnDeleteCvClicked(object sender, EventArgs e)
+        {
+            if ((sender as Button)?.CommandParameter is not int cvId)
                 return;
 
             var confirm = await DisplayAlert(
-                "Confirmare",
-                "Sigur vrei să ștergi acest CV?",
-                "Da",
-                "Nu");
+                "Delete CV",
+                "Are you sure you want to delete this CV?",
+                "Yes",
+                "No");
 
             if (!confirm)
                 return;
@@ -56,11 +128,38 @@ namespace JobCv.Mobile.Pages
 
             if (!deleted)
             {
-                await DisplayAlert("Eroare", "CV-ul nu a putut fi șters.", "OK");
+                await DisplayAlert("Error", "The CV could not be deleted.", "OK");
                 return;
             }
 
-            await LoadCvsAsync();
+            await LoadDataAsync();
         }
+
+        private async void OnDeleteUploadedCvClicked(object sender, EventArgs e)
+        {
+            if ((sender as Button)?.CommandParameter is not int fileId)
+                return;
+
+            var confirm = await DisplayAlert(
+                "Delete uploaded CV",
+                "Are you sure you want to delete this uploaded CV?",
+                "Yes",
+                "No");
+
+            if (!confirm)
+                return;
+
+            var deleted = await _apiService.DeleteUploadedCvFileAsync(fileId);
+
+            if (!deleted)
+            {
+                await DisplayAlert("Error", "The uploaded CV could not be deleted.", "OK");
+                return;
+            }
+
+            await LoadDataAsync();
+        }
+
+
     }
 }

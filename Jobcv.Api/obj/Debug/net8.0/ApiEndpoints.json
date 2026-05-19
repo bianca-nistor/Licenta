@@ -1,5 +1,111 @@
 [
   {
+    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
+    "Method": "CreateApplication",
+    "RelativePath": "api/Applications",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.CreateApplicationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
+    "Method": "GetApplicationById",
+    "RelativePath": "api/Applications/{applicationId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "applicationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
+    "Method": "DeleteApplication",
+    "RelativePath": "api/Applications/{applicationId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "applicationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
+    "Method": "UpdateInterviewFeedback",
+    "RelativePath": "api/Applications/{applicationId}/interview-feedback",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "applicationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateInterviewFeedbackDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Applications/{applicationId}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "applicationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateApplicationStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
+    "Method": "GetUserApplications",
+    "RelativePath": "api/Applications/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "JobCv.Api.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
@@ -102,6 +208,48 @@
   },
   {
     "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "AddCertification",
+    "RelativePath": "api/Cvs/{cvId}/certifications",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.AddCertificationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "DuplicateCv",
+    "RelativePath": "api/Cvs/{cvId}/duplicate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.DuplicateCvDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
     "Method": "AddEducation",
     "RelativePath": "api/Cvs/{cvId}/educations",
     "HttpMethod": "POST",
@@ -144,6 +292,138 @@
   },
   {
     "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "ExportCvPdf",
+    "RelativePath": "api/Cvs/{cvId}/export-pdf",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "AddLanguage",
+    "RelativePath": "api/Cvs/{cvId}/languages",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.AddLanguageDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "UpdatePersonalInfo",
+    "RelativePath": "api/Cvs/{cvId}/personal-info",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateCvPersonalInfoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "UploadCvPhoto",
+    "RelativePath": "api/Cvs/{cvId}/photo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "GetCvPhoto",
+    "RelativePath": "api/Cvs/{cvId}/photo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "PreviewCvPdf",
+    "RelativePath": "api/Cvs/{cvId}/preview-pdf",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "AddProject",
+    "RelativePath": "api/Cvs/{cvId}/projects",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cvId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.AddProjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
     "Method": "AddSkill",
     "RelativePath": "api/Cvs/{cvId}/skills",
     "HttpMethod": "POST",
@@ -165,14 +445,35 @@
   },
   {
     "ContainingType": "JobCv.Api.Controllers.CvsController",
-    "Method": "DeleteEducation",
-    "RelativePath": "api/Cvs/educations/{educationId}",
+    "Method": "UpdateCertification",
+    "RelativePath": "api/Cvs/certifications/{certificationId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "certificationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateCertificationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "DeleteCertification",
+    "RelativePath": "api/Cvs/certifications/{certificationId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "educationId",
+        "Name": "certificationId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -195,6 +496,22 @@
       {
         "Name": "dto",
         "Type": "JobCv.Api.Dtos.UpdateEducationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "DeleteEducation",
+    "RelativePath": "api/Cvs/educations/{educationId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "educationId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -239,14 +556,72 @@
   },
   {
     "ContainingType": "JobCv.Api.Controllers.CvsController",
-    "Method": "DeleteSkill",
-    "RelativePath": "api/Cvs/skills/{skillId}",
+    "Method": "UpdateLanguage",
+    "RelativePath": "api/Cvs/languages/{languageId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "languageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateLanguageDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "DeleteLanguage",
+    "RelativePath": "api/Cvs/languages/{languageId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "skillId",
+        "Name": "languageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "UpdateProject",
+    "RelativePath": "api/Cvs/projects/{projectId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateProjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "DeleteProject",
+    "RelativePath": "api/Cvs/projects/{projectId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -276,8 +651,282 @@
   },
   {
     "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "DeleteSkill",
+    "RelativePath": "api/Cvs/skills/{skillId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skillId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
+    "Method": "GetCvTemplates",
+    "RelativePath": "api/Cvs/templates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CvsController",
     "Method": "GetUserCvs",
     "RelativePath": "api/Cvs/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.JobsController",
+    "Method": "CreateJob",
+    "RelativePath": "api/Jobs",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.CreateJobDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.JobsController",
+    "Method": "GetJobs",
+    "RelativePath": "api/Jobs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.JobsController",
+    "Method": "GetJobById",
+    "RelativePath": "api/Jobs/{jobId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.JobsController",
+    "Method": "UpdateJob",
+    "RelativePath": "api/Jobs/{jobId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateJobDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.JobsController",
+    "Method": "DeleteJob",
+    "RelativePath": "api/Jobs/{jobId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.JobsController",
+    "Method": "SearchJobs",
+    "RelativePath": "api/Jobs/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyword",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "location",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "workMode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.StatisticsController",
+    "Method": "GetStatisticsByCv",
+    "RelativePath": "api/Statistics/user/{userId}/by-cv",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.StatisticsController",
+    "Method": "GetLastSixMonthsStatistics",
+    "RelativePath": "api/Statistics/user/{userId}/last-six-months",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.StatisticsController",
+    "Method": "GetMonthlyStatistics",
+    "RelativePath": "api/Statistics/user/{userId}/monthly",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "year",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "month",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.UploadedCvsController",
+    "Method": "DeleteUploadedCv",
+    "RelativePath": "api/UploadedCvs/{fileId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.UploadedCvsController",
+    "Method": "DownloadUploadedCv",
+    "RelativePath": "api/UploadedCvs/{fileId}/download",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.UploadedCvsController",
+    "Method": "PreviewUploadedCv",
+    "RelativePath": "api/UploadedCvs/{fileId}/preview",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.UploadedCvsController",
+    "Method": "UploadCvFile",
+    "RelativePath": "api/UploadedCvs/user/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.UploadedCvsController",
+    "Method": "GetUserUploadedCvs",
+    "RelativePath": "api/UploadedCvs/user/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

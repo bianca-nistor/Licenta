@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dt8j9HVZMpw=",
+  "dgSpecHash": "1qLE0cB1y3U=",
   "success": true,
   "projectFilePath": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Jobcv.Api.csproj",
   "expectedPackageFiles": [
@@ -33,6 +33,7 @@
     "C:\\Users\\Bianca\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\Bianca\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
     "C:\\Users\\Bianca\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\Bianca\\.nuget\\packages\\questpdf\\2026.5.0\\questpdf.2026.5.0.nupkg.sha512",
     "C:\\Users\\Bianca\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
     "C:\\Users\\Bianca\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
     "C:\\Users\\Bianca\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",

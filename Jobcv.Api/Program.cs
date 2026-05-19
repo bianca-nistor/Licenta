@@ -1,8 +1,11 @@
 using JobCv.Api.Data;
 using JobCv.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllers();
 

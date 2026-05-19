@@ -2,35 +2,123 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JobCv.Mobile.Pages.RegisterPage"
-             Title="Creează cont">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="18">
+        <Grid Padding="24"
+              RowDefinitions="Auto,*">
 
-            <Label Text="Creează cont"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+            <VerticalStackLayout Grid.Row="0"
+                                 Spacing="8"
+                                 Margin="0,45,0,28"
+                                 HorizontalOptions="Center"
+                                 MaximumWidthRequest="520">
 
-            <Entry x:Name="FullNameEntry"
-                   Placeholder="Nume complet" />
+                <Label Text="Create account"
+                       FontSize="34"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A"
+                       HorizontalTextAlignment="Center" />
 
-            <Entry x:Name="EmailEntry"
-                   Placeholder="Email"
-                   Keyboard="Email" />
+                <Label Text="Start building your career profile."
+                       FontSize="15"
+                       TextColor="#64748B"
+                       HorizontalTextAlignment="Center" />
 
-            <Entry x:Name="PasswordEntry"
-                   Placeholder="Parolă"
-                   IsPassword="True" />
+            </VerticalStackLayout>
 
-            <Button Text="Înregistrare"
-                    Clicked="OnRegisterClicked" />
+            <Border Grid.Row="1"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 30"
+                    Padding="28"
+                    HorizontalOptions="Center"
+                    MaximumWidthRequest="520">
 
-            <Label x:Name="MessageLabel"
-                   TextColor="Red"
-                   HorizontalOptions="Center" />
+                <VerticalStackLayout Spacing="20">
 
-        </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Join Career Guide"
+                               FontSize="26"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label Text="Create your account and manage your CVs, jobs and applications."
+                               FontSize="14"
+                               TextColor="#64748B" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Full name"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Entry x:Name="FullNameEntry"
+                               Placeholder="Enter your full name"
+                               TextColor="#0F172A"
+                               PlaceholderColor="#94A3B8"
+                               BackgroundColor="#F8FAFC"
+                               HeightRequest="52" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Email"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Entry x:Name="EmailEntry"
+                               Placeholder="Enter your email"
+                               Keyboard="Email"
+                               TextColor="#0F172A"
+                               PlaceholderColor="#94A3B8"
+                               BackgroundColor="#F8FAFC"
+                               HeightRequest="52" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Password"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Entry x:Name="PasswordEntry"
+                               Placeholder="Create a password"
+                               IsPassword="True"
+                               TextColor="#0F172A"
+                               PlaceholderColor="#94A3B8"
+                               BackgroundColor="#F8FAFC"
+                               HeightRequest="52" />
+                    </VerticalStackLayout>
+
+                    <Label x:Name="MessageLabel"
+                           Text=""
+                           TextColor="#DC2626"
+                           FontSize="13"
+                           HorizontalTextAlignment="Center" />
+
+                    <Button Text="Create account"
+                            Clicked="OnRegisterClicked"
+                            BackgroundColor="#1D4ED8"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            HeightRequest="54" />
+
+                    <Button Text="Back to sign in"
+                            Clicked="OnBackToLoginClicked"
+                            BackgroundColor="#DCFCE7"
+                            TextColor="#166534"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            HeightRequest="54" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </Grid>
     </ScrollView>
-
 </ContentPage>

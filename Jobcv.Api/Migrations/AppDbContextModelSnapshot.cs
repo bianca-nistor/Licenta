@@ -17,6 +17,69 @@ namespace Jobcv.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.25");
 
+            modelBuilder.Entity("JobCv.Api.Models.Application", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("AppliedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("CvId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("InterviewDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("InterviewDifficulty")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("InterviewNotes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("InterviewRating")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QuestionsAsked")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("WouldApplyAgain")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CvId");
+
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Applications");
+                });
+
             modelBuilder.Entity("JobCv.Api.Models.Cv", b =>
                 {
                     b.Property<int>("Id")
@@ -26,11 +89,64 @@ namespace Jobcv.Api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GitHubUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsBaseCv")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Language")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("LinkedInUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ParentCvId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhotoContentType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhotoFileName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PortfolioUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("TargetJobId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TemplateName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -43,9 +159,44 @@ namespace Jobcv.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentCvId");
+
+                    b.HasIndex("TargetJobId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Cvs");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.CvCertification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CvId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Issuer")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CvId");
+
+                    b.ToTable("CvCertifications");
                 });
 
             modelBuilder.Entity("JobCv.Api.Models.CvEducation", b =>
@@ -72,7 +223,7 @@ namespace Jobcv.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -109,7 +260,7 @@ namespace Jobcv.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -117,6 +268,66 @@ namespace Jobcv.Api.Migrations
                     b.HasIndex("CvId");
 
                     b.ToTable("CvExperiences");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.CvLanguage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CvId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CvId");
+
+                    b.ToTable("CvLanguages");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.CvProject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CvId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GitHubUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProjectUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Technologies")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CvId");
+
+                    b.ToTable("CvProjects");
                 });
 
             modelBuilder.Entity("JobCv.Api.Models.CvSkill", b =>
@@ -137,6 +348,97 @@ namespace Jobcv.Api.Migrations
                     b.HasIndex("CvId");
 
                     b.ToTable("CvSkills");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.Job", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Company")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmploymentType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ExternalUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Requirements")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WorkMode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.UploadedCvFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("OriginalFileName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StoredFileName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UploadedCvFiles");
                 });
 
             modelBuilder.Entity("JobCv.Api.Models.User", b =>
@@ -168,15 +470,66 @@ namespace Jobcv.Api.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("JobCv.Api.Models.Application", b =>
+                {
+                    b.HasOne("JobCv.Api.Models.Cv", "Cv")
+                        .WithMany()
+                        .HasForeignKey("CvId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("JobCv.Api.Models.Job", "Job")
+                        .WithMany("Applications")
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobCv.Api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cv");
+
+                    b.Navigation("Job");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("JobCv.Api.Models.Cv", b =>
                 {
+                    b.HasOne("JobCv.Api.Models.Cv", "ParentCv")
+                        .WithMany()
+                        .HasForeignKey("ParentCvId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("JobCv.Api.Models.Job", "TargetJob")
+                        .WithMany()
+                        .HasForeignKey("TargetJobId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("JobCv.Api.Models.User", "User")
                         .WithMany("Cvs")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("ParentCv");
+
+                    b.Navigation("TargetJob");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.CvCertification", b =>
+                {
+                    b.HasOne("JobCv.Api.Models.Cv", "Cv")
+                        .WithMany("Certifications")
+                        .HasForeignKey("CvId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cv");
                 });
 
             modelBuilder.Entity("JobCv.Api.Models.CvEducation", b =>
@@ -201,6 +554,28 @@ namespace Jobcv.Api.Migrations
                     b.Navigation("Cv");
                 });
 
+            modelBuilder.Entity("JobCv.Api.Models.CvLanguage", b =>
+                {
+                    b.HasOne("JobCv.Api.Models.Cv", "Cv")
+                        .WithMany("Languages")
+                        .HasForeignKey("CvId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cv");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.CvProject", b =>
+                {
+                    b.HasOne("JobCv.Api.Models.Cv", "Cv")
+                        .WithMany("Projects")
+                        .HasForeignKey("CvId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cv");
+                });
+
             modelBuilder.Entity("JobCv.Api.Models.CvSkill", b =>
                 {
                     b.HasOne("JobCv.Api.Models.Cv", "Cv")
@@ -212,13 +587,35 @@ namespace Jobcv.Api.Migrations
                     b.Navigation("Cv");
                 });
 
+            modelBuilder.Entity("JobCv.Api.Models.UploadedCvFile", b =>
+                {
+                    b.HasOne("JobCv.Api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("JobCv.Api.Models.Cv", b =>
                 {
+                    b.Navigation("Certifications");
+
                     b.Navigation("Educations");
 
                     b.Navigation("Experiences");
 
+                    b.Navigation("Languages");
+
+                    b.Navigation("Projects");
+
                     b.Navigation("Skills");
+                });
+
+            modelBuilder.Entity("JobCv.Api.Models.Job", b =>
+                {
+                    b.Navigation("Applications");
                 });
 
             modelBuilder.Entity("JobCv.Api.Models.User", b =>

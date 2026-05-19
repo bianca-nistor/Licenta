@@ -2,39 +2,145 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JobCv.Mobile.Pages.CreateCvPage"
-             Title="Creează CV">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="18">
+        <VerticalStackLayout Padding="24"
+                             Spacing="22">
 
-            <Label Text="CV nou"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*"
+                  Margin="0,30,0,0">
 
-            <Entry x:Name="TitleEntry"
-                   Placeholder="Titlu CV, ex: CV General" />
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44" />
 
-            <Picker x:Name="LanguagePicker"
-                    Title="Limba CV-ului">
-                <Picker.Items>
-                    <x:String>ro</x:String>
-                    <x:String>en</x:String>
-                </Picker.Items>
-            </Picker>
+                <VerticalStackLayout Grid.Column="1"
+                                     Margin="14,0,0,0"
+                                     Spacing="4">
 
-            <Editor x:Name="SummaryEditor"
-                    Placeholder="Descriere scurtă"
-                    HeightRequest="120" />
+                    <Label Text="Create CV"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
 
-            <Button Text="Salvează CV"
-                    Clicked="OnSaveClicked" />
+                    <Label Text="Choose how you want to start your CV."
+                           FontSize="14"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Start from scratch -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="22">
+
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="18">
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Start from scratch"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label Text="Create a new CV and add your personal information, photo, skills, education, experience and projects."
+                               FontSize="14"
+                               TextColor="#64748B" />
+                    </VerticalStackLayout>
+
+                    <Button Grid.Column="1"
+                            Text="Start"
+                            Clicked="OnStartFromScratchClicked"
+                            BackgroundColor="#1D4ED8"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            WidthRequest="130"
+                            HeightRequest="58"
+                            VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Duplicate existing CV -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="22">
+
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="18">
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Duplicate existing CV"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label Text="Create a new version based on one of your existing CVs."
+                               FontSize="14"
+                               TextColor="#64748B" />
+                    </VerticalStackLayout>
+
+                    <Button Grid.Column="1"
+                            Text="Choose"
+                            Clicked="OnDuplicateCvClicked"
+                            BackgroundColor="#DCFCE7"
+                            TextColor="#166534"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            WidthRequest="130"
+                            HeightRequest="58"
+                            VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Upload existing CV -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="22">
+
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="18">
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Upload existing CV"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label Text="Upload an existing PDF, DOC or DOCX CV and keep it in your CV library."
+                               FontSize="14"
+                               TextColor="#64748B" />
+                    </VerticalStackLayout>
+
+                    <Button Grid.Column="1"
+                            Text="Upload"
+                            Clicked="OnUploadCvClicked"
+                            BackgroundColor="#DCFCE7"
+                            TextColor="#166534"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            WidthRequest="130"
+                            HeightRequest="58"
+                            VerticalOptions="Center" />
+                </Grid>
+            </Border>
 
             <Label x:Name="MessageLabel"
-                   TextColor="Red"
-                   HorizontalOptions="Center" />
+                   Text=""
+                   FontSize="13"
+                   TextColor="#DC2626"
+                   HorizontalTextAlignment="Center" />
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

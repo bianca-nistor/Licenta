@@ -2,49 +2,310 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JobCv.Mobile.Pages.CvsPage"
-             Title="CV-urile mele">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="22">
 
-        <Label x:Name="WelcomeLabel"
-               FontSize="22"
-               FontAttributes="Bold" />
+            <!-- Header -->
+            <Grid ColumnDefinitions="*,Auto"
+                  Margin="0,30,0,0">
 
-        <Button Text="Creează CV nou"
-                Clicked="OnCreateCvClicked" />
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="My CVs"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
 
-        <CollectionView x:Name="CvsCollectionView"
-                        SelectionMode="None">
+                    <Label x:Name="WelcomeLabel"
+                           Text="Manage your CV versions here."
+                           FontSize="14"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Padding="15"
-                            Margin="0,8"
-                            Stroke="LightGray">
+                <Button Grid.Column="1"
+                        Text="👤"
+                        BackgroundColor="#DCFCE7"
+                        TextColor="#166534"
+                        CornerRadius="22"
+                        WidthRequest="44"
+                        HeightRequest="44" />
+            </Grid>
 
-                        <VerticalStackLayout Spacing="8">
+            <!-- Hero -->
+            <Border BackgroundColor="#0F172A"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="22">
 
-                            <Label Text="{Binding Title}"
-                                   FontSize="20"
-                                   FontAttributes="Bold" />
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Build a CV for every opportunity"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="White" />
 
-                            <Label Text="{Binding Language}"
-                                   FontSize="14" />
+                    <Label Text="Create, upload, manage and prepare CV versions for different jobs."
+                           FontSize="14"
+                           TextColor="#CBD5E1" />
 
-                            <Label Text="{Binding Summary}"
-                                   FontSize="14" />
+                    <Button Text="Create new CV"
+                            Clicked="OnCreateCvClicked"
+                            BackgroundColor="#1D4ED8"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            HeightRequest="52" />
+                </VerticalStackLayout>
+            </Border>
 
-                            <Button Text="Șterge"
-                                    Clicked="OnDeleteCvClicked"
-                                    CommandParameter="{Binding Id}" />
+            <!-- Created CVs -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Created CVs"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A" />
 
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                <Label Text="CVs built and edited inside the application."
+                       FontSize="14"
+                       TextColor="#64748B" />
+            </VerticalStackLayout>
 
-        </CollectionView>
+            <Border x:Name="EmptyCreatedCvsState"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 24"
+                    Padding="22"
+                    IsVisible="False">
 
-    </VerticalStackLayout>
+                <VerticalStackLayout Spacing="10"
+                                     HorizontalOptions="Center">
 
+                    <Label Text="No created CVs yet"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           HorizontalTextAlignment="Center" />
+
+                    <Label Text="Create your first structured CV to edit sections and export it later."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           HorizontalTextAlignment="Center" />
+
+                    <Button Text="Create your first CV"
+                            Clicked="OnCreateCvClicked"
+                            BackgroundColor="#DCFCE7"
+                            TextColor="#166534"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            WidthRequest="220"
+                            HeightRequest="48" />
+                </VerticalStackLayout>
+            </Border>
+
+            <CollectionView x:Name="CvsCollectionView"
+                            SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="White"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 24"
+                                Padding="18"
+                                Margin="0,0,0,12">
+
+                            <VerticalStackLayout Spacing="12">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Title}"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="#0F172A" />
+
+                                        <Label Text="{Binding Summary}"
+                                               FontSize="13"
+                                               TextColor="#64748B"
+                                               LineBreakMode="TailTruncation"
+                                               MaxLines="2" />
+                                    </VerticalStackLayout>
+
+                                    <Border Grid.Column="1"
+                                            BackgroundColor="#DBEAFE"
+                                            Stroke="#BFDBFE"
+                                            StrokeShape="RoundRectangle 14"
+                                            Padding="10,6">
+                                        <Label Text="{Binding LanguageDisplay}"
+                                               TextColor="#1D4ED8"
+                                               FontAttributes="Bold"
+                                               FontSize="12" />
+                                    </Border>
+                                </Grid>
+
+                                <BoxView HeightRequest="1"
+                                         BackgroundColor="#E2E8F0" />
+
+                                <Grid ColumnDefinitions="*,*,Auto"
+                                      ColumnSpacing="10">
+
+                                    <Button Text="Details"
+                                            Clicked="OnViewDetailsClicked"
+                                            CommandParameter="{Binding Id}"
+                                            BackgroundColor="#EFF6FF"
+                                            TextColor="#1D4ED8"
+                                            FontAttributes="Bold"
+                                            CornerRadius="14"
+                                            HeightRequest="44" />
+
+                                    <Button Grid.Column="1"
+                                            Text="Preview PDF"
+                                            Clicked="OnPreviewCvPdfClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#DCFCE7"
+                                            TextColor="#166534"
+                                            FontAttributes="Bold"
+                                            CornerRadius="14"
+                                            HeightRequest="44" />
+
+                                    <Button Grid.Column="2"
+                                            Text="Delete"
+                                            Clicked="OnDeleteCvClicked"
+                                            CommandParameter="{Binding Id}"
+                                            BackgroundColor="#FEE2E2"
+                                            TextColor="#DC2626"
+                                            FontAttributes="Bold"
+                                            CornerRadius="14"
+                                            WidthRequest="110"
+                                            HeightRequest="44" />
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Uploaded CVs -->
+            <VerticalStackLayout Spacing="8"
+                                 Margin="0,12,0,0">
+                <Label Text="Uploaded CVs"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A" />
+
+                <Label Text="Files uploaded by you. These can be used later when applying to jobs."
+                       FontSize="14"
+                       TextColor="#64748B" />
+            </VerticalStackLayout>
+
+            <Border x:Name="EmptyUploadedCvsState"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 24"
+                    Padding="22"
+                    IsVisible="False">
+
+                <VerticalStackLayout Spacing="10"
+                                     HorizontalOptions="Center">
+
+                    <Label Text="No uploaded CVs yet"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           HorizontalTextAlignment="Center" />
+
+                    <Label Text="Upload an existing PDF, DOC or DOCX CV."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           HorizontalTextAlignment="Center" />
+
+                    <Button Text="Upload CV"
+                            Clicked="OnUploadCvClicked"
+                            BackgroundColor="#DCFCE7"
+                            TextColor="#166534"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            WidthRequest="180"
+                            HeightRequest="48" />
+                </VerticalStackLayout>
+            </Border>
+
+            <CollectionView x:Name="UploadedCvsCollectionView"
+                            SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="White"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 24"
+                                Padding="18"
+                                Margin="0,0,0,12">
+
+                            <VerticalStackLayout Spacing="12">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding OriginalFileName}"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="#0F172A" />
+
+                                        <Label Text="{Binding DisplaySize}"
+                                               FontSize="13"
+                                               TextColor="#64748B" />
+                                    </VerticalStackLayout>
+
+                                    <Border Grid.Column="1"
+                                            BackgroundColor="#DCFCE7"
+                                            Stroke="#BBF7D0"
+                                            StrokeShape="RoundRectangle 14"
+                                            Padding="10,6">
+                                        <Label Text="uploaded"
+                                               TextColor="#166534"
+                                               FontAttributes="Bold"
+                                               FontSize="12" />
+                                    </Border>
+                                </Grid>
+
+                                <BoxView HeightRequest="1"
+                                         BackgroundColor="#E2E8F0" />
+
+                                <Grid ColumnDefinitions="*,Auto"
+                                      ColumnSpacing="10">
+
+                                    <Button Text="Open"
+                                            Clicked="OnOpenUploadedCvClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#EFF6FF"
+                                            TextColor="#1D4ED8"
+                                            FontAttributes="Bold"
+                                            CornerRadius="14"
+                                            HeightRequest="44" />
+
+                                    <Button Grid.Column="1"
+                                            Text="Delete"
+                                            Clicked="OnDeleteUploadedCvClicked"
+                                            CommandParameter="{Binding Id}"
+                                            BackgroundColor="#FEE2E2"
+                                            TextColor="#DC2626"
+                                            FontAttributes="Bold"
+                                            CornerRadius="14"
+                                            WidthRequest="110"
+                                            HeightRequest="44" />
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Upload another CV"
+                    Clicked="OnUploadCvClicked"
+                    BackgroundColor="#DCFCE7"
+                    TextColor="#166534"
+                    FontAttributes="Bold"
+                    CornerRadius="16"
+                    HeightRequest="52" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

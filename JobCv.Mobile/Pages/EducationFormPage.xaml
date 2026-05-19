@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.EducationFormPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="20">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*"
+                  Margin="0,20,0,0">
+
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Margin="14,0,0,0"
+                                     Spacing="4">
+
+                    <Label x:Name="PageTitleLabel"
+                           Text="Add Education"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Add education details to your CV."
+                           FontSize="14"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Form card -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="22">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Institution"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Entry x:Name="InstitutionEntry"
+                               Placeholder="Example: University of Oradea"
+                               BackgroundColor="#F8FAFC"
+                               TextColor="#0F172A"
+                               PlaceholderColor="#94A3B8"
+                               HeightRequest="52" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Degree"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Entry x:Name="DegreeEntry"
+                               Placeholder="Example: Computer Science"
+                               BackgroundColor="#F8FAFC"
+                               TextColor="#0F172A"
+                               PlaceholderColor="#94A3B8"
+                               HeightRequest="52" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Description"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Editor x:Name="DescriptionEditor"
+                                Placeholder="Example: Software development, databases, web technologies..."
+                                BackgroundColor="#F8FAFC"
+                                TextColor="#0F172A"
+                                PlaceholderColor="#94A3B8"
+                                HeightRequest="120" />
+                    </VerticalStackLayout>
+
+                    <!-- Start date -->
+                    <Border BackgroundColor="#F8FAFC"
+                            Stroke="#E2E8F0"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="14">
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <HorizontalStackLayout Spacing="8">
+                                <CheckBox x:Name="UseStartDateCheckBox"
+                                          Color="#1D4ED8"
+                                          CheckedChanged="OnUseStartDateChanged" />
+
+                                <Label Text="Add start date"
+                                       TextColor="#0F172A"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+
+                            <DatePicker x:Name="StartDatePicker"
+                                        IsEnabled="False"
+                                        BackgroundColor="White"
+                                        TextColor="#0F172A"
+                                        HeightRequest="48" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- End date -->
+                    <Border BackgroundColor="#F8FAFC"
+                            Stroke="#E2E8F0"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="14">
+
+                        <VerticalStackLayout Spacing="10">
+
+                            <HorizontalStackLayout Spacing="8">
+                                <CheckBox x:Name="UseEndDateCheckBox"
+                                          Color="#1D4ED8"
+                                          CheckedChanged="OnUseEndDateChanged" />
+
+                                <Label Text="Add end date"
+                                       TextColor="#0F172A"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+
+                            <DatePicker x:Name="EndDatePicker"
+                                        IsEnabled="False"
+                                        BackgroundColor="White"
+                                        TextColor="#0F172A"
+                                        HeightRequest="48" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Label x:Name="MessageLabel"
+                           Text=""
+                           FontSize="13"
+                           TextColor="#DC2626" />
+
+                    <Button x:Name="SaveButton"
+                            Text="Save education"
+                            Clicked="OnSaveClicked"
+                            BackgroundColor="#1D4ED8"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            HeightRequest="54" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

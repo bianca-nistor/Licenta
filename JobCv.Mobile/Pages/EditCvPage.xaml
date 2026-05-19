@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.EditCvPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*" Margin="0,20,0,0">
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44" />
+
+                <VerticalStackLayout Grid.Column="1" Margin="14,0,0,0" Spacing="4">
+                    <Label Text="Edit CV"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Update your CV information and sections."
+                           FontSize="14"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- CV Photo -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label Text="CV photo"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="16">
+
+                        <Border x:Name="CvPhotoBorder"
+                                WidthRequest="92"
+                                HeightRequest="92"
+                                Stroke="#BFDBFE"
+                                StrokeThickness="2"
+                                BackgroundColor="#EFF6FF"
+                                StrokeShape="RoundRectangle 46"
+                                IsVisible="False">
+
+                            <Image x:Name="CvPhotoImage"
+                                   Aspect="AspectFill"
+                                   WidthRequest="92"
+                                   HeightRequest="92" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="8"
+                                             VerticalOptions="Center">
+
+                            <Label Text="Optional. Add a professional photo if you want it to appear in the CV header."
+                                   FontSize="14"
+                                   TextColor="#64748B" />
+
+                            <Button Text="Choose photo"
+                                    Clicked="OnChooseCvPhotoClicked"
+                                    BackgroundColor="#DCFCE7"
+                                    TextColor="#166534"
+                                    FontAttributes="Bold"
+                                    CornerRadius="16"
+                                    HeightRequest="48" />
+
+                            <Label x:Name="PhotoMessageLabel"
+                                   Text=""
+                                   FontSize="13"
+                                   TextColor="#DC2626" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Basic Info -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Basic information"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="TitleEntry"
+                           Placeholder="CV title"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Entry x:Name="FullNameEntry"
+                           Placeholder="Full name"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Entry x:Name="EmailEntry"
+                           Placeholder="Email"
+                           Keyboard="Email"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Entry x:Name="PhoneEntry"
+                           Placeholder="Phone"
+                           Keyboard="Telephone"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Entry x:Name="LocationEntry"
+                           Placeholder="Location"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Entry x:Name="LinkedInEntry"
+                           Placeholder="LinkedIn URL"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Entry x:Name="GitHubEntry"
+                           Placeholder="GitHub URL"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Entry x:Name="PortfolioEntry"
+                           Placeholder="Portfolio URL"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           HeightRequest="50" />
+
+                    <Picker x:Name="LanguagePicker"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A"
+                            HeightRequest="50">
+                        <Picker.Items>
+                            <x:String>English</x:String>
+                            <x:String>Romanian</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Picker x:Name="TemplatePicker"
+                            ItemDisplayBinding="{Binding Name}"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A"
+                            HeightRequest="50" />
+
+                    <Editor x:Name="SummaryEditor"
+                            Placeholder="Professional summary"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A"
+                            HeightRequest="120" />
+
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox x:Name="BaseCvCheckBox"
+                                  Color="#1D4ED8" />
+                        <Label Text="Set as base CV"
+                               TextColor="#0F172A"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="MessageLabel"
+                           Text=""
+                           TextColor="#DC2626"
+                           FontSize="13" />
+
+                    <Button Text="Save basic information"
+                            Clicked="OnSaveBasicInfoClicked"
+                            BackgroundColor="#1D4ED8"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            HeightRequest="54" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Skills -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Skills" FontSize="20" FontAttributes="Bold" TextColor="#0F172A" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddSkillClicked"
+                                BackgroundColor="#DCFCE7" TextColor="#166534" CornerRadius="14" />
+                    </Grid>
+
+                    <CollectionView x:Name="SkillsCollectionView" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*,Auto,Auto" Padding="0,6">
+                                    <Label Text="{Binding Name}" TextColor="#0F172A" FontSize="15" />
+                                    <Button Grid.Column="1" Text="Edit" Clicked="OnEditSkillClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#EFF6FF" TextColor="#1D4ED8" CornerRadius="12" />
+                                    <Button Grid.Column="2" Text="Delete" Clicked="OnDeleteSkillClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#FEE2E2" TextColor="#DC2626" CornerRadius="12" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Languages -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Languages" FontSize="20" FontAttributes="Bold" TextColor="#0F172A" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddLanguageClicked"
+                                BackgroundColor="#DCFCE7" TextColor="#166534" CornerRadius="14" />
+                    </Grid>
+
+                    <CollectionView x:Name="LanguagesCollectionView" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="*,Auto,Auto" Padding="0,6">
+                                    <Label Text="{Binding Name}" TextColor="#0F172A" FontSize="15" />
+                                    <Button Grid.Column="1" Text="Edit" Clicked="OnEditLanguageClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#EFF6FF" TextColor="#1D4ED8" CornerRadius="12" />
+                                    <Button Grid.Column="2" Text="Delete" Clicked="OnDeleteLanguageClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#FEE2E2" TextColor="#DC2626" CornerRadius="12" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Education -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Education" FontSize="20" FontAttributes="Bold" TextColor="#0F172A" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddEducationClicked"
+                                BackgroundColor="#DCFCE7" TextColor="#166534" CornerRadius="14" />
+                    </Grid>
+
+                    <CollectionView x:Name="EducationsCollectionView" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#F8FAFC" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="12" Margin="0,0,0,8">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Degree}" FontAttributes="Bold" FontSize="15" TextColor="#0F172A" />
+                                        <Label Text="{Binding Institution}" FontSize="13" TextColor="#64748B" />
+                                        <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,6,0,0">
+                                            <BoxView HeightRequest="1" BackgroundColor="#E2E8F0" VerticalOptions="Center" />
+                                            <Button Grid.Column="1" Text="Edit" Clicked="OnEditEducationClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#EFF6FF" TextColor="#1D4ED8" CornerRadius="12" />
+                                            <Button Grid.Column="2" Text="Delete" Clicked="OnDeleteEducationClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#FEE2E2" TextColor="#DC2626" CornerRadius="12" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Experience -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Experience" FontSize="20" FontAttributes="Bold" TextColor="#0F172A" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddExperienceClicked"
+                                BackgroundColor="#DCFCE7" TextColor="#166534" CornerRadius="14" />
+                    </Grid>
+
+                    <CollectionView x:Name="ExperiencesCollectionView" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#F8FAFC" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="12" Margin="0,0,0,8">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding JobTitle}" FontAttributes="Bold" FontSize="15" TextColor="#0F172A" />
+                                        <Label Text="{Binding Company}" FontSize="13" TextColor="#64748B" />
+                                        <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,6,0,0">
+                                            <BoxView HeightRequest="1" BackgroundColor="#E2E8F0" VerticalOptions="Center" />
+                                            <Button Grid.Column="1" Text="Edit" Clicked="OnEditExperienceClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#EFF6FF" TextColor="#1D4ED8" CornerRadius="12" />
+                                            <Button Grid.Column="2" Text="Delete" Clicked="OnDeleteExperienceClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#FEE2E2" TextColor="#DC2626" CornerRadius="12" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Projects -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Projects" FontSize="20" FontAttributes="Bold" TextColor="#0F172A" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddProjectClicked"
+                                BackgroundColor="#DCFCE7" TextColor="#166534" CornerRadius="14" />
+                    </Grid>
+
+                    <CollectionView x:Name="ProjectsCollectionView" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#F8FAFC" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="12" Margin="0,0,0,8">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="15" TextColor="#0F172A" />
+                                        <Label Text="{Binding Technologies}" FontSize="13" TextColor="#64748B" />
+                                        <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,6,0,0">
+                                            <BoxView HeightRequest="1" BackgroundColor="#E2E8F0" VerticalOptions="Center" />
+                                            <Button Grid.Column="1" Text="Edit" Clicked="OnEditProjectClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#EFF6FF" TextColor="#1D4ED8" CornerRadius="12" />
+                                            <Button Grid.Column="2" Text="Delete" Clicked="OnDeleteProjectClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#FEE2E2" TextColor="#DC2626" CornerRadius="12" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Certifications -->
+            <Border BackgroundColor="White" Stroke="#E2E8F0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Certifications" FontSize="20" FontAttributes="Bold" TextColor="#0F172A" />
+                        <Button Grid.Column="1" Text="+ Add" Clicked="OnAddCertificationClicked"
+                                BackgroundColor="#DCFCE7" TextColor="#166534" CornerRadius="14" />
+                    </Grid>
+
+                    <CollectionView x:Name="CertificationsCollectionView" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#F8FAFC" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="12" Margin="0,0,0,8">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="15" TextColor="#0F172A" />
+                                        <Label Text="{Binding Issuer}" FontSize="13" TextColor="#64748B" />
+                                        <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,6,0,0">
+                                            <BoxView HeightRequest="1" BackgroundColor="#E2E8F0" VerticalOptions="Center" />
+                                            <Button Grid.Column="1" Text="Edit" Clicked="OnEditCertificationClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#EFF6FF" TextColor="#1D4ED8" CornerRadius="12" />
+                                            <Button Grid.Column="2" Text="Delete" Clicked="OnDeleteCertificationClicked" CommandParameter="{Binding .}"
+                                                    BackgroundColor="#FEE2E2" TextColor="#DC2626" CornerRadius="12" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+            <!-- Bottom save button -->
+            <Border BackgroundColor="White"
+        Stroke="#E2E8F0"
+        StrokeShape="RoundRectangle 24"
+        Padding="18"
+        Margin="0,4,0,30">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Button Text="Save CV"
+                Clicked="OnSaveCvClicked"
+                BackgroundColor="#1D4ED8"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="16"
+                HeightRequest="56" />
+
+                    <Label x:Name="BottomSaveMessageLabel"
+               Text=""
+               FontSize="13"
+               TextColor="#16A34A"
+               HorizontalTextAlignment="Center" />
+
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

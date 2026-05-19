@@ -3,8 +3,108 @@
   "WorkspaceRootPath": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\migrations\\20260515211550_extendcvstructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:migrations\\20260515211550_extendcvstructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\controllers\\cvscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:controllers\\cvscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\createcvdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\createcvdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updatecertificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\updatecertificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\addcertificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\addcertificationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updatelanguagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\updatelanguagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\addlanguagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\addlanguagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updateprojectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\updateprojectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\addprojectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\addprojectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updatecvpersonalinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\updatecvpersonalinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\models\\cvcertification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\cvcertification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\models\\cvlanguage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\cvlanguage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\models\\cvproject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\cvproject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\models\\cv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\cv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\migrations\\20260515201937_addjobsapplicationsandstatistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:migrations\\20260515201937_addjobsapplicationsandstatistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\controllers\\statisticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:controllers\\statisticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\controllers\\applicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:controllers\\applicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\controllers\\jobscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:controllers\\jobscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updateinterviewfeedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\updateinterviewfeedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updateapplicationstatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\updateapplicationstatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\createapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\createapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updatejobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\updatejobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\createjobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\createjobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\models\\application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\models\\job.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\job.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\updateexperiencedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -59,24 +159,12 @@
       "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\cveducation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\models\\cv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:models\\cv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\createcvdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|solutionrelative:dtos\\createcvdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2501B129-94EF-40C7-9EF4-C4C182279683}|Jobcv.Api.csproj|c:\\users\\bianca\\desktop\\licenta\\jobcv.api\\dtos\\addskilldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -102,7 +190,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -113,12 +201,321 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260515211550_ExtendCvStructure.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Migrations\\20260515211550_ExtendCvStructure.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260515211550_ExtendCvStructure.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Migrations\\20260515211550_ExtendCvStructure.cs",
+              "RelativeToolTip": "Migrations\\20260515211550_ExtendCvStructure.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:15:50.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdateCertificationDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateCertificationDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateCertificationDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateCertificationDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateCertificationDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:10:07.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AddCertificationDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddCertificationDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\AddCertificationDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddCertificationDto.cs",
+              "RelativeToolTip": "Dtos\\AddCertificationDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:09:14.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UpdateLanguageDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateLanguageDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateLanguageDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateLanguageDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateLanguageDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:08:43.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AddLanguageDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddLanguageDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\AddLanguageDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddLanguageDto.cs",
+              "RelativeToolTip": "Dtos\\AddLanguageDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:07:57.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateCvDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateCvDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\CreateCvDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateCvDto.cs",
+              "RelativeToolTip": "Dtos\\CreateCvDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-21T13:20:33.482Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "CvsController.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\CvsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CvsController.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\CvsController.cs",
+              "RelativeToolTip": "Controllers\\CvsController.cs",
+              "ViewState": "AgIAAL4BAAAAAAAAAAAqwOoBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T11:08:30.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UpdateProjectDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateProjectDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateProjectDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateProjectDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateProjectDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:07:18.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AddProjectDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddProjectDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\AddProjectDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddProjectDto.cs",
+              "RelativeToolTip": "Dtos\\AddProjectDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:06:48.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UpdateCvPersonalInfoDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateCvPersonalInfoDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateCvPersonalInfoDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateCvPersonalInfoDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateCvPersonalInfoDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:06:15.889Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CvCertification.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvCertification.cs",
+              "RelativeDocumentMoniker": "Models\\CvCertification.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvCertification.cs",
+              "RelativeToolTip": "Models\\CvCertification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:02:28.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CvLanguage.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvLanguage.cs",
+              "RelativeDocumentMoniker": "Models\\CvLanguage.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvLanguage.cs",
+              "RelativeToolTip": "Models\\CvLanguage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:02:00.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CvProject.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvProject.cs",
+              "RelativeDocumentMoniker": "Models\\CvProject.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvProject.cs",
+              "RelativeToolTip": "Models\\CvProject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T21:01:23.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "20260515201937_AddJobsApplicationsAndStatistics.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Migrations\\20260515201937_AddJobsApplicationsAndStatistics.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260515201937_AddJobsApplicationsAndStatistics.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Migrations\\20260515201937_AddJobsApplicationsAndStatistics.cs",
+              "RelativeToolTip": "Migrations\\20260515201937_AddJobsApplicationsAndStatistics.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:19:38.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "StatisticsController.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\StatisticsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StatisticsController.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\StatisticsController.cs",
+              "RelativeToolTip": "Controllers\\StatisticsController.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAgwKQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:14:04.086Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAYwEsAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-21T12:10:46.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ApplicationsController.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\ApplicationsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ApplicationsController.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\ApplicationsController.cs",
+              "RelativeToolTip": "Controllers\\ApplicationsController.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAgwJ0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:13:29.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "JobsController.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\JobsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\JobsController.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\JobsController.cs",
+              "RelativeToolTip": "Controllers\\JobsController.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAgwI0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:12:48.843Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Cv.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Cv.cs",
+              "RelativeDocumentMoniker": "Models\\Cv.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Cv.cs",
+              "RelativeToolTip": "Models\\Cv.cs",
+              "ViewState": "AgIAABQAAADAehrVwbcowCQAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-21T11:41:57.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "UpdateInterviewFeedbackDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateInterviewFeedbackDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateInterviewFeedbackDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateInterviewFeedbackDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateInterviewFeedbackDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:11:54.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "UpdateApplicationStatusDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateApplicationStatusDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateApplicationStatusDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateApplicationStatusDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateApplicationStatusDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:11:19.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CreateApplicationDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateApplicationDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\CreateApplicationDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateApplicationDto.cs",
+              "RelativeToolTip": "Dtos\\CreateApplicationDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:10:29.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UpdateJobDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateJobDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateJobDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateJobDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateJobDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:09:52.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CreateJobDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateJobDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\CreateJobDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateJobDto.cs",
+              "RelativeToolTip": "Dtos\\CreateJobDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:09:17.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Application.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Application.cs",
+              "RelativeDocumentMoniker": "Models\\Application.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Application.cs",
+              "RelativeToolTip": "Models\\Application.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:04:39.967Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Job.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Job.cs",
+              "RelativeDocumentMoniker": "Models\\Job.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Job.cs",
+              "RelativeToolTip": "Models\\Job.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T20:03:59.179Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
               "Title": "UpdateExperienceDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateExperienceDto.cs",
               "RelativeDocumentMoniker": "Dtos\\UpdateExperienceDto.cs",
@@ -126,25 +523,11 @@
               "RelativeToolTip": "Dtos\\UpdateExperienceDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T19:51:26.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T19:51:26.105Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UpdateSkillDto.cs",
-              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateSkillDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\UpdateSkillDto.cs",
-              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateSkillDto.cs",
-              "RelativeToolTip": "Dtos\\UpdateSkillDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T19:50:42.528Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 28,
               "Title": "UpdateEducationDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateEducationDto.cs",
               "RelativeDocumentMoniker": "Dtos\\UpdateEducationDto.cs",
@@ -152,12 +535,11 @@
               "RelativeToolTip": "Dtos\\UpdateEducationDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T19:47:47.588Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T19:47:47.588Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 30,
               "Title": "jobcv.db",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\jobcv.db",
               "RelativeDocumentMoniker": "jobcv.db",
@@ -168,20 +550,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CvsController.cs",
-              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\CvsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CvsController.cs",
-              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\CvsController.cs",
-              "RelativeToolTip": "Controllers\\CvsController.cs",
-              "ViewState": "AgIAAJwAAAAAAAAAAAAAAMAAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 27,
+              "Title": "UpdateSkillDto.cs",
+              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateSkillDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UpdateSkillDto.cs",
+              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateSkillDto.cs",
+              "RelativeToolTip": "Dtos\\UpdateSkillDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T11:08:30.769Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T19:50:42.528Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 44,
               "Title": "20260504102422_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Migrations\\20260504102422_InitialCreate.cs",
               "RelativeDocumentMoniker": "Migrations\\20260504102422_InitialCreate.cs",
@@ -193,7 +574,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 29,
               "Title": "UpdateCvDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\UpdateCvDto.cs",
               "RelativeDocumentMoniker": "Dtos\\UpdateCvDto.cs",
@@ -201,12 +582,11 @@
               "RelativeToolTip": "Dtos\\UpdateCvDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T19:31:33.49Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T19:31:33.49Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 31,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -218,7 +598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 32,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -230,7 +610,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 33,
               "Title": "PasswordService.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Services\\PasswordService.cs",
               "RelativeDocumentMoniker": "Services\\PasswordService.cs",
@@ -242,7 +622,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 40,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\LoginDto.cs",
               "RelativeDocumentMoniker": "Dtos\\LoginDto.cs",
@@ -254,7 +634,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 39,
               "Title": "RegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\RegisterDto.cs",
               "RelativeDocumentMoniker": "Dtos\\RegisterDto.cs",
@@ -266,19 +646,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-21T12:10:46.363Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 38,
               "Title": "CvEducation.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvEducation.cs",
               "RelativeDocumentMoniker": "Models\\CvEducation.cs",
@@ -290,19 +658,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Cv.cs",
-              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Cv.cs",
-              "RelativeDocumentMoniker": "Models\\Cv.cs",
-              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\Cv.cs",
-              "RelativeToolTip": "Models\\Cv.cs",
-              "ViewState": "AgIAAAcAAAAA1yEWTbokwBgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-21T11:41:57.266Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 35,
               "Title": "CvSkill.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvSkill.cs",
               "RelativeDocumentMoniker": "Models\\CvSkill.cs",
@@ -314,7 +670,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 37,
               "Title": "CvExperience.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\CvExperience.cs",
               "RelativeDocumentMoniker": "Models\\CvExperience.cs",
@@ -326,7 +682,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 36,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -338,7 +694,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 34,
               "Title": "AddEducationDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddEducationDto.cs",
               "RelativeDocumentMoniker": "Dtos\\AddEducationDto.cs",
@@ -350,19 +706,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "CreateCvDto.cs",
-              "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateCvDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\CreateCvDto.cs",
-              "ToolTip": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\CreateCvDto.cs",
-              "RelativeToolTip": "Dtos\\CreateCvDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-21T13:20:33.482Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 41,
               "Title": "AddSkillDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddSkillDto.cs",
               "RelativeDocumentMoniker": "Dtos\\AddSkillDto.cs",
@@ -374,7 +718,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 42,
               "Title": "AddExperienceDto.cs",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Dtos\\AddExperienceDto.cs",
               "RelativeDocumentMoniker": "Dtos\\AddExperienceDto.cs",
@@ -386,7 +730,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 43,
               "Title": "Jobcv.Api.csproj",
               "DocumentMoniker": "C:\\Users\\Bianca\\Desktop\\Licenta\\Jobcv.Api\\Jobcv.Api.csproj",
               "RelativeDocumentMoniker": "Jobcv.Api.csproj",
@@ -395,6 +739,10 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-03-21T08:09:52.466Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         },
