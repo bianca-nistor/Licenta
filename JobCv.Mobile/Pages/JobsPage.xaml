@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.JobsPage"
+             Shell.NavBarIsVisible="False"
+            BackgroundColor="#F1F5F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="20">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*"
+                  Margin="0,24,0,0">
+
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Margin="14,0,0,0"
+                                     Spacing="4">
+
+                    <Label Text="Find jobs"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Search for job opportunities and prepare a CV for each role."
+                           FontSize="14"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Search box -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="18">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Search jobs"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="QueryEntry"
+                           Placeholder="Job title, keyword, skill"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           PlaceholderColor="#94A3B8" />
+
+                    <Entry x:Name="LocationEntry"
+                           Placeholder="Location, city or remote"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           PlaceholderColor="#94A3B8" />
+
+                    <Button Text="Search"
+                            Clicked="OnSearchClicked"
+                            BackgroundColor="#1D4ED8"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            HeightRequest="52" />
+
+                    <Label x:Name="MessageLabel"
+                           Text=""
+                           FontSize="13"
+                           TextColor="#64748B" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Results title -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Job results"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A" />
+
+                <Label Text="Use these jobs to apply externally, create a tailored CV or track your application."
+                       FontSize="14"
+                       TextColor="#64748B" />
+            </VerticalStackLayout>
+
+            <!-- Results -->
+            <CollectionView x:Name="JobsCollectionView"
+                            SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border BackgroundColor="#F0F7FF"
+        Stroke="#BFDBFE"
+                                   StrokeThickness="1"
+        StrokeShape="RoundRectangle 24"
+        Padding="18"
+        Margin="0,0,0,14">
+                           
+
+                            <VerticalStackLayout Spacing="10">
+
+                                <Grid ColumnDefinitions="*,Auto"
+                                      ColumnSpacing="12">
+
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Title}"
+                                               FontSize="22"
+                                               FontAttributes="Bold"
+                                               TextColor="#0F172A" />
+
+                                        <Label Text="{Binding Company}"
+                                               FontSize="15"
+                                               TextColor="#334155" />
+
+                                        <Label Text="{Binding Location}"
+                                               FontSize="14"
+                                               TextColor="#64748B" />
+                                    </VerticalStackLayout>
+
+                                    <Border Grid.Column="1"
+        BackgroundColor="White"
+        Stroke="#DBEAFE"
+        StrokeShape="RoundRectangle 14"
+        Padding="12">
+
+                                        <Label Text="{Binding Source}"
+                                               TextColor="#1D4ED8"
+                                               FontSize="12"
+                                               FontAttributes="Bold" />
+                                    </Border>
+                                </Grid>
+
+                                <Label Text="{Binding Description}"
+                                       FontSize="14"
+                                       TextColor="#475569"
+                                       LineBreakMode="WordWrap" />
+
+                                <Grid ColumnDefinitions="*,*"
+                                      ColumnSpacing="10">
+
+                                    <Border BackgroundColor="White"
+        Stroke="#DBEAFE"
+        StrokeShape="RoundRectangle 14"
+        Padding="12">
+                                        <VerticalStackLayout Spacing="3">
+                                            <Label Text="Salary"
+                                                   FontSize="12"
+                                                   TextColor="#64748B" />
+
+                                            <Label Text="{Binding Salary}"
+                                                   FontSize="14"
+                                                   TextColor="#0F172A"
+                                                   FontAttributes="Bold" />
+                                        </VerticalStackLayout>
+                                    </Border>
+
+                                <Border Grid.Column="1"
+        BackgroundColor="White"
+        Stroke="#DBEAFE"
+        StrokeShape="RoundRectangle 14"
+        Padding="12">
+
+                                    <VerticalStackLayout Spacing="3">
+                                            <Label Text="Posted"
+                                                   FontSize="12"
+                                                   TextColor="#64748B" />
+
+                                            <Label Text="{Binding PostedText}"
+                                                   FontSize="14"
+                                                   TextColor="#0F172A"
+                                                   FontAttributes="Bold" />
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,*,*"
+                                      ColumnSpacing="10"
+                                      Margin="0,8,0,0">
+
+                                    <Button Text="Apply"
+                                            Clicked="OnApplyClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#DCFCE7"
+                                            TextColor="#166534"
+                                            FontAttributes="Bold"
+                                            CornerRadius="14"
+                                            HeightRequest="48" />
+
+                                    <Button Grid.Column="1"
+                                            Text="Create CV"
+                                            Clicked="OnCreateCvForJobClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#1D4ED8"
+                                            TextColor="White"
+                                            FontAttributes="Bold"
+                                            CornerRadius="14"
+                                            HeightRequest="48" />
+
+                                    <Button Grid.Column="2"
+        Text="Track"
+        BackgroundColor="White"
+        TextColor="#1D4ED8"
+        BorderColor="#93C5FD"
+        BorderWidth="1"
+        CornerRadius="18"
+        HeightRequest="48"
+        FontAttributes="Bold"
+      Clicked="OnTrackApplicationClicked"
+        CommandParameter="{Binding .}" />
+                                </Grid>
+
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

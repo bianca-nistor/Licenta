@@ -5,37 +5,6 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Applications": {
-      "post": {
-        "tags": [
-          "Applications"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateApplicationDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateApplicationDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateApplicationDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Applications/user/{userId}": {
       "get": {
         "tags": [
@@ -103,79 +72,26 @@
         }
       }
     },
-    "/api/Applications/{applicationId}/status": {
-      "put": {
+    "/api/Applications": {
+      "post": {
         "tags": [
           "Applications"
-        ],
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateApplicationStatusDto"
+                "$ref": "#/components/schemas/CreateJobApplicationDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateApplicationStatusDto"
+                "$ref": "#/components/schemas/CreateJobApplicationDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateApplicationStatusDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Applications/{applicationId}/interview-feedback": {
-      "put": {
-        "tags": [
-          "Applications"
-        ],
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateInterviewFeedbackDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateInterviewFeedbackDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateInterviewFeedbackDto"
+                "$ref": "#/components/schemas/CreateJobApplicationDto"
               }
             }
           }
@@ -1223,131 +1139,6 @@
         }
       }
     },
-    "/api/Jobs": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateJobDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateJobDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateJobDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Jobs"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Jobs/{jobId}": {
-      "get": {
-        "tags": [
-          "Jobs"
-        ],
-        "parameters": [
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Jobs"
-        ],
-        "parameters": [
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateJobDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateJobDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateJobDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Jobs"
-        ],
-        "parameters": [
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Jobs/search": {
       "get": {
         "tags": [
@@ -1355,7 +1146,7 @@
         ],
         "parameters": [
           {
-            "name": "keyword",
+            "name": "query",
             "in": "query",
             "schema": {
               "type": "string"
@@ -1369,10 +1160,21 @@
             }
           },
           {
-            "name": "workMode",
+            "name": "page",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
             }
           }
         ],
@@ -1736,38 +1538,6 @@
         },
         "additionalProperties": false
       },
-      "CreateApplicationDto": {
-        "type": "object",
-        "properties": {
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "jobId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cvId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "appliedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "notes": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateCvDto": {
         "type": "object",
         "properties": {
@@ -1835,10 +1605,23 @@
         },
         "additionalProperties": false
       },
-      "CreateJobDto": {
+      "CreateJobApplicationDto": {
         "type": "object",
         "properties": {
-          "title": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cvId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "jobExternalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobTitle": {
             "type": "string",
             "nullable": true
           },
@@ -1850,19 +1633,7 @@
             "type": "string",
             "nullable": true
           },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "requirements": {
-            "type": "string",
-            "nullable": true
-          },
-          "workMode": {
-            "type": "string",
-            "nullable": true
-          },
-          "employmentType": {
+          "jobUrl": {
             "type": "string",
             "nullable": true
           },
@@ -1870,13 +1641,34 @@
             "type": "string",
             "nullable": true
           },
-          "externalUrl": {
+          "status": {
             "type": "string",
             "nullable": true
           },
-          "publishedAt": {
+          "appliedAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "interviewAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "interviewNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "salaryRange": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactPerson": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -1927,30 +1719,6 @@
             "nullable": true
           },
           "password": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateApplicationStatusDto": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "appliedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "interviewDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "notes": {
             "type": "string",
             "nullable": true
           }
@@ -2099,86 +1867,6 @@
           },
           "isCurrent": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateInterviewFeedbackDto": {
-        "type": "object",
-        "properties": {
-          "interviewDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "interviewNotes": {
-            "type": "string",
-            "nullable": true
-          },
-          "questionsAsked": {
-            "type": "string",
-            "nullable": true
-          },
-          "interviewRating": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "interviewDifficulty": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "wouldApplyAgain": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateJobDto": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "company": {
-            "type": "string",
-            "nullable": true
-          },
-          "location": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "requirements": {
-            "type": "string",
-            "nullable": true
-          },
-          "workMode": {
-            "type": "string",
-            "nullable": true
-          },
-          "employmentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "source": {
-            "type": "string",
-            "nullable": true
-          },
-          "externalUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "publishedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           }
         },
         "additionalProperties": false

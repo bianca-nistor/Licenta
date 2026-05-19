@@ -25,13 +25,55 @@
                            TextColor="#64748B" />
                 </VerticalStackLayout>
 
-                <Button Grid.Column="1"
-                        Text="👤"
-                        BackgroundColor="#DCFCE7"
-                        TextColor="#166534"
-                        CornerRadius="22"
-                        WidthRequest="44"
-                        HeightRequest="44" />
+                <VerticalStackLayout Grid.Column="1"
+                     HorizontalOptions="End"
+                     VerticalOptions="Start"
+                     Spacing="8">
+
+                    <Button Text="👤"
+            Clicked="OnProfileClicked"
+            BackgroundColor="#DCFCE7"
+            TextColor="#0F172A"
+            CornerRadius="22"
+            WidthRequest="48"
+            HeightRequest="48"
+            FontSize="18" />
+
+                    <Border x:Name="ProfileMenu"
+            IsVisible="False"
+            BackgroundColor="White"
+            Stroke="#E2E8F0"
+            StrokeShape="RoundRectangle 18"
+            Padding="12"
+            WidthRequest="210"
+            Shadow="5,5,12,#22000000">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <Label Text="Profile"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#0F172A"
+                   Margin="4,0,4,6" />
+
+                            <Button Text="View profile"
+                    Clicked="OnViewProfileClicked"
+                    BackgroundColor="#EFF6FF"
+                    TextColor="#1D4ED8"
+                    CornerRadius="12"
+                    HeightRequest="44" />
+
+                            <Button Text="Logout"
+                    Clicked="OnLogoutClicked"
+                    BackgroundColor="#FEE2E2"
+                    TextColor="#DC2626"
+                    CornerRadius="12"
+                    HeightRequest="44" />
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                </VerticalStackLayout>
             </Grid>
 
             <!-- Hero -->
@@ -56,7 +98,24 @@
                             FontAttributes="Bold"
                             CornerRadius="16"
                             HeightRequest="52" />
+                    <Button Text="Find jobs"
+        Clicked="OnFindJobsClicked"
+        BackgroundColor="#DCFCE7"
+        TextColor="#166534"
+        FontAttributes="Bold"
+        CornerRadius="16"
+        HeightRequest="52" />
+                    <Button Text="My applications"
+        Clicked="OnMyApplicationsClicked"
+        BackgroundColor="#EFF6FF"
+        TextColor="#1D4ED8"
+        BorderColor="#93C5FD"
+        BorderWidth="1"
+        FontAttributes="Bold"
+        CornerRadius="16"
+        HeightRequest="52" />
                 </VerticalStackLayout>
+                
             </Border>
 
             <!-- Created CVs -->

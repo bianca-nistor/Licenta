@@ -342,5 +342,44 @@ namespace JobCv.Mobile.Services
 
             return await response.Content.ReadFromJsonAsync<CvDto>(_jsonOptions);
         }
+        public async Task<List<JobSearchResultDto>> SearchJobsAsync(string query, string location, int page = 1)
+        {
+            var encodedQuery = Uri.EscapeDataString(query ?? "");
+            var encodedLocation = Uri.EscapeDataString(location ?? "");
+
+            var jobs = await _httpClient.GetFromJsonAsync<List<JobSearchResultDto>>(
+                $"api/Jobs/search?query={encodedQuery}&location={encodedLocation}&page={page}",
+                _jsonOptions);
+
+            return jobs ?? new List<JobSearchResultDto>();
+        }
+        public async Task<JobApplicationDto?> CreateApplicationAsync(CreateJobApplicationRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/Applications", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Application API error: {response.StatusCode} - {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<JobApplicationDto>(_jsonOptions);
+        }
+
+        public async Task<List<JobApplicationDto>> GetUserApplicationsAsync(int userId)
+        {
+            var applications = await _httpClient.GetFromJsonAsync<List<JobApplicationDto>>(
+                $"api/Applications/user/{userId}",
+                _jsonOptions);
+
+            return applications ?? new List<JobApplicationDto>();
+        }
+
+        public async Task<bool> DeleteApplicationAsync(int applicationId)
+        {
+            var response = await _httpClient.DeleteAsync($"api/Applications/{applicationId}");
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }

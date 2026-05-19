@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "JobCv.Api.Dtos.CreateApplicationDto",
+        "Type": "JobCv.Api.Dtos.CreateJobApplicationDto",
         "IsRequired": true
       }
     ],
@@ -42,48 +42,6 @@
       {
         "Name": "applicationId",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
-    "Method": "UpdateInterviewFeedback",
-    "RelativePath": "api/Applications/{applicationId}/interview-feedback",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "applicationId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "JobCv.Api.Dtos.UpdateInterviewFeedbackDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
-    "Method": "UpdateStatus",
-    "RelativePath": "api/Applications/{applicationId}/status",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "applicationId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "JobCv.Api.Dtos.UpdateApplicationStatusDto",
         "IsRequired": true
       }
     ],
@@ -693,85 +651,6 @@
   },
   {
     "ContainingType": "JobCv.Api.Controllers.JobsController",
-    "Method": "CreateJob",
-    "RelativePath": "api/Jobs",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "JobCv.Api.Dtos.CreateJobDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobCv.Api.Controllers.JobsController",
-    "Method": "GetJobs",
-    "RelativePath": "api/Jobs",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobCv.Api.Controllers.JobsController",
-    "Method": "GetJobById",
-    "RelativePath": "api/Jobs/{jobId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "jobId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobCv.Api.Controllers.JobsController",
-    "Method": "UpdateJob",
-    "RelativePath": "api/Jobs/{jobId}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "jobId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "JobCv.Api.Dtos.UpdateJobDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobCv.Api.Controllers.JobsController",
-    "Method": "DeleteJob",
-    "RelativePath": "api/Jobs/{jobId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "jobId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "JobCv.Api.Controllers.JobsController",
     "Method": "SearchJobs",
     "RelativePath": "api/Jobs/search",
     "HttpMethod": "GET",
@@ -779,7 +658,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "keyword",
+        "Name": "query",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -789,8 +668,13 @@
         "IsRequired": false
       },
       {
-        "Name": "workMode",
-        "Type": "System.String",
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],

@@ -20,7 +20,7 @@ namespace JobCv.Api.Data
         public DbSet<CvProject> CvProjects => Set<CvProject>();
         public DbSet<CvLanguage> CvLanguages => Set<CvLanguage>();
         public DbSet<CvCertification> CvCertifications => Set<CvCertification>();
-
+        public DbSet<JobApplication> JobApplications { get; set; }
         public DbSet<UploadedCvFile> UploadedCvFiles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

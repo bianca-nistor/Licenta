@@ -1,8 +1,5 @@
-﻿using JobCv.Api.Data;
-using JobCv.Api.Dtos;
-using JobCv.Api.Models;
+﻿using JobCv.Api.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace JobCv.Api.Controllers
 {
@@ -10,133 +7,121 @@ namespace JobCv.Api.Controllers
     [Route("api/[controller]")]
     public class JobsController : ControllerBase
     {
-        private readonly AppDbContext _context;
-
-        public JobsController(AppDbContext context)
+        private static readonly List<JobSearchResultDto> MockJobs = new()
         {
-            _context = context;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateJob(CreateJobDto dto)
-        {
-            var job = new Job
+            new JobSearchResultDto
             {
-                Title = dto.Title,
-                Company = dto.Company,
-                Location = dto.Location,
-                Description = dto.Description,
-                Requirements = dto.Requirements,
-                WorkMode = dto.WorkMode,
-                EmploymentType = dto.EmploymentType,
-                Source = dto.Source,
-                ExternalUrl = dto.ExternalUrl,
-                PublishedAt = dto.PublishedAt
-            };
-
-            _context.Jobs.Add(job);
-            await _context.SaveChangesAsync();
-
-            return Ok(job);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetJobs()
-        {
-            var jobs = await _context.Jobs
-                .OrderByDescending(x => x.CreatedAt)
-                .ToListAsync();
-
-            return Ok(jobs);
-        }
-
-        [HttpGet("{jobId}")]
-        public async Task<IActionResult> GetJobById(int jobId)
-        {
-            var job = await _context.Jobs.FindAsync(jobId);
-
-            if (job == null)
+                ExternalId = "mock-1",
+                Title = "Junior .NET Developer",
+                Company = "Tech Solutions",
+                Location = "Bucharest / Remote",
+                Description = "Work on web and mobile applications using C#, .NET, REST APIs and SQL. Suitable for junior candidates with basic backend knowledge.",
+                ApplyUrl = "https://www.linkedin.com/jobs/",
+                Source = "Mock",
+                Salary = "Not specified",
+                PostedAt = DateTime.UtcNow.AddDays(-2)
+            },
+            new JobSearchResultDto
             {
-                return NotFound("Jobul nu a fost găsit.");
+                ExternalId = "mock-2",
+                Title = "Frontend Developer",
+                Company = "Digital Studio",
+                Location = "Cluj-Napoca",
+                Description = "Build responsive user interfaces using HTML, CSS, JavaScript and modern frontend frameworks.",
+                ApplyUrl = "https://www.linkedin.com/jobs/",
+                Source = "Mock",
+                Salary = "Not specified",
+                PostedAt = DateTime.UtcNow.AddDays(-4)
+            },
+            new JobSearchResultDto
+            {
+                ExternalId = "mock-3",
+                Title = "Mobile App Developer",
+                Company = "AppWorks",
+                Location = "Remote",
+                Description = "Develop mobile applications and collaborate with backend developers, designers and QA engineers.",
+                ApplyUrl = "https://www.linkedin.com/jobs/",
+                Source = "Mock",
+                Salary = "Not specified",
+                PostedAt = DateTime.UtcNow.AddDays(-1)
+            },
+            new JobSearchResultDto
+            {
+                ExternalId = "mock-4",
+                Title = "Data Analyst",
+                Company = "Insight Analytics",
+                Location = "Bucharest",
+                Description = "Analyze business data, create reports and dashboards, and support decision making with clear insights.",
+                ApplyUrl = "https://www.linkedin.com/jobs/",
+                Source = "Mock",
+                Salary = "Not specified",
+                PostedAt = DateTime.UtcNow.AddDays(-7)
+            },
+            new JobSearchResultDto
+            {
+                ExternalId = "mock-5",
+                Title = "QA Tester",
+                Company = "QualitySoft",
+                Location = "Iasi / Remote",
+                Description = "Test web and mobile applications, write test cases, report bugs and collaborate with developers.",
+                ApplyUrl = "https://www.linkedin.com/jobs/",
+                Source = "Mock",
+                Salary = "Not specified",
+                PostedAt = DateTime.UtcNow.AddDays(-3)
+            },
+            new JobSearchResultDto
+            {
+                ExternalId = "mock-6",
+                Title = "Backend Developer",
+                Company = "Cloud Systems",
+                Location = "Timisoara",
+                Description = "Develop REST APIs, work with databases, authentication and application architecture using .NET.",
+                ApplyUrl = "https://www.linkedin.com/jobs/",
+                Source = "Mock",
+                Salary = "Not specified",
+                PostedAt = DateTime.UtcNow.AddDays(-5)
             }
-
-            return Ok(job);
-        }
+        };
 
         [HttpGet("search")]
-        public async Task<IActionResult> SearchJobs(
-            string? keyword,
-            string? location,
-            string? workMode)
+        public IActionResult SearchJobs(
+            [FromQuery] string? query,
+            [FromQuery] string? location,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 20)
         {
-            var query = _context.Jobs.AsQueryable();
+            if (page < 1)
+                page = 1;
 
-            if (!string.IsNullOrWhiteSpace(keyword))
+            if (pageSize < 1)
+                pageSize = 20;
+
+            var results = MockJobs.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query))
             {
-                query = query.Where(x =>
-                    x.Title.Contains(keyword) ||
-                    x.Company.Contains(keyword) ||
-                    x.Description.Contains(keyword) ||
-                    x.Requirements.Contains(keyword));
+                var normalizedQuery = query.Trim().ToLower();
+
+                results = results.Where(job =>
+                    job.Title.ToLower().Contains(normalizedQuery) ||
+                    job.Company.ToLower().Contains(normalizedQuery) ||
+                    job.Description.ToLower().Contains(normalizedQuery));
             }
 
             if (!string.IsNullOrWhiteSpace(location))
             {
-                query = query.Where(x => x.Location.Contains(location));
+                var normalizedLocation = location.Trim().ToLower();
+
+                results = results.Where(job =>
+                    job.Location.ToLower().Contains(normalizedLocation));
             }
 
-            if (!string.IsNullOrWhiteSpace(workMode))
-            {
-                query = query.Where(x => x.WorkMode == workMode);
-            }
+            var finalResults = results
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
 
-            var jobs = await query
-                .OrderByDescending(x => x.CreatedAt)
-                .ToListAsync();
-
-            return Ok(jobs);
-        }
-
-        [HttpPut("{jobId}")]
-        public async Task<IActionResult> UpdateJob(int jobId, UpdateJobDto dto)
-        {
-            var job = await _context.Jobs.FindAsync(jobId);
-
-            if (job == null)
-            {
-                return NotFound("Jobul nu a fost găsit.");
-            }
-
-            job.Title = dto.Title;
-            job.Company = dto.Company;
-            job.Location = dto.Location;
-            job.Description = dto.Description;
-            job.Requirements = dto.Requirements;
-            job.WorkMode = dto.WorkMode;
-            job.EmploymentType = dto.EmploymentType;
-            job.Source = dto.Source;
-            job.ExternalUrl = dto.ExternalUrl;
-            job.PublishedAt = dto.PublishedAt;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(job);
-        }
-
-        [HttpDelete("{jobId}")]
-        public async Task<IActionResult> DeleteJob(int jobId)
-        {
-            var job = await _context.Jobs.FindAsync(jobId);
-
-            if (job == null)
-            {
-                return NotFound("Jobul nu a fost găsit.");
-            }
-
-            _context.Jobs.Remove(job);
-            await _context.SaveChangesAsync();
-
-            return Ok("Jobul a fost șters cu succes.");
+            return Ok(finalResults);
         }
     }
 }

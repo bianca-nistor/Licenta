@@ -159,7 +159,58 @@ namespace JobCv.Mobile.Pages
 
             await LoadDataAsync();
         }
+        private Border GetProfileMenu()
+        {
+            var menu = this.FindByName<Border>("ProfileMenu");
 
+            if (menu == null)
+            {
+                throw new Exception("ProfileMenu was not found in CvsPage.xaml.");
+            }
 
+            return menu;
+        }
+
+        private void OnProfileClicked(object sender, EventArgs e)
+        {
+            var profileMenu = GetProfileMenu();
+            profileMenu.IsVisible = !profileMenu.IsVisible;
+        }
+
+        private async void OnViewProfileClicked(object sender, EventArgs e)
+        {
+            var profileMenu = GetProfileMenu();
+            profileMenu.IsVisible = false;
+
+            await DisplayAlert(
+    "Your profile",
+    $"Name: {_user.FullName}\nEmail: {_user.Email}",
+    "OK");
+        }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            var profileMenu = GetProfileMenu();
+            profileMenu.IsVisible = false;
+
+            var confirm = await DisplayAlert(
+                "Logout",
+                "Are you sure you want to log out?",
+                "Yes",
+                "No");
+
+            if (!confirm)
+                return;
+
+            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+        }
+        private async void OnFindJobsClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new JobsPage(_user, _apiService));
+        }
+        private async void OnMyApplicationsClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ApplicationsPage(_user, _apiService));
+        }
     }
 }
