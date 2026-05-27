@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="JobCv.Mobile.Pages.InterviewPrepPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#F8FAFC">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="18">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="14"
+                  Margin="0,20,0,0">
+
+                <Button Grid.Column="0"
+                        Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="48"
+                        HeightRequest="48"
+                        FontSize="22" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4">
+
+                    <Label Text="Interview Preparation"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Generate interview questions and preparation tips for this job."
+                           FontSize="16"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Job info -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 24"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="8">
+
+                    <Label x:Name="JobTitleLabel"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label x:Name="CompanyLabel"
+                           FontSize="16"
+                           TextColor="#334155" />
+
+                    <Label x:Name="LocationLabel"
+                           FontSize="14"
+                           TextColor="#64748B" />
+
+                    <Label x:Name="DescriptionLabel"
+                           FontSize="14"
+                           TextColor="#475569"
+                           LineBreakMode="WordWrap"
+                           MaxLines="5" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Generate button -->
+            <Button Text="Generate interview prep"
+                    Clicked="OnGenerateClicked"
+                    BackgroundColor="#1D4ED8"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="16"
+                    HeightRequest="54" />
+
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               IsVisible="False"
+                               IsRunning="False"
+                               Color="#1D4ED8" />
+
+            <Label x:Name="MessageLabel"
+                   Text=""
+                   FontSize="14"
+                   TextColor="#64748B" />
+
+            <!-- Results -->
+            <VerticalStackLayout x:Name="ResultsLayout"
+                                 IsVisible="False"
+                                 Spacing="18">
+
+                <!-- AI source banner -->
+                <Border x:Name="AiSourceBanner"
+                        BackgroundColor="#FEF3C7"
+                        Stroke="#FDE68A"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="14">
+
+                    <Label x:Name="AiSourceLabel"
+                           Text=""
+                           FontSize="13"
+                           TextColor="#92400E"
+                           LineBreakMode="WordWrap" />
+
+                </Border>
+
+                <!-- Summary -->
+                <Border BackgroundColor="White"
+                        Stroke="#E2E8F0"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="Preparation summary"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label x:Name="SummaryLabel"
+                               FontSize="15"
+                               TextColor="#475569"
+                               LineBreakMode="WordWrap" />
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Skills -->
+                <Border BackgroundColor="White"
+                        Stroke="#E2E8F0"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="Key skills to review"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <CollectionView x:Name="SkillsCollectionView"
+                                        SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="8" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BackgroundColor="#EFF6FF"
+                                            Stroke="#BFDBFE"
+                                            StrokeShape="RoundRectangle 16"
+                                            Padding="12,8">
+
+                                        <Label Text="{Binding .}"
+                                               FontSize="14"
+                                               TextColor="#1D4ED8"
+                                               FontAttributes="Bold" />
+
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Questions -->
+                <Border BackgroundColor="White"
+                        Stroke="#E2E8F0"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="Possible interview questions"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <CollectionView x:Name="QuestionsCollectionView"
+                                        SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="12" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BackgroundColor="#F8FAFC"
+                                            Stroke="#E2E8F0"
+                                            StrokeShape="RoundRectangle 18"
+                                            Padding="14">
+
+                                        <VerticalStackLayout Spacing="8">
+
+                                            <Label Text="{Binding Category}"
+                                                   FontSize="12"
+                                                   TextColor="#1D4ED8"
+                                                   FontAttributes="Bold" />
+
+                                            <Label Text="{Binding Question}"
+                                                   FontSize="16"
+                                                   TextColor="#0F172A"
+                                                   FontAttributes="Bold"
+                                                   LineBreakMode="WordWrap" />
+
+                                            <Label Text="{Binding SuggestedAnswer}"
+                                                   FontSize="14"
+                                                   TextColor="#475569"
+                                                   LineBreakMode="WordWrap" />
+
+                                        </VerticalStackLayout>
+
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Tips -->
+                <Border BackgroundColor="White"
+                        Stroke="#E2E8F0"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="Before the interview"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <CollectionView x:Name="TipsCollectionView"
+                                        SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="8" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BackgroundColor="#ECFDF5"
+                                            Stroke="#BBF7D0"
+                                            StrokeShape="RoundRectangle 16"
+                                            Padding="12">
+
+                                        <Label Text="{Binding .}"
+                                               FontSize="14"
+                                               TextColor="#166534"
+                                               LineBreakMode="WordWrap" />
+
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

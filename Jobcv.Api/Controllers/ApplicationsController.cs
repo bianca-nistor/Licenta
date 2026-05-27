@@ -48,7 +48,6 @@ namespace JobCv.Api.Controllers
 
             return Ok(applications);
         }
-
         [HttpGet("{applicationId:int}")]
         public async Task<IActionResult> GetApplicationById(int applicationId)
         {
@@ -194,6 +193,103 @@ namespace JobCv.Api.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Application deleted successfully." });
+        }
+        [HttpPut("{applicationId:int}")]
+        public async Task<IActionResult> UpdateApplication(int applicationId, UpdateJobApplicationDto dto)
+        {
+            var application = await _context.JobApplications
+                .Include(x => x.Cv)
+                .FirstOrDefaultAsync(x => x.Id == applicationId);
+
+            if (application == null)
+            {
+                return NotFound("Application was not found.");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.JobTitle))
+            {
+                return BadRequest("Job title is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.Company))
+            {
+                return BadRequest("Company is required.");
+            }
+
+            if (dto.CvId.HasValue)
+            {
+                var cvExists = await _context.Cvs.AnyAsync(x =>
+                    x.Id == dto.CvId.Value &&
+                    x.UserId == application.UserId);
+
+                if (!cvExists)
+                {
+                    return BadRequest("The selected CV was not found for this user.");
+                }
+            }
+
+            var allowedStatuses = new[]
+            {
+                "Saved",
+                "Applied",
+                "Interview Scheduled",
+                "Interview Done",
+                "Rejected",
+                "Offer",
+                "Accepted",
+                "Withdrawn"
+            };
+
+            var status = string.IsNullOrWhiteSpace(dto.Status)
+                ? "Saved"
+                : dto.Status.Trim();
+
+            if (!allowedStatuses.Contains(status))
+            {
+                status = "Saved";
+            }
+
+            application.CvId = dto.CvId;
+            application.JobTitle = dto.JobTitle.Trim();
+            application.Company = dto.Company.Trim();
+            application.Location = dto.Location?.Trim() ?? string.Empty;
+            application.JobUrl = dto.JobUrl?.Trim() ?? string.Empty;
+            application.Source = dto.Source?.Trim() ?? string.Empty;
+            application.Status = status;
+            application.AppliedAt = dto.AppliedAt;
+            application.InterviewAt = dto.InterviewAt;
+            application.Notes = dto.Notes?.Trim() ?? string.Empty;
+            application.InterviewNotes = dto.InterviewNotes?.Trim() ?? string.Empty;
+            application.SalaryRange = dto.SalaryRange?.Trim() ?? string.Empty;
+            application.ContactPerson = dto.ContactPerson?.Trim() ?? string.Empty;
+
+            await _context.SaveChangesAsync();
+
+            var updatedApplication = await _context.JobApplications
+                .Include(x => x.Cv)
+                .FirstAsync(x => x.Id == applicationId);
+
+            return Ok(new
+            {
+                updatedApplication.Id,
+                updatedApplication.UserId,
+                updatedApplication.CvId,
+                CvTitle = updatedApplication.Cv == null ? "" : updatedApplication.Cv.Title,
+                updatedApplication.JobExternalId,
+                updatedApplication.JobTitle,
+                updatedApplication.Company,
+                updatedApplication.Location,
+                updatedApplication.JobUrl,
+                updatedApplication.Source,
+                updatedApplication.Status,
+                updatedApplication.AppliedAt,
+                updatedApplication.InterviewAt,
+                updatedApplication.Notes,
+                updatedApplication.InterviewNotes,
+                updatedApplication.SalaryRange,
+                updatedApplication.ContactPerson,
+                updatedApplication.CreatedAt
+            });
         }
     }
 }

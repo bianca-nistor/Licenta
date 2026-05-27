@@ -10,31 +10,135 @@
                              Spacing="20">
 
             <!-- Header -->
-            <Grid ColumnDefinitions="Auto,*"
-                  Margin="0,24,0,0">
+            <Grid ColumnDefinitions="Auto,*,Auto"
+ColumnSpacing="14"
+Margin="0,30,0,0">
 
-                <Button Text="←"
-                        Clicked="OnBackClicked"
-                        BackgroundColor="#E2E8F0"
-                        TextColor="#0F172A"
-                        CornerRadius="18"
-                        WidthRequest="44"
-                        HeightRequest="44" />
+                <Button Grid.Column="0"
+      Text="☰"
+      Clicked="OnMenuClicked"
+      BackgroundColor="#E2E8F0"
+      TextColor="#0F172A"
+      CornerRadius="18"
+      WidthRequest="48"
+      HeightRequest="48"
+      FontSize="22"
+      VerticalOptions="Start" />
 
                 <VerticalStackLayout Grid.Column="1"
-                                     Margin="14,0,0,0"
-                                     Spacing="4">
+                     Spacing="4">
 
                     <Label Text="My Applications"
-                           FontSize="34"
-                           FontAttributes="Bold"
-                           TextColor="#0F172A" />
+           FontSize="34"
+           FontAttributes="Bold"
+           TextColor="#0F172A" />
 
-                    <Label Text="Track saved jobs, CVs used, notes and interview details."
-                           FontSize="14"
-                           TextColor="#64748B" />
+                    <Label Text="Track your saved job applications, statuses, notes and interview progress."
+           FontSize="16"
+           TextColor="#64748B"
+           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2"
+                   HorizontalOptions="End"
+                   VerticalOptions="Start"
+                   Spacing="8">
+
+                    <Button Text="👤"
+          Clicked="OnProfileClicked"
+          BackgroundColor="#DCFCE7"
+          TextColor="#0F172A"
+          CornerRadius="22"
+          WidthRequest="48"
+          HeightRequest="48"
+          FontSize="18" />
+
+                    <Border x:Name="ProfileMenu"
+          IsVisible="False"
+          BackgroundColor="White"
+          Stroke="#E2E8F0"
+          StrokeShape="RoundRectangle 18"
+          Padding="12"
+          WidthRequest="210"
+          Shadow="5,5,12,#22000000">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <Label Text="Profile"
+                 FontSize="18"
+                 FontAttributes="Bold"
+                 TextColor="#0F172A"
+                 Margin="4,0,4,6" />
+
+                            <Button Text="View profile"
+                  Clicked="OnViewProfileClicked"
+                  BackgroundColor="#EFF6FF"
+                  TextColor="#1D4ED8"
+                  CornerRadius="12"
+                  HeightRequest="44" />
+
+                            <Button Text="Logout"
+                  Clicked="OnLogoutClicked"
+                  BackgroundColor="#FEE2E2"
+                  TextColor="#DC2626"
+                  CornerRadius="12"
+                  HeightRequest="44" />
+
+                        </VerticalStackLayout>
+                    </Border>
+
                 </VerticalStackLayout>
             </Grid>
+            <!-- Hamburger menu -->
+            <Border x:Name="MainMenu"
+  IsVisible="False"
+  BackgroundColor="White"
+  Stroke="#E2E8F0"
+  StrokeShape="RoundRectangle 22"
+  Padding="14"
+  Shadow="5,5,12,#22000000">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Menu"
+         FontSize="18"
+         FontAttributes="Bold"
+         TextColor="#0F172A"
+         Margin="4,0,4,4" />
+                    <Button Text="Dashboard"
+        Clicked="OnDashboardClicked"
+        BackgroundColor="#EFF6FF"
+        TextColor="#1D4ED8"
+        FontAttributes="Bold"
+        CornerRadius="14"
+        HeightRequest="46" />
+
+                    <Button Text="My CVs"
+        Clicked="OnMyCvsClicked"
+        BackgroundColor="#EFF6FF"
+        TextColor="#1D4ED8"
+        FontAttributes="Bold"
+        CornerRadius="14"
+        HeightRequest="46" />
+
+                    <Button Text="Applications"
+        Clicked="OnMyApplicationsClicked"
+        BackgroundColor="#1D4ED8"
+        TextColor="White"
+        FontAttributes="Bold"
+        CornerRadius="14"
+        HeightRequest="46" />
+
+                    <Button Text="Jobs"
+        Clicked="OnFindJobsClicked"
+        BackgroundColor="#EFF6FF"
+        TextColor="#1D4ED8"
+        FontAttributes="Bold"
+        CornerRadius="14"
+        HeightRequest="46" />
+                </VerticalStackLayout>
+            </Border>
+
 
             <!-- Summary card -->
             <Border BackgroundColor="#0F172A"
@@ -168,8 +272,8 @@
                                       ColumnSpacing="10"
                                       Margin="0,6,0,0">
 
-                                    <Button Text="Open job"
-                                            Clicked="OnOpenJobClicked"
+                                    <Button Text="Details"
+                                            Clicked="OnViewApplicationDetailsClicked"
                                             CommandParameter="{Binding .}"
                                             BackgroundColor="White"
                                             TextColor="#1D4ED8"

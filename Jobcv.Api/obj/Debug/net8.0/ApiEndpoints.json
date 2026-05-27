@@ -1,5 +1,69 @@
 [
   {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "GenerateCvJobMatch",
+    "RelativePath": "api/Ai/cv-job-match",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CvJobMatchRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "CheckCvQuality",
+    "RelativePath": "api/Ai/cv-quality-check",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CvQualityCheckRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "GenerateCvTailoring",
+    "RelativePath": "api/Ai/cv-tailoring",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CvTailoringRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "GenerateInterviewPrep",
+    "RelativePath": "api/Ai/interview-prep",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.InterviewPrepRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
     "Method": "CreateApplication",
     "RelativePath": "api/Applications",
@@ -42,6 +106,27 @@
       {
         "Name": "applicationId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
+    "Method": "UpdateApplication",
+    "RelativePath": "api/Applications/{applicationId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "applicationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateJobApplicationDto",
         "IsRequired": true
       }
     ],

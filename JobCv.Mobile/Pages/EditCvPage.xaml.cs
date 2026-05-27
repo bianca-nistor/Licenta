@@ -39,6 +39,11 @@ namespace JobCv.Mobile.Pages
         {
             _cv = await _apiService.GetCvByIdAsync(_cvId);
             _templates = await _apiService.GetCvTemplatesAsync();
+            AddMissingTemplate("modern-blue", "Modern Blue");
+            AddMissingTemplate("green-professional", "Green Professional");
+            AddMissingTemplate("classic-minimal", "Classic Minimal");
+            AddMissingTemplate("blue-sidebar", "Blue Sidebar");
+            AddMissingTemplate("warm-beige", "Warm Beige");
 
             if (_cv == null)
             {
@@ -75,10 +80,12 @@ namespace JobCv.Mobile.Pages
             var languagePicker = GetControl<Picker>("LanguagePicker");
             languagePicker.SelectedIndex = _cv.Language == "ro" ? 1 : 0;
 
+
             var templatePicker = GetControl<Picker>("TemplatePicker");
             templatePicker.ItemsSource = _templates;
             var templateIndex = _templates.FindIndex(x => x.Id == _cv.TemplateName);
             templatePicker.SelectedIndex = templateIndex >= 0 ? templateIndex : 0;
+            UpdateTemplatePreview();
 
             RefreshSectionLists();
 
@@ -470,5 +477,143 @@ namespace JobCv.Mobile.Pages
                 bottomMessageLabel.Text = ex.Message;
             }
         }
+        private void OnTemplateChanged(object sender, EventArgs e)
+        {
+            UpdateTemplatePreview();
+        }
+
+        private void UpdateTemplatePreview()
+        {
+            if (TemplatePicker?.SelectedItem == null)
+                return;
+
+            var selectedName = "";
+            var selectedId = "";
+
+            if (TemplatePicker.SelectedItem is CvTemplateDto template)
+            {
+                selectedName = template.Name;
+                selectedId = template.Id;
+            }
+            else
+            {
+                selectedName = TemplatePicker.SelectedItem.ToString() ?? "Modern Blue";
+                selectedId = selectedName;
+            }
+
+            if (selectedId == "blue-sidebar" || selectedName == "Blue Sidebar")
+            {
+                TemplatePreviewBorder.IsVisible = false;
+                ClassicMinimalTemplatePreviewBorder.IsVisible = false;
+                BlueSidebarTemplatePreviewBorder.IsVisible = true;
+                return;
+            }
+
+            if (selectedId == "classic-minimal" || selectedId == "classic" || selectedName == "Classic Minimal")
+            {
+                TemplatePreviewBorder.IsVisible = false;
+                BlueSidebarTemplatePreviewBorder.IsVisible = false;
+                ClassicMinimalTemplatePreviewBorder.IsVisible = true;
+                return;
+            }
+
+            TemplatePreviewBorder.IsVisible = true;
+            BlueSidebarTemplatePreviewBorder.IsVisible = false;
+            ClassicMinimalTemplatePreviewBorder.IsVisible = false;
+
+            TemplatePreviewTitleLabel.Text = $"Template preview - {selectedName}";
+
+            switch (selectedId)
+            {
+                case "green-professional":
+                case "minimal-green":
+                case "Green Professional":
+                    ApplyPreviewColors(
+                        previewBackground: "#F8FAFC",
+                        headerBackground: "#1F4D3A",
+                        avatarBackground: "#D1FAE5",
+                        avatarText: "#1F4D3A",
+                        nameColor: "#FFFFFF",
+                        mutedHeaderText: "#D1FAE5",
+                        sectionTitle: "#1F4D3A",
+                        lineColor: "#BBF7D0",
+                        bodyText: "#475569");
+                    break;
+
+                case "warm-beige":
+                case "Warm Beige":
+                    ApplyPreviewColors(
+                        previewBackground: "#F2E4D8",
+                        headerBackground: "#8B5E44",
+                        avatarBackground: "#F8EFE7",
+                        avatarText: "#6F4532",
+                        nameColor: "#FFF8F1",
+                        mutedHeaderText: "#F3DED1",
+                        sectionTitle: "#6B4433",
+                        lineColor: "#D9BFAF",
+                        bodyText: "#40342D");
+                    break;
+
+                case "modern-blue":
+                case "Modern Blue":
+                default:
+                    ApplyPreviewColors(
+                        previewBackground: "#F8FAFC",
+                        headerBackground: "#0F172A",
+                        avatarBackground: "#E2E8F0",
+                        avatarText: "#0F172A",
+                        nameColor: "#FFFFFF",
+                        mutedHeaderText: "#CBD5E1",
+                        sectionTitle: "#0F172A",
+                        lineColor: "#CBD5E1",
+                        bodyText: "#475569");
+                    break;
+            }
+        }
+        private void ApplyPreviewColors(
+            string previewBackground,
+            string headerBackground,
+            string avatarBackground,
+            string avatarText,
+            string nameColor,
+            string mutedHeaderText,
+            string sectionTitle,
+            string lineColor,
+            string bodyText)
+        {
+            TemplatePreviewBorder.BackgroundColor = Color.FromArgb(previewBackground);
+            PreviewHeader.BackgroundColor = Color.FromArgb(headerBackground);
+            PreviewAvatar.BackgroundColor = Color.FromArgb(avatarBackground);
+
+            PreviewInitialsLabel.TextColor = Color.FromArgb(avatarText);
+
+            PreviewNameLabel.TextColor = Color.FromArgb(nameColor);
+            PreviewRoleLabel.TextColor = Color.FromArgb(mutedHeaderText);
+            PreviewContactLabel.TextColor = Color.FromArgb(mutedHeaderText);
+
+            PreviewLeftTitleLabel.TextColor = Color.FromArgb(sectionTitle);
+            PreviewRightTitleLabel.TextColor = Color.FromArgb(sectionTitle);
+            PreviewExperienceTitleLabel.TextColor = Color.FromArgb(sectionTitle);
+            PreviewEducationTitleLabel.TextColor = Color.FromArgb(sectionTitle);
+
+            PreviewLeftLine.BackgroundColor = Color.FromArgb(lineColor);
+            PreviewRightLine.BackgroundColor = Color.FromArgb(lineColor);
+
+            PreviewProfileTextLabel.TextColor = Color.FromArgb(bodyText);
+            PreviewExperienceTextLabel.TextColor = Color.FromArgb(bodyText);
+            PreviewSkillsTextLabel.TextColor = Color.FromArgb(bodyText);
+            PreviewEducationTextLabel.TextColor = Color.FromArgb(bodyText);
+        }
+        private void AddMissingTemplate(string id, string name)
+{
+    if (_templates.Any(t => t.Id == id))
+        return;
+
+    _templates.Add(new CvTemplateDto
+    {
+        Id = id,
+        Name = name
+    });
+}
     }
 }

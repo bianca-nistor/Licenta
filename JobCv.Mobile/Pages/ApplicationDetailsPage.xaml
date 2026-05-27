@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.ApplicationDetailsPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F1F5F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="20">
+
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="14"
+                  Margin="0,30,0,0">
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="48"
+                        HeightRequest="48"
+                        FontSize="20" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4">
+                    <Label Text="Application Details"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+                    <Label Text="Edit the status, notes and interview details for this application."
+                           FontSize="15"
+                           TextColor="#64748B" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Job information"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="JobTitleEntry"
+                           Placeholder="Job title"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="CompanyEntry"
+                           Placeholder="Company"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="LocationEntry"
+                           Placeholder="Location"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="JobUrlEntry"
+                           Placeholder="Job URL"
+                           Keyboard="Url"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="SourceEntry"
+                           Placeholder="Source"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Application progress"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Status"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Picker x:Name="StatusPicker"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A">
+                        <Picker.Items>
+                            <x:String>Saved</x:String>
+                            <x:String>Applied</x:String>
+                            <x:String>Interview Scheduled</x:String>
+                            <x:String>Interview Done</x:String>
+                            <x:String>Offer</x:String>
+                            <x:String>Rejected</x:String>
+                            <x:String>Accepted</x:String>
+                            <x:String>Withdrawn</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Label Text="CV used"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Picker x:Name="CvPicker"
+                            ItemDisplayBinding="{Binding Title}"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A" />
+
+                    <Entry x:Name="SalaryRangeEntry"
+                           Placeholder="Salary range"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A" />
+
+                    <Entry x:Name="ContactPersonEntry"
+                           Placeholder="Recruiter / contact person"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A" />
+
+                    <Border BackgroundColor="#F8FAFC"
+                            Stroke="#E2E8F0"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="10">
+                                <CheckBox x:Name="UseAppliedDateCheckBox"
+                                          CheckedChanged="OnUseAppliedDateChanged" />
+                                <Label Text="Applied date"
+                                       VerticalOptions="Center"
+                                       TextColor="#0F172A" />
+                            </HorizontalStackLayout>
+
+                            <DatePicker x:Name="AppliedDatePicker"
+                                        IsEnabled="False"
+                                        BackgroundColor="White"
+                                        TextColor="#0F172A" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border BackgroundColor="#F8FAFC"
+                            Stroke="#E2E8F0"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="10">
+                                <CheckBox x:Name="UseInterviewDateCheckBox"
+                                          CheckedChanged="OnUseInterviewDateChanged" />
+                                <Label Text="Interview date"
+                                       VerticalOptions="Center"
+                                       TextColor="#0F172A" />
+                            </HorizontalStackLayout>
+
+                            <DatePicker x:Name="InterviewDatePicker"
+                                        IsEnabled="False"
+                                        BackgroundColor="White"
+                                        TextColor="#0F172A" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Notes"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Editor x:Name="NotesEditor"
+                            Placeholder="General notes: what you sent, recruiter contact, next steps..."
+                            HeightRequest="130"
+                            AutoSize="TextChanges"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A" />
+
+                    <Editor x:Name="InterviewNotesEditor"
+                            Placeholder="Interview preparation notes..."
+                            HeightRequest="130"
+                            AutoSize="TextChanges"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="12"
+                  RowSpacing="12">
+                <Button Text="Open job"
+                        Clicked="OnOpenJobClicked"
+                        BackgroundColor="White"
+                        TextColor="#1D4ED8"
+                        BorderColor="#93C5FD"
+                        BorderWidth="1"
+                        FontAttributes="Bold"
+                        CornerRadius="16"
+                        HeightRequest="54" />
+
+                <Button Grid.Column="1"
+                        Text="Prepare interview"
+                        Clicked="OnPrepareInterviewClicked"
+                        BackgroundColor="#16A34A"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="16"
+                        HeightRequest="54" />
+
+                <Button Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Text="Save changes"
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="#1D4ED8"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="16"
+                        HeightRequest="56" />
+            </Grid>
+
+            <Label x:Name="MessageLabel"
+                   Text=""
+                   FontSize="14"
+                   TextColor="#64748B" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

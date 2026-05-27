@@ -8,6 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllers();
+builder.Services.AddHttpClient<AdzunaJobSearchService>();
+builder.Services.AddScoped<MockAiService>();
+
+builder.Services.AddHttpClient<OllamaAiService>((serviceProvider, httpClient) =>
+{
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+
+    var baseUrl = configuration["Ollama:BaseUrl"] ?? "http://localhost:11434";
+
+    httpClient.BaseAddress = new Uri(baseUrl);
+    httpClient.Timeout = TimeSpan.FromSeconds(120);
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -32,7 +44,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
 
@@ -41,3 +53,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

@@ -53,7 +53,8 @@
 
                         <Label Text="Create a new CV and add your personal information, photo, skills, education, experience and projects."
                                FontSize="14"
-                               TextColor="#64748B" />
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
 
                     <Button Grid.Column="1"
@@ -86,7 +87,8 @@
 
                         <Label Text="Create a new version based on one of your existing CVs."
                                FontSize="14"
-                               TextColor="#64748B" />
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
 
                     <Button Grid.Column="1"
@@ -119,7 +121,8 @@
 
                         <Label Text="Upload an existing PDF, DOC or DOCX CV and keep it in your CV library."
                                FontSize="14"
-                               TextColor="#64748B" />
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
 
                     <Button Grid.Column="1"

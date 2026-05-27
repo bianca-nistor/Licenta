@@ -15,9 +15,9 @@ namespace JobCv.Mobile.Services
         };
 
 #if ANDROID
-        private const string ApiBaseUrl = "https://10.0.2.2:7158/";
+        private const string ApiBaseUrl = "http://10.0.2.2:5158/";
 #else
-        private const string ApiBaseUrl = "https://localhost:7158/";
+    private const string ApiBaseUrl = "https://localhost:7158/";
 #endif
 
         public ApiService()
@@ -381,5 +381,92 @@ namespace JobCv.Mobile.Services
 
             return response.IsSuccessStatusCode;
         }
+        public async Task<InterviewPrepResponse?> GenerateInterviewPrepAsync(
+    InterviewPrepRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/interview-prep",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            return await response.Content.ReadFromJsonAsync<InterviewPrepResponse>(_jsonOptions);
+        }
+        public async Task<CvTailoringResponse?> GenerateCvTailoringAsync(
+    CvTailoringRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/cv-tailoring",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"CV tailoring request failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CvTailoringResponse>(_jsonOptions);
+        }
+        public async Task<JobApplicationDto?> GetApplicationByIdAsync(int applicationId)
+        {
+            var response = await _httpClient.GetAsync($"api/Applications/{applicationId}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            return await response.Content.ReadFromJsonAsync<JobApplicationDto>(_jsonOptions);
+        }
+
+        public async Task<JobApplicationDto?> UpdateApplicationAsync(int applicationId, UpdateJobApplicationRequest request)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"api/Applications/{applicationId}", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Application update API error: {response.StatusCode} - {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<JobApplicationDto>(_jsonOptions);
+        }
+        public async Task<CvQualityCheckResponse?> CheckCvQualityAsync(CvQualityCheckRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/cv-quality-check",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"CV quality check failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CvQualityCheckResponse>(_jsonOptions);
+        }
+        public async Task<CvJobMatchResponse?> GenerateCvJobMatchAsync(CvJobMatchRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/cv-job-match",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"CV job match request failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CvJobMatchResponse>(_jsonOptions);
+        }
+
+
     }
 }

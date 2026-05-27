@@ -781,25 +781,37 @@ namespace JobCv.Api.Controllers
         {
             var templates = new[]
             {
-                new
-                {
-                    Id = "modern-blue",
-                    Name = "Modern Blue",
-                    Description = "A clean professional template with navy and blue accents."
-                },
-                new
-                {
-                    Id = "classic",
-                    Name = "Classic",
-                    Description = "A simple traditional CV layout suitable for formal applications."
-                },
-                new
-                {
-                    Id = "minimal-green",
-                    Name = "Minimal Green",
-                    Description = "A minimalist layout with subtle green accents."
-                }
-            };
+        new
+        {
+            Id = "modern-blue",
+            Name = "Modern Blue",
+            Description = "A clean professional template with navy and blue accents."
+        },
+        new
+        {
+            Id = "green-professional",
+            Name = "Green Professional",
+            Description = "A professional green template with a strong header."
+        },
+        new
+        {
+            Id = "classic-minimal",
+            Name = "Classic Minimal",
+            Description = "A simple traditional CV layout suitable for formal applications."
+        },
+        new
+        {
+            Id = "blue-sidebar",
+            Name = "Blue Sidebar",
+            Description = "A modern CV layout with a blue sidebar."
+        },
+        new
+        {
+            Id = "warm-beige",
+            Name = "Warm Beige",
+            Description = "A warm beige and brown CV template."
+        }
+    };
 
             return Ok(templates);
         }

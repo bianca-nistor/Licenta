@@ -1,5 +1,6 @@
 using JobCv.Mobile.Models;
 using JobCv.Mobile.Services;
+using Microsoft.Maui.ApplicationModel;
 
 namespace JobCv.Mobile.Pages
 {
@@ -20,6 +21,21 @@ namespace JobCv.Mobile.Pages
         {
             base.OnAppearing();
             await LoadApplicationsAsync();
+        }
+
+        private T GetControl<T>(string name) where T : Element
+        {
+            var control = this.FindByName<T>(name);
+
+            if (control == null)
+                throw new Exception($"Control '{name}' was not found in ApplicationsPage.xaml.");
+
+            return control;
+        }
+
+        private Border GetMainMenu()
+        {
+            return GetControl<Border>("MainMenu");
         }
 
         private async Task LoadApplicationsAsync()
@@ -44,14 +60,39 @@ namespace JobCv.Mobile.Pages
             }
         }
 
-        private async void OnBackClicked(object sender, EventArgs e)
+        private void OnMenuClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            var mainMenu = GetMainMenu();
+            mainMenu.IsVisible = !mainMenu.IsVisible;
+        }
+
+        private async void OnDashboardClicked(object sender, EventArgs e)
+        {
+            GetMainMenu().IsVisible = false;
+            await Navigation.PushAsync(new CvsPage(_user, _apiService));
+        }
+
+        private async void OnMyCvsClicked(object sender, EventArgs e)
+        {
+            GetMainMenu().IsVisible = false;
+            await Navigation.PushAsync(new MyCvsPage(_user, _apiService));
+        }
+
+        private void OnMyApplicationsClicked(object sender, EventArgs e)
+        {
+            GetMainMenu().IsVisible = false;
+            // Already on Applications.
         }
 
         private async void OnFindJobsClicked(object sender, EventArgs e)
         {
+            GetMainMenu().IsVisible = false;
             await Navigation.PushAsync(new JobsPage(_user, _apiService));
+        }
+
+        private async void OnBackClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
 
         private async void OnOpenJobClicked(object sender, EventArgs e)
@@ -105,6 +146,58 @@ namespace JobCv.Mobile.Pages
             {
                 await DisplayAlert("Error", ex.Message, "OK");
             }
+        }
+        private Border GetProfileMenu()
+        {
+            return GetControl<Border>("ProfileMenu");
+        }
+
+        private void OnProfileClicked(object sender, EventArgs e)
+        {
+            var profileMenu = GetProfileMenu();
+            var mainMenu = GetMainMenu();
+
+            profileMenu.IsVisible = !profileMenu.IsVisible;
+
+            if (mainMenu.IsVisible)
+                mainMenu.IsVisible = false;
+        }
+
+        private async void OnViewProfileClicked(object sender, EventArgs e)
+        {
+            GetProfileMenu().IsVisible = false;
+
+            await Navigation.PushAsync(new ProfilePage(_user, _apiService));
+        }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            GetProfileMenu().IsVisible = false;
+
+            var confirm = await DisplayAlert(
+                "Logout",
+                "Are you sure you want to log out?",
+                "Yes",
+                "No");
+
+            if (!confirm)
+                return;
+
+            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+        }
+        private async void OnApplicationDetailsClicked(object sender, EventArgs e)
+        {
+            if (sender is not Button button || button.CommandParameter is not JobApplicationDto application)
+                return;
+
+            await Navigation.PushAsync(new ApplicationDetailsPage(_user, _apiService, application));
+        }
+        private async void OnViewApplicationDetailsClicked(object sender, EventArgs e)
+        {
+            if (sender is not Button button || button.CommandParameter is not JobApplicationDto application)
+                return;
+
+            await Navigation.PushAsync(new ApplicationDetailsPage(_user, _apiService, application));
         }
     }
 }
