@@ -13,13 +13,32 @@ namespace JobCv.Mobile.Services
         {
             PropertyNameCaseInsensitive = true
         };
+        /*
+        #if ANDROID
+                private const string ApiBaseUrl = "http://10.0.2.2:5158/";
+        #else
+            private const string ApiBaseUrl = "https://localhost:7158/";
+        #endif
+        */
+        //#if ANDROID
+        //        // Emulator Android:
+        //        // private const string ApiBaseUrl = "http://10.0.2.2:5158/";
 
+<<<<<<< Updated upstream
 #if ANDROID
         private const string ApiBaseUrl = "https://10.0.2.2:7158/";
 #else
         private const string ApiBaseUrl = "https://localhost:7158/";
 #endif
+=======
+        //        // Telefon real pe aceeași rețea Wi-Fi cu laptopul:
+        //        private const string ApiBaseUrl = "http:// 192.168.56.1:5158/";
+        //#else
+        //        private const string ApiBaseUrl = "https://localhost:7158/";
+        //#endif
+>>>>>>> Stashed changes
 
+        private const string ApiBaseUrl = "https://career-guide-d7dubecfb3hchcf7.swedencentral-01.azurewebsites.net/";
         public ApiService()
         {
             _httpClient = new HttpClient
@@ -86,7 +105,7 @@ namespace JobCv.Mobile.Services
             return templates ?? new List<CvTemplateDto>();
         }
 
-      
+
         public async Task<CvDto?> GetCvByIdAsync(int cvId)
         {
             var response = await _httpClient.GetAsync($"api/Cvs/{cvId}");
@@ -375,11 +394,182 @@ namespace JobCv.Mobile.Services
             return applications ?? new List<JobApplicationDto>();
         }
 
+        public async Task<DashboardActivityStatsDto?> GetDashboardActivityStatsAsync(int userId, string period)
+        {
+            var encodedPeriod = Uri.EscapeDataString(period ?? "last30");
+
+            var response = await _httpClient.GetAsync(
+                $"api/Statistics/user/{userId}/dashboard-activity?period={encodedPeriod}");
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            return await response.Content.ReadFromJsonAsync<DashboardActivityStatsDto>(_jsonOptions);
+        }
+
         public async Task<bool> DeleteApplicationAsync(int applicationId)
         {
             var response = await _httpClient.DeleteAsync($"api/Applications/{applicationId}");
 
             return response.IsSuccessStatusCode;
         }
+<<<<<<< Updated upstream
+=======
+        public async Task<InterviewPrepResponse?> GenerateInterviewPrepAsync(
+    InterviewPrepRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/interview-prep",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            return await response.Content.ReadFromJsonAsync<InterviewPrepResponse>(_jsonOptions);
+        }
+        public async Task<CvTailoringResponse?> GenerateCvTailoringAsync(
+    CvTailoringRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/cv-tailoring",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"CV tailoring request failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CvTailoringResponse>(_jsonOptions);
+        }
+        public async Task<JobApplicationDto?> GetApplicationByIdAsync(int applicationId)
+        {
+            var response = await _httpClient.GetAsync($"api/Applications/{applicationId}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            return await response.Content.ReadFromJsonAsync<JobApplicationDto>(_jsonOptions);
+        }
+
+        public async Task<JobApplicationDto?> UpdateApplicationAsync(int applicationId, UpdateJobApplicationRequest request)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"api/Applications/{applicationId}", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Application update API error: {response.StatusCode} - {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<JobApplicationDto>(_jsonOptions);
+        }
+        public async Task<CvQualityCheckResponse?> CheckCvQualityAsync(CvQualityCheckRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/cv-quality-check",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"CV quality check failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CvQualityCheckResponse>(_jsonOptions);
+        }
+        public async Task<CvJobMatchResponse?> GenerateCvJobMatchAsync(CvJobMatchRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/cv-job-match",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"CV job match request failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CvJobMatchResponse>(_jsonOptions);
+        }
+        public async Task<UserDto?> GetUserByIdAsync(int userId)
+        {
+            var response = await _httpClient.GetAsync($"api/Auth/user/{userId}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            return await response.Content.ReadFromJsonAsync<UserDto>(_jsonOptions);
+        }
+
+        public async Task<UserDto?> UpdateUserProfileAsync(int userId, UpdateUserProfileRequest request)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"api/Auth/user/{userId}/profile", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Profile update failed: {response.StatusCode} - {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<UserDto>(_jsonOptions);
+        }
+
+        public async Task<bool> ChangePasswordAsync(int userId, ChangePasswordRequest request)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"api/Auth/user/{userId}/password", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Password change failed: {response.StatusCode} - {error}");
+            }
+
+            return true;
+        }
+        public async Task<CoverLetterResponse?> GenerateCoverLetterAsync(CoverLetterRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/Ai/cover-letter",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"Cover letter request failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CoverLetterResponse>(_jsonOptions);
+        }
+        public async Task<byte[]> ExportCareerTestPdfAsync(CareerTestPdfRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/CareerTest/export-pdf",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"Career test PDF export failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+
+>>>>>>> Stashed changes
     }
 }

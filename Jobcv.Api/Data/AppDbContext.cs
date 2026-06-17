@@ -27,9 +27,17 @@ namespace JobCv.Api.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>()
-                .HasIndex(x => x.Email)
+     .Property(u => u.Email)
+     .HasMaxLength(256)
+     .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
                 .IsUnique();
 
+            modelBuilder.Entity<User>()
+                .Property(u => u.FullName)
+                .HasMaxLength(150);
             modelBuilder.Entity<Cv>()
                 .HasOne(x => x.User)
                 .WithMany(x => x.Cvs)
@@ -55,10 +63,10 @@ namespace JobCv.Api.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Application>()
-                .HasOne(x => x.User)
-                .WithMany()
-                .HasForeignKey(x => x.UserId)
-               .OnDelete(DeleteBehavior.Cascade);
+     .HasOne(x => x.User)
+     .WithMany()
+     .HasForeignKey(x => x.UserId)
+     .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Application>()
                 .HasOne(x => x.Job)

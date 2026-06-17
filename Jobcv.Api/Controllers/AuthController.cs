@@ -53,18 +53,18 @@ namespace JobCv.Api.Controllers
             {
                 FullName = dto.FullName.Trim(),
                 Email = dto.Email,
-                PasswordHash = _passwordService.HashPassword(dto.Password)
+                PasswordHash = _passwordService.HashPassword(dto.Password),
+                PhoneNumber = string.Empty,
+                AlternativeEmail = string.Empty,
+                Location = string.Empty,
+                CareerLevel = string.Empty,
+                PreferredJobType = string.Empty
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new
-            {
-                user.Id,
-                user.FullName,
-                user.Email
-            });
+            return Ok(ToUserResponse(user));
         }
 
         [HttpPost("login")]
@@ -95,12 +95,128 @@ namespace JobCv.Api.Controllers
                 return Unauthorized("Invalid email or password.");
             }
 
+            return Ok(ToUserResponse(user));
+        }
+
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetUser(int userId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(ToUserResponse(user));
+        }
+
+        [HttpPut("user/{userId}/profile")]
+        public async Task<IActionResult> UpdateProfile(int userId, UpdateUserProfileDto dto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.FullName))
+            {
+                return BadRequest("Full name is required.");
+            }
+
+            if (!string.IsNullOrWhiteSpace(dto.AlternativeEmail))
+            {
+                var alternativeEmail = dto.AlternativeEmail.Trim().ToLower();
+
+                if (!IsValidEmail(alternativeEmail))
+                {
+                    return BadRequest("Please enter a valid alternative email address.");
+                }
+
+                if (alternativeEmail == user.Email)
+                {
+                    return BadRequest("Alternative email must be different from your main email.");
+                }
+            }
+
+            user.FullName = dto.FullName.Trim();
+            user.PhoneNumber = dto.PhoneNumber?.Trim() ?? string.Empty;
+            user.AlternativeEmail = dto.AlternativeEmail?.Trim().ToLower() ?? string.Empty;
+            user.Location = dto.Location?.Trim() ?? string.Empty;
+            user.CareerLevel = dto.CareerLevel?.Trim() ?? string.Empty;
+            user.PreferredJobType = dto.PreferredJobType?.Trim() ?? string.Empty;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(ToUserResponse(user));
+        }
+
+        [HttpPut("user/{userId}/password")]
+        public async Task<IActionResult> ChangePassword(int userId, ChangePasswordDto dto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.CurrentPassword) ||
+                string.IsNullOrWhiteSpace(dto.NewPassword) ||
+                string.IsNullOrWhiteSpace(dto.ConfirmNewPassword))
+            {
+                return BadRequest("All password fields are required.");
+            }
+
+            var currentPasswordIsValid = _passwordService.VerifyPassword(
+                user.PasswordHash,
+                dto.CurrentPassword);
+
+            if (!currentPasswordIsValid)
+            {
+                return BadRequest("Current password is incorrect.");
+            }
+
+            if (dto.NewPassword.Length < 6)
+            {
+                return BadRequest("New password must have at least 6 characters.");
+            }
+
+            if (dto.NewPassword != dto.ConfirmNewPassword)
+            {
+                return BadRequest("New password and confirmation do not match.");
+            }
+
+            if (dto.CurrentPassword == dto.NewPassword)
+            {
+                return BadRequest("New password must be different from the current password.");
+            }
+
+            user.PasswordHash = _passwordService.HashPassword(dto.NewPassword);
+
+            await _context.SaveChangesAsync();
+
             return Ok(new
+            {
+                Message = "Password changed successfully."
+            });
+        }
+
+        private static object ToUserResponse(User user)
+        {
+            return new
             {
                 user.Id,
                 user.FullName,
-                user.Email
-            });
+                user.Email,
+                user.PhoneNumber,
+                user.AlternativeEmail,
+                user.Location,
+                user.CareerLevel,
+                user.PreferredJobType
+            };
         }
 
         private bool IsValidEmail(string email)

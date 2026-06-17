@@ -1,4 +1,5 @@
 ﻿using JobCv.Api.Data;
+using JobCv.Api.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,65 @@ namespace JobCv.Api.Controllers
         public StatisticsController(AppDbContext context)
         {
             _context = context;
+        }
+
+
+        [HttpGet("user/{userId}/dashboard-activity")]
+        public async Task<ActionResult<DashboardActivityStatsDto>> GetDashboardActivity(
+            int userId,
+            [FromQuery] string? period)
+        {
+            var normalizedPeriod = (period ?? "last30").Trim().ToLowerInvariant();
+            var todayUtc = DateTime.UtcNow.Date;
+
+            DateTime? startDate = normalizedPeriod switch
+            {
+                "last7" or "7" or "last-7-days" => todayUtc.AddDays(-7),
+                "last30" or "30" or "last-30-days" => todayUtc.AddDays(-30),
+                "last90" or "90" or "last-90-days" => todayUtc.AddDays(-90),
+                "all" or "alltime" or "all-time" => null,
+                _ => todayUtc.AddDays(-30)
+            };
+
+            var createdCvsCountQuery = _context.Cvs.Where(x => x.UserId == userId);
+            var uploadedCvsCountQuery = _context.UploadedCvFiles.Where(x => x.UserId == userId);
+            var applicationsCountQuery = _context.JobApplications.Where(x => x.UserId == userId);
+            var interviewsCountQuery = _context.JobApplications.Where(x =>
+                x.UserId == userId &&
+                (x.InterviewAt.HasValue ||
+                 (x.Status != null && x.Status.Contains("Interview"))));
+
+            if (startDate.HasValue)
+            {
+                var start = startDate.Value;
+
+                createdCvsCountQuery = createdCvsCountQuery.Where(x => x.CreatedAt >= start);
+                uploadedCvsCountQuery = uploadedCvsCountQuery.Where(x => x.UploadedAt >= start);
+                applicationsCountQuery = applicationsCountQuery.Where(x => x.CreatedAt >= start);
+                interviewsCountQuery = interviewsCountQuery.Where(x =>
+                    (x.InterviewAt.HasValue && x.InterviewAt.Value >= start) ||
+                    (!x.InterviewAt.HasValue && x.CreatedAt >= start));
+            }
+
+            var selectedPeriodText = normalizedPeriod switch
+            {
+                "last7" or "7" or "last-7-days" => "last 7 days",
+                "last90" or "90" or "last-90-days" => "last 90 days",
+                "all" or "alltime" or "all-time" => "all time",
+                _ => "last 30 days"
+            };
+
+            return Ok(new DashboardActivityStatsDto
+            {
+                Period = selectedPeriodText,
+                Summary = selectedPeriodText == "all time"
+                    ? "Showing activity for all time."
+                    : $"Showing activity for {selectedPeriodText}.",
+                CreatedCvsCount = await createdCvsCountQuery.CountAsync(),
+                UploadedCvsCount = await uploadedCvsCountQuery.CountAsync(),
+                ApplicationsCount = await applicationsCountQuery.CountAsync(),
+                InterviewsCount = await interviewsCountQuery.CountAsync()
+            });
         }
 
         [HttpGet("user/{userId}/monthly")]

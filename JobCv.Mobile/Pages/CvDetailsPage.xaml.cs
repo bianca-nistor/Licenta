@@ -137,17 +137,18 @@ namespace JobCv.Mobile.Pages
 
         private async void OnExportPdfClicked(object sender, EventArgs e)
         {
-            if (_cv == null)
-                return;
-
-            var previewUrl = _apiService.GetCvPdfPreviewUrl(_cvId) + $"?v={DateTime.UtcNow.Ticks}";
-            var downloadUrl = _apiService.GetCvPdfDownloadUrl(_cvId);
-
-            await Navigation.PushAsync(
-                new UploadedCvPreviewPage(
-                    _cv.Title,
-                    previewUrl,
-                    downloadUrl));
+            try
+            {
+                var downloadUrl = _apiService.GetCvPdfDownloadUrl(_cvId);
+                await Launcher.OpenAsync(downloadUrl);
+            }
+            catch
+            {
+                await DisplayAlert(
+                    "Error",
+                    "The PDF could not be opened.",
+                    "OK");
+            }
         }
     }
 }

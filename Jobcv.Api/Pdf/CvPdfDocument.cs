@@ -29,6 +29,7 @@ namespace JobCv.Api.Pdf
                 page.Size(PageSizes.A4);
                 page.DefaultTextStyle(x => x.FontSize(10).FontColor(_style.TextColor));
 
+<<<<<<< Updated upstream
                 page.Content().Column(column =>
                 {
                     ComposeHeader(column);
@@ -40,10 +41,364 @@ namespace JobCv.Api.Pdf
                     ComposeProjects(column);
                     ComposeLanguages(column);
                     ComposeCertifications(column);
+=======
+                page.Content()
+                    .Background(_style.PageBackground)
+                    .Column(column =>
+                    {
+                        ComposeHeader(column);
+
+                        ComposeSummary(column);
+                        ComposeSkills(column);
+                        ComposeExperience(column);
+                        ComposeEducation(column);
+                        ComposeProjects(column);
+                        ComposeLanguages(column);
+                        ComposeCertifications(column);
+                    });
+            });
+        }
+
+        private void ComposeBlueSidebar(IDocumentContainer container)
+        {
+            container.Page(page =>
+            {
+                page.Margin(24);
+                page.Size(PageSizes.A4);
+                page.DefaultTextStyle(x => x.FontSize(10).FontColor("#334155"));
+
+                page.Content().Row(row =>
+                {
+                    row.ConstantItem(180)
+                        .Background("#1D4ED8")
+                        .Padding(16)
+                        .Column(sidebar =>
+                        {
+                            sidebar.Spacing(12);
+
+                            ComposeSidebarPhotoOrInitials(sidebar);
+
+                            sidebar.Item().Text("CONTACT")
+                                .FontSize(11)
+                                .Bold()
+                                .FontColor(Colors.White);
+
+                            var contact = GetContactText();
+
+                            if (!string.IsNullOrWhiteSpace(contact))
+                            {
+                                sidebar.Item().Text(contact.Replace(" | ", "\n"))
+                                    .FontSize(8.5f)
+                                    .FontColor("#DBEAFE")
+                                    .LineHeight(1.25f);
+                            }
+
+                            var links = GetLinksText();
+
+                            if (!string.IsNullOrWhiteSpace(links))
+                            {
+                                sidebar.Item().PaddingTop(6).Text("LINKS")
+                                    .FontSize(11)
+                                    .Bold()
+                                    .FontColor(Colors.White);
+
+                                sidebar.Item().Text(links.Replace(" | ", "\n"))
+                                    .FontSize(7.5f)
+                                    .FontColor("#DBEAFE")
+                                    .LineHeight(1.25f);
+                            }
+
+                            if (_cv.Skills != null && _cv.Skills.Any())
+                            {
+                                sidebar.Item().PaddingTop(8).Text("SKILLS")
+                                    .FontSize(11)
+                                    .Bold()
+                                    .FontColor(Colors.White);
+
+                                sidebar.Item().Text(string.Join("\n", _cv.Skills.Select(x => x.Name)))
+                                    .FontSize(8.5f)
+                                    .FontColor("#DBEAFE")
+                                    .LineHeight(1.25f);
+                            }
+
+                            if (_cv.Languages != null && _cv.Languages.Any())
+                            {
+                                sidebar.Item().PaddingTop(8).Text("LANGUAGES")
+                                    .FontSize(11)
+                                    .Bold()
+                                    .FontColor(Colors.White);
+
+                                sidebar.Item().Text(string.Join("\n", _cv.Languages.Select(x => $"{x.Name} - {x.Level}")))
+                                    .FontSize(8.5f)
+                                    .FontColor("#DBEAFE")
+                                    .LineHeight(1.25f);
+                            }
+                        });
+
+                    row.RelativeItem()
+                        .PaddingLeft(22)
+                        .Column(content =>
+                        {
+                            content.Spacing(12);
+
+                            content.Item().Text(GetDisplayName())
+                                .FontSize(26)
+                                .Bold()
+                                .FontColor("#0F172A");
+
+                            var titleOrLocation = GetBlueSidebarSubtitle();
+
+                            if (!string.IsNullOrWhiteSpace(titleOrLocation))
+                            {
+                                content.Item().Text(titleOrLocation)
+                                    .FontSize(13)
+                                    .Bold()
+                                    .FontColor("#1D4ED8");
+                            }
+
+                            content.Item().PaddingBottom(4).LineHorizontal(1).LineColor("#CBD5E1");
+
+                            ComposeBlueSidebarSummary(content);
+                            ComposeBlueSidebarExperience(content);
+                            ComposeBlueSidebarEducation(content);
+                            ComposeBlueSidebarProjects(content);
+                            ComposeBlueSidebarCertifications(content);
+                        });
+>>>>>>> Stashed changes
                 });
             });
         }
 
+<<<<<<< Updated upstream
+=======
+        private void ComposeSidebarPhotoOrInitials(ColumnDescriptor sidebar)
+        {
+            var hasPhoto =
+                !string.IsNullOrWhiteSpace(_cv.PhotoPath) &&
+                File.Exists(_cv.PhotoPath);
+
+            if (hasPhoto)
+            {
+                sidebar.Item()
+                    .AlignCenter()
+                    .Width(76)
+                    .Height(76)
+                    .CornerRadius(38)
+                    .Image(_cv.PhotoPath)
+                    .FitUnproportionally();
+
+                return;
+            }
+
+            sidebar.Item()
+                .AlignCenter()
+                .Width(76)
+                .Height(76)
+                .Background("#DBEAFE")
+                .CornerRadius(38)
+                .AlignCenter()
+                .AlignMiddle()
+                .Text(GetInitials(GetDisplayName()))
+                .FontSize(22)
+                .Bold()
+                .FontColor("#1D4ED8");
+        }
+
+        private void ComposeBlueSidebarSummary(ColumnDescriptor column)
+        {
+            if (string.IsNullOrWhiteSpace(_cv.Summary))
+                return;
+
+            ComposeBlueSidebarSectionTitle(column, "PROFILE");
+
+            column.Item().Text(_cv.Summary)
+                .FontSize(10)
+                .LineHeight(1.3f)
+                .FontColor("#475569");
+        }
+
+        private void ComposeBlueSidebarExperience(ColumnDescriptor column)
+        {
+            if (_cv.Experiences == null || !_cv.Experiences.Any())
+                return;
+
+            ComposeBlueSidebarSectionTitle(column, "EXPERIENCE");
+
+            foreach (var item in _cv.Experiences.OrderByDescending(x => x.StartDate))
+            {
+                column.Item().PaddingBottom(8).Column(exp =>
+                {
+                    exp.Item().Text($"{item.JobTitle} - {item.Company}")
+                        .FontSize(11)
+                        .Bold()
+                        .FontColor("#0F172A");
+
+                    var dateText = FormatDateRange(item.StartDate, item.EndDate, item.IsCurrent);
+
+                    if (!string.IsNullOrWhiteSpace(dateText))
+                    {
+                        exp.Item().PaddingTop(2).Text(dateText)
+                            .FontSize(9)
+                            .FontColor("#64748B");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(item.Description))
+                    {
+                        exp.Item().PaddingTop(4).Text(item.Description)
+                            .FontSize(10)
+                            .LineHeight(1.25f)
+                            .FontColor("#475569");
+                    }
+                });
+            }
+        }
+
+        private void ComposeBlueSidebarEducation(ColumnDescriptor column)
+        {
+            if (_cv.Educations == null || !_cv.Educations.Any())
+                return;
+
+            ComposeBlueSidebarSectionTitle(column, "EDUCATION");
+
+            foreach (var item in _cv.Educations.OrderByDescending(x => x.StartDate))
+            {
+                column.Item().PaddingBottom(8).Column(education =>
+                {
+                    education.Item().Text(item.Degree)
+                        .FontSize(11)
+                        .Bold()
+                        .FontColor("#0F172A");
+
+                    if (!string.IsNullOrWhiteSpace(item.Institution))
+                    {
+                        education.Item().PaddingTop(2).Text(item.Institution)
+                            .FontSize(10)
+                            .FontColor("#64748B");
+                    }
+
+                    var dateText = FormatDateRange(item.StartDate, item.EndDate, false);
+
+                    if (!string.IsNullOrWhiteSpace(dateText))
+                    {
+                        education.Item().PaddingTop(2).Text(dateText)
+                            .FontSize(9)
+                            .FontColor("#64748B");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(item.Description))
+                    {
+                        education.Item().PaddingTop(4).Text(item.Description)
+                            .FontSize(10)
+                            .LineHeight(1.25f)
+                            .FontColor("#475569");
+                    }
+                });
+            }
+        }
+
+        private void ComposeBlueSidebarProjects(ColumnDescriptor column)
+        {
+            if (_cv.Projects == null || !_cv.Projects.Any())
+                return;
+
+            ComposeBlueSidebarSectionTitle(column, "PROJECTS");
+
+            foreach (var item in _cv.Projects)
+            {
+                column.Item().PaddingBottom(8).Column(project =>
+                {
+                    project.Item().Text(item.Title)
+                        .FontSize(11)
+                        .Bold()
+                        .FontColor("#0F172A");
+
+                    if (!string.IsNullOrWhiteSpace(item.Technologies))
+                    {
+                        project.Item().PaddingTop(2).Text(item.Technologies)
+                            .FontSize(9)
+                            .FontColor("#1D4ED8");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(item.Description))
+                    {
+                        project.Item().PaddingTop(4).Text(item.Description)
+                            .FontSize(10)
+                            .LineHeight(1.25f)
+                            .FontColor("#475569");
+                    }
+
+                    var links = new List<string>();
+
+                    if (!string.IsNullOrWhiteSpace(item.ProjectUrl))
+                        links.Add($"Project: {item.ProjectUrl}");
+
+                    if (!string.IsNullOrWhiteSpace(item.GitHubUrl))
+                        links.Add($"GitHub: {item.GitHubUrl}");
+
+                    if (links.Count > 0)
+                    {
+                        project.Item().PaddingTop(3).Text(string.Join(" | ", links))
+                            .FontSize(9)
+                            .FontColor("#64748B");
+                    }
+                });
+            }
+        }
+
+        private void ComposeBlueSidebarCertifications(ColumnDescriptor column)
+        {
+            if (_cv.Certifications == null || !_cv.Certifications.Any())
+                return;
+
+            ComposeBlueSidebarSectionTitle(column, "CERTIFICATIONS");
+
+            foreach (var item in _cv.Certifications.OrderByDescending(x => x.Date))
+            {
+                column.Item().PaddingBottom(8).Column(certification =>
+                {
+                    certification.Item().Text(item.Name)
+                        .FontSize(11)
+                        .Bold()
+                        .FontColor("#0F172A");
+
+                    var infoParts = new List<string>();
+
+                    if (!string.IsNullOrWhiteSpace(item.Issuer))
+                        infoParts.Add(item.Issuer);
+
+                    if (item.Date.HasValue)
+                        infoParts.Add(item.Date.Value.ToString("MMM yyyy"));
+
+                    if (infoParts.Count > 0)
+                    {
+                        certification.Item().PaddingTop(2).Text(string.Join(" | ", infoParts))
+                            .FontSize(9)
+                            .FontColor("#64748B");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(item.Url))
+                    {
+                        certification.Item().PaddingTop(3).Text(item.Url)
+                            .FontSize(9)
+                            .FontColor("#1D4ED8");
+                    }
+                });
+            }
+        }
+
+        private void ComposeBlueSidebarSectionTitle(ColumnDescriptor column, string title)
+        {
+            column.Item().PaddingTop(8).Text(title)
+                .FontSize(12)
+                .Bold()
+                .FontColor("#0F172A");
+
+            column.Item().PaddingTop(2).PaddingBottom(6)
+                .LineHorizontal(1)
+                .LineColor("#CBD5E1");
+        }
+
+>>>>>>> Stashed changes
         private void ComposeHeader(ColumnDescriptor column)
         {
             var hasPhoto =
@@ -63,11 +418,9 @@ namespace JobCv.Api.Pdf
                                 photoColumn.Item()
                                     .Width(74)
                                     .Height(74)
-                                    .Background(Colors.White)
                                     .CornerRadius(37)
-                                    .Padding(2)
                                     .Image(_cv.PhotoPath)
-                                    .FitArea();
+                                    .FitUnproportionally();
                             });
                         }
 
@@ -121,11 +474,9 @@ namespace JobCv.Api.Pdf
                             photoColumn.Item()
                                 .Width(74)
                                 .Height(74)
-                                .Background(Colors.White)
                                 .CornerRadius(37)
-                                .Padding(3)
                                 .Image(_cv.PhotoPath)
-                                .FitArea();
+                                .FitUnproportionally();
                         });
                     }
 
@@ -419,7 +770,7 @@ namespace JobCv.Api.Pdf
             column.Item().PaddingTop(4).Text(title)
                 .FontSize(14)
                 .Bold()
-                .FontColor(_style.HeaderTextColor);
+                .FontColor(_style.AccentColor);
 
             column.Item().PaddingTop(2).PaddingBottom(8)
                 .LineHorizontal(1)

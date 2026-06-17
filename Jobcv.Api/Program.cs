@@ -8,12 +8,44 @@ var builder = WebApplication.CreateBuilder(args);
 QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllers();
+<<<<<<< Updated upstream
+=======
+builder.Services.AddHttpClient<AdzunaJobSearchService>();
+builder.Services.AddScoped<MockAiService>();
+
+builder.Services.AddHttpClient<GeminiAiService>((serviceProvider, httpClient) =>
+{
+    httpClient.BaseAddress = new Uri("https://generativelanguage.googleapis.com/");
+    httpClient.Timeout = TimeSpan.FromSeconds(60);
+});
+
+builder.Services.AddHttpClient<OllamaAiService>((serviceProvider, httpClient) =>
+{
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+
+    var baseUrl = configuration["Ollama:BaseUrl"] ?? "http://localhost:11434";
+
+    httpClient.BaseAddress = new Uri(baseUrl);
+    httpClient.Timeout = TimeSpan.FromSeconds(120);
+});
+>>>>>>> Stashed changes
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseSqlite("Data Source=jobcv.db"));
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=jobcv.db"));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null);
+        }));
 
 builder.Services.AddScoped<PasswordService>();
 

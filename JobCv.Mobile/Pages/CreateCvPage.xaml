@@ -6,33 +6,40 @@
              BackgroundColor="#F8FAFC">
 
     <ScrollView>
-        <VerticalStackLayout Padding="24"
-                             Spacing="22">
+        <VerticalStackLayout Padding="22,22,22,28"
+                             Spacing="18">
 
             <!-- Header -->
             <Grid ColumnDefinitions="Auto,*"
-                  Margin="0,30,0,0">
+                  ColumnSpacing="14"
+                  Margin="0,18,0,6"
+                  VerticalOptions="Start">
 
                 <Button Text="←"
                         Clicked="OnBackClicked"
                         BackgroundColor="#E2E8F0"
                         TextColor="#0F172A"
+                        FontSize="18"
                         CornerRadius="18"
                         WidthRequest="44"
-                        HeightRequest="44" />
+                        HeightRequest="44"
+                        Padding="0" />
 
                 <VerticalStackLayout Grid.Column="1"
-                                     Margin="14,0,0,0"
-                                     Spacing="4">
+                                     Spacing="3"
+                                     VerticalOptions="Center">
 
                     <Label Text="Create CV"
                            FontSize="34"
                            FontAttributes="Bold"
-                           TextColor="#0F172A" />
+                           TextColor="#0F172A"
+                           LineBreakMode="NoWrap"
+                           MaxLines="1" />
 
                     <Label Text="Choose how you want to start your CV."
-                           FontSize="14"
-                           TextColor="#64748B" />
+                           FontSize="15"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
                 </VerticalStackLayout>
             </Grid>
 
@@ -42,31 +49,36 @@
                     StrokeShape="RoundRectangle 26"
                     Padding="22">
 
-                <Grid ColumnDefinitions="*,Auto"
-                      ColumnSpacing="18">
-
-                    <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="14">
+                    <VerticalStackLayout Spacing="8">
                         <Label Text="Start from scratch"
-                               FontSize="24"
+                               FontSize="25"
                                FontAttributes="Bold"
-                               TextColor="#0F172A" />
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
 
                         <Label Text="Create a new CV and add your personal information, photo, skills, education, experience and projects."
+<<<<<<< Updated upstream
                                FontSize="14"
                                TextColor="#64748B" />
+=======
+                               FontSize="15"
+                               TextColor="#64748B"
+                               LineHeight="1.15"
+                               LineBreakMode="WordWrap" />
+>>>>>>> Stashed changes
                     </VerticalStackLayout>
 
-                    <Button Grid.Column="1"
-                            Text="Start"
+                    <Button Text="Start"
                             Clicked="OnStartFromScratchClicked"
                             BackgroundColor="#1D4ED8"
                             TextColor="White"
                             FontAttributes="Bold"
+                            FontSize="16"
                             CornerRadius="16"
-                            WidthRequest="130"
-                            HeightRequest="58"
-                            VerticalOptions="Center" />
-                </Grid>
+                            HeightRequest="56"
+                            HorizontalOptions="Fill" />
+                </VerticalStackLayout>
             </Border>
 
             <!-- Duplicate existing CV -->
@@ -75,31 +87,36 @@
                     StrokeShape="RoundRectangle 26"
                     Padding="22">
 
-                <Grid ColumnDefinitions="*,Auto"
-                      ColumnSpacing="18">
-
-                    <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="14">
+                    <VerticalStackLayout Spacing="8">
                         <Label Text="Duplicate existing CV"
-                               FontSize="24"
+                               FontSize="25"
                                FontAttributes="Bold"
-                               TextColor="#0F172A" />
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
 
                         <Label Text="Create a new version based on one of your existing CVs."
+<<<<<<< Updated upstream
                                FontSize="14"
                                TextColor="#64748B" />
+=======
+                               FontSize="15"
+                               TextColor="#64748B"
+                               LineHeight="1.15"
+                               LineBreakMode="WordWrap" />
+>>>>>>> Stashed changes
                     </VerticalStackLayout>
 
-                    <Button Grid.Column="1"
-                            Text="Choose"
+                    <Button Text="Choose"
                             Clicked="OnDuplicateCvClicked"
                             BackgroundColor="#DCFCE7"
                             TextColor="#166534"
                             FontAttributes="Bold"
+                            FontSize="16"
                             CornerRadius="16"
-                            WidthRequest="130"
-                            HeightRequest="58"
-                            VerticalOptions="Center" />
-                </Grid>
+                            HeightRequest="56"
+                            HorizontalOptions="Fill" />
+                </VerticalStackLayout>
             </Border>
 
             <!-- Upload existing CV -->
@@ -108,31 +125,36 @@
                     StrokeShape="RoundRectangle 26"
                     Padding="22">
 
-                <Grid ColumnDefinitions="*,Auto"
-                      ColumnSpacing="18">
-
-                    <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="14">
+                    <VerticalStackLayout Spacing="8">
                         <Label Text="Upload existing CV"
-                               FontSize="24"
+                               FontSize="25"
                                FontAttributes="Bold"
-                               TextColor="#0F172A" />
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
 
                         <Label Text="Upload an existing PDF, DOC or DOCX CV and keep it in your CV library."
+<<<<<<< Updated upstream
                                FontSize="14"
                                TextColor="#64748B" />
+=======
+                               FontSize="15"
+                               TextColor="#64748B"
+                               LineHeight="1.15"
+                               LineBreakMode="WordWrap" />
+>>>>>>> Stashed changes
                     </VerticalStackLayout>
 
-                    <Button Grid.Column="1"
-                            Text="Upload"
+                    <Button Text="Upload"
                             Clicked="OnUploadCvClicked"
                             BackgroundColor="#DCFCE7"
                             TextColor="#166534"
                             FontAttributes="Bold"
+                            FontSize="16"
                             CornerRadius="16"
-                            WidthRequest="130"
-                            HeightRequest="58"
-                            VerticalOptions="Center" />
-                </Grid>
+                            HeightRequest="56"
+                            HorizontalOptions="Fill" />
+                </VerticalStackLayout>
             </Border>
 
             <Label x:Name="MessageLabel"

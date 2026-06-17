@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.CareerTestPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F1F5F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="18"
+                             Spacing="18">
+
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="12"
+                  Margin="0,26,0,0">
+
+                <Button Text="‹"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        FontSize="24" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4">
+
+                    <Label Text="Career Orientation Test"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           LineBreakMode="WordWrap" />
+
+                    <Label Text="Answer 24 questions to discover career directions that may fit your interests, strengths and work style."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border BackgroundColor="#FEF3C7"
+                    Stroke="#FDE68A"
+                    StrokeShape="RoundRectangle 22"
+                    Padding="16">
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Important"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#92400E" />
+
+                    <Label Text="Your answers and result are not saved automatically. If you want to keep the result, download the PDF report at the end of the test."
+                           FontSize="14"
+                           TextColor="#92400E"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label x:Name="ProgressLabel"
+                           Text="Question 1 of 24"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#1D4ED8" />
+
+                    <ProgressBar x:Name="QuestionProgressBar"
+                                 Progress="0.04"
+                                 ProgressColor="#1D4ED8"
+                                 BackgroundColor="#E2E8F0" />
+
+                    <Label x:Name="AreaLabel"
+                           Text="Work style"
+                           FontSize="13"
+                           TextColor="#64748B" />
+
+                    <Label x:Name="QuestionLabel"
+                           Text="Question text"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           LineBreakMode="WordWrap" />
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Button x:Name="Answer1Button"
+                                Text="Strongly disagree"
+                                Clicked="OnAnswerClicked"
+                                CommandParameter="1"
+                                BackgroundColor="#F8FAFC"
+                                TextColor="#0F172A"
+                                BorderColor="#CBD5E1"
+                                BorderWidth="1"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button x:Name="Answer2Button"
+                                Text="Disagree"
+                                Clicked="OnAnswerClicked"
+                                CommandParameter="2"
+                                BackgroundColor="#F8FAFC"
+                                TextColor="#0F172A"
+                                BorderColor="#CBD5E1"
+                                BorderWidth="1"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button x:Name="Answer3Button"
+                                Text="Neutral"
+                                Clicked="OnAnswerClicked"
+                                CommandParameter="3"
+                                BackgroundColor="#F8FAFC"
+                                TextColor="#0F172A"
+                                BorderColor="#CBD5E1"
+                                BorderWidth="1"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button x:Name="Answer4Button"
+                                Text="Agree"
+                                Clicked="OnAnswerClicked"
+                                CommandParameter="4"
+                                BackgroundColor="#F8FAFC"
+                                TextColor="#0F172A"
+                                BorderColor="#CBD5E1"
+                                BorderWidth="1"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button x:Name="Answer5Button"
+                                Text="Strongly agree"
+                                Clicked="OnAnswerClicked"
+                                CommandParameter="5"
+                                BackgroundColor="#F8FAFC"
+                                TextColor="#0F172A"
+                                BorderColor="#CBD5E1"
+                                BorderWidth="1"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="10">
+
+                        <Button Text="Previous"
+                                Clicked="OnPreviousClicked"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                BorderColor="#93C5FD"
+                                BorderWidth="1"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="52" />
+
+                        <Button x:Name="NextButton"
+                                Grid.Column="1"
+                                Text="Next"
+                                Clicked="OnNextClicked"
+                                BackgroundColor="#1D4ED8"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="52" />
+
+                    </Grid>
+
+                    <Label x:Name="MessageLabel"
+                           Text=""
+                           FontSize="14"
+                           TextColor="#DC2626"
+                           IsVisible="False"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

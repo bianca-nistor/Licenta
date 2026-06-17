@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.EditProfilePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F1F5F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="20">
+
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="14"
+                  Margin="0,30,0,0">
+
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="48"
+                        HeightRequest="48"
+                        FontSize="20" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4">
+
+                    <Label Text="Edit Profile"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Complete optional details used for your career profile."
+                           FontSize="15"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="22">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label Text="Basic information"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Full name"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#334155" />
+
+                    <Entry x:Name="FullNameEntry"
+                           Placeholder="Your full name"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           PlaceholderColor="#94A3B8" />
+
+                    <Label Text="Phone number"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#334155" />
+
+                    <Entry x:Name="PhoneNumberEntry"
+                           Placeholder="Add phone number"
+                           Keyboard="Telephone"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           PlaceholderColor="#94A3B8" />
+
+                    <Label Text="Alternative email"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#334155" />
+
+                    <Entry x:Name="AlternativeEmailEntry"
+                           Placeholder="Add another email"
+                           Keyboard="Email"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           PlaceholderColor="#94A3B8" />
+
+                    <Label Text="Location"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#334155" />
+
+                    <Entry x:Name="LocationEntry"
+                           Placeholder="Add location"
+                           BackgroundColor="#F8FAFC"
+                           TextColor="#0F172A"
+                           PlaceholderColor="#94A3B8" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="22">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label Text="Career preferences"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Career level"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#334155" />
+
+                    <Picker x:Name="CareerLevelPicker"
+                            Title="Choose career level"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A"
+                            TitleColor="#64748B">
+                        <Picker.Items>
+                            <x:String>Student</x:String>
+                            <x:String>Internship</x:String>
+                            <x:String>Entry level</x:String>
+                            <x:String>Junior</x:String>
+                            <x:String>Mid</x:String>
+                            <x:String>Senior</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Label Text="Preferred job type"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#334155" />
+
+                    <Picker x:Name="PreferredJobTypePicker"
+                            Title="Choose preferred job type"
+                            BackgroundColor="#F8FAFC"
+                            TextColor="#0F172A"
+                            TitleColor="#64748B">
+                        <Picker.Items>
+                            <x:String>Full-time</x:String>
+                            <x:String>Part-time</x:String>
+                            <x:String>Internship</x:String>
+                            <x:String>Remote</x:String>
+                            <x:String>Hybrid</x:String>
+                            <x:String>On-site</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label x:Name="MessageLabel"
+                   Text=""
+                   FontSize="13"
+                   TextColor="#DC2626" />
+
+            <Button Text="Save profile"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#1D4ED8"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="16"
+                    HeightRequest="54" />
+
+            <Button Text="Cancel"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="#E2E8F0"
+                    TextColor="#0F172A"
+                    FontAttributes="Bold"
+                    CornerRadius="16"
+                    HeightRequest="52"
+                    Margin="0,0,0,30" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

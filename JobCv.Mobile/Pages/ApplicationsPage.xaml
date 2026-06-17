@@ -6,19 +6,30 @@
              BackgroundColor="#F1F5F9">
 
     <ScrollView>
-        <VerticalStackLayout Padding="24"
+        <VerticalStackLayout Padding="18"
                              Spacing="20">
 
             <!-- Header -->
+<<<<<<< Updated upstream
             <Grid ColumnDefinitions="Auto,*"
                   Margin="0,24,0,0">
 
                 <Button Text="←"
                         Clicked="OnBackClicked"
+=======
+            <Grid ColumnDefinitions="Auto,*,Auto"
+                  ColumnSpacing="10"
+                  Margin="0,26,0,0">
+
+                <Button Grid.Column="0"
+                        Text="☰"
+                        Clicked="OnMenuClicked"
+>>>>>>> Stashed changes
                         BackgroundColor="#E2E8F0"
                         TextColor="#0F172A"
                         CornerRadius="18"
                         WidthRequest="44"
+<<<<<<< Updated upstream
                         HeightRequest="44" />
 
                 <VerticalStackLayout Grid.Column="1"
@@ -55,19 +66,297 @@
 
                     <Button Text="Find more jobs"
                             Clicked="OnFindJobsClicked"
+=======
+                        HeightRequest="44"
+                        FontSize="20"
+                        VerticalOptions="Start" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4"
+                                     VerticalOptions="Start">
+
+                    <Label x:Name="PageTitleLabel"
+                           Text="My Applications"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           MaxLines="2"
+                           LineBreakMode="WordWrap" />
+
+                    <Label Text="Track saved jobs, applications and interview progress."
+                           FontSize="15"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start"
+                                     Spacing="8">
+
+                    <Button Text="👤"
+            Clicked="OnProfileClicked"
+            BackgroundColor="#DCFCE7"
+            TextColor="#0F172A"
+            CornerRadius="22"
+            WidthRequest="48"
+            HeightRequest="48"
+            FontSize="18" />
+
+                    <Border x:Name="ProfileMenu"
+                            IsVisible="False"
+                            BackgroundColor="White"
+                            Stroke="#E2E8F0"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="12"
+                            WidthRequest="210"
+                            Shadow="5,5,12,#22000000">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <Label Text="Profile"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#0F172A"
+                                   Margin="4,0,4,6" />
+
+                            <Button Text="View profile"
+                                    Clicked="OnViewProfileClicked"
+                                    BackgroundColor="#EFF6FF"
+                                    TextColor="#1D4ED8"
+                                    CornerRadius="12"
+                                    HeightRequest="44" />
+
+                            <Button Text="Logout"
+                                    Clicked="OnLogoutClicked"
+                                    BackgroundColor="#FEE2E2"
+                                    TextColor="#DC2626"
+                                    CornerRadius="12"
+                                    HeightRequest="44" />
+
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Hamburger menu -->
+            <Border x:Name="MainMenu"
+                    IsVisible="False"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 22"
+                    Padding="14"
+                    Shadow="5,5,12,#22000000">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Menu"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           Margin="4,0,4,4" />
+
+                    <Button Text="Dashboard"
+                            Clicked="OnDashboardClicked"
+                            BackgroundColor="#EFF6FF"
+                            TextColor="#1D4ED8"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="46" />
+
+                    <Button Text="My CVs"
+                            Clicked="OnMyCvsClicked"
+                            BackgroundColor="#EFF6FF"
+                            TextColor="#1D4ED8"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="46" />
+
+                    <Button Text="Applications"
+                            Clicked="OnMyApplicationsClicked"
+>>>>>>> Stashed changes
                             BackgroundColor="#1D4ED8"
                             TextColor="White"
                             FontAttributes="Bold"
-                            CornerRadius="16"
-                            HeightRequest="52" />
+                            CornerRadius="14"
+                            HeightRequest="46" />
+
+                    <Button Text="Jobs"
+                            Clicked="OnFindJobsClicked"
+                            BackgroundColor="#EFF6FF"
+                            TextColor="#1D4ED8"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="46" />
 
                 </VerticalStackLayout>
             </Border>
 
-            <Label x:Name="MessageLabel"
-                   Text=""
-                   FontSize="14"
-                   TextColor="#64748B" />
+            <!-- Filter summary -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="Applications overview"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
+
+                        <Border BackgroundColor="#EFF6FF"
+                                Stroke="#BFDBFE"
+                                StrokeShape="RoundRectangle 16"
+                                Padding="12,8"
+                                HorizontalOptions="Start">
+
+                            <Label x:Name="ApplicationsCountLabel"
+                                   Text="0"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="#1D4ED8" />
+
+                        </Border>
+
+                        <Label x:Name="FilterSummaryLabel"
+                               Text="Showing all applications."
+                               FontSize="14"
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
+
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+         Color="#E2E8F0" />
+
+                    <SearchBar x:Name="ApplicationSearchBar"
+           Placeholder="Search by job title"
+           TextChanged="OnApplicationSearchTextChanged"
+           BackgroundColor="#F8FAFC"
+           TextColor="#0F172A"
+           PlaceholderColor="#94A3B8" />
+
+                    <!-- Filters -->
+                    <FlexLayout Direction="Row"
+                                Wrap="Wrap"
+                                JustifyContent="Start"
+                                AlignItems="Center">
+
+                        <Button x:Name="AllFilterButton"
+                                Text="All"
+                                Clicked="OnFilterClicked"
+                                CommandParameter="All"
+                                BackgroundColor="#1D4ED8"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="44"
+                                WidthRequest="104"
+                                Margin="0,0,8,8" />
+
+                        <Button x:Name="SavedFilterButton"
+                                Text="Saved"
+                                Clicked="OnFilterClicked"
+                                CommandParameter="Saved"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="44"
+                                WidthRequest="104"
+                                Margin="0,0,8,8" />
+
+                        <Button x:Name="AppliedFilterButton"
+                                Text="Applied"
+                                Clicked="OnFilterClicked"
+                                CommandParameter="Applied"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="44"
+                                WidthRequest="104"
+                                Margin="0,0,8,8" />
+
+                        <Button x:Name="InterviewFilterButton"
+                                Text="Interview"
+                                Clicked="OnFilterClicked"
+                                CommandParameter="Interview"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="44"
+                                WidthRequest="116"
+                                Margin="0,0,8,8" />
+
+                        <Button x:Name="OfferFilterButton"
+                                Text="Offer"
+                                Clicked="OnFilterClicked"
+                                CommandParameter="Offer"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="44"
+                                WidthRequest="104"
+                                Margin="0,0,8,8" />
+
+                        <Button x:Name="RejectedFilterButton"
+                                Text="Rejected"
+                                Clicked="OnFilterClicked"
+                                CommandParameter="Rejected"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="44"
+                                WidthRequest="116"
+                                Margin="0,0,8,8" />
+
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Empty state -->
+            <Border x:Name="EmptyApplicationsState"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 24"
+                    Padding="20"
+                    IsVisible="False">
+
+                <VerticalStackLayout Spacing="10"
+                                     HorizontalOptions="Center">
+
+                    <Label Text="No applications found"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap" />
+
+                    <Label x:Name="EmptyApplicationsMessageLabel"
+                           Text="You do not have applications for this filter yet."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap" />
+
+                    <Button Text="Find jobs"
+                            Clicked="OnFindJobsClicked"
+                            BackgroundColor="#DCFCE7"
+                            TextColor="#166534"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            WidthRequest="180"
+                            HeightRequest="48" />
+                </VerticalStackLayout>
+            </Border>
 
             <!-- Applications list -->
             <CollectionView x:Name="ApplicationsCollectionView"
@@ -75,125 +364,115 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-
-                        <Border BackgroundColor="#F0F7FF"
-                                Stroke="#BFDBFE"
+                        <Border BackgroundColor="White"
+                                Stroke="#E2E8F0"
                                 StrokeShape="RoundRectangle 24"
                                 Padding="18"
-                                Margin="0,0,0,14">
+                                Margin="0,0,0,12">
 
                             <VerticalStackLayout Spacing="12">
 
-                                <Grid ColumnDefinitions="*,Auto"
+                                <VerticalStackLayout Spacing="8">
+
+                                    <Label Text="{Binding JobTitle}"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#0F172A"
+                                           LineBreakMode="WordWrap" />
+
+                                    <Label Text="{Binding Company}"
+                                           FontSize="15"
+                                           TextColor="#334155"
+                                           LineBreakMode="WordWrap" />
+
+                                    <Label Text="{Binding Location}"
+                                           FontSize="13"
+                                           TextColor="#64748B"
+                                           LineBreakMode="WordWrap" />
+
+                                    <Border BackgroundColor="#DBEAFE"
+                                            Stroke="#BFDBFE"
+                                            StrokeShape="RoundRectangle 14"
+                                            Padding="10,6"
+                                            HorizontalOptions="Start">
+
+                                        <Label Text="{Binding Status}"
+                                               TextColor="#1D4ED8"
+                                               FontAttributes="Bold"
+                                               FontSize="12" />
+
+                                    </Border>
+
+                                </VerticalStackLayout>
+
+                                <BoxView HeightRequest="1"
+                                         BackgroundColor="#E2E8F0" />
+
+                                <Grid ColumnDefinitions="*,*"
                                       ColumnSpacing="12">
 
                                     <VerticalStackLayout Spacing="4">
 
-                                        <Label Text="{Binding JobTitle}"
-                                               FontSize="22"
-                                               FontAttributes="Bold"
-                                               TextColor="#0F172A" />
-
-                                        <Label Text="{Binding Company}"
-                                               FontSize="15"
-                                               TextColor="#334155" />
-
-                                        <Label Text="{Binding Location}"
-                                               FontSize="14"
+                                        <Label Text="Applied date"
+                                               FontSize="12"
                                                TextColor="#64748B" />
+
+                                        <Label Text="{Binding AppliedAt, StringFormat='{0:dd MMM yyyy}'}"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               TextColor="#0F172A"
+                                               LineBreakMode="WordWrap" />
 
                                     </VerticalStackLayout>
 
-                                    <Border Grid.Column="1"
-                                            BackgroundColor="White"
-                                            Stroke="#DBEAFE"
-                                            StrokeShape="RoundRectangle 14"
-                                            Padding="12,8"
-                                            VerticalOptions="Start">
+                                    <VerticalStackLayout Grid.Column="1"
+                                                         Spacing="4">
 
-                                        <Label Text="{Binding Status}"
-                                               TextColor="#1D4ED8"
+                                        <Label Text="Source"
                                                FontSize="12"
-                                               FontAttributes="Bold" />
+                                               TextColor="#64748B" />
 
-                                    </Border>
+                                        <Label Text="{Binding Source}"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               TextColor="#0F172A"
+                                               LineBreakMode="WordWrap" />
+
+                                    </VerticalStackLayout>
                                 </Grid>
-
-                                <Grid ColumnDefinitions="*,*"
-                                      ColumnSpacing="10">
-
-                                    <Border BackgroundColor="White"
-                                            Stroke="#DBEAFE"
-                                            StrokeShape="RoundRectangle 14"
-                                            Padding="12">
-
-                                        <VerticalStackLayout Spacing="4">
-                                            <Label Text="CV used"
-                                                   FontSize="12"
-                                                   TextColor="#64748B" />
-
-                                            <Label Text="{Binding CvDisplay}"
-                                                   FontSize="14"
-                                                   TextColor="#0F172A"
-                                                   FontAttributes="Bold" />
-                                        </VerticalStackLayout>
-                                    </Border>
-
-                                    <Border Grid.Column="1"
-                                            BackgroundColor="White"
-                                            Stroke="#DBEAFE"
-                                            StrokeShape="RoundRectangle 14"
-                                            Padding="12">
-
-                                        <VerticalStackLayout Spacing="4">
-                                            <Label Text="Created"
-                                                   FontSize="12"
-                                                   TextColor="#64748B" />
-
-                                            <Label Text="{Binding CreatedText}"
-                                                   FontSize="14"
-                                                   TextColor="#0F172A"
-                                                   FontAttributes="Bold" />
-                                        </VerticalStackLayout>
-                                    </Border>
-
-                                </Grid>
-
-                                <Label Text="{Binding Notes}"
-                                       FontSize="14"
-                                       TextColor="#475569"
-                                       LineBreakMode="WordWrap" />
 
                                 <Grid ColumnDefinitions="*,*"
                                       ColumnSpacing="10"
-                                      Margin="0,6,0,0">
+                                      Margin="0,4,0,0">
 
+<<<<<<< Updated upstream
                                     <Button Text="Open job"
                                             Clicked="OnOpenJobClicked"
+=======
+                                    <Button Grid.Column="0"
+                                            Text="Details"
+                                            Clicked="OnViewApplicationDetailsClicked"
+>>>>>>> Stashed changes
                                             CommandParameter="{Binding .}"
-                                            BackgroundColor="White"
+                                            BackgroundColor="#EFF6FF"
                                             TextColor="#1D4ED8"
-                                            BorderColor="#93C5FD"
-                                            BorderWidth="1"
                                             FontAttributes="Bold"
                                             CornerRadius="14"
-                                            HeightRequest="48" />
+                                            HeightRequest="44" />
 
                                     <Button Grid.Column="1"
                                             Text="Delete"
                                             Clicked="OnDeleteApplicationClicked"
-                                            CommandParameter="{Binding .}"
+                                            CommandParameter="{Binding Id}"
                                             BackgroundColor="#FEE2E2"
                                             TextColor="#DC2626"
                                             FontAttributes="Bold"
                                             CornerRadius="14"
-                                            HeightRequest="48" />
+                                            HeightRequest="44" />
 
                                 </Grid>
-
                             </VerticalStackLayout>
                         </Border>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

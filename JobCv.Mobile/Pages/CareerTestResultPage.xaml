@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.CareerTestResultPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F1F5F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="18"
+                             Spacing="18">
+
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="12"
+                  Margin="0,26,0,0">
+
+                <Button Text="‹"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        FontSize="24" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4">
+
+                    <Label Text="Career Test Result"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           LineBreakMode="WordWrap" />
+
+                    <Label Text="Review your result and export it as a PDF report."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border BackgroundColor="#FEF3C7"
+                    Stroke="#FDE68A"
+                    StrokeShape="RoundRectangle 22"
+                    Padding="16">
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Temporary result"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#92400E" />
+
+                    <Label Text="This result is not saved automatically. Download the PDF report if you want to keep it after leaving this page."
+                           FontSize="14"
+                           TextColor="#92400E"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Your profile"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#64748B" />
+
+                    <Label x:Name="ProfileTitleLabel"
+                           Text="Profile title"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="#1D4ED8"
+                           LineBreakMode="WordWrap" />
+
+                    <Label x:Name="SummaryLabel"
+                           Text="Summary"
+                           FontSize="15"
+                           TextColor="#334155"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Career area scores"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <VerticalStackLayout x:Name="ScoresContainer"
+                                         Spacing="10" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Recommended career directions"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <VerticalStackLayout x:Name="RolesContainer"
+                                         Spacing="8" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Suggested next steps"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <VerticalStackLayout x:Name="StepsContainer"
+                                         Spacing="8" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Download PDF report"
+                    Clicked="OnDownloadPdfClicked"
+                    BackgroundColor="#1D4ED8"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="18"
+                    HeightRequest="56" />
+
+            <Label x:Name="MessageLabel"
+                   Text=""
+                   FontSize="14"
+                   TextColor="#64748B"
+                   IsVisible="False"
+                   LineBreakMode="WordWrap"
+                   Margin="0,0,0,30" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

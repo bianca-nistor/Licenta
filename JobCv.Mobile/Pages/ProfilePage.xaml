@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.ProfilePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F1F5F9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="18"
+                             Spacing="20">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="12"
+                  Margin="0,26,0,0">
+
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        FontSize="18"
+                        VerticalOptions="Start" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4"
+                                     VerticalOptions="Start">
+
+                    <Label Text="Profile"
+                           FontSize="30"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           LineBreakMode="WordWrap" />
+
+                    <Label Text="Manage your account and career preferences."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Profile summary -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="18">
+
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="14">
+
+                        <Border BackgroundColor="#DBEAFE"
+                                Stroke="#BFDBFE"
+                                StrokeShape="RoundRectangle 30"
+                                WidthRequest="64"
+                                HeightRequest="64">
+
+                            <Label x:Name="InitialsLabel"
+                                   Text="U"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#1D4ED8"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center" />
+
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="5"
+                                             VerticalOptions="Center">
+
+                            <Label x:Name="FullNameLabel"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#0F172A"
+                                   LineBreakMode="WordWrap" />
+
+                            <Label x:Name="EmailLabel"
+                                   FontSize="14"
+                                   TextColor="#64748B"
+                                   LineBreakMode="WordWrap" />
+
+                            <Border BackgroundColor="#EFF6FF"
+                                    Stroke="#BFDBFE"
+                                    StrokeShape="RoundRectangle 14"
+                                    Padding="10,6"
+                                    HorizontalOptions="Start"
+                                    Margin="0,4,0,0">
+
+                                <Label Text="JobCv user"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D4ED8" />
+
+                            </Border>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <BoxView HeightRequest="1"
+                             Color="#E2E8F0" />
+
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="10">
+
+                        <Border BackgroundColor="#F8FAFC"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 18"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Career level"
+                                       FontSize="12"
+                                       TextColor="#64748B" />
+
+                                <Label x:Name="CareerLevelLabel"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#0F172A"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                BackgroundColor="#F8FAFC"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 18"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Preferred job type"
+                                       FontSize="12"
+                                       TextColor="#64748B" />
+
+                                <Label x:Name="PreferredJobTypeLabel"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#166534"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="10">
+
+                        <Button Grid.Column="0"
+                                Text="Edit profile"
+                                Clicked="OnEditProfileClicked"
+                                BackgroundColor="#1D4ED8"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button Grid.Column="1"
+                                Text="Password"
+                                Clicked="OnChangePasswordClicked"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Contact details -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Contact details"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Grid ColumnDefinitions="*,*"
+                          RowDefinitions="Auto,Auto"
+                          ColumnSpacing="10"
+                          RowSpacing="10">
+
+                        <Border BackgroundColor="#F8FAFC"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 18"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Phone number"
+                                       FontSize="12"
+                                       TextColor="#64748B" />
+
+                                <Label x:Name="PhoneNumberLabel"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#0F172A"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                BackgroundColor="#F8FAFC"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 18"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Alternative email"
+                                       FontSize="12"
+                                       TextColor="#64748B" />
+
+                                <Label x:Name="AlternativeEmailLabel"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#0F172A"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="#F8FAFC"
+                                Stroke="#E2E8F0"
+                                StrokeShape="RoundRectangle 18"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Location"
+                                       FontSize="12"
+                                       TextColor="#64748B" />
+
+                                <Label x:Name="LocationLabel"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#0F172A"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Quick actions -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Quick actions"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Grid ColumnDefinitions="*,*"
+                          RowDefinitions="Auto,Auto"
+                          ColumnSpacing="10"
+                          RowSpacing="10">
+
+                        <Button Grid.Row="0"
+                                Grid.Column="0"
+                                Text="Dashboard"
+                                Clicked="OnDashboardClicked"
+                                BackgroundColor="#1D4ED8"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button Grid.Row="0"
+                                Grid.Column="1"
+                                Text="My CVs"
+                                Clicked="OnMyCvsClicked"
+                                BackgroundColor="#2563EB"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button Grid.Row="1"
+                                Grid.Column="0"
+                                Text="Applications"
+                                Clicked="OnApplicationsClicked"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button Grid.Row="1"
+                                Grid.Column="1"
+                                Text="Jobs"
+                                Clicked="OnJobsClicked"
+                                BackgroundColor="#DCFCE7"
+                                TextColor="#166534"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Session -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20"
+                    Margin="0,0,0,30">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Session"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="You can safely log out from your account."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                    <Button Text="Logout"
+                            Clicked="OnLogoutClicked"
+                            BackgroundColor="#FEE2E2"
+                            TextColor="#DC2626"
+                            FontAttributes="Bold"
+                            CornerRadius="16"
+                            HeightRequest="50" />
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

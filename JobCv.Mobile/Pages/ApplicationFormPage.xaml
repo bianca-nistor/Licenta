@@ -93,18 +93,20 @@
                            TextColor="#0F172A" />
 
                     <Picker x:Name="StatusPicker"
-                            BackgroundColor="#F8FAFC"
-                            TextColor="#0F172A">
+        Title="Choose status"
+        BackgroundColor="#F8FAFC"
+        TextColor="#0F172A"
+        TitleColor="#64748B">
+
                         <Picker.Items>
                             <x:String>Saved</x:String>
                             <x:String>Applied</x:String>
                             <x:String>Interview Scheduled</x:String>
                             <x:String>Interview Done</x:String>
-                            <x:String>Rejected</x:String>
                             <x:String>Offer</x:String>
-                            <x:String>Accepted</x:String>
-                            <x:String>Withdrawn</x:String>
+                            <x:String>Rejected</x:String>
                         </Picker.Items>
+
                     </Picker>
 
                     <Label Text="CV used"

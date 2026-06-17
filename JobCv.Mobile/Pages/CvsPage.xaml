@@ -6,10 +6,11 @@
              BackgroundColor="#F8FAFC">
 
     <ScrollView>
-        <VerticalStackLayout Padding="24"
-                             Spacing="22">
+        <VerticalStackLayout Padding="18"
+                             Spacing="20">
 
             <!-- Header -->
+<<<<<<< Updated upstream
             <Grid ColumnDefinitions="*,Auto"
                   Margin="0,30,0,0">
 
@@ -29,6 +30,46 @@
                      HorizontalOptions="End"
                      VerticalOptions="Start"
                      Spacing="8">
+=======
+            <Grid ColumnDefinitions="Auto,*,Auto"
+                  ColumnSpacing="10"
+                  Margin="0,26,0,0">
+
+                <Button Grid.Column="0"
+                        Text="☰"
+                        Clicked="OnMenuClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        FontSize="20"
+                        VerticalOptions="Start" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="4"
+                                     VerticalOptions="Start">
+
+                    <Label x:Name="PageTitleLabel"
+                           Text="Career Dashboard"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           MaxLines="2"
+                           LineBreakMode="WordWrap" />
+
+                    <Label x:Name="WelcomeLabel"
+                           Text=""
+                           FontSize="15"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start"
+                                     Spacing="8">
+>>>>>>> Stashed changes
 
                     <Button Text="👤"
             Clicked="OnProfileClicked"
@@ -40,6 +81,7 @@
             FontSize="18" />
 
                     <Border x:Name="ProfileMenu"
+<<<<<<< Updated upstream
             IsVisible="False"
             BackgroundColor="White"
             Stroke="#E2E8F0"
@@ -47,10 +89,20 @@
             Padding="12"
             WidthRequest="210"
             Shadow="5,5,12,#22000000">
+=======
+                            IsVisible="False"
+                            BackgroundColor="White"
+                            Stroke="#E2E8F0"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="12"
+                            WidthRequest="210"
+                            Shadow="5,5,12,#22000000">
+>>>>>>> Stashed changes
 
                         <VerticalStackLayout Spacing="8">
 
                             <Label Text="Profile"
+<<<<<<< Updated upstream
                    FontSize="18"
                    FontAttributes="Bold"
                    TextColor="#0F172A"
@@ -69,16 +121,371 @@
                     TextColor="#DC2626"
                     CornerRadius="12"
                     HeightRequest="44" />
+=======
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#0F172A"
+                                   Margin="4,0,4,6" />
+
+                            <Button Text="View profile"
+                                    Clicked="OnViewProfileClicked"
+                                    BackgroundColor="#EFF6FF"
+                                    TextColor="#1D4ED8"
+                                    CornerRadius="12"
+                                    HeightRequest="44" />
+
+                            <Button Text="Logout"
+                                    Clicked="OnLogoutClicked"
+                                    BackgroundColor="#FEE2E2"
+                                    TextColor="#DC2626"
+                                    CornerRadius="12"
+                                    HeightRequest="44" />
+>>>>>>> Stashed changes
 
                         </VerticalStackLayout>
                     </Border>
 
                 </VerticalStackLayout>
             </Grid>
+<<<<<<< Updated upstream
 
             <!-- Hero -->
+=======
+
+            <!-- Hamburger menu -->
+            <Border x:Name="MainMenu"
+                    IsVisible="False"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 22"
+                    Padding="14"
+                    Shadow="5,5,12,#22000000">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Menu"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           Margin="4,0,4,4" />
+
+                    <Button Text="Dashboard"
+                            Clicked="OnDashboardClicked"
+                            BackgroundColor="#1D4ED8"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="46" />
+
+                    <Button Text="My CVs"
+                            Clicked="OnMyCvsClicked"
+                            BackgroundColor="#EFF6FF"
+                            TextColor="#1D4ED8"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="46" />
+
+                    <Button Text="Applications"
+                            Clicked="OnMyApplicationsClicked"
+                            BackgroundColor="#EFF6FF"
+                            TextColor="#1D4ED8"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="46" />
+
+                    <Button Text="Jobs"
+                            Clicked="OnFindJobsClicked"
+                            BackgroundColor="#EFF6FF"
+                            TextColor="#1D4ED8"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="46" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Activity by period -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="Activity by period"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
+
+                        <Picker x:Name="PeriodPicker"
+                                SelectedIndexChanged="OnPeriodChanged"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                TitleColor="#64748B"
+                                HorizontalOptions="Fill">
+                            <Picker.Items>
+                                <x:String>Last 7 days</x:String>
+                                <x:String>Last 30 days</x:String>
+                                <x:String>Last 90 days</x:String>
+                                <x:String>All time</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+                        <Label x:Name="PeriodSummaryLabel"
+                               Text="Choose a period to analyze your activity."
+                               FontSize="14"
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
+
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*"
+                          RowDefinitions="Auto,Auto"
+                          ColumnSpacing="12"
+                          RowSpacing="12">
+
+                        <Border BackgroundColor="#EFF6FF"
+                                Stroke="#BFDBFE"
+                                StrokeShape="RoundRectangle 22"
+                                Padding="16">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="PeriodCreatedCvCountLabel"
+                                       Text="0"
+                                       FontSize="26"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D4ED8" />
+
+                                <Label Text="CVs created"
+                                       FontSize="13"
+                                       TextColor="#475569"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                BackgroundColor="#DCFCE7"
+                                Stroke="#BBF7D0"
+                                StrokeShape="RoundRectangle 22"
+                                Padding="16">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="PeriodUploadedCvCountLabel"
+                                       Text="0"
+                                       FontSize="26"
+                                       FontAttributes="Bold"
+                                       TextColor="#166534" />
+
+                                <Label Text="CVs uploaded"
+                                       FontSize="13"
+                                       TextColor="#475569"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                BackgroundColor="#DBEAFE"
+                                Stroke="#BFDBFE"
+                                StrokeShape="RoundRectangle 22"
+                                Padding="16">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="PeriodApplicationsCountLabel"
+                                       Text="0"
+                                       FontSize="26"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D4ED8" />
+
+                                <Label Text="Applications added"
+                                       FontSize="13"
+                                       TextColor="#475569"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                BackgroundColor="#ECFDF5"
+                                Stroke="#BBF7D0"
+                                StrokeShape="RoundRectangle 22"
+                                Padding="16">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="PeriodInterviewsCountLabel"
+                                       Text="0"
+                                       FontSize="26"
+                                       FontAttributes="Bold"
+                                       TextColor="#166534" />
+
+                                <Label Text="Interviews"
+                                       FontSize="13"
+                                       TextColor="#475569"
+                                       LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Application pipeline -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Application pipeline"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
+
+                        <Label Text="See where your applications are in the recruitment process."
+                               FontSize="14"
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*"
+                          RowDefinitions="Auto,Auto,Auto"
+                          ColumnSpacing="12"
+                          RowSpacing="12">
+
+                        <Border BackgroundColor="#EFF6FF"
+                                Stroke="#BFDBFE"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="SavedJobsCountLabel"
+                                       Text="0"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D4ED8" />
+
+                                <Label Text="Saved"
+                                       FontSize="13"
+                                       TextColor="#64748B" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                BackgroundColor="#DBEAFE"
+                                Stroke="#BFDBFE"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="AppliedJobsCountLabel"
+                                       Text="0"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D4ED8" />
+
+                                <Label Text="Applied"
+                                       FontSize="13"
+                                       TextColor="#64748B" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                BackgroundColor="#DCFCE7"
+                                Stroke="#BBF7D0"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="PipelineInterviewsCountLabel"
+                                       Text="0"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       TextColor="#166534" />
+
+                                <Label Text="Interview"
+                                       FontSize="13"
+                                       TextColor="#64748B" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                BackgroundColor="#ECFDF5"
+                                Stroke="#BBF7D0"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="OffersCountLabel"
+                                       Text="0"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       TextColor="#166534" />
+
+                                <Label Text="Offers"
+                                       FontSize="13"
+                                       TextColor="#64748B" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="#FEE2E2"
+                                Stroke="#FECACA"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="14">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="RejectedCountLabel"
+                                       Text="0"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       TextColor="#DC2626" />
+
+                                <Label Text="Rejected"
+                                       FontSize="13"
+                                       TextColor="#64748B" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Quick insight -->
+            <Border BackgroundColor="#0F172A"
+                    Stroke="#0F172A"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Quick insight"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+
+                    <Label x:Name="QuickInsightLabel"
+                           Text="Your dashboard insights will appear here."
+                           FontSize="14"
+                           TextColor="#CBD5E1"
+                           LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Quick actions card -->
+>>>>>>> Stashed changes
             <Border BackgroundColor="#0F172A"
                     StrokeShape="RoundRectangle 28"
+<<<<<<< Updated upstream
                     Padding="22">
 
                 <VerticalStackLayout Spacing="14">
@@ -136,15 +543,27 @@
                     StrokeShape="RoundRectangle 24"
                     Padding="22"
                     IsVisible="False">
+=======
+                    Padding="20">
+>>>>>>> Stashed changes
 
                 <VerticalStackLayout Spacing="10"
                                      HorizontalOptions="Center">
 
+<<<<<<< Updated upstream
                     <Label Text="No created CVs yet"
                            FontSize="20"
                            FontAttributes="Bold"
                            TextColor="#0F172A"
                            HorizontalTextAlignment="Center" />
+=======
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Prepare your next application"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               LineBreakMode="WordWrap" />
+>>>>>>> Stashed changes
 
                     <Label Text="Create your first structured CV to edit sections and export it later."
                            FontSize="14"
@@ -161,7 +580,13 @@
                             HeightRequest="48" />
                 </VerticalStackLayout>
             </Border>
+            <!-- Career orientation test -->
+            <Border BackgroundColor="White"
+        Stroke="#E2E8F0"
+        StrokeShape="RoundRectangle 28"
+        Padding="20">
 
+<<<<<<< Updated upstream
             <CollectionView x:Name="CvsCollectionView"
                             SelectionMode="None">
 
@@ -188,6 +613,129 @@
                                                LineBreakMode="TailTruncation"
                                                MaxLines="2" />
                                     </VerticalStackLayout>
+=======
+                <VerticalStackLayout Spacing="14">
+
+                    <Grid ColumnDefinitions="*,Auto"
+              ColumnSpacing="12">
+
+                        <VerticalStackLayout Spacing="6">
+
+                            <Label Text="Career Orientation Test"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A"
+                       LineBreakMode="WordWrap" />
+
+                            <Label Text="Discover career directions that may fit your interests, strengths and preferred work style."
+                       FontSize="14"
+                       TextColor="#64748B"
+                       LineBreakMode="WordWrap" />
+
+                        </VerticalStackLayout>
+
+                        <Border Grid.Column="1"
+                    BackgroundColor="#F3E8FF"
+                    Stroke="#DDD6FE"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="12,8"
+                    VerticalOptions="Start">
+
+                            <Label Text="24 questions"
+                       FontSize="12"
+                       FontAttributes="Bold"
+                       TextColor="#6D28D9" />
+
+                        </Border>
+                    </Grid>
+
+                    <Border BackgroundColor="#FEF3C7"
+                Stroke="#FDE68A"
+                StrokeShape="RoundRectangle 18"
+                Padding="12">
+
+                        <Label Text="Your result is not saved automatically. Download the PDF report at the end if you want to keep it."
+                   FontSize="13"
+                   TextColor="#92400E"
+                   LineBreakMode="WordWrap" />
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,*"
+              ColumnSpacing="10">
+
+                        <VerticalStackLayout Spacing="4">
+
+                            <Label Text="Focus"
+                       FontSize="12"
+                       TextColor="#64748B" />
+
+                            <Label Text="Interests, work style and strengths"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A"
+                       LineBreakMode="WordWrap" />
+
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                 Spacing="4">
+
+                            <Label Text="Output"
+                       FontSize="12"
+                       TextColor="#64748B" />
+
+                            <Label Text="Career profile + PDF report"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A"
+                       LineBreakMode="WordWrap" />
+
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Button Text="Start career test"
+                Clicked="OnStartCareerTestClicked"
+                BackgroundColor="#7C3AED"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="18"
+                HeightRequest="54" />
+
+                </VerticalStackLayout>
+            </Border>
+            <!-- Recent applications -->
+            <VerticalStackLayout Spacing="8">
+
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="8"
+                      Margin="0,8,0,0">
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Recent applications"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
+
+                        <Label Text="Your latest tracked job applications."
+                               FontSize="14"
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+
+                    <Button Grid.Column="1"
+                            Text="View all"
+                            Clicked="OnMyApplicationsClicked"
+                            BackgroundColor="#EFF6FF"
+                            TextColor="#1D4ED8"
+                            BorderColor="#93C5FD"
+                            BorderWidth="1"
+                            CornerRadius="14"
+                            HeightRequest="42"
+                            WidthRequest="92"
+                            VerticalOptions="Center" />
+                </Grid>
+>>>>>>> Stashed changes
 
                                     <Border Grid.Column="1"
                                             BackgroundColor="#DBEAFE"
@@ -253,7 +801,70 @@
 
                 <Label Text="Files uploaded by you. These can be used later when applying to jobs."
                        FontSize="14"
+<<<<<<< Updated upstream
                        TextColor="#64748B" />
+=======
+                       TextColor="#64748B"
+                       IsVisible="False"
+                       LineBreakMode="WordWrap" />
+
+                <CollectionView x:Name="RecentApplicationsCollectionView"
+                                SelectionMode="None">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Border BackgroundColor="#F0F7FF"
+                                    Stroke="#BFDBFE"
+                                    StrokeShape="RoundRectangle 22"
+                                    Padding="16"
+                                    Margin="0,0,0,10">
+
+                                <VerticalStackLayout Spacing="8">
+
+                                    <Grid ColumnDefinitions="*,Auto"
+                                          ColumnSpacing="10">
+
+                                        <VerticalStackLayout Spacing="3">
+                                            <Label Text="{Binding JobTitle}"
+                                                   FontSize="18"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#0F172A"
+                                                   LineBreakMode="WordWrap" />
+
+                                            <Label Text="{Binding Company}"
+                                                   FontSize="14"
+                                                   TextColor="#334155"
+                                                   LineBreakMode="WordWrap" />
+                                        </VerticalStackLayout>
+
+                                        <Border Grid.Column="1"
+                                                BackgroundColor="White"
+                                                Stroke="#DBEAFE"
+                                                StrokeShape="RoundRectangle 14"
+                                                Padding="10,6"
+                                                VerticalOptions="Start">
+
+                                            <Label Text="{Binding Status}"
+                                                   FontSize="12"
+                                                   TextColor="#1D4ED8"
+                                                   FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+
+                                    <Label Text="{Binding CvDisplay}"
+                                           FontSize="13"
+                                           TextColor="#64748B"
+                                           LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+                            </Border>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+>>>>>>> Stashed changes
             </VerticalStackLayout>
 
             <Border x:Name="EmptyUploadedCvsState"

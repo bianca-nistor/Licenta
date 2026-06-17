@@ -1,5 +1,98 @@
 [
   {
+<<<<<<< Updated upstream
+=======
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "GenerateCoverLetter",
+    "RelativePath": "api/Ai/cover-letter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CoverLetterRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "GenerateCvJobMatch",
+    "RelativePath": "api/Ai/cv-job-match",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CvJobMatchRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "CheckCvQuality",
+    "RelativePath": "api/Ai/cv-quality-check",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CvQualityCheckRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "GenerateCvTailoring",
+    "RelativePath": "api/Ai/cv-tailoring",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CvTailoringRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "TestGemini",
+    "RelativePath": "api/Ai/gemini-test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AiController",
+    "Method": "GenerateInterviewPrep",
+    "RelativePath": "api/Ai/interview-prep",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.InterviewPrepRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+>>>>>>> Stashed changes
     "ContainingType": "JobCv.Api.Controllers.ApplicationsController",
     "Method": "CreateApplication",
     "RelativePath": "api/Applications",
@@ -90,6 +183,80 @@
       {
         "Name": "dto",
         "Type": "JobCv.Api.Dtos.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AuthController",
+    "Method": "GetUser",
+    "RelativePath": "api/Auth/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AuthController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Auth/user/{userId}/password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.AuthController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Auth/user/{userId}/profile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "JobCv.Api.Dtos.UpdateUserProfileDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.CareerTestController",
+    "Method": "ExportCareerTestPdf",
+    "RelativePath": "api/CareerTest/export-pdf",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JobCv.Api.Dtos.CareerTestPdfRequestDto",
         "IsRequired": true
       }
     ],
@@ -695,6 +862,37 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JobCv.Api.Controllers.StatisticsController",
+    "Method": "GetDashboardActivity",
+    "RelativePath": "api/Statistics/user/{userId}/dashboard-activity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "period",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobCv.Api.Dtos.DashboardActivityStatsDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "JobCv.Api.Controllers.StatisticsController",

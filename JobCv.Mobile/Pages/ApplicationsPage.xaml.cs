@@ -8,6 +8,10 @@ namespace JobCv.Mobile.Pages
         private readonly UserDto _user;
         private readonly ApiService _apiService;
 
+        private List<JobApplicationDto> _allApplications = new();
+        private string _currentFilter = "All";
+        private string _searchText = string.Empty;
+
         public ApplicationsPage(UserDto user, ApiService apiService)
         {
             InitializeComponent();
@@ -19,34 +23,134 @@ namespace JobCv.Mobile.Pages
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
             await LoadApplicationsAsync();
         }
 
+<<<<<<< Updated upstream
+=======
+        private T GetControl<T>(string name) where T : Element
+        {
+            var control = this.FindByName<T>(name);
+
+            if (control == null)
+                throw new Exception($"Control '{name}' was not found in ApplicationsPage.xaml.");
+
+            return control;
+        }
+
+        private Border GetMainMenu()
+        {
+            return GetControl<Border>("MainMenu");
+        }
+
+        private Border GetProfileMenu()
+        {
+            return GetControl<Border>("ProfileMenu");
+        }
+
+>>>>>>> Stashed changes
         private async Task LoadApplicationsAsync()
         {
-            MessageLabel.TextColor = Colors.Gray;
-            MessageLabel.Text = "Loading applications...";
-
             try
             {
-                var applications = await _apiService.GetUserApplicationsAsync(_user.Id);
+                _allApplications = await _apiService.GetUserApplicationsAsync(_user.Id);
 
-                ApplicationsCollectionView.ItemsSource = applications;
-
-                MessageLabel.Text = applications.Count == 0
-                    ? "No applications saved yet. Go to Find jobs and track your first application."
-                    : $"{applications.Count} application(s) saved.";
+                ApplyCurrentFilter();
             }
             catch (Exception ex)
             {
-                MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = ex.Message;
+                await DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
+<<<<<<< Updated upstream
         private async void OnBackClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+=======
+        private void OnFilterClicked(object sender, EventArgs e)
+        {
+            if ((sender as Button)?.CommandParameter is not string selectedFilter)
+                return;
+
+            _currentFilter = selectedFilter;
+            ApplyCurrentFilter();
+        }
+
+        private void ApplyCurrentFilter()
+        {
+            var filteredApplications = GetFilteredApplications();
+
+            ApplicationsCollectionView.ItemsSource = filteredApplications;
+
+            EmptyApplicationsState.IsVisible = filteredApplications.Count == 0;
+            ApplicationsCollectionView.IsVisible = filteredApplications.Count > 0;
+
+            ApplicationsCountLabel.Text = filteredApplications.Count.ToString();
+
+            FilterSummaryLabel.Text = _currentFilter == "All"
+                ? $"Showing all applications ({filteredApplications.Count})."
+                : $"Showing {_currentFilter.ToLower()} applications ({filteredApplications.Count}).";
+
+            EmptyApplicationsMessageLabel.Text = _currentFilter == "All"
+                ? "You have not saved or tracked any applications yet."
+                : $"You do not have applications with the status {_currentFilter} yet.";
+
+            UpdateFilterButtons();
+        }
+
+        
+        private void UpdateFilterButtons()
+        {
+            SetFilterButtonStyle(AllFilterButton, _currentFilter == "All");
+            SetFilterButtonStyle(SavedFilterButton, _currentFilter == "Saved");
+            SetFilterButtonStyle(AppliedFilterButton, _currentFilter == "Applied");
+            SetFilterButtonStyle(InterviewFilterButton, _currentFilter == "Interview");
+            SetFilterButtonStyle(OfferFilterButton, _currentFilter == "Offer");
+            SetFilterButtonStyle(RejectedFilterButton, _currentFilter == "Rejected");
+        }
+
+        private static void SetFilterButtonStyle(Button button, bool isSelected)
+        {
+            if (isSelected)
+            {
+                button.BackgroundColor = Color.FromArgb("#1D4ED8");
+                button.TextColor = Colors.White;
+                return;
+            }
+
+            button.BackgroundColor = Color.FromArgb("#EFF6FF");
+            button.TextColor = Color.FromArgb("#1D4ED8");
+        }
+
+        private void OnMenuClicked(object sender, EventArgs e)
+        {
+            var mainMenu = GetMainMenu();
+            var profileMenu = GetProfileMenu();
+
+            mainMenu.IsVisible = !mainMenu.IsVisible;
+
+            if (profileMenu.IsVisible)
+                profileMenu.IsVisible = false;
+        }
+
+        private async void OnDashboardClicked(object sender, EventArgs e)
+        {
+            GetMainMenu().IsVisible = false;
+            await Navigation.PushAsync(new CvsPage(_user, _apiService));
+        }
+
+        private async void OnMyCvsClicked(object sender, EventArgs e)
+        {
+            GetMainMenu().IsVisible = false;
+            await Navigation.PushAsync(new MyCvsPage(_user, _apiService));
+        }
+
+        private void OnMyApplicationsClicked(object sender, EventArgs e)
+        {
+            GetMainMenu().IsVisible = false;
+>>>>>>> Stashed changes
         }
 
         private async void OnFindJobsClicked(object sender, EventArgs e)
@@ -54,57 +158,152 @@ namespace JobCv.Mobile.Pages
             await Navigation.PushAsync(new JobsPage(_user, _apiService));
         }
 
+<<<<<<< Updated upstream
         private async void OnOpenJobClicked(object sender, EventArgs e)
+=======
+        private async void OnViewApplicationDetailsClicked(object sender, EventArgs e)
+>>>>>>> Stashed changes
         {
             if ((sender as Button)?.CommandParameter is not JobApplicationDto application)
                 return;
 
-            if (string.IsNullOrWhiteSpace(application.JobUrl))
-            {
-                await DisplayAlert("Missing link", "This application does not have a job link.", "OK");
-                return;
-            }
-
-            try
-            {
-                await Launcher.OpenAsync(application.JobUrl);
-            }
-            catch
-            {
-                await DisplayAlert("Error", "The job link could not be opened.", "OK");
-            }
+            await Navigation.PushAsync(new ApplicationDetailsPage(_user, _apiService, application));
         }
 
         private async void OnDeleteApplicationClicked(object sender, EventArgs e)
         {
-            if ((sender as Button)?.CommandParameter is not JobApplicationDto application)
+            if ((sender as Button)?.CommandParameter is not int applicationId)
                 return;
 
             var confirm = await DisplayAlert(
                 "Delete application",
-                $"Are you sure you want to delete this application?\n\n{application.JobTitle}\n{application.Company}",
+                "Are you sure you want to delete this application?",
                 "Yes",
                 "No");
 
             if (!confirm)
                 return;
 
-            try
-            {
-                var deleted = await _apiService.DeleteApplicationAsync(application.Id);
+            var deleted = await _apiService.DeleteApplicationAsync(applicationId);
 
-                if (!deleted)
-                {
-                    await DisplayAlert("Error", "The application could not be deleted.", "OK");
-                    return;
-                }
-
-                await LoadApplicationsAsync();
-            }
-            catch (Exception ex)
+            if (!deleted)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await DisplayAlert("Error", "The application could not be deleted.", "OK");
+                return;
             }
+<<<<<<< Updated upstream
+=======
+
+            await LoadApplicationsAsync();
+        }
+
+        private void OnProfileClicked(object sender, EventArgs e)
+        {
+            var profileMenu = GetProfileMenu();
+            var mainMenu = GetMainMenu();
+
+            profileMenu.IsVisible = !profileMenu.IsVisible;
+
+            if (mainMenu.IsVisible)
+                mainMenu.IsVisible = false;
+        }
+
+        private async void OnViewProfileClicked(object sender, EventArgs e)
+        {
+            GetProfileMenu().IsVisible = false;
+
+            await Navigation.PushAsync(new ProfilePage(_user, _apiService));
+        }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            GetProfileMenu().IsVisible = false;
+
+            var confirm = await DisplayAlert(
+                "Logout",
+                "Are you sure you want to log out?",
+                "Yes",
+                "No");
+
+            if (!confirm)
+                return;
+
+            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (PageTitleLabel == null)
+                return;
+
+            if (width < 360)
+            {
+                PageTitleLabel.FontSize = 26;
+            }
+            else if (width < 430)
+            {
+                PageTitleLabel.FontSize = 30;
+            }
+            else
+            {
+                PageTitleLabel.FontSize = 34;
+            }
+        }
+        private void OnApplicationSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _searchText = e.NewTextValue ?? string.Empty;
+            ApplyCurrentFilter();
+        }
+        private List<JobApplicationDto> GetFilteredApplications()
+        {
+            IEnumerable<JobApplicationDto> applications = _allApplications;
+
+            if (_currentFilter == "Interview")
+            {
+                applications = applications
+                    .Where(application =>
+                        (
+                            !string.IsNullOrWhiteSpace(application.Status) &&
+                            application.Status.Contains("Interview", StringComparison.OrdinalIgnoreCase)
+                        )
+                        ||
+                        application.InterviewAt != null);
+            }
+            else if (_currentFilter == "Applied")
+            {
+                applications = applications
+                    .Where(application =>
+                        string.Equals(
+                            application.Status?.Trim(),
+                            "Applied",
+                            StringComparison.OrdinalIgnoreCase)
+                        ||
+                        application.AppliedAt != null);
+            }
+            else if (_currentFilter != "All")
+            {
+                applications = applications
+                    .Where(application =>
+                        string.Equals(
+                            application.Status?.Trim(),
+                            _currentFilter,
+                            StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(_searchText))
+            {
+                var normalizedSearch = _searchText.Trim();
+
+                applications = applications
+                    .Where(application =>
+                        !string.IsNullOrWhiteSpace(application.JobTitle) &&
+                        application.JobTitle.Contains(normalizedSearch, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return applications.ToList();
+>>>>>>> Stashed changes
         }
     }
 }

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.CvTemplatePreviewPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F1F5F9">
+
+    <Grid RowDefinitions="Auto,*"
+          Padding="18"
+          RowSpacing="18">
+
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto,*,Auto"
+              ColumnSpacing="12"
+              Margin="0,26,0,0">
+
+            <Button Grid.Column="0"
+                    Text="←"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="#E2E8F0"
+                    TextColor="#0F172A"
+                    CornerRadius="18"
+                    WidthRequest="44"
+                    HeightRequest="44"
+                    FontSize="18"
+                    VerticalOptions="Start" />
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="4"
+                                 VerticalOptions="Start">
+
+                <Label x:Name="PageTitleLabel"
+                       Text="CV Preview"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="#0F172A"
+                       MaxLines="2"
+                       LineBreakMode="WordWrap" />
+
+                <Label x:Name="TemplateLabel"
+                       Text="Preview generated from selected template."
+                       FontSize="14"
+                       TextColor="#64748B"
+                       LineBreakMode="WordWrap" />
+
+            </VerticalStackLayout>
+
+            <Button Grid.Column="2"
+                    Text="Export"
+                    Clicked="OnExportPdfClicked"
+                    BackgroundColor="#DCFCE7"
+                    TextColor="#166534"
+                    FontAttributes="Bold"
+                    CornerRadius="18"
+                    HeightRequest="44"
+                    WidthRequest="96"
+                    VerticalOptions="Start" />
+
+        </Grid>
+
+        <!-- Preview -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="14">
+
+                <Label x:Name="MessageLabel"
+                       Text=""
+                       FontSize="13"
+                       TextColor="#DC2626"
+                       IsVisible="False"
+                       LineBreakMode="WordWrap" />
+
+                <Border BackgroundColor="White"
+                        Stroke="#E2E8F0"
+                        StrokeShape="RoundRectangle 26"
+                        Padding="0">
+
+                    <Grid RowDefinitions="Auto,*">
+
+                        <!-- Template colored header -->
+                        <Border x:Name="CvHeaderBorder"
+                                Grid.Row="0"
+                                StrokeThickness="0"
+                                Padding="22">
+
+                            <Grid ColumnDefinitions="Auto,*"
+      ColumnSpacing="14">
+
+                                <Border x:Name="PhotoBorder"
+            Grid.Column="0"
+            BackgroundColor="White"
+            Stroke="#E2E8F0"
+            StrokeShape="RoundRectangle 38"
+            WidthRequest="76"
+            HeightRequest="76"
+            Padding="0"
+            IsVisible="False">
+
+                                    <Image x:Name="PhotoImage"
+               Aspect="AspectFill"
+               WidthRequest="76"
+               HeightRequest="76" />
+
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1"
+                         Spacing="6"
+                         VerticalOptions="Center">
+
+                                    <Label x:Name="FullNameLabel"
+               Text="Full Name"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="White"
+               LineBreakMode="WordWrap" />
+
+                                    <Label x:Name="ContactLabel"
+               Text="Email • Phone • Location"
+               FontSize="13"
+               TextColor="#E5E7EB"
+               LineBreakMode="WordWrap" />
+
+                                    <Label x:Name="LinksLabel"
+               Text=""
+               FontSize="12"
+               TextColor="#DBEAFE"
+               LineBreakMode="WordWrap"
+               IsVisible="False" />
+
+                                </VerticalStackLayout>
+
+                            </Grid>
+                        </Border>
+
+                        <!-- Body -->
+                        <VerticalStackLayout x:Name="PreviewContainer"
+                                             Grid.Row="1"
+                                             Padding="22"
+                                             Spacing="18" />
+
+                    </Grid>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

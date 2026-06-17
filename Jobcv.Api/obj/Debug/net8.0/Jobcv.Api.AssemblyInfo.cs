@@ -11,10 +11,15 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aa9295b1-de95-4b8e-8553-12d51b1a6129")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Jobcv.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e143971abab5be1c74d8ac4d87e012a2075626ad")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb7e7feed1dc6041c3c512656b19d71f20c3f725")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("Jobcv.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Jobcv.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

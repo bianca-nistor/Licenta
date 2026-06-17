@@ -3,56 +3,107 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JobCv.Mobile.Pages.UploadedCvPreviewPage"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="#F8FAFC">
+             BackgroundColor="#F1F5F9">
 
     <Grid RowDefinitions="Auto,*"
-          Padding="18">
+          Padding="18"
+          RowSpacing="18">
 
-        <Grid ColumnDefinitions="Auto,*,Auto"
-              Margin="0,20,0,14">
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto,*,Auto"
+              ColumnSpacing="12"
+              Margin="0,26,0,0">
 
-            <Button Text="←"
+            <Button Grid.Column="0"
+                    Text="←"
                     Clicked="OnBackClicked"
                     BackgroundColor="#E2E8F0"
                     TextColor="#0F172A"
                     CornerRadius="18"
                     WidthRequest="44"
-                    HeightRequest="44" />
+                    HeightRequest="44"
+                    FontSize="18"
+                    VerticalOptions="Start" />
 
             <VerticalStackLayout Grid.Column="1"
-                                 Margin="14,0,0,0"
-                                 Spacing="2">
+                                 Spacing="4"
+                                 VerticalOptions="Start">
 
                 <Label x:Name="TitleLabel"
-                       Text="Uploaded CV"
-                       FontSize="24"
+                       Text="CV Preview"
+                       FontSize="28"
                        FontAttributes="Bold"
                        TextColor="#0F172A"
-                       LineBreakMode="TailTruncation" />
+                       MaxLines="2"
+                       LineBreakMode="WordWrap" />
 
-                <Label Text="Preview your uploaded PDF file."
-                       FontSize="13"
-                       TextColor="#64748B" />
+                <Label Text="Preview your PDF file inside the app."
+                       FontSize="14"
+                       TextColor="#64748B"
+                       LineBreakMode="WordWrap" />
+
             </VerticalStackLayout>
 
             <Button Grid.Column="2"
-        Text="Export PDF"
-        Clicked="OnOpenExternalClicked"
-        BackgroundColor="#DCFCE7"
-        TextColor="#166534"
-        FontAttributes="Bold"
-        CornerRadius="16"
-        WidthRequest="120"
-        HeightRequest="44" />
+                    Text="Export"
+                    Clicked="OnOpenExternalClicked"
+                    BackgroundColor="#DCFCE7"
+                    TextColor="#166534"
+                    FontAttributes="Bold"
+                    CornerRadius="18"
+                    HeightRequest="44"
+                    WidthRequest="96"
+                    VerticalOptions="Start" />
+
         </Grid>
 
+        <!-- PDF preview card -->
         <Border Grid.Row="1"
                 BackgroundColor="White"
                 Stroke="#E2E8F0"
-                StrokeShape="RoundRectangle 24"
-                Padding="0">
+                StrokeShape="RoundRectangle 26"
+                Padding="10">
 
-            <WebView x:Name="PdfWebView" />
+            <Grid RowDefinitions="Auto,*"
+                  RowSpacing="8">
+
+                <Grid Grid.Row="0"
+                      ColumnDefinitions="*,Auto"
+                      Padding="6,4">
+
+                    <VerticalStackLayout Spacing="2">
+
+                        <Label Text="PDF preview"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#0F172A" />
+
+                        <Label x:Name="PreviewMessageLabel"
+                               Text="Loading preview..."
+                               FontSize="12"
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
+
+                    </VerticalStackLayout>
+
+                    <ActivityIndicator x:Name="PreviewLoadingIndicator"
+                                       Grid.Column="1"
+                                       IsRunning="True"
+                                       IsVisible="True"
+                                       WidthRequest="28"
+                                       HeightRequest="28"
+                                       VerticalOptions="Center" />
+
+                </Grid>
+
+                <WebView x:Name="PdfWebView"
+                         Grid.Row="1"
+                         BackgroundColor="White"
+                         Navigating="OnPdfWebViewNavigating"
+                         Navigated="OnPdfWebViewNavigated" />
+
+            </Grid>
         </Border>
 
     </Grid>
