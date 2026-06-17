@@ -8,8 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllers();
-<<<<<<< Updated upstream
-=======
 builder.Services.AddHttpClient<AdzunaJobSearchService>();
 builder.Services.AddScoped<MockAiService>();
 
@@ -28,7 +26,6 @@ builder.Services.AddHttpClient<OllamaAiService>((serviceProvider, httpClient) =>
     httpClient.BaseAddress = new Uri(baseUrl);
     httpClient.Timeout = TimeSpan.FromSeconds(120);
 });
->>>>>>> Stashed changes
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

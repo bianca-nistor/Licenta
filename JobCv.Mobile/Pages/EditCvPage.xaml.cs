@@ -464,8 +464,6 @@ namespace JobCv.Mobile.Pages
                 bottomMessageLabel.Text = ex.Message;
             }
         }
-<<<<<<< Updated upstream
-=======
         private void OnTemplateChanged(object sender, EventArgs e)
         {
             UpdateTemplatePreview();
@@ -634,6 +632,5 @@ namespace JobCv.Mobile.Pages
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
->>>>>>> Stashed changes
     }
 }

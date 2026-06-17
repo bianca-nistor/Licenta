@@ -1,4 +1,4 @@
-﻿using JobCv.Api.Models;
+using JobCv.Api.Models;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -23,25 +23,23 @@ namespace JobCv.Api.Pdf
 
         public void Compose(IDocumentContainer container)
         {
+            if (_style.Id == "blue-sidebar")
+            {
+                ComposeBlueSidebar(container);
+                return;
+            }
+
+            ComposeStandardLayout(container);
+        }
+
+        private void ComposeStandardLayout(IDocumentContainer container)
+        {
             container.Page(page =>
             {
                 page.Margin(36);
                 page.Size(PageSizes.A4);
                 page.DefaultTextStyle(x => x.FontSize(10).FontColor(_style.TextColor));
 
-<<<<<<< Updated upstream
-                page.Content().Column(column =>
-                {
-                    ComposeHeader(column);
-
-                    ComposeSummary(column);
-                    ComposeSkills(column);
-                    ComposeExperience(column);
-                    ComposeEducation(column);
-                    ComposeProjects(column);
-                    ComposeLanguages(column);
-                    ComposeCertifications(column);
-=======
                 page.Content()
                     .Background(_style.PageBackground)
                     .Column(column =>
@@ -164,13 +162,10 @@ namespace JobCv.Api.Pdf
                             ComposeBlueSidebarProjects(content);
                             ComposeBlueSidebarCertifications(content);
                         });
->>>>>>> Stashed changes
                 });
             });
         }
 
-<<<<<<< Updated upstream
-=======
         private void ComposeSidebarPhotoOrInitials(ColumnDescriptor sidebar)
         {
             var hasPhoto =
@@ -398,7 +393,6 @@ namespace JobCv.Api.Pdf
                 .LineColor("#CBD5E1");
         }
 
->>>>>>> Stashed changes
         private void ComposeHeader(ColumnDescriptor column)
         {
             var hasPhoto =
@@ -511,6 +505,7 @@ namespace JobCv.Api.Pdf
 
             column.Item().PaddingBottom(14);
         }
+
         private void ComposeSummary(ColumnDescriptor column)
         {
             if (string.IsNullOrWhiteSpace(_cv.Summary))
@@ -767,6 +762,20 @@ namespace JobCv.Api.Pdf
                 return;
             }
 
+            if (_style.Id == "warm-beige")
+            {
+                column.Item().PaddingTop(4).Text(title)
+                    .FontSize(14)
+                    .Bold()
+                    .FontColor(_style.AccentColor);
+
+                column.Item().PaddingTop(2).PaddingBottom(8)
+                    .LineHorizontal(1)
+                    .LineColor(_style.LineColor);
+
+                return;
+            }
+
             column.Item().PaddingTop(4).Text(title)
                 .FontSize(14)
                 .Bold()
@@ -786,6 +795,17 @@ namespace JobCv.Api.Pdf
                 return _cv.Title;
 
             return "CV";
+        }
+
+        private string GetBlueSidebarSubtitle()
+        {
+            if (!string.IsNullOrWhiteSpace(_cv.Location))
+                return _cv.Location;
+
+            if (!string.IsNullOrWhiteSpace(_cv.Email))
+                return _cv.Email;
+
+            return string.Empty;
         }
 
         private string GetContactText()
@@ -847,11 +867,27 @@ namespace JobCv.Api.Pdf
             return string.Empty;
         }
 
+        private static string GetInitials(string? fullName)
+        {
+            if (string.IsNullOrWhiteSpace(fullName))
+                return "CV";
+
+            var parts = fullName
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                .Take(2)
+                .ToList();
+
+            if (parts.Count == 0)
+                return "CV";
+
+            return string.Join("", parts.Select(x => x[0])).ToUpper();
+        }
+
         private static TemplateStyle GetTemplateStyle(string? templateName)
         {
             return templateName switch
             {
-                "classic" => new TemplateStyle
+                "classic" or "classic-minimal" => new TemplateStyle
                 {
                     Id = "classic",
                     HeaderBackground = Colors.White,
@@ -864,20 +900,47 @@ namespace JobCv.Api.Pdf
                     LineColor = "#D1D5DB"
                 },
 
-                "minimal-green" => new TemplateStyle
+                "minimal-green" or "green-professional" => new TemplateStyle
                 {
                     Id = "minimal-green",
-                    HeaderBackground = "#064E3B",
+                    HeaderBackground = "#1F4D3A",
                     HeaderTextColor = Colors.White,
                     HeaderMutedTextColor = "#D1FAE5",
                     HeaderLinkColor = "#BBF7D0",
                     TextColor = "#0F172A",
                     MutedTextColor = "#64748B",
-                    AccentColor = "#166534",
+                    AccentColor = "#1F4D3A",
                     LineColor = "#BBF7D0"
                 },
 
-                _ => new TemplateStyle
+                "blue-sidebar" => new TemplateStyle
+                {
+                    Id = "blue-sidebar",
+                    HeaderBackground = "#1D4ED8",
+                    HeaderTextColor = Colors.White,
+                    HeaderMutedTextColor = "#DBEAFE",
+                    HeaderLinkColor = "#DBEAFE",
+                    TextColor = "#0F172A",
+                    MutedTextColor = "#64748B",
+                    AccentColor = "#1D4ED8",
+                    LineColor = "#CBD5E1"
+                },
+
+                "warm-beige" => new TemplateStyle
+                {
+                    Id = "warm-beige",
+                    PageBackground = "#F2E4D8",
+                    HeaderBackground = "#8B5E44",
+                    HeaderTextColor = "#FFF8F1",
+                    HeaderMutedTextColor = "#F3DED1",
+                    HeaderLinkColor = "#F3DED1",
+                    TextColor = "#40342D",
+                    MutedTextColor = "#6B5A4F",
+                    AccentColor = "#6B4433",
+                    LineColor = "#D9BFAF"
+                },
+
+                "modern-blue" or _ => new TemplateStyle
                 {
                     Id = "modern-blue",
                     HeaderBackground = "#0F172A",
@@ -895,6 +958,8 @@ namespace JobCv.Api.Pdf
         private class TemplateStyle
         {
             public string Id { get; set; } = "modern-blue";
+
+            public string PageBackground { get; set; } = "#FFFFFF";
 
             public string HeaderBackground { get; set; } = "#0F172A";
 

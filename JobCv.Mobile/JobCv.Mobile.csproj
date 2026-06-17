@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
@@ -95,15 +95,12 @@
 	  <MauiXaml Update="Pages\CvsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-<<<<<<< Updated upstream
-=======
 	  <MauiXaml Update="Pages\CvTailoringPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\CvTemplatePreviewPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
->>>>>>> Stashed changes
 	  <MauiXaml Update="Pages\EditCvPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

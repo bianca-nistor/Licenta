@@ -158,18 +158,6 @@
                 HeightRequest="110" />
 
                     <Picker x:Name="TemplatePicker"
-<<<<<<< Updated upstream
-                            ItemDisplayBinding="{Binding Name}"
-                            BackgroundColor="#F8FAFC"
-                            TextColor="#0F172A"
-                            HeightRequest="50" />
-
-                    <Editor x:Name="SummaryEditor"
-                            Placeholder="Professional summary"
-                            BackgroundColor="#F8FAFC"
-                            TextColor="#0F172A"
-                            HeightRequest="120" />
-=======
                 ItemDisplayBinding="{Binding Name}"
                 SelectedIndexChanged="OnTemplateChanged"
                 BackgroundColor="#F8FAFC"
@@ -564,7 +552,6 @@
                         </Border>
 
                     </Grid>
->>>>>>> Stashed changes
 
                     <!-- Set as base CV -->
                     <Grid ColumnDefinitions="Auto,*"

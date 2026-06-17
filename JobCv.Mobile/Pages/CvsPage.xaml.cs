@@ -1,6 +1,5 @@
 ﻿using JobCv.Mobile.Models;
 using JobCv.Mobile.Services;
-using Microsoft.Maui.ApplicationModel;
 
 namespace JobCv.Mobile.Pages
 {
@@ -20,17 +19,6 @@ namespace JobCv.Mobile.Pages
             _user = user;
             _apiService = apiService;
 
-<<<<<<< Updated upstream
-            WelcomeLabel.Text = $"Welcome, {_user.FullName}. Manage your CVs here.";
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await LoadDataAsync();
-        }
-
-=======
             var displayName = string.IsNullOrWhiteSpace(_user.FullName)
                 ? _user.Email
                 : _user.FullName;
@@ -43,7 +31,6 @@ namespace JobCv.Mobile.Pages
                 PeriodPicker.SelectedIndex = 1;
         }
 
->>>>>>> Stashed changes
         private T GetControl<T>(string name) where T : Element
         {
             var control = this.FindByName<T>(name);
@@ -54,18 +41,16 @@ namespace JobCv.Mobile.Pages
             return control;
         }
 
-        private async Task LoadDataAsync()
+        private Border GetMainMenu()
         {
-            var createdCvs = await _apiService.GetUserCvsAsync(_user.Id);
-            var uploadedCvs = await _apiService.GetUploadedCvFilesAsync(_user.Id);
+            return GetControl<Border>("MainMenu");
+        }
 
-            GetControl<CollectionView>("CvsCollectionView").ItemsSource = createdCvs;
-            GetControl<CollectionView>("UploadedCvsCollectionView").ItemsSource = uploadedCvs;
+        private Border GetProfileMenu()
+        {
+            return GetControl<Border>("ProfileMenu");
+        }
 
-<<<<<<< Updated upstream
-            GetControl<Border>("EmptyCreatedCvsState").IsVisible = createdCvs.Count == 0;
-            GetControl<Border>("EmptyUploadedCvsState").IsVisible = uploadedCvs.Count == 0;
-=======
         private void SetLabelText(string labelName, string text)
         {
             var label = this.FindByName<Label>(labelName);
@@ -91,7 +76,7 @@ namespace JobCv.Mobile.Pages
 
                 UpdateOverviewStats();
                 UpdatePipelineStats();
-                await UpdatePeriodStatsAsync();
+                UpdatePeriodStats();
                 UpdateQuickInsight();
                 UpdateRecentApplications();
             }
@@ -161,42 +146,9 @@ namespace JobCv.Mobile.Pages
             SetLabelText("RejectedCountLabel", rejectedCount.ToString());
         }
 
-        private async Task UpdatePeriodStatsAsync()
+        private void UpdatePeriodStats()
         {
             var selectedPeriod = PeriodPicker?.SelectedItem?.ToString() ?? "Last 30 days";
-            var periodKey = GetPeriodKey(selectedPeriod);
-
-            try
-            {
-                var stats = await _apiService.GetDashboardActivityStatsAsync(_user.Id, periodKey);
-
-                if (stats != null)
-                {
-                    SetLabelText("PeriodCreatedCvCountLabel", stats.CreatedCvsCount.ToString());
-                    SetLabelText("PeriodUploadedCvCountLabel", stats.UploadedCvsCount.ToString());
-                    SetLabelText("PeriodApplicationsCountLabel", stats.ApplicationsCount.ToString());
-                    SetLabelText("PeriodInterviewsCountLabel", stats.InterviewsCount.ToString());
-
-                    SetLabelText(
-                        "PeriodSummaryLabel",
-                        string.IsNullOrWhiteSpace(stats.Summary)
-                            ? BuildPeriodSummary(selectedPeriod)
-                            : stats.Summary);
-
-                    return;
-                }
-            }
-            catch
-            {
-                // If the deployed API does not have the new dashboard endpoint yet,
-                // keep the dashboard usable by falling back to the local data already loaded.
-            }
-
-            UpdatePeriodStatsFromLoadedData(selectedPeriod);
-        }
-
-        private void UpdatePeriodStatsFromLoadedData(string selectedPeriod)
-        {
             var startDate = GetPeriodStartDate(selectedPeriod);
 
             var createdCvCount = CountByPeriod(_createdCvs, x => x.CreatedAt, startDate);
@@ -210,26 +162,12 @@ namespace JobCv.Mobile.Pages
             SetLabelText("PeriodUploadedCvCountLabel", uploadedCvCount.ToString());
             SetLabelText("PeriodApplicationsCountLabel", applicationCount.ToString());
             SetLabelText("PeriodInterviewsCountLabel", interviewCount.ToString());
-            SetLabelText("PeriodSummaryLabel", BuildPeriodSummary(selectedPeriod));
-        }
 
-        private static string GetPeriodKey(string selectedPeriod)
-        {
-            return selectedPeriod switch
-            {
-                "Last 7 days" => "last7",
-                "Last 30 days" => "last30",
-                "Last 90 days" => "last90",
-                "All time" => "all",
-                _ => "last30"
-            };
-        }
-
-        private static string BuildPeriodSummary(string selectedPeriod)
-        {
-            return selectedPeriod == "All time"
+            var periodText = selectedPeriod == "All time"
                 ? "Showing activity for all time."
                 : $"Showing activity for {selectedPeriod.ToLower()}.";
+
+            SetLabelText("PeriodSummaryLabel", periodText);
         }
 
         private int CountByPeriod<T>(
@@ -352,9 +290,16 @@ namespace JobCv.Mobile.Pages
                    );
         }
 
-        private async void OnPeriodChanged(object sender, EventArgs e)
+        private void OnPeriodChanged(object sender, EventArgs e)
         {
-            await UpdatePeriodStatsAsync();
+            if (_createdCvs.Count == 0 &&
+                _uploadedCvs.Count == 0 &&
+                _applications.Count == 0)
+            {
+                return;
+            }
+
+            UpdatePeriodStats();
         }
 
         private void OnMenuClicked(object sender, EventArgs e)
@@ -389,154 +334,35 @@ namespace JobCv.Mobile.Pages
         {
             GetMainMenu().IsVisible = false;
             await Navigation.PushAsync(new ApplicationsPage(_user, _apiService));
->>>>>>> Stashed changes
         }
 
         private async void OnCreateCvClicked(object sender, EventArgs e)
         {
+            GetMainMenu().IsVisible = false;
             await Navigation.PushAsync(new CreateCvPage(_user, _apiService));
-        }
-
-        private async void OnUploadCvClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new UploadCvPage(_user, _apiService));
-        }
-
-        private async void OnViewDetailsClicked(object sender, EventArgs e)
-        {
-            if ((sender as Button)?.CommandParameter is not int cvId)
-                return;
-
-            await Navigation.PushAsync(new CvDetailsPage(cvId, _apiService));
-        }
-
-        private async void OnOpenUploadedCvClicked(object sender, EventArgs e)
-        {
-            if ((sender as Button)?.CommandParameter is not UploadedCvFileDto uploadedFile)
-                return;
-
-            var extension = Path.GetExtension(uploadedFile.OriginalFileName).ToLowerInvariant();
-
-            var downloadUrl = _apiService.GetUploadedCvDownloadUrl(uploadedFile.Id);
-
-            if (extension == ".pdf")
-            {
-                var previewUrl = _apiService.GetUploadedCvPreviewUrl(uploadedFile.Id);
-
-                await Navigation.PushAsync(
-                    new UploadedCvPreviewPage(
-                        uploadedFile.OriginalFileName,
-                        previewUrl,
-                        downloadUrl));
-
-                return;
-            }
-
-            try
-            {
-                await Launcher.OpenAsync(downloadUrl);
-            }
-            catch
-            {
-                await DisplayAlert("Error", "The file could not be opened.", "OK");
-            }
-        }
-        private async void OnPreviewCvPdfClicked(object sender, EventArgs e)
-        {
-            if ((sender as Button)?.CommandParameter is not CvDto cv)
-                return;
-
-            var previewUrl = _apiService.GetCvPdfPreviewUrl(cv.Id);
-            var downloadUrl = _apiService.GetCvPdfDownloadUrl(cv.Id);
-
-            await Navigation.PushAsync(
-                new UploadedCvPreviewPage(
-                    cv.Title,
-                    previewUrl,
-                    downloadUrl));
-        }
-        private async void OnDeleteCvClicked(object sender, EventArgs e)
-        {
-            if ((sender as Button)?.CommandParameter is not int cvId)
-                return;
-
-            var confirm = await DisplayAlert(
-                "Delete CV",
-                "Are you sure you want to delete this CV?",
-                "Yes",
-                "No");
-
-            if (!confirm)
-                return;
-
-            var deleted = await _apiService.DeleteCvAsync(cvId);
-
-            if (!deleted)
-            {
-                await DisplayAlert("Error", "The CV could not be deleted.", "OK");
-                return;
-            }
-
-            await LoadDataAsync();
-        }
-
-        private async void OnDeleteUploadedCvClicked(object sender, EventArgs e)
-        {
-            if ((sender as Button)?.CommandParameter is not int fileId)
-                return;
-
-            var confirm = await DisplayAlert(
-                "Delete uploaded CV",
-                "Are you sure you want to delete this uploaded CV?",
-                "Yes",
-                "No");
-
-            if (!confirm)
-                return;
-
-            var deleted = await _apiService.DeleteUploadedCvFileAsync(fileId);
-
-            if (!deleted)
-            {
-                await DisplayAlert("Error", "The uploaded CV could not be deleted.", "OK");
-                return;
-            }
-
-            await LoadDataAsync();
-        }
-        private Border GetProfileMenu()
-        {
-            var menu = this.FindByName<Border>("ProfileMenu");
-
-            if (menu == null)
-            {
-                throw new Exception("ProfileMenu was not found in CvsPage.xaml.");
-            }
-
-            return menu;
         }
 
         private void OnProfileClicked(object sender, EventArgs e)
         {
             var profileMenu = GetProfileMenu();
+            var mainMenu = GetMainMenu();
+
             profileMenu.IsVisible = !profileMenu.IsVisible;
+
+            if (mainMenu.IsVisible)
+                mainMenu.IsVisible = false;
         }
 
         private async void OnViewProfileClicked(object sender, EventArgs e)
         {
-            var profileMenu = GetProfileMenu();
-            profileMenu.IsVisible = false;
+            GetProfileMenu().IsVisible = false;
 
-            await DisplayAlert(
-    "Your profile",
-    $"Name: {_user.FullName}\nEmail: {_user.Email}",
-    "OK");
+            await Navigation.PushAsync(new ProfilePage(_user, _apiService));
         }
 
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
-            var profileMenu = GetProfileMenu();
-            profileMenu.IsVisible = false;
+            GetProfileMenu().IsVisible = false;
 
             var confirm = await DisplayAlert(
                 "Logout",
@@ -549,15 +375,6 @@ namespace JobCv.Mobile.Pages
 
             Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
         }
-<<<<<<< Updated upstream
-        private async void OnFindJobsClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new JobsPage(_user, _apiService));
-        }
-        private async void OnMyApplicationsClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ApplicationsPage(_user, _apiService));
-=======
 
         protected override void OnSizeAllocated(double width, double height)
         {
@@ -578,7 +395,6 @@ namespace JobCv.Mobile.Pages
             {
                 PageTitleLabel.FontSize = 30;
             }
->>>>>>> Stashed changes
         }
         private async void OnStartCareerTestClicked(object sender, EventArgs e)
         {

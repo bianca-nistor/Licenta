@@ -1,4 +1,4 @@
-﻿using JobCv.Mobile.Models;
+using JobCv.Mobile.Models;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -24,19 +24,11 @@ namespace JobCv.Mobile.Services
         //        // Emulator Android:
         //        // private const string ApiBaseUrl = "http://10.0.2.2:5158/";
 
-<<<<<<< Updated upstream
-#if ANDROID
-        private const string ApiBaseUrl = "https://10.0.2.2:7158/";
-#else
-        private const string ApiBaseUrl = "https://localhost:7158/";
-#endif
-=======
-        //        // Telefon real pe aceeași rețea Wi-Fi cu laptopul:
+        //        // Telefon real pe aceea?i re?ea Wi-Fi cu laptopul:
         //        private const string ApiBaseUrl = "http:// 192.168.56.1:5158/";
         //#else
         //        private const string ApiBaseUrl = "https://localhost:7158/";
         //#endif
->>>>>>> Stashed changes
 
         private const string ApiBaseUrl = "https://career-guide-d7dubecfb3hchcf7.swedencentral-01.azurewebsites.net/";
         public ApiService()
@@ -413,8 +405,6 @@ namespace JobCv.Mobile.Services
 
             return response.IsSuccessStatusCode;
         }
-<<<<<<< Updated upstream
-=======
         public async Task<InterviewPrepResponse?> GenerateInterviewPrepAsync(
     InterviewPrepRequest request)
         {
@@ -570,6 +560,5 @@ namespace JobCv.Mobile.Services
             return await response.Content.ReadAsByteArrayAsync();
         }
 
->>>>>>> Stashed changes
     }
 }

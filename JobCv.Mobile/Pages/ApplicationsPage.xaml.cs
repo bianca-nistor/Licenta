@@ -27,8 +27,6 @@ namespace JobCv.Mobile.Pages
             await LoadApplicationsAsync();
         }
 
-<<<<<<< Updated upstream
-=======
         private T GetControl<T>(string name) where T : Element
         {
             var control = this.FindByName<T>(name);
@@ -49,7 +47,6 @@ namespace JobCv.Mobile.Pages
             return GetControl<Border>("ProfileMenu");
         }
 
->>>>>>> Stashed changes
         private async Task LoadApplicationsAsync()
         {
             try
@@ -64,11 +61,6 @@ namespace JobCv.Mobile.Pages
             }
         }
 
-<<<<<<< Updated upstream
-        private async void OnBackClicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-=======
         private void OnFilterClicked(object sender, EventArgs e)
         {
             if ((sender as Button)?.CommandParameter is not string selectedFilter)
@@ -150,7 +142,6 @@ namespace JobCv.Mobile.Pages
         private void OnMyApplicationsClicked(object sender, EventArgs e)
         {
             GetMainMenu().IsVisible = false;
->>>>>>> Stashed changes
         }
 
         private async void OnFindJobsClicked(object sender, EventArgs e)
@@ -158,11 +149,7 @@ namespace JobCv.Mobile.Pages
             await Navigation.PushAsync(new JobsPage(_user, _apiService));
         }
 
-<<<<<<< Updated upstream
-        private async void OnOpenJobClicked(object sender, EventArgs e)
-=======
         private async void OnViewApplicationDetailsClicked(object sender, EventArgs e)
->>>>>>> Stashed changes
         {
             if ((sender as Button)?.CommandParameter is not JobApplicationDto application)
                 return;
@@ -191,8 +178,6 @@ namespace JobCv.Mobile.Pages
                 await DisplayAlert("Error", "The application could not be deleted.", "OK");
                 return;
             }
-<<<<<<< Updated upstream
-=======
 
             await LoadApplicationsAsync();
         }
@@ -303,7 +288,6 @@ namespace JobCv.Mobile.Pages
             }
 
             return applications.ToList();
->>>>>>> Stashed changes
         }
     }
 }

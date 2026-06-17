@@ -10,13 +10,6 @@
                              Spacing="20">
 
             <!-- Header -->
-<<<<<<< Updated upstream
-            <Grid ColumnDefinitions="Auto,*"
-                  Margin="0,24,0,0">
-
-                <Button Text="←"
-                        Clicked="OnBackClicked"
-=======
             <Grid ColumnDefinitions="Auto,*,Auto"
                   ColumnSpacing="10"
                   Margin="0,26,0,0">
@@ -24,49 +17,10 @@
                 <Button Grid.Column="0"
                         Text="☰"
                         Clicked="OnMenuClicked"
->>>>>>> Stashed changes
                         BackgroundColor="#E2E8F0"
                         TextColor="#0F172A"
                         CornerRadius="18"
                         WidthRequest="44"
-<<<<<<< Updated upstream
-                        HeightRequest="44" />
-
-                <VerticalStackLayout Grid.Column="1"
-                                     Margin="14,0,0,0"
-                                     Spacing="4">
-
-                    <Label Text="My Applications"
-                           FontSize="34"
-                           FontAttributes="Bold"
-                           TextColor="#0F172A" />
-
-                    <Label Text="Track saved jobs, CVs used, notes and interview details."
-                           FontSize="14"
-                           TextColor="#64748B" />
-                </VerticalStackLayout>
-            </Grid>
-
-            <!-- Summary card -->
-            <Border BackgroundColor="#0F172A"
-                    Stroke="#0F172A"
-                    StrokeShape="RoundRectangle 28"
-                    Padding="22">
-
-                <VerticalStackLayout Spacing="10">
-
-                    <Label Text="Application tracker"
-                           FontSize="24"
-                           FontAttributes="Bold"
-                           TextColor="White" />
-
-                    <Label Text="Keep all your job applications in one place and follow your progress."
-                           FontSize="14"
-                           TextColor="#CBD5E1" />
-
-                    <Button Text="Find more jobs"
-                            Clicked="OnFindJobsClicked"
-=======
                         HeightRequest="44"
                         FontSize="20"
                         VerticalOptions="Start" />
@@ -174,7 +128,6 @@
 
                     <Button Text="Applications"
                             Clicked="OnMyApplicationsClicked"
->>>>>>> Stashed changes
                             BackgroundColor="#1D4ED8"
                             TextColor="White"
                             FontAttributes="Bold"
@@ -445,14 +398,9 @@
                                       ColumnSpacing="10"
                                       Margin="0,4,0,0">
 
-<<<<<<< Updated upstream
-                                    <Button Text="Open job"
-                                            Clicked="OnOpenJobClicked"
-=======
                                     <Button Grid.Column="0"
                                             Text="Details"
                                             Clicked="OnViewApplicationDetailsClicked"
->>>>>>> Stashed changes
                                             CommandParameter="{Binding .}"
                                             BackgroundColor="#EFF6FF"
                                             TextColor="#1D4ED8"
