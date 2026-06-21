@@ -267,7 +267,13 @@ namespace JobCv.Mobile.Services
             using var content = new MultipartFormDataContent();
 
             var fileContent = new StreamContent(stream);
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType ?? "application/octet-stream");
+
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var contentType = extension == ".pdf"
+                ? "application/pdf"
+                : (string.IsNullOrWhiteSpace(file.ContentType) ? "application/octet-stream" : file.ContentType);
+
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
 
             content.Add(fileContent, "file", file.FileName);
 
@@ -275,7 +281,8 @@ namespace JobCv.Mobile.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                return null;
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"PDF upload failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
             }
 
             return await response.Content.ReadFromJsonAsync<UploadedCvFileDto>(_jsonOptions);
@@ -288,6 +295,26 @@ namespace JobCv.Mobile.Services
                 _jsonOptions);
 
             return files ?? new List<UploadedCvFileDto>();
+        }
+
+        public async Task<CvDto?> ImportUploadedCvToEditableCvAsync(
+            int userId,
+            int fileId,
+            ImportUploadedCvRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                $"api/UploadedCvs/user/{userId}/{fileId}/import-to-cv",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(
+                    $"CV import failed. Status: {(int)response.StatusCode} {response.ReasonPhrase}. Details: {error}");
+            }
+
+            return await response.Content.ReadFromJsonAsync<CvDto>(_jsonOptions);
         }
 
         public async Task<bool> DeleteUploadedCvFileAsync(int fileId)
@@ -327,7 +354,13 @@ namespace JobCv.Mobile.Services
             using var content = new MultipartFormDataContent();
 
             var fileContent = new StreamContent(stream);
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType ?? "application/octet-stream");
+
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var contentType = extension == ".pdf"
+                ? "application/pdf"
+                : (string.IsNullOrWhiteSpace(file.ContentType) ? "application/octet-stream" : file.ContentType);
+
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
 
             content.Add(fileContent, "file", file.FileName);
 

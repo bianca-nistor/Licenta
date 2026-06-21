@@ -188,67 +188,53 @@ namespace JobCv.Mobile.Pages
 
         private IEnumerable<JobSearchResultDto> ApplyWorkModeFilter(IEnumerable<JobSearchResultDto> jobs)
         {
-            var selected = WorkModePicker.SelectedItem?.ToString() ?? "All";
-
-            if (selected == "All")
-                return jobs;
-
-            return selected switch
+            // Do not use SelectedItem text here.
+            // The UI translation service changes picker text in Romanian, so filtering must use indexes.
+            return WorkModePicker.SelectedIndex switch
             {
-                "Remote" => jobs.Where(job => ContainsAny(job, "remote", "work from home", "wfh")),
-                "Hybrid" => jobs.Where(job => ContainsAny(job, "hybrid")),
-                "On-site" => jobs.Where(job => ContainsAny(job, "on-site", "onsite", "office")),
+                1 => jobs.Where(job => ContainsAny(job, "remote", "work from home", "wfh")),
+                2 => jobs.Where(job => ContainsAny(job, "hybrid")),
+                3 => jobs.Where(job => ContainsAny(job, "on-site", "onsite", "office")),
                 _ => jobs
             };
         }
 
         private IEnumerable<JobSearchResultDto> ApplySalaryFilter(IEnumerable<JobSearchResultDto> jobs)
         {
-            var selected = SalaryFilterPicker.SelectedItem?.ToString() ?? "Any";
-
-            if (selected == "Any")
-                return jobs;
-
-            if (selected == "With salary")
+            // 0 = Any, 1 = With salary, 2 = No salary specified
+            return SalaryFilterPicker.SelectedIndex switch
             {
-                return jobs.Where(job => HasSalary(job));
-            }
-
-            if (selected == "No salary specified")
-            {
-                return jobs.Where(job => !HasSalary(job));
-            }
-
-            return jobs;
+                1 => jobs.Where(HasSalary),
+                2 => jobs.Where(job => !HasSalary(job)),
+                _ => jobs
+            };
         }
 
         private IEnumerable<JobSearchResultDto> ApplySourceFilter(IEnumerable<JobSearchResultDto> jobs)
         {
-            var selected = SourceFilterPicker.SelectedItem?.ToString() ?? "All";
-
-            if (selected == "All")
+            // 0 = All, 1 = Adzuna
+            if (SourceFilterPicker.SelectedIndex <= 0)
                 return jobs;
 
             return jobs.Where(job =>
                 !string.IsNullOrWhiteSpace(job.Source) &&
-                job.Source.Contains(selected, StringComparison.OrdinalIgnoreCase));
+                job.Source.Equals("Adzuna", StringComparison.OrdinalIgnoreCase));
         }
 
         private IEnumerable<JobSearchResultDto> ApplySort(IEnumerable<JobSearchResultDto> jobs)
         {
-            var selected = SortPicker.SelectedItem?.ToString() ?? "Default";
-
-            return selected switch
+            // 0 = Default, 1 = Salary available first, 2 = Company A-Z, 3 = Title A-Z
+            return SortPicker.SelectedIndex switch
             {
-                "Salary available first" => jobs
+                1 => jobs
                     .OrderByDescending(HasSalary)
                     .ThenBy(job => job.Title),
 
-                "Company A-Z" => jobs
+                2 => jobs
                     .OrderBy(job => job.Company)
                     .ThenBy(job => job.Title),
 
-                "Title A-Z" => jobs
+                3 => jobs
                     .OrderBy(job => job.Title)
                     .ThenBy(job => job.Company),
 
@@ -344,16 +330,15 @@ namespace JobCv.Mobile.Pages
         {
             GetProfileMenu().IsVisible = false;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Logout",
-                "Are you sure you want to log out?",
-                "Yes",
-                "No");
+                "Are you sure you want to log out?");
 
             if (!confirm)
                 return;
 
-            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+            Application.Current!.Windows[0].Page = new LocalizedNavigationPage(new MainPage());
         }
 
         protected override void OnSizeAllocated(double width, double height)
@@ -376,7 +361,7 @@ namespace JobCv.Mobile.Pages
                 PageTitleLabel.FontSize = 34;
             }
         }
-       
-        
+
+
     }
 }

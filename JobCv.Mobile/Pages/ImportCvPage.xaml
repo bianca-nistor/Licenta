@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobCv.Mobile.Pages.ImportCvPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24"
+                             Spacing="20">
+
+            <Grid ColumnDefinitions="Auto,*"
+                  Margin="0,20,0,0">
+
+                <Button Text="←"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#E2E8F0"
+                        TextColor="#0F172A"
+                        CornerRadius="18"
+                        WidthRequest="44"
+                        HeightRequest="44" />
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Margin="14,0,0,0"
+                                     Spacing="4">
+
+                    <Label Text="Start from your CV"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Upload a PDF CV and we’ll copy the information we can find into a new editable CV."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 26"
+                    Padding="22">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label Text="Choose your PDF"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="For best results, use a PDF exported from this app. Other PDFs may import only basic information."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                    <Border BackgroundColor="#F8FAFC"
+                            Stroke="#E2E8F0"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="16">
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Selected file"
+                                   FontSize="13"
+                                   TextColor="#64748B" />
+
+                            <Label x:Name="SelectedFileLabel"
+                                   Text="No file selected"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#0F172A" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="New CV title"
+                               FontSize="13"
+                               TextColor="#64748B" />
+
+                        <Entry x:Name="TitleEntry"
+                               Text="Imported CV"
+                               Placeholder="Imported CV"
+                               BackgroundColor="#F8FAFC"
+                               TextColor="#0F172A"
+                               PlaceholderColor="#94A3B8" />
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="12">
+
+                        <Button Text="Choose PDF"
+                                Clicked="OnChooseFileClicked"
+                                BackgroundColor="#DCFCE7"
+                                TextColor="#166534"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="54" />
+
+                        <Button Grid.Column="1"
+                                Text="Extract"
+                                Clicked="OnExtractClicked"
+                                BackgroundColor="#1D4ED8"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="54" />
+                    </Grid>
+
+                    <ActivityIndicator x:Name="ImportActivityIndicator"
+                                       IsVisible="False"
+                                       IsRunning="False" />
+
+                    <Label x:Name="MessageLabel"
+                           Text=""
+                           FontSize="13"
+                           TextColor="#DC2626"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

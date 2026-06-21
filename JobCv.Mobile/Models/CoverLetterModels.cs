@@ -7,6 +7,8 @@
         public string Location { get; set; } = string.Empty;
         public string JobDescription { get; set; } = string.Empty;
         public string CvText { get; set; } = string.Empty;
+
+        public string Language { get; set; } = "en";
     }
 
     public class CoverLetterResponse

@@ -86,39 +86,78 @@ namespace JobCv.Api.Controllers
             }
             else
             {
-                result = new CvTailoringResponseDto
+                if (AiLanguageHelper.IsRomanian(request.Language))
                 {
-                    JobTitle = request.JobTitle,
-                    Company = request.Company,
-                    TailoredProfileSummary =
-                        $"Candidate profile adapted for the {request.JobTitle} role at {request.Company}.",
-                    ImportantKeywords = new List<string>
+                    result = new CvTailoringResponseDto
                     {
-                        "communication",
-                        "problem solving",
-                        "teamwork"
-                    },
-                    SkillsToHighlight = new List<string>
-                    {
-                        "Relevant skills",
-                        "Adaptability",
-                        "Attention to detail"
-                    },
-                    ExperienceToEmphasize = new List<string>
-                    {
-                        "Mention projects or responsibilities that match this job."
-                    },
-                    Suggestions = new List<CvTailoringSuggestionDto>
-                    {
-                        new CvTailoringSuggestionDto
+                        JobTitle = request.JobTitle,
+                        Company = request.Company,
+                        TailoredProfileSummary =
+                            $"Profilul candidatului este adaptat pentru rolul {request.JobTitle} la {request.Company}.",
+                        ImportantKeywords = new List<string>
                         {
-                            Section = "Profile",
-                            Suggestion = "Adapt the profile section to the selected job.",
-                            Reason = "This makes the CV more relevant for the recruiter."
-                        }
-                    },
-                    IsMock = true
-                };
+                            "comunicare",
+                            "rezolvare de probleme",
+                            "lucru în echipă"
+                        },
+                        SkillsToHighlight = new List<string>
+                        {
+                            "Competențe relevante",
+                            "Adaptabilitate",
+                            "Atenție la detalii"
+                        },
+                        ExperienceToEmphasize = new List<string>
+                        {
+                            "Menționează proiecte sau responsabilități care se potrivesc acestui job."
+                        },
+                        Suggestions = new List<CvTailoringSuggestionDto>
+                        {
+                            new CvTailoringSuggestionDto
+                            {
+                                Section = "Profil",
+                                Suggestion = "Adaptează secțiunea de profil pentru jobul selectat.",
+                                Reason = "Acest lucru face CV-ul mai relevant pentru recrutor."
+                            }
+                        },
+                        IsMock = true
+                    };
+                }
+                else
+                {
+                    result = new CvTailoringResponseDto
+                    {
+                        JobTitle = request.JobTitle,
+                        Company = request.Company,
+                        TailoredProfileSummary =
+                            $"Candidate profile adapted for the {request.JobTitle} role at {request.Company}.",
+                        ImportantKeywords = new List<string>
+                        {
+                            "communication",
+                            "problem solving",
+                            "teamwork"
+                        },
+                        SkillsToHighlight = new List<string>
+                        {
+                            "Relevant skills",
+                            "Adaptability",
+                            "Attention to detail"
+                        },
+                        ExperienceToEmphasize = new List<string>
+                        {
+                            "Mention projects or responsibilities that match this job."
+                        },
+                        Suggestions = new List<CvTailoringSuggestionDto>
+                        {
+                            new CvTailoringSuggestionDto
+                            {
+                                Section = "Profile",
+                                Suggestion = "Adapt the profile section to the selected job.",
+                                Reason = "This makes the CV more relevant for the recruiter."
+                            }
+                        },
+                        IsMock = true
+                    };
+                }
             }
 
             return Ok(result);
@@ -129,7 +168,7 @@ namespace JobCv.Api.Controllers
             if (request == null)
                 return BadRequest("Invalid request.");
 
-            var result = BuildCvQualityCheck(request);
+            var result = AiLanguageHelper.LocalizeCvQualityResponse(BuildCvQualityCheck(request), request.Language);
 
             return Ok(result);
         }
@@ -457,10 +496,10 @@ namespace JobCv.Api.Controllers
             {
                 var geminiResult = await _geminiAiService.GenerateCvJobMatchAsync(request);
                 if (geminiResult != null)
-                    return Ok(geminiResult);
+                    return Ok(AiLanguageHelper.LocalizeCvJobMatchResponse(geminiResult, request.Language));
             }
 
-            var result = BuildExplainableCvJobMatch(request);
+            var result = AiLanguageHelper.LocalizeCvJobMatchResponse(BuildExplainableCvJobMatch(request), request.Language);
             return Ok(result);
         }
 

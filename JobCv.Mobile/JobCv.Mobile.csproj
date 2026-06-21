@@ -113,6 +113,9 @@
 	  <MauiXaml Update="Pages\ExperienceFormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\ImportCvPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\JobsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

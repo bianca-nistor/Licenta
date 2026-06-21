@@ -106,7 +106,7 @@ namespace JobCv.Mobile.Pages
                 return;
             }
 
-            await DisplayAlert("Success", "File uploaded successfully.", "OK");
+            await UiTranslationService.DisplayAlertAsync(this, "Success", "File uploaded successfully.");
             await Navigation.PopAsync();
         }
 
@@ -123,7 +123,7 @@ namespace JobCv.Mobile.Pages
             }
             catch
             {
-                await DisplayAlert("Error", "The file could not be opened.", "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", "The file could not be opened.");
             }
         }
 
@@ -132,11 +132,10 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not int fileId)
                 return;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Delete file",
-                "Are you sure you want to delete this uploaded CV?",
-                "Yes",
-                "No");
+                "Are you sure you want to delete this uploaded CV?");
 
             if (!confirm)
                 return;
@@ -145,7 +144,7 @@ namespace JobCv.Mobile.Pages
 
             if (!deleted)
             {
-                await DisplayAlert("Error", "The file could not be deleted.", "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", "The file could not be deleted.");
                 return;
             }
 

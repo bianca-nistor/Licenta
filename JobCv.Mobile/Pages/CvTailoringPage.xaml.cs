@@ -187,7 +187,7 @@ namespace JobCv.Mobile.Pages
             LoadingIndicator.IsRunning = true;
 
             MessageLabel.TextColor = Colors.Gray;
-            MessageLabel.Text = "Generating CV suggestions...";
+            MessageLabel.Text = UiTranslationService.TranslateText("Generating CV suggestions...");
 
             ResultsLayout.IsVisible = false;
 
@@ -210,7 +210,8 @@ namespace JobCv.Mobile.Pages
                     Company = _job.Company ?? string.Empty,
                     Location = _job.Location ?? string.Empty,
                     JobDescription = _job.Description ?? string.Empty,
-                    CurrentCvText = cvText
+                    CurrentCvText = cvText,
+                    Language = LanguageService.CurrentLanguage
                 };
 
                 var result = await _apiService.GenerateCvTailoringAsync(request);
@@ -218,7 +219,7 @@ namespace JobCv.Mobile.Pages
                 if (result == null)
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "CV suggestions could not be generated.";
+                    MessageLabel.Text = UiTranslationService.TranslateText("CV suggestions could not be generated.");
                     return;
                 }
 
@@ -236,14 +237,14 @@ namespace JobCv.Mobile.Pages
                     AiSourceBanner.BackgroundColor = Color.FromArgb("#FEF3C7");
                     AiSourceBanner.Stroke = Color.FromArgb("#FDE68A");
                     AiSourceLabel.TextColor = Color.FromArgb("#92400E");
-                    AiSourceLabel.Text = "Demo AI result: this is a mock response. Later it can be connected to OpenAI or a local LLM.";
+                    AiSourceLabel.Text = UiTranslationService.TranslateText("Demo AI result: this is a mock response. Later it can be connected to OpenAI or a local LLM.");
                 }
                 else
                 {
                     AiSourceBanner.BackgroundColor = Color.FromArgb("#ECFDF5");
                     AiSourceBanner.Stroke = Color.FromArgb("#BBF7D0");
                     AiSourceLabel.TextColor = Color.FromArgb("#166534");
-                    AiSourceLabel.Text = "Generated with AI.";
+                    AiSourceLabel.Text = UiTranslationService.TranslateText("Generated with AI.");
                 }
 
                 if (string.IsNullOrWhiteSpace(result.CvQualityWarning))
@@ -254,11 +255,12 @@ namespace JobCv.Mobile.Pages
                 else
                 {
                     CvQualityWarningBorder.IsVisible = true;
-                    CvQualityWarningLabel.Text = result.CvQualityWarning;
+                    CvQualityWarningLabel.Text = UiTranslationService.TranslateText(result.CvQualityWarning);
                 }
 
                 MessageLabel.TextColor = Colors.Green;
-                MessageLabel.Text = "CV suggestions generated successfully.";
+                MessageLabel.Text = UiTranslationService.TranslateText("CV suggestions generated successfully.");
+                UiTranslationService.ApplyToPage(this);
             }
             catch (Exception ex)
             {

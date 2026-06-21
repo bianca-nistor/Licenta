@@ -23,6 +23,18 @@ namespace JobCv.Mobile.Pages
         {
             base.OnAppearing();
             await LoadDataAsync();
+            ApplyLocalTranslations();
+        }
+
+        private void ApplyLocalTranslations()
+        {
+            UiTranslationService.ApplyToPage(this);
+        }
+
+        private async void ApplyLocalTranslationsAfterDelay()
+        {
+            await Task.Delay(250);
+            UiTranslationService.ApplyToPage(this);
         }
 
         private T GetControl<T>(string name) where T : Element
@@ -42,7 +54,7 @@ namespace JobCv.Mobile.Pages
 
             if (_cv == null)
             {
-                await DisplayAlert("Error", "The CV could not be loaded.", "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", "The CV could not be loaded.");
                 await Navigation.PopAsync();
                 return;
             }
@@ -56,6 +68,9 @@ namespace JobCv.Mobile.Pages
             GetControl<Entry>("GitHubEntry").Text = _cv.GitHubUrl;
             GetControl<Entry>("PortfolioEntry").Text = _cv.PortfolioUrl;
             GetControl<Editor>("SummaryEditor").Text = _cv.Summary;
+
+            var languagePicker = GetControl<Picker>("CvLanguagePicker");
+            languagePicker.SelectedIndex = string.Equals(_cv.Language, "ro", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
 
             var photoBorder = GetControl<Border>("CvPhotoBorder");
             var photoImage = GetControl<Image>("CvPhotoImage");
@@ -78,6 +93,7 @@ namespace JobCv.Mobile.Pages
             templatePicker.SelectedIndex = templateIndex >= 0 ? templateIndex : 0;
 
             RefreshSectionLists();
+            ApplyLocalTranslationsAfterDelay();
 
         }
 
@@ -109,6 +125,7 @@ namespace JobCv.Mobile.Pages
         {
             _cv = await _apiService.GetCvByIdAsync(_cvId);
             RefreshSectionLists();
+            ApplyLocalTranslationsAfterDelay();
         }
 
         private async void OnBackClicked(object sender, EventArgs e)
@@ -127,12 +144,12 @@ namespace JobCv.Mobile.Pages
                 await SaveBasicInformationAsync();
 
                 messageLabel.TextColor = Colors.Green;
-                messageLabel.Text = "Saved successfully.";
+                messageLabel.Text = UiTranslationService.TranslateText("Saved successfully.");
             }
             catch (Exception ex)
             {
                 messageLabel.TextColor = Colors.Red;
-                messageLabel.Text = ex.Message;
+                messageLabel.Text = UiTranslationService.TranslateText(ex.Message);
             }
         }
         private async Task SaveBasicInformationAsync()
@@ -155,10 +172,13 @@ namespace JobCv.Mobile.Pages
             var templatePicker = GetControl<Picker>("TemplatePicker");
             var selectedTemplate = templatePicker.SelectedItem as CvTemplateDto;
 
+            var languagePicker = GetControl<Picker>("CvLanguagePicker");
+            var selectedLanguage = languagePicker.SelectedIndex == 1 ? "ro" : "en";
+
             var updateRequest = new UpdateCvRequest
             {
                 Title = title,
-                Language = "en",
+                Language = selectedLanguage,
                 Summary = summary,
                 TemplateName = selectedTemplate?.Id ?? "modern-blue",
                 IsBaseCv = _cv?.IsBaseCv ?? false,
@@ -194,7 +214,7 @@ namespace JobCv.Mobile.Pages
         }
         private async void OnAddSkillClicked(object sender, EventArgs e)
         {
-            var name = await DisplayPromptAsync("Add skill", "Skill name:");
+            var name = await DisplayPromptAsync(UiTranslationService.TranslateText("Add skill"), UiTranslationService.TranslateText("Skill name:"));
 
             if (string.IsNullOrWhiteSpace(name))
                 return;
@@ -208,7 +228,7 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvSkillDto skill)
                 return;
 
-            var name = await DisplayPromptAsync("Edit skill", "Skill name:", initialValue: skill.Name);
+            var name = await DisplayPromptAsync(UiTranslationService.TranslateText("Edit skill"), UiTranslationService.TranslateText("Skill name:"), initialValue: skill.Name);
 
             if (string.IsNullOrWhiteSpace(name))
                 return;
@@ -222,7 +242,7 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvSkillDto skill)
                 return;
 
-            var confirm = await DisplayAlert("Delete skill", $"Delete {skill.Name}?", "Yes", "No");
+            var confirm = await UiTranslationService.DisplayConfirmAsync(this, "Delete skill", $"Delete {skill.Name}?");
 
             if (!confirm)
                 return;
@@ -233,10 +253,10 @@ namespace JobCv.Mobile.Pages
 
         private async void OnAddLanguageClicked(object sender, EventArgs e)
         {
-            var name = await DisplayPromptAsync("Add language", "Language name:");
+            var name = await DisplayPromptAsync(UiTranslationService.TranslateText("Add language"), UiTranslationService.TranslateText("Language name:"));
             if (string.IsNullOrWhiteSpace(name)) return;
 
-            var level = await DisplayPromptAsync("Language level", "Example: Beginner, Intermediate, Advanced, Native:");
+            var level = await DisplayPromptAsync(UiTranslationService.TranslateText("Language level"), UiTranslationService.TranslateText("Example: Beginner, Intermediate, Advanced, Native:"));
             if (string.IsNullOrWhiteSpace(level)) return;
 
             await _apiService.AddLanguageAsync(_cvId, new AddLanguageRequest
@@ -253,10 +273,10 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvLanguageDto language)
                 return;
 
-            var name = await DisplayPromptAsync("Edit language", "Language name:", initialValue: language.Name);
+            var name = await DisplayPromptAsync(UiTranslationService.TranslateText("Edit language"), UiTranslationService.TranslateText("Language name:"), initialValue: language.Name);
             if (string.IsNullOrWhiteSpace(name)) return;
 
-            var level = await DisplayPromptAsync("Language level", "Level:", initialValue: language.Level);
+            var level = await DisplayPromptAsync(UiTranslationService.TranslateText("Language level"), UiTranslationService.TranslateText("Level:"), initialValue: language.Level);
             if (string.IsNullOrWhiteSpace(level)) return;
 
             await _apiService.UpdateLanguageAsync(language.Id, new UpdateLanguageRequest
@@ -273,7 +293,7 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvLanguageDto language)
                 return;
 
-            var confirm = await DisplayAlert("Delete language", $"Delete {language.Name}?", "Yes", "No");
+            var confirm = await UiTranslationService.DisplayConfirmAsync(this, "Delete language", $"Delete {language.Name}?");
 
             if (!confirm)
                 return;
@@ -300,7 +320,7 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvEducationDto education)
                 return;
 
-            var confirm = await DisplayAlert("Delete education", $"Delete {education.Degree}?", "Yes", "No");
+            var confirm = await UiTranslationService.DisplayConfirmAsync(this, "Delete education", $"Delete {education.Degree}?");
 
             if (!confirm)
                 return;
@@ -326,7 +346,7 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvExperienceDto experience)
                 return;
 
-            var confirm = await DisplayAlert("Delete experience", $"Delete {experience.JobTitle}?", "Yes", "No");
+            var confirm = await UiTranslationService.DisplayConfirmAsync(this, "Delete experience", $"Delete {experience.JobTitle}?");
 
             if (!confirm)
                 return;
@@ -353,7 +373,7 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvProjectDto project)
                 return;
 
-            var confirm = await DisplayAlert("Delete project", $"Delete {project.Title}?", "Yes", "No");
+            var confirm = await UiTranslationService.DisplayConfirmAsync(this, "Delete project", $"Delete {project.Title}?");
 
             if (!confirm)
                 return;
@@ -380,7 +400,7 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not CvCertificationDto certification)
                 return;
 
-            var confirm = await DisplayAlert("Delete certification", $"Delete {certification.Name}?", "Yes", "No");
+            var confirm = await UiTranslationService.DisplayConfirmAsync(this, "Delete certification", $"Delete {certification.Name}?");
 
             if (!confirm)
                 return;
@@ -402,7 +422,7 @@ namespace JobCv.Mobile.Pages
 
             var result = await FilePicker.Default.PickAsync(new PickOptions
             {
-                PickerTitle = "Choose CV photo",
+                PickerTitle = UiTranslationService.TranslateText("Choose CV photo"),
                 FileTypes = customFileType
             });
 
@@ -414,7 +434,7 @@ namespace JobCv.Mobile.Pages
             if (extension != ".jpg" && extension != ".jpeg" && extension != ".png" && extension != ".webp")
             {
                 messageLabel.TextColor = Colors.Red;
-                messageLabel.Text = "Only JPG, JPEG, PNG and WEBP images are allowed.";
+                messageLabel.Text = UiTranslationService.TranslateText("Only JPG, JPEG, PNG and WEBP images are allowed.");
                 return;
             }
 
@@ -425,7 +445,7 @@ namespace JobCv.Mobile.Pages
                 if (updatedCv == null)
                 {
                     messageLabel.TextColor = Colors.Red;
-                    messageLabel.Text = "The photo could not be uploaded.";
+                    messageLabel.Text = UiTranslationService.TranslateText("The photo could not be uploaded.");
                     return;
                 }
 
@@ -437,12 +457,12 @@ namespace JobCv.Mobile.Pages
                     ImageSource.FromUri(new Uri(_apiService.GetCvPhotoUrl(_cvId) + $"?v={DateTime.UtcNow.Ticks}"));
 
                 messageLabel.TextColor = Colors.Green;
-                messageLabel.Text = "Photo uploaded successfully.";
+                messageLabel.Text = UiTranslationService.TranslateText("Photo uploaded successfully.");
             }
             catch (Exception ex)
             {
                 messageLabel.TextColor = Colors.Red;
-                messageLabel.Text = ex.Message;
+                messageLabel.Text = UiTranslationService.TranslateText(ex.Message);
             }
         }
         private async void OnSaveCvClicked(object sender, EventArgs e)
@@ -456,12 +476,12 @@ namespace JobCv.Mobile.Pages
                 await SaveBasicInformationAsync();
 
                 bottomMessageLabel.TextColor = Colors.Green;
-                bottomMessageLabel.Text = "CV saved successfully.";
+                bottomMessageLabel.Text = UiTranslationService.TranslateText("CV saved successfully.");
             }
             catch (Exception ex)
             {
                 bottomMessageLabel.TextColor = Colors.Red;
-                bottomMessageLabel.Text = ex.Message;
+                bottomMessageLabel.Text = UiTranslationService.TranslateText(ex.Message);
             }
         }
         private void OnTemplateChanged(object sender, EventArgs e)
@@ -613,7 +633,7 @@ namespace JobCv.Mobile.Pages
 
                 if (_cv == null)
                 {
-                    await DisplayAlert("Error", "The CV could not be loaded.", "OK");
+                    await UiTranslationService.DisplayAlertAsync(this, "Error", "The CV could not be loaded.");
                     return;
                 }
 
@@ -621,7 +641,7 @@ namespace JobCv.Mobile.Pages
 
                 if (user == null)
                 {
-                    await DisplayAlert("Error", "The user could not be loaded.", "OK");
+                    await UiTranslationService.DisplayAlertAsync(this, "Error", "The user could not be loaded.");
                     return;
                 }
 
@@ -629,7 +649,7 @@ namespace JobCv.Mobile.Pages
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", UiTranslationService.TranslateText(ex.Message));
             }
         }
     }

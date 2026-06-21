@@ -15,5 +15,7 @@
         public string CvQualityWarning { get; set; } = string.Empty;
 
         public bool IsMock { get; set; }
+
+
     }
 }

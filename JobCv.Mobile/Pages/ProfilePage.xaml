@@ -91,7 +91,7 @@
                                     HorizontalOptions="Start"
                                     Margin="0,4,0,0">
 
-                                <Label Text="JobCv user"
+                                <Label Text="Career Guide user"
                                        FontSize="12"
                                        FontAttributes="Bold"
                                        TextColor="#1D4ED8" />
@@ -307,6 +307,58 @@
                                 HeightRequest="50" />
 
                     </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Language -->
+            <Border BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="App language"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A" />
+
+                    <Label Text="Choose the app language. Job listings may still appear in their original language."
+                           FontSize="14"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="10">
+
+                        <Button x:Name="EnglishLanguageButton"
+                                Grid.Column="0"
+                                Text="English"
+                                Clicked="OnEnglishLanguageClicked"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                        <Button x:Name="RomanianLanguageButton"
+                                Grid.Column="1"
+                                Text="Română"
+                                Clicked="OnRomanianLanguageClicked"
+                                BackgroundColor="#EFF6FF"
+                                TextColor="#1D4ED8"
+                                FontAttributes="Bold"
+                                CornerRadius="16"
+                                HeightRequest="50" />
+
+                    </Grid>
+
+                    <Label x:Name="LanguageStatusLabel"
+                           Text="Current language: English"
+                           FontSize="13"
+                           TextColor="#64748B"
+                           HorizontalTextAlignment="Center" />
+
                 </VerticalStackLayout>
             </Border>
 

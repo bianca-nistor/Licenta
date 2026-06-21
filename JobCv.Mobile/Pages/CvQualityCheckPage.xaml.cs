@@ -38,7 +38,7 @@ namespace JobCv.Mobile.Pages
                     return;
                 }
 
-                SubtitleLabel.Text = $"Quality analysis for: {_cv.Title}";
+                SubtitleLabel.Text = UiTranslationService.TranslateText($"Quality analysis for: {_cv.Title}");
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace JobCv.Mobile.Pages
 
                 if (result == null)
                 {
-                    MessageLabel.Text = "The CV quality check could not be generated.";
+                    MessageLabel.Text = UiTranslationService.TranslateText("The CV quality check could not be generated.");
                     return;
                 }
 
@@ -115,7 +115,8 @@ namespace JobCv.Mobile.Pages
                     .ToList(),
                 Languages = cv.Languages
                     .Select(language => $"{language.Name} {language.Level}")
-                    .ToList()
+                    .ToList(),
+                Language = LanguageService.CurrentLanguage
             };
         }
 
@@ -123,13 +124,29 @@ namespace JobCv.Mobile.Pages
         {
             ScoreLabel.Text = $"{result.Score}%";
             LevelLabel.Text = string.IsNullOrWhiteSpace(result.CompletenessLevel)
-                ? "CV quality"
-                : result.CompletenessLevel;
-            SummaryLabel.Text = result.Summary;
+                ? UiTranslationService.TranslateText("CV quality")
+                : UiTranslationService.TranslateText(result.CompletenessLevel);
+            SummaryLabel.Text = UiTranslationService.TranslateText(result.Summary);
 
-            StrengthsCollectionView.ItemsSource = result.Strengths;
-            IssuesCollectionView.ItemsSource = result.Issues;
-            SuggestionsCollectionView.ItemsSource = result.Suggestions;
+            StrengthsCollectionView.ItemsSource = result.Strengths
+                .Select(UiTranslationService.TranslateText)
+                .ToList();
+
+            IssuesCollectionView.ItemsSource = result.Issues
+                .Select(issue => new CvQualityIssueDto
+                {
+                    Section = UiTranslationService.TranslateText(issue.Section),
+                    Severity = UiTranslationService.TranslateText(issue.Severity),
+                    Problem = UiTranslationService.TranslateText(issue.Problem),
+                    Suggestion = UiTranslationService.TranslateText(issue.Suggestion)
+                })
+                .ToList();
+
+            SuggestionsCollectionView.ItemsSource = result.Suggestions
+                .Select(UiTranslationService.TranslateText)
+                .ToList();
+
+            UiTranslationService.ApplyToPage(this);
         }
     }
 }

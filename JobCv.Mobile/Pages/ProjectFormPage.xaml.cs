@@ -32,6 +32,23 @@ namespace JobCv.Mobile.Pages
             LoadProjectForEdit();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ApplyLocalTranslations();
+        }
+
+        private void ApplyLocalTranslations()
+        {
+            UiTranslationService.ApplyToPage(this);
+        }
+
+        private void SetMessage(string message, Color color)
+        {
+            MessageLabel.TextColor = color;
+            MessageLabel.Text = UiTranslationService.TranslateText(message);
+        }
+
         private void LoadProjectForEdit()
         {
             if (_projectToEdit == null)
@@ -64,8 +81,7 @@ namespace JobCv.Mobile.Pages
 
             if (string.IsNullOrWhiteSpace(title))
             {
-                MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Project title is required.";
+                SetMessage("Project title is required.", Colors.Red);
                 return;
             }
 
@@ -98,8 +114,7 @@ namespace JobCv.Mobile.Pages
 
                 if (result == null)
                 {
-                    MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "Project could not be saved.";
+                    SetMessage("Project could not be saved.", Colors.Red);
                     return;
                 }
 
@@ -107,7 +122,7 @@ namespace JobCv.Mobile.Pages
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", UiTranslationService.TranslateText(ex.Message));
             }
         }
 
@@ -134,8 +149,7 @@ namespace JobCv.Mobile.Pages
 
                 if (!updated)
                 {
-                    MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "Project could not be updated.";
+                    SetMessage("Project could not be updated.", Colors.Red);
                     return;
                 }
 
@@ -143,7 +157,7 @@ namespace JobCv.Mobile.Pages
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", UiTranslationService.TranslateText(ex.Message));
             }
         }
     }

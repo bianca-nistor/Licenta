@@ -47,14 +47,14 @@
             </VerticalStackLayout>
 
             <Button Grid.Column="2"
-                    Text="Export"
+                    Text="PDF"
                     Clicked="OnExportPdfClicked"
                     BackgroundColor="#DCFCE7"
                     TextColor="#166534"
                     FontAttributes="Bold"
                     CornerRadius="18"
                     HeightRequest="44"
-                    WidthRequest="96"
+                    WidthRequest="72"
                     VerticalOptions="Start" />
 
         </Grid>

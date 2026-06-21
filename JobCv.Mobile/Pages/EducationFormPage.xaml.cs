@@ -36,6 +36,23 @@ namespace JobCv.Mobile.Pages
             LoadEducationForEdit();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ApplyLocalTranslations();
+        }
+
+        private void ApplyLocalTranslations()
+        {
+            UiTranslationService.ApplyToPage(this);
+        }
+
+        private void SetMessage(string message, Color color)
+        {
+            MessageLabel.TextColor = color;
+            MessageLabel.Text = UiTranslationService.TranslateText(message);
+        }
+
         private void LoadEducationForEdit()
         {
             if (_educationToEdit == null)
@@ -100,15 +117,13 @@ namespace JobCv.Mobile.Pages
 
             if (string.IsNullOrWhiteSpace(institution))
             {
-                MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Institution is required.";
+                SetMessage("Institution is required.", Colors.Red);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(degree))
             {
-                MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Degree is required.";
+                SetMessage("Degree is required.", Colors.Red);
                 return;
             }
 
@@ -122,8 +137,7 @@ namespace JobCv.Mobile.Pages
 
             if (startDate.HasValue && endDate.HasValue && endDate.Value < startDate.Value)
             {
-                MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "End date cannot be before start date.";
+                SetMessage("End date cannot be before start date.", Colors.Red);
                 return;
             }
 
@@ -167,8 +181,7 @@ namespace JobCv.Mobile.Pages
 
                 if (result == null)
                 {
-                    MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "Education could not be saved.";
+                    SetMessage("Education could not be saved.", Colors.Red);
                     return;
                 }
 
@@ -176,7 +189,7 @@ namespace JobCv.Mobile.Pages
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", UiTranslationService.TranslateText(ex.Message));
             }
         }
 
@@ -203,8 +216,7 @@ namespace JobCv.Mobile.Pages
 
                 if (!updated)
                 {
-                    MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "Education could not be updated.";
+                    SetMessage("Education could not be updated.", Colors.Red);
                     return;
                 }
 
@@ -212,7 +224,7 @@ namespace JobCv.Mobile.Pages
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", UiTranslationService.TranslateText(ex.Message));
             }
         }
     }

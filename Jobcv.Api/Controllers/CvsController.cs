@@ -805,7 +805,7 @@ namespace JobCv.Api.Controllers
         }
 
         [HttpGet("{cvId:int}/export-pdf")]
-        public async Task<IActionResult> ExportCvPdf(int cvId)
+        public async Task<IActionResult> ExportCvPdf(int cvId, [FromQuery] string? language = null)
         {
             var cv = await _context.Cvs
                 .Include(x => x.Skills)
@@ -818,6 +818,8 @@ namespace JobCv.Api.Controllers
 
             if (cv == null)
                 return NotFound("CV was not found.");
+
+            ApplyPdfLanguageOverride(cv, language);
 
             var document = new CvPdfDocument(cv);
             var pdfBytes = document.GeneratePdf();
@@ -832,7 +834,7 @@ namespace JobCv.Api.Controllers
         }
 
         [HttpGet("{cvId:int}/preview-pdf")]
-        public async Task<IActionResult> PreviewCvPdf(int cvId)
+        public async Task<IActionResult> PreviewCvPdf(int cvId, [FromQuery] string? language = null)
         {
             var cv = await _context.Cvs
                 .Include(x => x.Skills)
@@ -846,10 +848,23 @@ namespace JobCv.Api.Controllers
             if (cv == null)
                 return NotFound("CV was not found.");
 
+            ApplyPdfLanguageOverride(cv, language);
+
             var document = new CvPdfDocument(cv);
             var pdfBytes = document.GeneratePdf();
 
             return File(pdfBytes, "application/pdf");
+        }
+
+        private static void ApplyPdfLanguageOverride(Cv cv, string? language)
+        {
+            if (string.IsNullOrWhiteSpace(language))
+                return;
+
+            var normalized = language.Trim().ToLowerInvariant();
+
+            if (normalized == "ro" || normalized == "en")
+                cv.Language = normalized;
         }
 
         [HttpPost("{cvId:int}/photo")]

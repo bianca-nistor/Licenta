@@ -166,7 +166,7 @@ namespace JobCv.Mobile.Pages
             LoadingIndicator.IsRunning = true;
             ResultsLayout.IsVisible = false;
             MessageLabel.TextColor = Colors.Gray;
-            MessageLabel.Text = "Generating match score...";
+            MessageLabel.Text = UiTranslationService.TranslateText("Generating match score...");
 
             try
             {
@@ -179,7 +179,7 @@ namespace JobCv.Mobile.Pages
                 if (string.IsNullOrWhiteSpace(cvText))
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "Choose a CV or paste CV text first.";
+                    MessageLabel.Text = UiTranslationService.TranslateText("Choose a CV or paste CV text first.");
                     return;
                 }
 
@@ -189,7 +189,8 @@ namespace JobCv.Mobile.Pages
                     Company = _job.Company ?? string.Empty,
                     Location = _job.Location ?? string.Empty,
                     JobDescription = _job.Description ?? string.Empty,
-                    CurrentCvText = cvText
+                    CurrentCvText = cvText,
+                    Language = LanguageService.CurrentLanguage
                 };
 
                 var result = await _apiService.GenerateCvJobMatchAsync(request);
@@ -197,22 +198,23 @@ namespace JobCv.Mobile.Pages
                 if (result == null)
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "The match score could not be generated.";
+                    MessageLabel.Text = UiTranslationService.TranslateText("The match score could not be generated.");
                     return;
                 }
 
                 ScoreLabel.Text = $"{result.MatchScore}%";
-                RecommendationLabel.Text = result.Recommendation;
-                SummaryLabel.Text = result.Summary;
-                StrengthsCollectionView.ItemsSource = result.Strengths;
-                MissingCollectionView.ItemsSource = result.MissingSkills;
-                ImprovementsCollectionView.ItemsSource = result.Improvements;
+                RecommendationLabel.Text = UiTranslationService.TranslateText(result.Recommendation);
+                SummaryLabel.Text = UiTranslationService.TranslateText(result.Summary);
+                StrengthsCollectionView.ItemsSource = result.Strengths.Select(UiTranslationService.TranslateText).ToList();
+                MissingCollectionView.ItemsSource = result.MissingSkills.Select(UiTranslationService.TranslateText).ToList();
+                ImprovementsCollectionView.ItemsSource = result.Improvements.Select(UiTranslationService.TranslateText).ToList();
 
                 ResultsLayout.IsVisible = true;
+                UiTranslationService.ApplyToPage(this);
                 MessageLabel.TextColor = Colors.Green;
                 MessageLabel.Text = result.IsMock
-                    ? "Match score generated with explainable demo logic."
-                    : "Match score generated successfully.";
+                    ? UiTranslationService.TranslateText("Match score generated with explainable demo logic.")
+                    : UiTranslationService.TranslateText("Match score generated successfully.");
             }
             catch (Exception ex)
             {

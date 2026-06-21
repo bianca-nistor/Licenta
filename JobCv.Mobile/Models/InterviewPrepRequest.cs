@@ -6,5 +6,7 @@
         public string Company { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+
+        public string Language { get; set; } = "en";
     }
 }

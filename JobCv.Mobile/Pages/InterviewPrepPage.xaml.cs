@@ -44,7 +44,7 @@ namespace JobCv.Mobile.Pages
             LoadingIndicator.IsRunning = true;
 
             MessageLabel.TextColor = Colors.Gray;
-            MessageLabel.Text = "Generating interview preparation...";
+            MessageLabel.Text = UiTranslationService.TranslateText("Generating interview preparation...");
 
             ResultsLayout.IsVisible = false;
 
@@ -55,7 +55,8 @@ namespace JobCv.Mobile.Pages
                     JobTitle = _job.Title ?? string.Empty,
                     Company = _job.Company ?? string.Empty,
                     Location = _job.Location ?? string.Empty,
-                    Description = _job.Description ?? string.Empty
+                    Description = _job.Description ?? string.Empty,
+                    Language = LanguageService.CurrentLanguage
                 };
 
                 var result = await _apiService.GenerateInterviewPrepAsync(request);
@@ -63,7 +64,7 @@ namespace JobCv.Mobile.Pages
                 if (result == null)
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "Interview preparation could not be generated.";
+                    MessageLabel.Text = UiTranslationService.TranslateText("Interview preparation could not be generated.");
                     return;
                 }
 
@@ -79,18 +80,19 @@ namespace JobCv.Mobile.Pages
                     AiSourceBanner.BackgroundColor = Color.FromArgb("#FEF3C7");
                     AiSourceBanner.Stroke = Color.FromArgb("#FDE68A");
                     AiSourceLabel.TextColor = Color.FromArgb("#92400E");
-                    AiSourceLabel.Text = "Demo AI result: this is a mock response. Later it can be connected to OpenAI or a local LLM.";
+                    AiSourceLabel.Text = UiTranslationService.TranslateText("Demo AI result: this is a mock response. Later it can be connected to OpenAI or a local LLM.");
                 }
                 else
                 {
                     AiSourceBanner.BackgroundColor = Color.FromArgb("#ECFDF5");
                     AiSourceBanner.Stroke = Color.FromArgb("#BBF7D0");
                     AiSourceLabel.TextColor = Color.FromArgb("#166534");
-                    AiSourceLabel.Text = "Generated with AI.";
+                    AiSourceLabel.Text = UiTranslationService.TranslateText("Generated with AI.");
                 }
 
                 MessageLabel.TextColor = Colors.Green;
-                MessageLabel.Text = "Interview preparation generated successfully.";
+                MessageLabel.Text = UiTranslationService.TranslateText("Interview preparation generated successfully.");
+                UiTranslationService.ApplyToPage(this);
             }
             catch (Exception ex)
             {

@@ -145,13 +145,15 @@ namespace JobCv.Api.Services
 
         private static string BuildInterviewPrepPrompt(InterviewPrepRequestDto request)
         {
-            var jobTitle = DefaultText(request.JobTitle, "Selected job");
-            var company = DefaultText(request.Company, "Unknown company");
-            var location = DefaultText(request.Location, "Not specified");
-            var description = Limit(DefaultText(request.Description, "No job description available."), 1800);
+            var jobTitle = DefaultText(request.JobTitle, AiLanguageHelper.DefaultJobTitle(request.Language));
+            var company = DefaultText(request.Company, AiLanguageHelper.DefaultCompany(request.Language));
+            var location = DefaultText(request.Location, AiLanguageHelper.DefaultLocation(request.Language));
+            var description = Limit(DefaultText(request.Description, AiLanguageHelper.DefaultJobDescription(request.Language)), 1800);
+            var languageInstruction = AiLanguageHelper.GetLanguageInstruction(request.Language);
 
             return $$"""
 You are an assistant for a career preparation mobile app.
+{{languageInstruction}}
 Generate interview preparation for this job.
 
 Job title: {{jobTitle}}
@@ -178,19 +180,22 @@ Return exactly one valid JSON object matching this C# DTO shape:
 Rules:
 - Return JSON only.
 - Keep answers practical and concise.
+- All user-facing values must respect the requested language.
 """;
         }
 
         private static string BuildCvTailoringPrompt(CvTailoringRequestDto request)
         {
-            var jobTitle = DefaultText(request.JobTitle, "Selected job");
-            var company = DefaultText(request.Company, "Unknown company");
-            var location = DefaultText(request.Location, "Not specified");
-            var jobDescription = Limit(DefaultText(request.JobDescription, "No job description available."), 1800);
-            var cvText = Limit(DefaultText(request.CurrentCvText, "No current CV text was provided."), 2500);
+            var jobTitle = DefaultText(request.JobTitle, AiLanguageHelper.DefaultJobTitle(request.Language));
+            var company = DefaultText(request.Company, AiLanguageHelper.DefaultCompany(request.Language));
+            var location = DefaultText(request.Location, AiLanguageHelper.DefaultLocation(request.Language));
+            var jobDescription = Limit(DefaultText(request.JobDescription, AiLanguageHelper.DefaultJobDescription(request.Language)), 1800);
+            var cvText = Limit(DefaultText(request.CurrentCvText, AiLanguageHelper.DefaultCvText(request.Language)), 2500);
+            var languageInstruction = AiLanguageHelper.GetLanguageInstruction(request.Language);
 
             return $$"""
 You are an assistant for a CV and career preparation mobile app.
+{{languageInstruction}}
 Generate CV tailoring advice for this job.
 
 Job title: {{jobTitle}}
@@ -222,19 +227,22 @@ Rules:
 - Return JSON only.
 - Do not invent degrees, companies, certifications or work experience that are not in the CV.
 - If the CV is weak or missing, say that tailoring cannot be done properly yet and focus on improving content first.
+- All user-facing values must respect the requested language.
 """;
         }
 
         private static string BuildCvJobMatchPrompt(CvJobMatchRequestDto request)
         {
-            var jobTitle = DefaultText(request.JobTitle, "Selected job");
-            var company = DefaultText(request.Company, "Unknown company");
-            var location = DefaultText(request.Location, "Not specified");
-            var jobDescription = Limit(DefaultText(request.JobDescription, "No job description available."), 1800);
-            var cvText = Limit(DefaultText(request.CurrentCvText, "No current CV text was provided."), 2500);
+            var jobTitle = DefaultText(request.JobTitle, AiLanguageHelper.DefaultJobTitle(request.Language));
+            var company = DefaultText(request.Company, AiLanguageHelper.DefaultCompany(request.Language));
+            var location = DefaultText(request.Location, AiLanguageHelper.DefaultLocation(request.Language));
+            var jobDescription = Limit(DefaultText(request.JobDescription, AiLanguageHelper.DefaultJobDescription(request.Language)), 1800);
+            var cvText = Limit(DefaultText(request.CurrentCvText, AiLanguageHelper.DefaultCvText(request.Language)), 2500);
+            var languageInstruction = AiLanguageHelper.GetLanguageInstruction(request.Language);
 
             return $$"""
 You are an assistant for a CV and career preparation mobile app.
+{{languageInstruction}}
 Evaluate how well the CV matches the job.
 
 Job title: {{jobTitle}}
@@ -262,13 +270,51 @@ Rules:
 - Return JSON only.
 - matchScore must be an integer from 0 to 100.
 - Do not invent experience. Base the score only on the job and CV text provided.
+- All user-facing values must respect the requested language.
 """;
         }
 
         private static CvTailoringResponseDto BuildMockCvTailoring(CvTailoringRequestDto request)
         {
-            var title = DefaultText(request.JobTitle, "Selected job");
-            var company = DefaultText(request.Company, "Unknown company");
+            var title = DefaultText(request.JobTitle, AiLanguageHelper.DefaultJobTitle(request.Language));
+            var company = DefaultText(request.Company, AiLanguageHelper.DefaultCompany(request.Language));
+
+            if (AiLanguageHelper.IsRomanian(request.Language))
+            {
+                return new CvTailoringResponseDto
+                {
+                    JobTitle = title,
+                    Company = company,
+                    TailoredProfileSummary = $"Candidat motivat pentru rolul {title} la {company}, cu competențe relevante, adaptabilitate și abilități bune de comunicare.",
+                    ImportantKeywords = new List<string> { "comunicare", "rezolvare de probleme", "lucru în echipă", "adaptabilitate", "atenție la detalii" },
+                    SkillsToHighlight = new List<string> { "Competențe tehnice relevante", "Comunicare", "Rezolvare de probleme", "Colaborare în echipă" },
+                    ExperienceToEmphasize = new List<string>
+                    {
+                        "Menționează proiecte sau sarcini care se potrivesc responsabilităților din descrierea jobului.",
+                        "Folosește exemple măsurabile acolo unde este posibil.",
+                        "Evidențiază experiența care arată că te poți adapta rapid la rol."
+                    },
+                    Suggestions = new List<CvTailoringSuggestionDto>
+                    {
+                        new CvTailoringSuggestionDto
+                        {
+                            Section = "Profil",
+                            Suggestion = "Rescrie secțiunea de profil astfel încât să menționeze rolul vizat și cele mai relevante puncte forte.",
+                            Reason = "Recrutorii citesc de obicei profilul primul, deci acesta trebuie să se potrivească rapid cu jobul."
+                        },
+                        new CvTailoringSuggestionDto
+                        {
+                            Section = "Competențe",
+                            Suggestion = "Mută competențele cele mai relevante pentru acest job aproape de începutul secțiunii de competențe.",
+                            Reason = "CV-ul devine mai ușor de scanat și mai relevant pentru rol."
+                        }
+                    },
+                    CvQualityWarning = string.IsNullOrWhiteSpace(request.CurrentCvText) || request.CurrentCvText.Trim().Length < 120
+                        ? "CV-ul selectat are prea puțin text, deci sugestiile sunt în mare parte generale. Completează CV-ul înainte de a-l adapta serios pentru job."
+                        : string.Empty,
+                    IsMock = true
+                };
+            }
 
             return new CvTailoringResponseDto
             {
@@ -385,14 +431,16 @@ Rules:
         }
         private static string BuildCoverLetterPrompt(CoverLetterRequestDto request)
         {
-            var jobTitle = DefaultText(request.JobTitle, "Selected job");
-            var company = DefaultText(request.Company, "Unknown company");
-            var location = DefaultText(request.Location, "Not specified");
-            var jobDescription = Limit(DefaultText(request.JobDescription, "No job description available."), 1600);
-            var cvText = Limit(DefaultText(request.CvText, "No CV text provided."), 2200);
+            var jobTitle = DefaultText(request.JobTitle, AiLanguageHelper.DefaultJobTitle(request.Language));
+            var company = DefaultText(request.Company, AiLanguageHelper.DefaultCompany(request.Language));
+            var location = DefaultText(request.Location, AiLanguageHelper.DefaultLocation(request.Language));
+            var jobDescription = Limit(DefaultText(request.JobDescription, AiLanguageHelper.DefaultJobDescription(request.Language)), 1600);
+            var cvText = Limit(DefaultText(request.CvText, AiLanguageHelper.DefaultCvText(request.Language)), 2200);
+            var languageInstruction = AiLanguageHelper.GetLanguageInstruction(request.Language);
 
             return $$"""
 You are an assistant for a CV and career preparation mobile app.
+{{languageInstruction}}
 Generate a professional cover letter for this job application.
 
 Job title: {{jobTitle}}
@@ -421,6 +469,7 @@ Rules:
 - Make it professional, clear and not exaggerated.
 - Do not invent degrees, companies, technologies or experience that are not present in the CV text.
 - If the CV text is weak or missing, keep the letter general but still useful.
+- All user-facing values must respect the requested language.
 """;
         }
     }

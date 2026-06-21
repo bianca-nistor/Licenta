@@ -7,5 +7,8 @@
         public string Subject { get; set; } = string.Empty;
         public string Letter { get; set; } = string.Empty;
         public bool IsMock { get; set; }
+
+       
+
     }
 }

@@ -15,5 +15,7 @@ namespace JobCv.Api.Dtos
         public List<string> Suggestions { get; set; } = new();
 
         public bool IsMock { get; set; }
+
+
     }
 }

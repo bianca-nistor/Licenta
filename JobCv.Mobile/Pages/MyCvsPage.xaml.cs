@@ -143,11 +143,10 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not int cvId)
                 return;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Delete CV",
-                "Are you sure you want to delete this CV?",
-                "Yes",
-                "No");
+                "Are you sure you want to delete this CV?");
 
             if (!confirm)
                 return;
@@ -156,7 +155,7 @@ namespace JobCv.Mobile.Pages
 
             if (!deleted)
             {
-                await DisplayAlert("Error", "The CV could not be deleted.", "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", "The CV could not be deleted.");
                 return;
             }
 
@@ -176,10 +175,10 @@ namespace JobCv.Mobile.Pages
             }
             catch
             {
-                await DisplayAlert(
+                await UiTranslationService.DisplayAlertAsync(
+                    this,
                     "Error",
-                    "The file could not be opened. Please make sure your phone has an app that can open this file type.",
-                    "OK");
+                    "The file could not be opened. Please make sure your phone has an app that can open this file type.");
             }
         }
 
@@ -188,11 +187,10 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not int fileId)
                 return;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Delete uploaded CV",
-                "Are you sure you want to delete this uploaded CV?",
-                "Yes",
-                "No");
+                "Are you sure you want to delete this uploaded CV?");
 
             if (!confirm)
                 return;
@@ -201,7 +199,7 @@ namespace JobCv.Mobile.Pages
 
             if (!deleted)
             {
-                await DisplayAlert("Error", "The uploaded CV could not be deleted.", "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", "The uploaded CV could not be deleted.");
                 return;
             }
 
@@ -230,16 +228,15 @@ namespace JobCv.Mobile.Pages
         {
             GetProfileMenu().IsVisible = false;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Logout",
-                "Are you sure you want to log out?",
-                "Yes",
-                "No");
+                "Are you sure you want to log out?");
 
             if (!confirm)
                 return;
 
-            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+            Application.Current!.Windows[0].Page = new LocalizedNavigationPage(new MainPage());
         }
         protected override void OnSizeAllocated(double width, double height)
         {

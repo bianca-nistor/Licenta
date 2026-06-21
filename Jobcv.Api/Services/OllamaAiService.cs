@@ -170,7 +170,10 @@ namespace JobCv.Api.Services
             if (description.Length > 1800)
                 description = description[..1800];
 
+            var languageInstruction = AiLanguageHelper.GetLanguageInstruction(request.Language);
+
             return $@"
+{languageInstruction}
 Generate interview preparation for this job.
 
 Job title: {jobTitle}
@@ -226,6 +229,7 @@ Rules:
 - Do not include markdown.
 - Do not include text before or after the JSON.
 - Keep answers concise.
+- All user-facing values must respect the requested language.
 ";
         }
         public async Task<CvTailoringResponseDto> GenerateCvTailoringAsync(
@@ -459,7 +463,10 @@ Rules:
             if (cvText.Length > 2500)
                 cvText = cvText[..2500];
 
+            var languageInstruction = AiLanguageHelper.GetLanguageInstruction(request.Language);
+
             return $@"
+{languageInstruction}
 Generate CV tailoring advice for this job.
 
 Job title: {jobTitle}
@@ -521,8 +528,10 @@ Rules:
 - Keep the advice practical and concise.
 - Do not invent degrees, companies, certifications or experience that are not in the CV.
 - If the CV text is missing, give general suggestions based on the job description.
+- All user-facing values must respect the requested language.
 ";
             return $@"
+{languageInstruction}
 Generate CV tailoring advice for this job.
 
 Job title: {jobTitle}
@@ -586,6 +595,7 @@ Rules:
 - Do not invent degrees, companies, certifications or experience that are not in the CV.
 - If the CV text is missing, too short, random, or not meaningful, clearly say that the CV cannot be tailored properly yet.
 - If the CV text is weak, focus suggestions on improving the CV content first.
+- All user-facing values must respect the requested language.
 ";
         }
 
@@ -598,6 +608,63 @@ Rules:
             var company = string.IsNullOrWhiteSpace(request.Company)
                 ? "Unknown company"
                 : request.Company;
+
+            if (AiLanguageHelper.IsRomanian(request.Language))
+            {
+                return new CvTailoringResponseDto
+                {
+                    JobTitle = title,
+                    Company = company,
+                    TailoredProfileSummary =
+                        $"Candidat motivat pentru rolul {title} la {company}, cu competențe relevante, adaptabilitate și abilități bune de comunicare.",
+                    ImportantKeywords = new List<string>
+                    {
+                        "comunicare",
+                        "rezolvare de probleme",
+                        "lucru în echipă",
+                        "adaptabilitate",
+                        "atenție la detalii"
+                    },
+                    SkillsToHighlight = new List<string>
+                    {
+                        "Competențe tehnice relevante",
+                        "Comunicare",
+                        "Rezolvare de probleme",
+                        "Colaborare în echipă"
+                    },
+                    ExperienceToEmphasize = new List<string>
+                    {
+                        "Menționează proiecte sau sarcini care se potrivesc responsabilităților din descrierea jobului.",
+                        "Folosește exemple măsurabile acolo unde este posibil.",
+                        "Evidențiază experiența care arată că te poți adapta rapid la rol."
+                    },
+                    Suggestions = new List<CvTailoringSuggestionDto>
+                    {
+                        new CvTailoringSuggestionDto
+                        {
+                            Section = "Profil",
+                            Suggestion = "Rescrie secțiunea de profil astfel încât să menționeze rolul vizat și cele mai relevante puncte forte.",
+                            Reason = "Recrutorii citesc de obicei profilul primul, deci acesta trebuie să se potrivească rapid cu jobul."
+                        },
+                        new CvTailoringSuggestionDto
+                        {
+                            Section = "Competențe",
+                            Suggestion = "Mută competențele cele mai relevante pentru acest job aproape de începutul secțiunii de competențe.",
+                            Reason = "CV-ul devine mai ușor de scanat și mai relevant pentru rol."
+                        },
+                        new CvTailoringSuggestionDto
+                        {
+                            Section = "Experiență",
+                            Suggestion = "Adaugă puncte scurte care conectează experiența sau proiectele tale cu cerințele jobului.",
+                            Reason = "Exemplele specifice sunt mai puternice decât afirmațiile generale."
+                        }
+                    },
+                    CvQualityWarning = string.IsNullOrWhiteSpace(GetCvQualityWarning(request.CurrentCvText))
+                        ? string.Empty
+                        : "CV-ul selectat pare incomplet sau dificil de analizat, deci recomandările pot fi mai generale.",
+                    IsMock = true
+                };
+            }
 
             return new CvTailoringResponseDto
             {

@@ -7,5 +7,8 @@ namespace JobCv.Api.Dtos
         public string Location { get; set; } = string.Empty;
         public string JobDescription { get; set; } = string.Empty;
         public string CurrentCvText { get; set; } = string.Empty;
+
+        public string Language { get; set; } = "en";
+
     }
 }

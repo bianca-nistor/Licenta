@@ -27,5 +27,7 @@ namespace JobCv.Api.Dtos
         public List<string> Certifications { get; set; } = new();
 
         public List<string> Languages { get; set; } = new();
+        public string Language { get; set; } = "en";
+
     }
 }

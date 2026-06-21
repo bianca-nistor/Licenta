@@ -135,6 +135,11 @@ namespace JobCv.Mobile.Pages
             }
         }
 
+        private async void OnStartFromYourCvClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ImportCvPage(_user, _apiService));
+        }
+
         private async void OnUploadCvClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new UploadCvPage(_user, _apiService));

@@ -149,7 +149,8 @@ namespace JobCv.Mobile.Pages
         private void UpdatePeriodStats()
         {
             var selectedPeriod = PeriodPicker?.SelectedItem?.ToString() ?? "Last 30 days";
-            var startDate = GetPeriodStartDate(selectedPeriod);
+            var normalizedPeriod = NormalizePeriod(selectedPeriod);
+            var startDate = GetPeriodStartDate(normalizedPeriod);
 
             var createdCvCount = CountByPeriod(_createdCvs, x => x.CreatedAt, startDate);
             var uploadedCvCount = CountByPeriod(_uploadedCvs, x => x.UploadedAt, startDate);
@@ -163,11 +164,11 @@ namespace JobCv.Mobile.Pages
             SetLabelText("PeriodApplicationsCountLabel", applicationCount.ToString());
             SetLabelText("PeriodInterviewsCountLabel", interviewCount.ToString());
 
-            var periodText = selectedPeriod == "All time"
+            var periodText = normalizedPeriod == "All time"
                 ? "Showing activity for all time."
-                : $"Showing activity for {selectedPeriod.ToLower()}.";
+                : $"Showing activity for {normalizedPeriod.ToLowerInvariant()}.";
 
-            SetLabelText("PeriodSummaryLabel", periodText);
+            SetLabelText("PeriodSummaryLabel", UiTranslationService.TranslateText(periodText));
         }
 
         private int CountByPeriod<T>(
@@ -189,6 +190,25 @@ namespace JobCv.Mobile.Pages
                 "Last 90 days" => today.AddDays(-90),
                 "All time" => null,
                 _ => today.AddDays(-30)
+            };
+        }
+
+        private static string NormalizePeriod(string? selectedPeriod)
+        {
+            if (string.IsNullOrWhiteSpace(selectedPeriod))
+                return "Last 30 days";
+
+            return selectedPeriod.Trim() switch
+            {
+                "Ultimele 7 zile" => "Last 7 days",
+                "Ultimele 30 de zile" => "Last 30 days",
+                "Ultimele 90 de zile" => "Last 90 days",
+                "Toată perioada" => "All time",
+                "Last 7 days" => "Last 7 days",
+                "Last 30 days" => "Last 30 days",
+                "Last 90 days" => "Last 90 days",
+                "All time" => "All time",
+                _ => "Last 30 days"
             };
         }
 
@@ -364,16 +384,15 @@ namespace JobCv.Mobile.Pages
         {
             GetProfileMenu().IsVisible = false;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Logout",
-                "Are you sure you want to log out?",
-                "Yes",
-                "No");
+                "Are you sure you want to log out?");
 
             if (!confirm)
                 return;
 
-            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+            Application.Current!.Windows[0].Page = new LocalizedNavigationPage(new MainPage());
         }
 
         protected override void OnSizeAllocated(double width, double height)

@@ -11,5 +11,7 @@
         public List<string> BeforeInterviewTips { get; set; } = new();
 
         public bool IsMock { get; set; } = true;
+
+
     }
 }

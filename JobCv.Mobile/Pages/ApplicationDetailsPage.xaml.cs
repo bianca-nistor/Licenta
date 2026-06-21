@@ -332,7 +332,8 @@ namespace JobCv.Mobile.Pages
                 Company = company,
                 Location = LocationEntry.Text?.Trim() ?? string.Empty,
                 JobDescription = BuildJobContextForCoverLetter(),
-                CvText = BuildCvTextForCoverLetter(selectedCv)
+                CvText = BuildCvTextForCoverLetter(selectedCv),
+                Language = LanguageService.CurrentLanguage
             };
 
             try

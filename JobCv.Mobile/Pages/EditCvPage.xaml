@@ -157,6 +157,26 @@
                 AutoSize="TextChanges"
                 HeightRequest="110" />
 
+                    <Label Text="CV language"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#0F172A"
+                           Margin="0,2,0,-8" />
+
+                    <Picker x:Name="CvLanguagePicker"
+        HeightRequest="56"
+        MinimumHeightRequest="56"
+        FontSize="16"
+        VerticalOptions="Center"
+        HorizontalOptions="Fill"
+        BackgroundColor="#F8FAFC"
+        TextColor="#0F172A" >
+                        <Picker.Items>
+                            <x:String>English</x:String>
+                            <x:String>Romanian</x:String>
+                        </Picker.Items>
+                    </Picker>
+
                     <Picker x:Name="TemplatePicker"
                 ItemDisplayBinding="{Binding Name}"
                 SelectedIndexChanged="OnTemplateChanged"

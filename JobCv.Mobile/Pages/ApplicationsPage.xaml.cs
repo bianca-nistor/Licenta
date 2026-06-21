@@ -92,7 +92,7 @@ namespace JobCv.Mobile.Pages
             UpdateFilterButtons();
         }
 
-        
+
         private void UpdateFilterButtons()
         {
             SetFilterButtonStyle(AllFilterButton, _currentFilter == "All");
@@ -162,11 +162,10 @@ namespace JobCv.Mobile.Pages
             if ((sender as Button)?.CommandParameter is not int applicationId)
                 return;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Delete application",
-                "Are you sure you want to delete this application?",
-                "Yes",
-                "No");
+                "Are you sure you want to delete this application?");
 
             if (!confirm)
                 return;
@@ -175,7 +174,7 @@ namespace JobCv.Mobile.Pages
 
             if (!deleted)
             {
-                await DisplayAlert("Error", "The application could not be deleted.", "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", "The application could not be deleted.");
                 return;
             }
 
@@ -204,16 +203,15 @@ namespace JobCv.Mobile.Pages
         {
             GetProfileMenu().IsVisible = false;
 
-            var confirm = await DisplayAlert(
+            var confirm = await UiTranslationService.DisplayConfirmAsync(
+                this,
                 "Logout",
-                "Are you sure you want to log out?",
-                "Yes",
-                "No");
+                "Are you sure you want to log out?");
 
             if (!confirm)
                 return;
 
-            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+            Application.Current!.Windows[0].Page = new LocalizedNavigationPage(new MainPage());
         }
 
         protected override void OnSizeAllocated(double width, double height)

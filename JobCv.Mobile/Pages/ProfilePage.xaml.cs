@@ -16,6 +16,7 @@ namespace JobCv.Mobile.Pages
             _apiService = apiService;
 
             LoadProfile();
+            UpdateLanguageButtons();
         }
 
         protected override async void OnAppearing()
@@ -30,11 +31,13 @@ namespace JobCv.Mobile.Pages
                 {
                     _user = updatedUser;
                     LoadProfile();
+                    UpdateLanguageButtons();
                 }
             }
             catch
             {
                 LoadProfile();
+                UpdateLanguageButtons();
             }
         }
 
@@ -135,18 +138,47 @@ namespace JobCv.Mobile.Pages
             await Navigation.PushAsync(new JobsPage(_user, _apiService));
         }
 
+        private void OnEnglishLanguageClicked(object sender, EventArgs e)
+        {
+            LanguageService.SetLanguage("en");
+            UpdateLanguageButtons();
+            UiTranslationService.ApplyToPage(this);
+        }
+
+        private void OnRomanianLanguageClicked(object sender, EventArgs e)
+        {
+            LanguageService.SetLanguage("ro");
+            UpdateLanguageButtons();
+            UiTranslationService.ApplyToPage(this);
+        }
+
+        private void UpdateLanguageButtons()
+        {
+            var isRomanian = LanguageService.IsRomanian;
+
+            EnglishLanguageButton.BackgroundColor = isRomanian ? Color.FromArgb("#EFF6FF") : Color.FromArgb("#1D4ED8");
+            EnglishLanguageButton.TextColor = isRomanian ? Color.FromArgb("#1D4ED8") : Colors.White;
+
+            RomanianLanguageButton.BackgroundColor = isRomanian ? Color.FromArgb("#1D4ED8") : Color.FromArgb("#EFF6FF");
+            RomanianLanguageButton.TextColor = isRomanian ? Colors.White : Color.FromArgb("#1D4ED8");
+
+            LanguageStatusLabel.Text = isRomanian
+                ? "Current language: Romanian"
+                : "Current language: English";
+        }
+
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
             var confirm = await DisplayAlert(
-                "Logout",
-                "Are you sure you want to log out?",
-                "Yes",
-                "No");
+                UiTranslationService.TranslateText("Logout"),
+                UiTranslationService.TranslateText("Are you sure you want to log out?"),
+                UiTranslationService.TranslateText("Yes"),
+                UiTranslationService.TranslateText("No"));
 
             if (!confirm)
                 return;
 
-            Application.Current!.Windows[0].Page = new NavigationPage(new MainPage());
+            Application.Current!.Windows[0].Page = new LocalizedNavigationPage(new MainPage());
         }
     }
 }

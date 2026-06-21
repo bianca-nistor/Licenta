@@ -30,6 +30,10 @@ builder.Services.AddHttpClient<OllamaAiService>((serviceProvider, httpClient) =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ICvTextExtractionService, CvTextExtractionService>();
+builder.Services.AddScoped<ICvImportParserService, CvImportParserService>();
+
+
 //builder.Services.AddDbContext<AppDbContext>(options =>
 //    options.UseSqlite("Data Source=jobcv.db"));
 

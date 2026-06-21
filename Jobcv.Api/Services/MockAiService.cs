@@ -7,6 +7,9 @@ namespace JobCv.Api.Services
     {
         public Task<InterviewPrepResponseDto> GenerateInterviewPrepAsync(InterviewPrepRequestDto request)
         {
+            if (AiLanguageHelper.IsRomanian(request.Language))
+                return Task.FromResult(BuildRomanianInterviewPrep(request));
+
             var text = $"{request.JobTitle} {request.Description}".ToLower();
 
             var skills = DetectSkills(text);
@@ -40,6 +43,108 @@ namespace JobCv.Api.Services
             };
 
             return Task.FromResult(response);
+        }
+
+        private static InterviewPrepResponseDto BuildRomanianInterviewPrep(InterviewPrepRequestDto request)
+        {
+            var text = $"{request.JobTitle} {request.Description}".ToLowerInvariant();
+            var skills = DetectSkills(text);
+
+            var jobTitle = string.IsNullOrWhiteSpace(request.JobTitle)
+                ? "jobul selectat"
+                : request.JobTitle.Trim();
+
+            var company = string.IsNullOrWhiteSpace(request.Company)
+                ? "compania selectată"
+                : request.Company.Trim();
+
+            var skillText = skills.Count == 0
+                ? "cerințele principale din descrierea jobului"
+                : string.Join(", ", skills.Take(4));
+
+            var questions = new List<InterviewQuestionDto>
+            {
+                new InterviewQuestionDto
+                {
+                    Category = "General",
+                    Question = "Îmi poți spune pe scurt despre tine și de ce te interesează acest rol?",
+                    SuggestedAnswer = "Prezintă pe scurt experiența ta, menționează competențele relevante și explică de ce rolul se potrivește cu obiectivele tale profesionale."
+                },
+                new InterviewQuestionDto
+                {
+                    Category = "General",
+                    Question = "De ce vrei să lucrezi pentru această companie?",
+                    SuggestedAnswer = "Menționează ce știi despre companie, ce te atrage la rol și cum poți contribui prin competențele tale."
+                },
+                new InterviewQuestionDto
+                {
+                    Category = "CV",
+                    Question = "Care proiect din CV-ul tău este cel mai relevant pentru această poziție?",
+                    SuggestedAnswer = "Alege un proiect puternic, explică problema, contribuția ta, tehnologiile folosite și rezultatul obținut."
+                }
+            };
+
+            if (skills.Contains("C#") || skills.Contains(".NET"))
+            {
+                questions.Add(new InterviewQuestionDto
+                {
+                    Category = "Tehnic",
+                    Question = "Ce este dependency injection și de ce este util în aplicațiile .NET?",
+                    SuggestedAnswer = "Explică faptul că dependency injection ajută la gestionarea dependențelor, crește testabilitatea și menține codul mai modular."
+                });
+            }
+
+            if (skills.Contains("REST APIs"))
+            {
+                questions.Add(new InterviewQuestionDto
+                {
+                    Category = "Tehnic",
+                    Question = "Cum ai proiecta un endpoint REST pentru crearea unei resurse noi?",
+                    SuggestedAnswer = "Menționează folosirea HTTP POST, validarea datelor, coduri de status potrivite și returnarea resursei create sau a identificatorului ei."
+                });
+            }
+
+            if (skills.Contains("SQL"))
+            {
+                questions.Add(new InterviewQuestionDto
+                {
+                    Category = "Tehnic",
+                    Question = "Cum ai investiga o interogare SQL lentă?",
+                    SuggestedAnswer = "Menționează verificarea indexurilor, structura query-ului, planul de execuție, condițiile de filtrare și reducerea datelor încărcate inutil."
+                });
+            }
+
+            questions.Add(new InterviewQuestionDto
+            {
+                Category = "Comportamental",
+                Question = "Povestește despre un moment în care a trebuit să înveți rapid ceva nou.",
+                SuggestedAnswer = "Folosește un exemplu concret. Explică situația, ce ai învățat, cum ai aplicat informația și care a fost rezultatul."
+            });
+
+            questions.Add(new InterviewQuestionDto
+            {
+                Category = "Final",
+                Question = "Ai întrebări pentru noi?",
+                SuggestedAnswer = "Întreabă despre echipă, tehnologii, procesul de onboarding, așteptările pentru primele luni și oportunitățile de dezvoltare."
+            });
+
+            return new InterviewPrepResponseDto
+            {
+                JobTitle = jobTitle,
+                Company = company,
+                Summary = $"Această pregătire pentru interviu este orientată către rolul {jobTitle} la {company}. Candidatul ar trebui să fie pregătit să discute despre {skillText}, experiența relevantă și modul în care profilul său se potrivește responsabilităților rolului.",
+                KeySkills = skills,
+                Questions = questions.Take(10).ToList(),
+                BeforeInterviewTips = new List<string>
+                {
+                    "Recitește descrierea jobului și identifică cerințele cele mai importante.",
+                    "Pregătește unul sau două exemple din CV care se potrivesc acestui rol.",
+                    "Informează-te despre companie înainte de interviu.",
+                    "Exersează explicarea proiectelor tale clar și pe scurt.",
+                    "Pregătește întrebări despre echipă, tehnologii și așteptări."
+                },
+                IsMock = true
+            };
         }
 
         private static List<string> DetectSkills(string text)
@@ -205,13 +310,36 @@ namespace JobCv.Api.Services
         }
         public Task<CoverLetterResponseDto> GenerateCoverLetterAsync(CoverLetterRequestDto request)
         {
+            var romanian = AiLanguageHelper.IsRomanian(request.Language);
+
             var jobTitle = string.IsNullOrWhiteSpace(request.JobTitle)
-                ? "the selected role"
+                ? romanian ? "rolul selectat" : "the selected role"
                 : request.JobTitle.Trim();
 
             var company = string.IsNullOrWhiteSpace(request.Company)
-                ? "your company"
+                ? romanian ? "compania dumneavoastră" : "your company"
                 : request.Company.Trim();
+
+            if (romanian)
+            {
+                return Task.FromResult(new CoverLetterResponseDto
+                {
+                    JobTitle = jobTitle,
+                    Company = company,
+                    Subject = $"Aplicare pentru {jobTitle}",
+                    Letter =
+$@"Bună ziua,
+
+Vă scriu pentru a-mi exprima interesul pentru poziția {jobTitle} în cadrul {company}. Consider că acest rol se potrivește cu profilul meu, motivația mea și interesul meu pentru dezvoltarea de soluții practice.
+
+Experiența și competențele mele m-au ajutat să îmi formez o bază solidă în rezolvarea problemelor, comunicare și lucrul cu proiecte orientate spre tehnologie. Sunt interesat(ă) în special de oportunități în care pot continua să învăț, să contribui în cadrul unei echipe și să aplic cunoștințele în contexte reale.
+
+Mi-ar plăcea să discutăm despre modul în care profilul meu se poate potrivi nevoilor echipei dumneavoastră. Vă mulțumesc pentru timpul acordat și pentru oportunitate.
+
+Cu stimă,",
+                    IsMock = true
+                });
+            }
 
             var response = new CoverLetterResponseDto
             {
@@ -219,7 +347,7 @@ namespace JobCv.Api.Services
                 Company = company,
                 Subject = $"Application for {jobTitle}",
                 Letter =
-        $@"Dear Hiring Team,
+$@"Dear Hiring Team,
 
 I am writing to express my interest in the {jobTitle} position at {company}. I believe this role is a strong match for my background, motivation, and interest in developing practical solutions.
 

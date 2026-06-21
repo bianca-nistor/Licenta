@@ -11,5 +11,7 @@ namespace JobCv.Api.Dtos
         public List<string> MissingSkills { get; set; } = new();
         public List<string> Improvements { get; set; } = new();
         public bool IsMock { get; set; }
+
+
     }
 }

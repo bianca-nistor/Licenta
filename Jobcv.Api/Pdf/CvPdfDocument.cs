@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.Json;
 using JobCv.Api.Models;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -32,6 +34,10 @@ namespace JobCv.Api.Pdf
             ComposeStandardLayout(container);
         }
 
+        private bool IsRomanian => string.Equals(_cv.Language?.Trim(), "ro", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(_cv.Language?.Trim(), "romanian", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(_cv.Language?.Trim(), "română", StringComparison.OrdinalIgnoreCase);
+
         private void ComposeStandardLayout(IDocumentContainer container)
         {
             container.Page(page =>
@@ -53,6 +59,7 @@ namespace JobCv.Api.Pdf
                         ComposeProjects(column);
                         ComposeLanguages(column);
                         ComposeCertifications(column);
+                        ComposeMachineReadableExport(column);
                     });
             });
         }
@@ -76,7 +83,7 @@ namespace JobCv.Api.Pdf
 
                             ComposeSidebarPhotoOrInitials(sidebar);
 
-                            sidebar.Item().Text("CONTACT")
+                            sidebar.Item().Text(T("CONTACT"))
                                 .FontSize(11)
                                 .Bold()
                                 .FontColor(Colors.White);
@@ -95,7 +102,7 @@ namespace JobCv.Api.Pdf
 
                             if (!string.IsNullOrWhiteSpace(links))
                             {
-                                sidebar.Item().PaddingTop(6).Text("LINKS")
+                                sidebar.Item().PaddingTop(6).Text(T("LINKS"))
                                     .FontSize(11)
                                     .Bold()
                                     .FontColor(Colors.White);
@@ -108,7 +115,7 @@ namespace JobCv.Api.Pdf
 
                             if (_cv.Skills != null && _cv.Skills.Any())
                             {
-                                sidebar.Item().PaddingTop(8).Text("SKILLS")
+                                sidebar.Item().PaddingTop(8).Text(T("SKILLS"))
                                     .FontSize(11)
                                     .Bold()
                                     .FontColor(Colors.White);
@@ -121,7 +128,7 @@ namespace JobCv.Api.Pdf
 
                             if (_cv.Languages != null && _cv.Languages.Any())
                             {
-                                sidebar.Item().PaddingTop(8).Text("LANGUAGES")
+                                sidebar.Item().PaddingTop(8).Text(T("LANGUAGES"))
                                     .FontSize(11)
                                     .Bold()
                                     .FontColor(Colors.White);
@@ -161,6 +168,7 @@ namespace JobCv.Api.Pdf
                             ComposeBlueSidebarEducation(content);
                             ComposeBlueSidebarProjects(content);
                             ComposeBlueSidebarCertifications(content);
+                            ComposeMachineReadableExport(content);
                         });
                 });
             });
@@ -204,7 +212,7 @@ namespace JobCv.Api.Pdf
             if (string.IsNullOrWhiteSpace(_cv.Summary))
                 return;
 
-            ComposeBlueSidebarSectionTitle(column, "PROFILE");
+            ComposeBlueSidebarSectionTitle(column, T("PROFILE"));
 
             column.Item().Text(_cv.Summary)
                 .FontSize(10)
@@ -217,7 +225,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Experiences == null || !_cv.Experiences.Any())
                 return;
 
-            ComposeBlueSidebarSectionTitle(column, "EXPERIENCE");
+            ComposeBlueSidebarSectionTitle(column, T("EXPERIENCE"));
 
             foreach (var item in _cv.Experiences.OrderByDescending(x => x.StartDate))
             {
@@ -253,7 +261,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Educations == null || !_cv.Educations.Any())
                 return;
 
-            ComposeBlueSidebarSectionTitle(column, "EDUCATION");
+            ComposeBlueSidebarSectionTitle(column, T("EDUCATION"));
 
             foreach (var item in _cv.Educations.OrderByDescending(x => x.StartDate))
             {
@@ -296,7 +304,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Projects == null || !_cv.Projects.Any())
                 return;
 
-            ComposeBlueSidebarSectionTitle(column, "PROJECTS");
+            ComposeBlueSidebarSectionTitle(column, T("PROJECTS"));
 
             foreach (var item in _cv.Projects)
             {
@@ -325,7 +333,7 @@ namespace JobCv.Api.Pdf
                     var links = new List<string>();
 
                     if (!string.IsNullOrWhiteSpace(item.ProjectUrl))
-                        links.Add($"Project: {item.ProjectUrl}");
+                        links.Add($"{T("Project")}: {item.ProjectUrl}");
 
                     if (!string.IsNullOrWhiteSpace(item.GitHubUrl))
                         links.Add($"GitHub: {item.GitHubUrl}");
@@ -345,7 +353,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Certifications == null || !_cv.Certifications.Any())
                 return;
 
-            ComposeBlueSidebarSectionTitle(column, "CERTIFICATIONS");
+            ComposeBlueSidebarSectionTitle(column, T("CERTIFICATIONS"));
 
             foreach (var item in _cv.Certifications.OrderByDescending(x => x.Date))
             {
@@ -511,7 +519,7 @@ namespace JobCv.Api.Pdf
             if (string.IsNullOrWhiteSpace(_cv.Summary))
                 return;
 
-            ComposeSectionTitle(column, "Professional Summary");
+            ComposeSectionTitle(column, T("Professional Summary"));
 
             column.Item().Text(_cv.Summary)
                 .FontSize(10)
@@ -526,7 +534,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Skills == null || !_cv.Skills.Any())
                 return;
 
-            ComposeSectionTitle(column, "Skills");
+            ComposeSectionTitle(column, T("Skills"));
 
             column.Item().Text(string.Join("  •  ", _cv.Skills.Select(x => x.Name)))
                 .FontSize(10)
@@ -540,7 +548,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Experiences == null || !_cv.Experiences.Any())
                 return;
 
-            ComposeSectionTitle(column, "Experience");
+            ComposeSectionTitle(column, T("Experience"));
 
             foreach (var item in _cv.Experiences.OrderByDescending(x => x.StartDate))
             {
@@ -578,7 +586,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Educations == null || !_cv.Educations.Any())
                 return;
 
-            ComposeSectionTitle(column, "Education");
+            ComposeSectionTitle(column, T("Education"));
 
             foreach (var item in _cv.Educations.OrderByDescending(x => x.StartDate))
             {
@@ -623,7 +631,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Projects == null || !_cv.Projects.Any())
                 return;
 
-            ComposeSectionTitle(column, "Projects");
+            ComposeSectionTitle(column, T("Projects"));
 
             foreach (var item in _cv.Projects)
             {
@@ -652,7 +660,7 @@ namespace JobCv.Api.Pdf
                     var links = new List<string>();
 
                     if (!string.IsNullOrWhiteSpace(item.ProjectUrl))
-                        links.Add($"Project: {item.ProjectUrl}");
+                        links.Add($"{T("Project")}: {item.ProjectUrl}");
 
                     if (!string.IsNullOrWhiteSpace(item.GitHubUrl))
                         links.Add($"GitHub: {item.GitHubUrl}");
@@ -674,7 +682,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Languages == null || !_cv.Languages.Any())
                 return;
 
-            ComposeSectionTitle(column, "Languages");
+            ComposeSectionTitle(column, T("Languages"));
 
             column.Item().Column(languages =>
             {
@@ -694,7 +702,7 @@ namespace JobCv.Api.Pdf
             if (_cv.Certifications == null || !_cv.Certifications.Any())
                 return;
 
-            ComposeSectionTitle(column, "Certifications");
+            ComposeSectionTitle(column, T("Certifications"));
 
             foreach (var item in _cv.Certifications.OrderByDescending(x => x.Date))
             {
@@ -786,6 +794,110 @@ namespace JobCv.Api.Pdf
                 .LineColor(_style.LineColor);
         }
 
+        private string T(string key)
+        {
+            if (!IsRomanian)
+                return key;
+
+            return key switch
+            {
+                "CONTACT" => "CONTACT",
+                "LINKS" => "LINKURI",
+                "SKILLS" => "COMPETENȚE",
+                "LANGUAGES" => "LIMBI STRĂINE",
+                "PROFILE" => "PROFIL PROFESIONAL",
+                "EXPERIENCE" => "EXPERIENȚĂ",
+                "EDUCATION" => "EDUCAȚIE",
+                "PROJECTS" => "PROIECTE",
+                "CERTIFICATIONS" => "CERTIFICĂRI",
+                "Professional Summary" => "Profil profesional",
+                "Skills" => "Competențe",
+                "Experience" => "Experiență",
+                "Education" => "Educație",
+                "Projects" => "Proiecte",
+                "Languages" => "Limbi străine",
+                "Certifications" => "Certificări",
+                "Project" => "Proiect",
+                "Present" => "Prezent",
+                _ => key
+            };
+        }
+
+        private void ComposeMachineReadableExport(ColumnDescriptor column)
+        {
+            var payload = BuildMachineReadableExport();
+
+            if (string.IsNullOrWhiteSpace(payload))
+                return;
+
+            column.Item()
+                .PaddingTop(1)
+                .Text(payload)
+                .FontSize(1)
+                .FontColor(_style.PageBackground);
+        }
+
+        private string BuildMachineReadableExport()
+        {
+            var export = new
+            {
+                fullName = _cv.FullName ?? string.Empty,
+                email = _cv.Email ?? string.Empty,
+                phone = _cv.Phone ?? string.Empty,
+                location = _cv.Location ?? string.Empty,
+                linkedInUrl = _cv.LinkedInUrl ?? string.Empty,
+                gitHubUrl = _cv.GitHubUrl ?? string.Empty,
+                portfolioUrl = _cv.PortfolioUrl ?? string.Empty,
+                summary = _cv.Summary ?? string.Empty,
+                skills = (_cv.Skills ?? new List<CvSkill>()).Select(x => x.Name).Where(x => !string.IsNullOrWhiteSpace(x)).ToList(),
+                experiences = (_cv.Experiences ?? new List<CvExperience>()).Select(x => new
+                {
+                    jobTitle = x.JobTitle ?? string.Empty,
+                    company = x.Company ?? string.Empty,
+                    description = x.Description ?? string.Empty,
+                    startDate = x.StartDate,
+                    endDate = x.EndDate,
+                    isCurrent = x.IsCurrent
+                }).ToList(),
+                educations = (_cv.Educations ?? new List<CvEducation>()).Select(x => new
+                {
+                    institution = x.Institution ?? string.Empty,
+                    degree = x.Degree ?? string.Empty,
+                    description = x.Description ?? string.Empty,
+                    startDate = x.StartDate,
+                    endDate = x.EndDate
+                }).ToList(),
+                projects = (_cv.Projects ?? new List<CvProject>()).Select(x => new
+                {
+                    title = x.Title ?? string.Empty,
+                    description = x.Description ?? string.Empty,
+                    technologies = x.Technologies ?? string.Empty,
+                    projectUrl = x.ProjectUrl ?? string.Empty,
+                    gitHubUrl = x.GitHubUrl ?? string.Empty
+                }).ToList(),
+                languages = (_cv.Languages ?? new List<CvLanguage>()).Select(x => new
+                {
+                    name = x.Name ?? string.Empty,
+                    level = x.Level ?? string.Empty
+                }).ToList(),
+                certifications = (_cv.Certifications ?? new List<CvCertification>()).Select(x => new
+                {
+                    name = x.Name ?? string.Empty,
+                    issuer = x.Issuer ?? string.Empty,
+                    date = x.Date,
+                    url = x.Url ?? string.Empty
+                }).ToList()
+            };
+
+            var json = JsonSerializer.Serialize(export, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+
+            var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
+            return $"JOBCV_EXPORT_V1_START{base64}JOBCV_EXPORT_V1_END";
+        }
+
         private string GetDisplayName()
         {
             if (!string.IsNullOrWhiteSpace(_cv.FullName))
@@ -840,7 +952,7 @@ namespace JobCv.Api.Pdf
             return string.Join(" | ", links);
         }
 
-        private static string FormatDateRange(DateTime? startDate, DateTime? endDate, bool isCurrent)
+        private string FormatDateRange(DateTime? startDate, DateTime? endDate, bool isCurrent)
         {
             if (!startDate.HasValue && !endDate.HasValue && !isCurrent)
                 return string.Empty;
@@ -850,7 +962,7 @@ namespace JobCv.Api.Pdf
                 : string.Empty;
 
             var end = isCurrent
-                ? "Present"
+                ? T("Present")
                 : endDate.HasValue
                     ? endDate.Value.ToString("MMM yyyy")
                     : string.Empty;
