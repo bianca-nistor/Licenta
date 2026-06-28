@@ -81,13 +81,13 @@ namespace JobCv.Mobile.Pages
             if (string.IsNullOrWhiteSpace(query))
             {
                 SearchMessageLabel.TextColor = Colors.Red;
-                SearchMessageLabel.Text = "Please enter a job keyword before searching.";
+                SearchMessageLabel.Text = UiTranslationService.TranslateText("Please enter a job keyword before searching.");
                 return;
             }
 
             _isSearching = true;
             SearchMessageLabel.TextColor = Color.FromArgb("#64748B");
-            SearchMessageLabel.Text = resetResults ? "Searching jobs..." : "Loading more jobs...";
+            SearchMessageLabel.Text = UiTranslationService.TranslateText(resetResults ? "Searching jobs..." : "Loading more jobs...");
 
             try
             {
@@ -111,7 +111,7 @@ namespace JobCv.Mobile.Pages
                 {
                     _allJobs.Clear();
                     ApplyFilters();
-                    EmptyJobsMessageLabel.Text = "No jobs were found for this search.";
+                    EmptyJobsMessageLabel.Text = UiTranslationService.TranslateText("No jobs were found for this search.");
                     SearchMessageLabel.Text = "";
                     return;
                 }
@@ -121,14 +121,14 @@ namespace JobCv.Mobile.Pages
                 ApplyFilters();
 
                 SearchMessageLabel.TextColor = Color.FromArgb("#166534");
-                SearchMessageLabel.Text = resetResults
+                SearchMessageLabel.Text = UiTranslationService.TranslateText(resetResults
                     ? $"Search completed. Found {_filteredJobs.Count} visible jobs."
-                    : $"Loaded more jobs. Showing {_filteredJobs.Count} jobs after filters.";
+                    : $"Loaded more jobs. Showing {_filteredJobs.Count} jobs after filters.");
             }
             catch (Exception ex)
             {
                 SearchMessageLabel.TextColor = Colors.Red;
-                SearchMessageLabel.Text = ex.Message;
+                SearchMessageLabel.Text = UiTranslationService.TranslateText(ex.Message);
             }
             finally
             {
@@ -177,13 +177,13 @@ namespace JobCv.Mobile.Pages
 
             if (_allJobs.Count == 0)
             {
-                FilterSummaryLabel.Text = "Filters are applied after a search.";
-                EmptyJobsMessageLabel.Text = "Search for a role to see job offers here.";
+                FilterSummaryLabel.Text = UiTranslationService.TranslateText("Filters are applied after a search.");
+                EmptyJobsMessageLabel.Text = UiTranslationService.TranslateText("Search for a role to see job offers here.");
                 return;
             }
 
-            FilterSummaryLabel.Text = $"Showing {_filteredJobs.Count} of {_allJobs.Count} loaded jobs.";
-            EmptyJobsMessageLabel.Text = "No jobs match the selected filters.";
+            FilterSummaryLabel.Text = UiTranslationService.TranslateText($"Showing {_filteredJobs.Count} of {_allJobs.Count} loaded jobs.");
+            EmptyJobsMessageLabel.Text = UiTranslationService.TranslateText("No jobs match the selected filters.");
         }
 
         private IEnumerable<JobSearchResultDto> ApplyWorkModeFilter(IEnumerable<JobSearchResultDto> jobs)
@@ -361,7 +361,11 @@ namespace JobCv.Mobile.Pages
                 PageTitleLabel.FontSize = 34;
             }
         }
-
+        private void OnTranslateLoadedElement(object sender, EventArgs e)
+        {
+            if (sender is Element element)
+                UiTranslationService.ApplyToElement(element);
+        }
 
     }
 }

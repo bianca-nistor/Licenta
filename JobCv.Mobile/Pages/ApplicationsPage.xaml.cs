@@ -12,6 +12,23 @@ namespace JobCv.Mobile.Pages
         private string _currentFilter = "All";
         private string _searchText = string.Empty;
 
+        private sealed class ApplicationListItem
+        {
+            public ApplicationListItem(JobApplicationDto application)
+            {
+                Application = application;
+            }
+
+            public JobApplicationDto Application { get; }
+            public int Id => Application.Id;
+            public string JobTitle => Application.JobTitle;
+            public string Company => Application.Company;
+            public string Location => Application.Location;
+            public string Status => UiTranslationService.TranslateText(Application.Status);
+            public DateTime? AppliedAt => Application.AppliedAt;
+            public string Source => Application.Source;
+        }
+
         public ApplicationsPage(UserDto user, ApiService apiService)
         {
             InitializeComponent();
@@ -57,7 +74,7 @@ namespace JobCv.Mobile.Pages
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await UiTranslationService.DisplayAlertAsync(this, "Error", ex.Message);
             }
         }
 
@@ -74,22 +91,23 @@ namespace JobCv.Mobile.Pages
         {
             var filteredApplications = GetFilteredApplications();
 
-            ApplicationsCollectionView.ItemsSource = filteredApplications;
+            ApplicationsCollectionView.ItemsSource = filteredApplications.Select(application => new ApplicationListItem(application)).ToList();
 
             EmptyApplicationsState.IsVisible = filteredApplications.Count == 0;
             ApplicationsCollectionView.IsVisible = filteredApplications.Count > 0;
 
             ApplicationsCountLabel.Text = filteredApplications.Count.ToString();
 
-            FilterSummaryLabel.Text = _currentFilter == "All"
+            FilterSummaryLabel.Text = UiTranslationService.TranslateText(_currentFilter == "All"
                 ? $"Showing all applications ({filteredApplications.Count})."
-                : $"Showing {_currentFilter.ToLower()} applications ({filteredApplications.Count}).";
+                : $"Showing {_currentFilter.ToLower()} applications ({filteredApplications.Count}).");
 
-            EmptyApplicationsMessageLabel.Text = _currentFilter == "All"
+            EmptyApplicationsMessageLabel.Text = UiTranslationService.TranslateText(_currentFilter == "All"
                 ? "You have not saved or tracked any applications yet."
-                : $"You do not have applications with the status {_currentFilter} yet.";
+                : $"You do not have applications with the status {_currentFilter} yet.");
 
             UpdateFilterButtons();
+            UiTranslationService.ApplyToPage(this);
         }
 
 
@@ -151,7 +169,16 @@ namespace JobCv.Mobile.Pages
 
         private async void OnViewApplicationDetailsClicked(object sender, EventArgs e)
         {
-            if ((sender as Button)?.CommandParameter is not JobApplicationDto application)
+            var commandParameter = (sender as Button)?.CommandParameter;
+
+            var application = commandParameter switch
+            {
+                ApplicationListItem item => item.Application,
+                JobApplicationDto dto => dto,
+                _ => null
+            };
+
+            if (application == null)
                 return;
 
             await Navigation.PushAsync(new ApplicationDetailsPage(_user, _apiService, application));
@@ -159,7 +186,17 @@ namespace JobCv.Mobile.Pages
 
         private async void OnDeleteApplicationClicked(object sender, EventArgs e)
         {
-            if ((sender as Button)?.CommandParameter is not int applicationId)
+            var commandParameter = (sender as Button)?.CommandParameter;
+
+            var applicationId = commandParameter switch
+            {
+                int id => id,
+                ApplicationListItem item => item.Id,
+                JobApplicationDto dto => dto.Id,
+                _ => 0
+            };
+
+            if (applicationId <= 0)
                 return;
 
             var confirm = await UiTranslationService.DisplayConfirmAsync(

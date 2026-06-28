@@ -1,4 +1,4 @@
-using JobCv.Mobile.Models;
+﻿using JobCv.Mobile.Models;
 using JobCv.Mobile.Services;
 using Microsoft.Maui.ApplicationModel;
 
@@ -13,8 +13,8 @@ namespace JobCv.Mobile.Pages
         private List<UploadedCvFileDto> _allUploadedCvs = new();
 
         private string _searchText = string.Empty;
-        private string _selectedFilter = "All";
-        private string _selectedSort = "Newest";
+        private int _selectedFilterIndex = 0;
+        private int _selectedSortIndex = 0;
 
         public MyCvsPage(UserDto user, ApiService apiService)
         {
@@ -22,12 +22,115 @@ namespace JobCv.Mobile.Pages
 
             _user = user;
             _apiService = apiService;
+
+            ApplyCvPickerLanguage();
+            SetDefaultPickerIndexes();
+        }
+
+        private void SetDefaultPickerIndexes()
+        {
+            if (CvTypeFilterPicker.SelectedIndex < 0)
+                CvTypeFilterPicker.SelectedIndex = 0;
+
+            if (CvSortPicker.SelectedIndex < 0)
+                CvSortPicker.SelectedIndex = 0;
+
+            _selectedFilterIndex = CvTypeFilterPicker.SelectedIndex < 0
+                ? 0
+                : CvTypeFilterPicker.SelectedIndex;
+
+            _selectedSortIndex = CvSortPicker.SelectedIndex < 0
+                ? 0
+                : CvSortPicker.SelectedIndex;
+        }
+
+        private void ApplyCvPickerLanguage()
+        {
+            var filterIndex = CvTypeFilterPicker.SelectedIndex < 0
+                ? _selectedFilterIndex
+                : CvTypeFilterPicker.SelectedIndex;
+
+            var sortIndex = CvSortPicker.SelectedIndex < 0
+                ? _selectedSortIndex
+                : CvSortPicker.SelectedIndex;
+
+            if (filterIndex < 0)
+                filterIndex = 0;
+
+            if (sortIndex < 0)
+                sortIndex = 0;
+
+            if (LanguageService.IsRomanian)
+            {
+                SetPickerItems(
+                    CvTypeFilterPicker,
+                    "Filtru",
+                    filterIndex,
+                    "Toate",
+                    "Create",
+                    "Încărcate");
+
+                SetPickerItems(
+                    CvSortPicker,
+                    "Sortare",
+                    sortIndex,
+                    "Cele mai noi",
+                    "Cele mai vechi",
+                    "A-Z");
+            }
+            else
+            {
+                SetPickerItems(
+                    CvTypeFilterPicker,
+                    "Filter",
+                    filterIndex,
+                    "All",
+                    "Created",
+                    "Uploaded");
+
+                SetPickerItems(
+                    CvSortPicker,
+                    "Sort",
+                    sortIndex,
+                    "Newest",
+                    "Oldest",
+                    "A-Z");
+            }
+
+            _selectedFilterIndex = CvTypeFilterPicker.SelectedIndex < 0
+                ? 0
+                : CvTypeFilterPicker.SelectedIndex;
+
+            _selectedSortIndex = CvSortPicker.SelectedIndex < 0
+                ? 0
+                : CvSortPicker.SelectedIndex;
+        }
+
+        private static void SetPickerItems(Picker picker, string title, int selectedIndex, params string[] items)
+        {
+            picker.Title = title;
+
+            picker.Items.Clear();
+
+            foreach (var item in items)
+                picker.Items.Add(item);
+
+            picker.SelectedIndex = selectedIndex >= 0 && selectedIndex < items.Length
+                ? selectedIndex
+                : 0;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            ApplyCvPickerLanguage();
+            SetDefaultPickerIndexes();
+
             await LoadDataAsync();
+
+            UiTranslationService.ApplyToPage(this);
+            ApplyCvPickerLanguage();
         }
 
         private T GetControl<T>(string name) where T : Element
@@ -72,6 +175,7 @@ namespace JobCv.Mobile.Pages
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
         private void OnMenuClicked(object sender, EventArgs e)
         {
             var mainMenu = GetMainMenu();
@@ -118,6 +222,54 @@ namespace JobCv.Mobile.Pages
             await Navigation.PushAsync(new UploadCvPage(_user, _apiService));
         }
 
+        private void OnTranslateLoadedElement(object sender, EventArgs e)
+        {
+            if (sender is not Element element)
+                return;
+
+            UiTranslationService.ApplyToElement(element);
+            ApplyKnownCvTemplateTranslation(element);
+        }
+
+        private static void ApplyKnownCvTemplateTranslation(Element element)
+        {
+            switch (element)
+            {
+                case Button button when !string.IsNullOrWhiteSpace(button.Text):
+                    button.Text = TranslateKnownCvTemplateText(button.Text);
+                    break;
+
+                case Label label when !string.IsNullOrWhiteSpace(label.Text):
+                    label.Text = TranslateKnownCvTemplateText(label.Text);
+                    break;
+            }
+        }
+
+        private static string TranslateKnownCvTemplateText(string text)
+        {
+            return LanguageService.IsRomanian
+                ? text switch
+                {
+                    "Details" => "Detalii",
+                    "Preview" => "Previzualizare",
+                    "Quality" => "Calitate",
+                    "Delete" => "Șterge",
+                    "Open file" => "Deschide fișierul",
+                    "uploaded" => "încărcat",
+                    _ => text
+                }
+                : text switch
+                {
+                    "Detalii" => "Details",
+                    "Previzualizare" => "Preview",
+                    "Calitate" => "Quality",
+                    "Șterge" => "Delete",
+                    "Deschide fișierul" => "Open file",
+                    "încărcat" => "uploaded",
+                    _ => text
+                };
+        }
+
         private async void OnViewDetailsClicked(object sender, EventArgs e)
         {
             if ((sender as Button)?.CommandParameter is not int cvId)
@@ -125,7 +277,6 @@ namespace JobCv.Mobile.Pages
 
             await Navigation.PushAsync(new CvDetailsPage(cvId, _apiService));
         }
-
 
         private async void OnPreviewCvPdfClicked(object sender, EventArgs e)
         {
@@ -238,6 +389,7 @@ namespace JobCv.Mobile.Pages
 
             Application.Current!.Windows[0].Page = new LocalizedNavigationPage(new MainPage());
         }
+
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
@@ -258,6 +410,7 @@ namespace JobCv.Mobile.Pages
                 PageTitleLabel.FontSize = 30;
             }
         }
+
         private async void OnCheckCvQualityClicked(object sender, EventArgs e)
         {
             if ((sender as Button)?.CommandParameter is not int cvId)
@@ -265,6 +418,7 @@ namespace JobCv.Mobile.Pages
 
             await Navigation.PushAsync(new CvQualityCheckPage(cvId, _apiService));
         }
+
         private void ApplyCvFilters()
         {
             var createdCvs = _allCreatedCvs.AsEnumerable();
@@ -283,25 +437,25 @@ namespace JobCv.Mobile.Pages
                     cv.OriginalFileName.Contains(normalizedSearch, StringComparison.OrdinalIgnoreCase));
             }
 
-            createdCvs = _selectedSort switch
+            createdCvs = _selectedSortIndex switch
             {
-                "Oldest" => createdCvs.OrderBy(cv => cv.CreatedAt),
-                "A-Z" => createdCvs.OrderBy(cv => cv.Title),
+                1 => createdCvs.OrderBy(cv => cv.CreatedAt),
+                2 => createdCvs.OrderBy(cv => cv.Title),
                 _ => createdCvs.OrderByDescending(cv => cv.CreatedAt)
             };
 
-            uploadedCvs = _selectedSort switch
+            uploadedCvs = _selectedSortIndex switch
             {
-                "Oldest" => uploadedCvs.OrderBy(cv => cv.UploadedAt),
-                "A-Z" => uploadedCvs.OrderBy(cv => cv.OriginalFileName),
+                1 => uploadedCvs.OrderBy(cv => cv.UploadedAt),
+                2 => uploadedCvs.OrderBy(cv => cv.OriginalFileName),
                 _ => uploadedCvs.OrderByDescending(cv => cv.UploadedAt)
             };
 
             var filteredCreatedCvs = createdCvs.ToList();
             var filteredUploadedCvs = uploadedCvs.ToList();
 
-            var showCreated = _selectedFilter == "All" || _selectedFilter == "Created";
-            var showUploaded = _selectedFilter == "All" || _selectedFilter == "Uploaded";
+            var showCreated = _selectedFilterIndex == 0 || _selectedFilterIndex == 1;
+            var showUploaded = _selectedFilterIndex == 0 || _selectedFilterIndex == 2;
 
             CreatedCvsSectionHeader.IsVisible = showCreated;
             CvsCollectionView.IsVisible = showCreated;
@@ -334,21 +488,20 @@ namespace JobCv.Mobile.Pages
 
         private void OnCvFilterChanged(object sender, EventArgs e)
         {
-            if (CvTypeFilterPicker.SelectedIndex < 0)
-                return;
+            _selectedFilterIndex = CvTypeFilterPicker.SelectedIndex < 0
+                ? 0
+                : CvTypeFilterPicker.SelectedIndex;
 
-            _selectedFilter = CvTypeFilterPicker.Items[CvTypeFilterPicker.SelectedIndex];
             ApplyCvFilters();
         }
 
         private void OnCvSortChanged(object sender, EventArgs e)
         {
-            if (CvSortPicker.SelectedIndex < 0)
-                return;
+            _selectedSortIndex = CvSortPicker.SelectedIndex < 0
+                ? 0
+                : CvSortPicker.SelectedIndex;
 
-            _selectedSort = CvSortPicker.Items[CvSortPicker.SelectedIndex];
             ApplyCvFilters();
         }
-
     }
 }

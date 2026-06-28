@@ -1,5 +1,6 @@
 ﻿using JobCv.Api.Dtos;
 using JobCv.Api.Pdf;
+using JobCv.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
 
@@ -9,6 +10,28 @@ namespace JobCv.Api.Controllers
     [Route("api/[controller]")]
     public class CareerTestController : ControllerBase
     {
+        private readonly GeminiAiService _geminiAiService;
+
+        public CareerTestController(GeminiAiService geminiAiService)
+        {
+            _geminiAiService = geminiAiService;
+        }
+
+        [HttpPost("ai-recommendations")]
+        public async Task<IActionResult> GenerateAiRecommendations(
+            [FromBody] CareerAiRecommendationsRequestDto request)
+        {
+            if (request == null)
+                return BadRequest("Invalid career test result.");
+
+            if (request.AreaScores == null || request.AreaScores.Count == 0)
+                return BadRequest("Career test scores are required.");
+
+            var result = await _geminiAiService.GenerateCareerRecommendationsAsync(request);
+
+            return Ok(result);
+        }
+
         [HttpPost("export-pdf")]
         public IActionResult ExportCareerTestPdf([FromBody] CareerTestPdfRequestDto request)
         {

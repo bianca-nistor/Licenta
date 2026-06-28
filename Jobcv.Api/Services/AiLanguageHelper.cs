@@ -91,6 +91,10 @@ namespace JobCv.Api.Services
             if (incompleteMatch.Success)
                 return $"Acest CV este incomplet. Are {incompleteMatch.Groups[1].Value} problemă(e) importantă(e), deci ar trebui îmbunătățit înainte de aplicarea la joburi.";
 
+            var duplicateSkillsMatch = Regex.Match(text, @"^Remove duplicate skills such as: (.+)\.$");
+            if (duplicateSkillsMatch.Success)
+                return $"Elimină competențele duplicate, precum: {duplicateSkillsMatch.Groups[1].Value}.";
+
             return text;
         }
 
@@ -163,6 +167,19 @@ namespace JobCv.Api.Services
             ["Add languages and proficiency levels, especially English if relevant for the job market."] = "Adaugă limbi străine și niveluri de cunoaștere, mai ales engleza dacă este relevantă pentru piața muncii.",
             ["The CV appears to contain placeholder or test text."] = "CV-ul pare să conțină text temporar sau de test.",
             ["Replace generic or test values with real professional information before applying."] = "Înlocuiește valorile generice sau de test cu informații profesionale reale înainte de aplicare.",
+            ["The email address does not appear to have a valid format."] = "Adresa de email nu pare să aibă un format valid.",
+            ["Check that the email contains a username, @ symbol and domain, for example name@example.com."] = "Verifică dacă emailul conține un nume de utilizator, simbolul @ și un domeniu, de exemplu name@example.com.",
+            ["The phone number seems incomplete."] = "Numărul de telefon pare incomplet.",
+            ["Add a phone number with enough digits so recruiters can contact you correctly."] = "Adaugă un număr de telefon cu suficiente cifre, astfel încât recrutorii să te poată contacta corect.",
+            ["Some skills appear more than once."] = "Unele competențe apar de mai multe ori.",
+            ["The profile summary contains very generic wording."] = "Rezumatul profesional conține formulări foarte generale.",
+            ["Add specific details about your role, experience level, technologies and career objective."] = "Adaugă detalii specifice despre rolul tău, nivelul de experiență, tehnologii și obiectivul profesional.",
+            ["Several skills appear to be too general."] = "Mai multe competențe par prea generale.",
+            ["Add more specific technical or role-related skills that match the jobs you want to apply for."] = "Adaugă competențe mai specifice, tehnice sau relevante pentru rolurile la care vrei să aplici.",
+            ["Some experience entries appear too short."] = "Unele intrări de experiență par prea scurte.",
+            ["Add responsibilities, technologies used and results obtained for each experience."] = "Adaugă responsabilități, tehnologii folosite și rezultate obținute pentru fiecare experiență.",
+            ["Some project entries appear too short."] = "Unele proiecte par descrise prea scurt.",
+            ["Add a clearer description, technologies used and the purpose of each project."] = "Adaugă o descriere mai clară, tehnologiile folosite și scopul fiecărui proiect.",
             ["The CV includes certifications, which can support the candidate profile."] = "CV-ul include certificări, ceea ce poate susține profilul candidatului.",
             ["The CV includes language information."] = "CV-ul include informații despre limbi străine.",
             ["The profile summary is detailed enough to introduce the candidate."] = "Rezumatul profesional este suficient de detaliat pentru a prezenta candidatul.",

@@ -27,14 +27,13 @@
 
                 <VerticalStackLayout Grid.Column="1"
                                      Spacing="4">
-
                     <Label x:Name="PageTitleLabel"
-                           Text="Find Jobs"
-                           FontSize="34"
-                           FontAttributes="Bold"
-                           TextColor="#0F172A"
-                           MaxLines="1"
-                           LineBreakMode="TailTruncation" />
+       Text="Find Jobs"
+       FontSize="34"
+       FontAttributes="Bold"
+       TextColor="#0F172A"
+       MaxLines="2"
+       LineBreakMode="WordWrap" />
 
                     <Label Text="Search jobs, filter results and open details before applying."
                            FontSize="16"
@@ -507,6 +506,7 @@
                                        LineBreakMode="TailTruncation" />
 
                                 <Button Text="View details"
+                                          Loaded="OnTranslateLoadedElement"
                                         Clicked="OnViewJobDetailsClicked"
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="#EFF6FF"
@@ -523,6 +523,7 @@
 
             <Button x:Name="LoadMoreButton"
                     Text="Load more jobs"
+                      Loaded="OnTranslateLoadedElement"
                     Clicked="OnLoadMoreClicked"
                     BackgroundColor="#DCFCE7"
                     TextColor="#166534"

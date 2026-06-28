@@ -6,25 +6,26 @@
              BackgroundColor="#F8FAFC">
 
     <ScrollView>
-        <Grid Padding="24"
+        <Grid Padding="24,14,24,24"
               RowDefinitions="Auto,*">
 
             <VerticalStackLayout Grid.Row="0"
                                  Spacing="8"
-                                 Margin="0,45,0,28"
+                                 Margin="0,8,0,18"
                                  HorizontalOptions="Center"
                                  MaximumWidthRequest="520">
 
-                <Label Text="Create account"
-                       FontSize="34"
+                <Label Text="Creează cont"
+                       FontSize="32"
                        FontAttributes="Bold"
                        TextColor="#0F172A"
                        HorizontalTextAlignment="Center" />
 
-                <Label Text="Start building your career profile."
+                <Label Text="Începe să-ți construiești profilul profesional."
                        FontSize="15"
                        TextColor="#64748B"
-                       HorizontalTextAlignment="Center" />
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap" />
 
             </VerticalStackLayout>
 
@@ -33,81 +34,82 @@
                     Stroke="#E2E8F0"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 30"
-                    Padding="28"
+                    Padding="24"
                     HorizontalOptions="Center"
                     MaximumWidthRequest="520">
 
-                <VerticalStackLayout Spacing="20">
+                <VerticalStackLayout Spacing="16">
 
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Join Career Guide"
-                               FontSize="26"
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Alătură-te Career Guide"
+                               FontSize="22"
                                FontAttributes="Bold"
-                               TextColor="#0F172A" />
+                               TextColor="#0F172A"
+                               LineBreakMode="WordWrap" />
 
-                        <Label Text="Create your account and manage your CVs, jobs and applications."
+                        <Label Text="Creează-ți contul și gestionează CV-urile, joburile și aplicațiile."
                                FontSize="14"
-                               TextColor="#64748B" />
+                               TextColor="#64748B"
+                               LineBreakMode="WordWrap" />
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Full name"
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Nume complet"
                                FontSize="14"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
 
                         <Entry x:Name="FullNameEntry"
-                               Placeholder="Enter your full name"
+                               Placeholder="Introdu numele complet"
                                TextColor="#0F172A"
                                PlaceholderColor="#94A3B8"
                                BackgroundColor="#F8FAFC"
-                               HeightRequest="52" />
+                               HeightRequest="50" />
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Spacing="8">
+                    <VerticalStackLayout Spacing="6">
                         <Label Text="Email"
                                FontSize="14"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
 
                         <Entry x:Name="EmailEntry"
-                               Placeholder="Enter your email"
+                               Placeholder="Introdu emailul"
                                Keyboard="Email"
                                TextColor="#0F172A"
                                PlaceholderColor="#94A3B8"
                                BackgroundColor="#F8FAFC"
-                               HeightRequest="52" />
+                               HeightRequest="50" />
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Password"
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Parolă"
                                FontSize="14"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
 
                         <Entry x:Name="PasswordEntry"
-                               Placeholder="Create a password"
+                               Placeholder="Creează o parolă"
                                IsPassword="True"
                                TextColor="#0F172A"
                                PlaceholderColor="#94A3B8"
                                BackgroundColor="#F8FAFC"
-                               HeightRequest="52" />
+                               HeightRequest="50" />
                     </VerticalStackLayout>
-                   
 
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Confirm password"
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Confirmă parola"
                                FontSize="14"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
 
                         <Entry x:Name="ConfirmPasswordEntry"
-                               Placeholder="Confirm your password"
+                               Placeholder="Confirmă parola"
                                IsPassword="True"
                                TextColor="#0F172A"
                                PlaceholderColor="#94A3B8"
                                BackgroundColor="#F8FAFC"
-                               HeightRequest="52" />
+                               HeightRequest="50" />
                     </VerticalStackLayout>
 
                     <Label x:Name="MessageLabel"
@@ -116,21 +118,21 @@
                            FontSize="13"
                            HorizontalTextAlignment="Center" />
 
-                    <Button Text="Create account"
+                    <Button Text="Creează cont"
                             Clicked="OnRegisterClicked"
                             BackgroundColor="#1D4ED8"
                             TextColor="White"
                             FontAttributes="Bold"
                             CornerRadius="16"
-                            HeightRequest="54" />
+                            HeightRequest="52" />
 
-                    <Button Text="Back to sign in"
+                    <Button Text="Înapoi la autentificare"
                             Clicked="OnBackToLoginClicked"
                             BackgroundColor="#DCFCE7"
                             TextColor="#166534"
                             FontAttributes="Bold"
                             CornerRadius="16"
-                            HeightRequest="54" />
+                            HeightRequest="52" />
 
                 </VerticalStackLayout>
             </Border>

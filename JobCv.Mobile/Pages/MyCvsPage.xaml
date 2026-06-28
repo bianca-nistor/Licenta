@@ -319,6 +319,7 @@
                                     <Button Grid.Row="0"
                                             Grid.Column="0"
                                             Text="Details"
+                                            Loaded="OnTranslateLoadedElement"
                                             Clicked="OnViewDetailsClicked"
                                             CommandParameter="{Binding Id}"
                                             BackgroundColor="#EEF4FF"
@@ -330,6 +331,7 @@
                                     <Button Grid.Row="0"
                                             Grid.Column="1"
                                             Text="Preview"
+                                            Loaded="OnTranslateLoadedElement"
                                             Clicked="OnPreviewCvPdfClicked"
                                             CommandParameter="{Binding .}"
                                             BackgroundColor="#DCFCE7"
@@ -341,6 +343,7 @@
                                     <Button Grid.Row="1"
                                             Grid.Column="0"
                                             Text="Quality"
+                                            Loaded="OnTranslateLoadedElement"
                                             Clicked="OnCheckCvQualityClicked"
                                             CommandParameter="{Binding Id}"
                                             BackgroundColor="#FEF3C7"
@@ -352,6 +355,7 @@
                                     <Button Grid.Row="1"
                                             Grid.Column="1"
                                             Text="Delete"
+                                            Loaded="OnTranslateLoadedElement"
                                             Clicked="OnDeleteCvClicked"
                                             CommandParameter="{Binding Id}"
                                             BackgroundColor="#FEE2E2"
@@ -475,6 +479,7 @@
                                                 VerticalOptions="Start">
 
                                             <Label Text="uploaded"
+                                                   Loaded="OnTranslateLoadedElement"
                                                    TextColor="#166534"
                                                    FontAttributes="Bold"
                                                    FontSize="12" />
@@ -492,6 +497,7 @@
 
                                     <Button Grid.Column="0"
                                             Text="Open file"
+                                            Loaded="OnTranslateLoadedElement"
                                             Clicked="OnOpenUploadedCvClicked"
                                             CommandParameter="{Binding .}"
                                             BackgroundColor="#EFF6FF"
@@ -502,6 +508,7 @@
 
                                     <Button Grid.Column="1"
                                             Text="Delete"
+                                            Loaded="OnTranslateLoadedElement"
                                             Clicked="OnDeleteUploadedCvClicked"
                                             CommandParameter="{Binding Id}"
                                             BackgroundColor="#FEE2E2"

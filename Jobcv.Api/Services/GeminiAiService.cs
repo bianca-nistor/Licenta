@@ -10,6 +10,7 @@ namespace JobCv.Api.Services
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly MockAiService _mockAiService;
+        private readonly ILogger<GeminiAiService> _logger;
 
         private readonly JsonSerializerOptions _jsonOptions = new()
         {
@@ -20,11 +21,13 @@ namespace JobCv.Api.Services
         public GeminiAiService(
             HttpClient httpClient,
             IConfiguration configuration,
-            MockAiService mockAiService)
+            MockAiService mockAiService,
+            ILogger<GeminiAiService> logger)
         {
             _httpClient = httpClient;
             _configuration = configuration;
             _mockAiService = mockAiService;
+            _logger = logger;
         }
 
         public async Task<InterviewPrepResponseDto> GenerateInterviewPrepAsync(InterviewPrepRequestDto request)
@@ -91,10 +94,13 @@ namespace JobCv.Api.Services
         {
             var apiKey = _configuration["Gemini:ApiKey"];
             if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                _logger.LogWarning("Gemini request skipped because Gemini:ApiKey is missing.");
                 return default;
+            }
 
             var model = _configuration["Gemini:Model"] ?? "gemini-2.5-flash-lite";
-            var url = $"v1beta/models/{WebUtility.UrlEncode(model)}:generateContent?key={WebUtility.UrlEncode(apiKey)}";
+            var url = $"v1beta/models/{WebUtility.UrlEncode(model)}:generateContent";
 
             var geminiRequest = new GeminiGenerateContentRequest
             {
@@ -108,8 +114,8 @@ namespace JobCv.Api.Services
                             new GeminiPart
                             {
                                 Text =
-    "Return only one valid JSON object. No markdown. No explanations outside JSON.\n\n" +
-    prompt
+                                    "Return only one valid JSON object. No markdown. No explanations outside JSON.\n\n" +
+                                    prompt
                             }
                         }
                     }
@@ -117,28 +123,82 @@ namespace JobCv.Api.Services
                 GenerationConfig = new GeminiGenerationConfig
                 {
                     Temperature = 0.2,
-                    MaxOutputTokens = 1600,
+                    MaxOutputTokens = 3000,
                     ResponseMimeType = "application/json"
                 }
             };
 
             try
             {
-                using var response = await _httpClient.PostAsJsonAsync(url, geminiRequest, _jsonOptions);
+                using var requestMessage = new HttpRequestMessage(HttpMethod.Post, url);
+                requestMessage.Headers.TryAddWithoutValidation("x-goog-api-key", apiKey);
+                requestMessage.Content = JsonContent.Create(geminiRequest, options: _jsonOptions);
+
+                using var response = await _httpClient.SendAsync(requestMessage);
+                var rawResponse = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
-                    return default;
+                {
+                    _logger.LogWarning(
+                        "Gemini returned an error. StatusCode: {StatusCode}. Body: {Body}",
+                        response.StatusCode,
+                        Truncate(rawResponse, 2000));
 
-                var geminiResponse = await response.Content.ReadFromJsonAsync<GeminiGenerateContentResponse>(_jsonOptions);
+                    return default;
+                }
+
+                GeminiGenerateContentResponse? geminiResponse;
+
+                try
+                {
+                    geminiResponse = JsonSerializer.Deserialize<GeminiGenerateContentResponse>(rawResponse, _jsonOptions);
+                }
+                catch (JsonException ex)
+                {
+                    _logger.LogError(
+                        ex,
+                        "Could not deserialize Gemini HTTP response. Body: {Body}",
+                        Truncate(rawResponse, 2000));
+
+                    return default;
+                }
+
                 var text = geminiResponse?.Candidates?.FirstOrDefault()?.Content?.Parts?.FirstOrDefault()?.Text;
 
                 if (string.IsNullOrWhiteSpace(text))
-                    return default;
+                {
+                    _logger.LogWarning(
+                        "Gemini response did not contain candidate text. Body: {Body}",
+                        Truncate(rawResponse, 2000));
 
-                return JsonSerializer.Deserialize<T>(CleanJson(text), _jsonOptions);
+                    return default;
+                }
+
+                var cleanedJson = CleanJson(text);
+
+                try
+                {
+                    return JsonSerializer.Deserialize<T>(cleanedJson, _jsonOptions);
+                }
+                catch (JsonException ex)
+                {
+                    _logger.LogError(
+                        ex,
+                        "Gemini returned text, but it was not valid JSON for {TargetType}. Text: {Text}",
+                        typeof(T).Name,
+                        Truncate(cleanedJson, 2000));
+
+                    return default;
+                }
             }
-            catch
+            catch (TaskCanceledException ex)
             {
+                _logger.LogError(ex, "Gemini request timed out.");
+                return default;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Gemini request failed unexpectedly.");
                 return default;
             }
         }
@@ -375,6 +435,14 @@ Rules:
             return cleaned.Trim();
         }
 
+        private static string Truncate(string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value))
+                return string.Empty;
+
+            return value.Length <= maxLength ? value : value[..maxLength];
+        }
+
         private class GeminiGenerateContentRequest
         {
             public List<GeminiContent> Contents { get; set; } = new();
@@ -472,5 +540,293 @@ Rules:
 - All user-facing values must respect the requested language.
 """;
         }
+        private static string BuildCareerRecommendationsPrompt(CareerAiRecommendationsRequestDto request)
+        {
+            var languageInstruction = AiLanguageHelper.GetLanguageInstruction(request.Language);
+
+            var scoresText = string.Join("\n", request.AreaScores.Select(score =>
+                $"- {score.AreaCode} / {score.Area}: raw score {score.RawScore}/{score.MaxScore}, percentage {score.Score}%, description: {score.Description}"));
+
+            var profileTitle = DefaultText(request.ProfileTitle, "RIASEC career interest profile");
+            var profileCode = DefaultText(request.ProfileCode, "unknown");
+            var summary = Limit(DefaultText(request.Summary, "No summary provided."), 1200);
+
+            return $$"""
+You are a career guidance assistant inside a mobile app.
+{{languageInstruction}}
+
+The user completed a career interest test based on the RIASEC model.
+Use the profile and scores below to generate practical career orientation recommendations.
+
+Important:
+- Do not claim this is an official psychological diagnosis.
+- Do not claim the recommendations are official O*NET career matches.
+- Explain that recommendations are orientation suggestions based on the RIASEC profile.
+- Keep the tone practical, supportive and realistic.
+- Do not invent personal information about the user.
+- Recommend broad career directions and example roles.
+
+Profile title: {{profileTitle}}
+RIASEC profile code: {{profileCode}}
+
+Summary:
+{{summary}}
+
+Scores:
+{{scoresText}}
+
+Return exactly one valid JSON object matching this C# DTO shape:
+{
+  "summary": "short personalized explanation of the RIASEC profile",
+  "careerDirections": [
+    "career direction 1",
+    "career direction 2",
+    "career direction 3"
+  ],
+  "recommendedRoles": [
+    {
+      "title": "example role title",
+      "reason": "why this role may fit the profile"
+    },
+    {
+      "title": "example role title",
+      "reason": "why this role may fit the profile"
     }
+  ],
+  "skillsToDevelop": [
+    "skill 1",
+    "skill 2",
+    "skill 3"
+  ],
+  "nextSteps": [
+    "step 1",
+    "step 2",
+    "step 3"
+  ],
+  "disclaimer": "short disclaimer that the result is orientation only",
+  "isMock": false
+}
+
+Rules:
+- Return JSON only.
+- recommendedRoles should contain 5 to 8 roles.
+- careerDirections should contain 3 to 5 items.
+- skillsToDevelop should contain 4 to 6 items.
+- nextSteps should contain 4 to 6 items.
+- All user-facing values must respect the requested language.
+""";
+        }
+
+        private static CareerAiRecommendationsResponseDto BuildFallbackCareerRecommendations(
+            CareerAiRecommendationsRequestDto request)
+        {
+            var topAreas = request.AreaScores
+                .OrderByDescending(x => x.RawScore)
+                .ThenByDescending(x => x.Score)
+                .Take(3)
+                .ToList();
+
+            var topCodes = topAreas.Select(x => x.AreaCode).ToHashSet();
+
+            if (AiLanguageHelper.IsRomanian(request.Language))
+            {
+                var responseRo = new CareerAiRecommendationsResponseDto
+                {
+                    Summary = $"Profilul {request.ProfileCode} indică interese dominante în ariile {string.Join(", ", topAreas.Select(x => $"{x.AreaCode} - {x.Area}"))}. Recomandările sunt orientative și trebuie comparate cu educația, experiența și obiectivele personale.",
+                    Disclaimer = "Recomandările sunt generate pe baza profilului RIASEC și au caracter orientativ. Ele nu reprezintă o evaluare psihologică sau vocațională oficială.",
+                    IsMock = true
+                };
+
+                if (topCodes.Contains("R"))
+                {
+                    responseRo.CareerDirections.Add("activități practice și tehnice");
+                    responseRo.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                    {
+                        Title = "Tehnician / rol practic aplicat",
+                        Reason = "Profilul include interes pentru activități concrete, instrumente, echipamente sau lucru practic."
+                    });
+                }
+
+                if (topCodes.Contains("I"))
+                {
+                    responseRo.CareerDirections.Add("analiză, cercetare și rezolvare de probleme");
+                    responseRo.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                    {
+                        Title = "Analist / rol de cercetare",
+                        Reason = "Profilul include interes pentru investigare, analiză și înțelegerea cauzelor."
+                    });
+                }
+
+                if (topCodes.Contains("A"))
+                {
+                    responseRo.CareerDirections.Add("creație, design și comunicare vizuală");
+                    responseRo.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                    {
+                        Title = "Designer / creator de conținut",
+                        Reason = "Profilul include interes pentru exprimare creativă și activități imaginative."
+                    });
+                }
+
+                if (topCodes.Contains("S"))
+                {
+                    responseRo.CareerDirections.Add("educație, sprijin și lucru cu oamenii");
+                    responseRo.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                    {
+                        Title = "Trainer / specialist suport",
+                        Reason = "Profilul include interes pentru ajutor, predare, consiliere sau lucru direct cu persoane."
+                    });
+                }
+
+                if (topCodes.Contains("E"))
+                {
+                    responseRo.CareerDirections.Add("business, vânzări și coordonare");
+                    responseRo.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                    {
+                        Title = "Coordonator proiect / business development",
+                        Reason = "Profilul include interes pentru persuasiune, organizare, negociere și luarea deciziilor."
+                    });
+                }
+
+                if (topCodes.Contains("C"))
+                {
+                    responseRo.CareerDirections.Add("administrativ, organizare și lucrul cu date");
+                    responseRo.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                    {
+                        Title = "Specialist administrativ / raportare",
+                        Reason = "Profilul include interes pentru structură, proceduri, evidențe și organizare."
+                    });
+                }
+
+                responseRo.SkillsToDevelop = new List<string>
+        {
+            "comunicare profesională",
+            "organizare personală",
+            "analiză a descrierilor de job",
+            "adaptarea CV-ului pentru roluri diferite"
+        };
+
+                responseRo.NextSteps = new List<string>
+        {
+            "Alege 2-3 roluri care par interesante.",
+            "Caută anunțuri reale pentru aceste roluri.",
+            "Compară cerințele joburilor cu educația și competențele tale actuale.",
+            "Actualizează CV-ul pentru direcția profesională pe care vrei să o explorezi."
+        };
+
+                return responseRo;
+            }
+
+            var responseEn = new CareerAiRecommendationsResponseDto
+            {
+                Summary = $"The {request.ProfileCode} profile suggests stronger interests in {string.Join(", ", topAreas.Select(x => $"{x.AreaCode} - {x.Area}"))}. These recommendations are orientation suggestions and should be compared with your education, experience and goals.",
+                Disclaimer = "These recommendations are generated based on the RIASEC profile and are intended for orientation only. They are not an official psychological or vocational assessment.",
+                IsMock = true
+            };
+
+            if (topCodes.Contains("R"))
+            {
+                responseEn.CareerDirections.Add("hands-on technical and practical work");
+                responseEn.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                {
+                    Title = "Technician / applied practical role",
+                    Reason = "The profile includes interest in concrete tasks, tools, equipment or hands-on work."
+                });
+            }
+
+            if (topCodes.Contains("I"))
+            {
+                responseEn.CareerDirections.Add("analysis, research and problem solving");
+                responseEn.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                {
+                    Title = "Analyst / research-oriented role",
+                    Reason = "The profile includes interest in investigation, analysis and understanding causes."
+                });
+            }
+
+            if (topCodes.Contains("A"))
+            {
+                responseEn.CareerDirections.Add("creative work, design and visual communication");
+                responseEn.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                {
+                    Title = "Designer / content creator",
+                    Reason = "The profile includes interest in creative expression and imaginative activities."
+                });
+            }
+
+            if (topCodes.Contains("S"))
+            {
+                responseEn.CareerDirections.Add("education, support and people-focused work");
+                responseEn.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                {
+                    Title = "Trainer / support specialist",
+                    Reason = "The profile includes interest in helping, teaching, counseling or working directly with people."
+                });
+            }
+
+            if (topCodes.Contains("E"))
+            {
+                responseEn.CareerDirections.Add("business, sales and coordination");
+                responseEn.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                {
+                    Title = "Project coordinator / business development role",
+                    Reason = "The profile includes interest in persuasion, organization, negotiation and decision making."
+                });
+            }
+
+            if (topCodes.Contains("C"))
+            {
+                responseEn.CareerDirections.Add("administration, organization and working with data");
+                responseEn.RecommendedRoles.Add(new CareerAiRecommendedRoleDto
+                {
+                    Title = "Administrative / reporting specialist",
+                    Reason = "The profile includes interest in structure, procedures, records and organization."
+                });
+            }
+
+            responseEn.SkillsToDevelop = new List<string>
+    {
+        "professional communication",
+        "personal organization",
+        "job description analysis",
+        "CV tailoring for different roles"
+    };
+
+            responseEn.NextSteps = new List<string>
+    {
+        "Choose 2-3 roles that seem interesting.",
+        "Search for real job descriptions for those roles.",
+        "Compare the job requirements with your current education and skills.",
+        "Update your CV for the career direction you want to explore."
+    };
+
+            return responseEn;
+        }
+        public async Task<CareerAiRecommendationsResponseDto> GenerateCareerRecommendationsAsync(
+    CareerAiRecommendationsRequestDto request)
+        {
+            var result = await GenerateJsonAsync<CareerAiRecommendationsResponseDto>(
+                BuildCareerRecommendationsPrompt(request));
+
+            if (result == null)
+                return BuildFallbackCareerRecommendations(request);
+
+            result.Summary ??= string.Empty;
+            result.CareerDirections ??= new List<string>();
+            result.RecommendedRoles ??= new List<CareerAiRecommendedRoleDto>();
+            result.SkillsToDevelop ??= new List<string>();
+            result.NextSteps ??= new List<string>();
+
+            if (string.IsNullOrWhiteSpace(result.Disclaimer))
+            {
+                result.Disclaimer = AiLanguageHelper.IsRomanian(request.Language)
+                    ? "Aceste recomandări sunt generate cu AI pe baza scorurilor RIASEC și au caracter orientativ. Ele nu reprezintă o evaluare psihologică sau vocațională oficială."
+                    : "These recommendations are AI-generated based on the RIASEC scores and are intended for orientation only. They are not an official psychological or vocational assessment.";
+            }
+
+            result.IsMock = false;
+
+            return result;
+        }
+    }
+
 }

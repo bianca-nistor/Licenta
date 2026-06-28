@@ -1,4 +1,4 @@
-using JobCv.Mobile.Models;
+﻿using JobCv.Mobile.Models;
 using JobCv.Mobile.Services;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.ApplicationModel.DataTransfer;
@@ -45,6 +45,7 @@ namespace JobCv.Mobile.Pages
 
             await LoadCvsAsync();
             await LoadApplicationAsync();
+            UiTranslationService.ApplyToPage(this);
         }
 
         private void SetupStatusPicker()
@@ -53,7 +54,7 @@ namespace JobCv.Mobile.Pages
 
             foreach (var status in _statuses)
             {
-                StatusPicker.Items.Add(status);
+                StatusPicker.Items.Add(UiTranslationService.TranslateText(status));
             }
 
             if (StatusPicker.SelectedIndex < 0)
@@ -71,7 +72,7 @@ namespace JobCv.Mobile.Pages
                 new CvDto
                 {
                     Id = 0,
-                    Title = "No CV selected"
+                    Title = UiTranslationService.TranslateText("No CV selected")
                 }
             };
 
@@ -81,17 +82,27 @@ namespace JobCv.Mobile.Pages
             CvPicker.SelectedIndex = 0;
         }
 
+        private static string Txt(string en, string ro) => LanguageService.IsRomanian ? ro : en;
+
+        private static Task DisplayAlertLocalized(Page page, string titleEn, string titleRo, string messageEn, string messageRo, string cancelEn = "OK", string cancelRo = "OK")
+        {
+            return page.DisplayAlert(
+                Txt(titleEn, titleRo),
+                Txt(messageEn, messageRo),
+                Txt(cancelEn, cancelRo));
+        }
+
         private async Task LoadApplicationAsync()
         {
             MessageLabel.TextColor = Colors.Gray;
-            MessageLabel.Text = "Loading application...";
+            MessageLabel.Text = Txt("Loading application...", "Se încarcă aplicarea...");
 
             var latest = await _apiService.GetApplicationByIdAsync(_applicationId);
 
             if (latest == null)
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "The application could not be loaded.";
+                MessageLabel.Text = Txt("The application could not be loaded.", "Aplicarea nu a putut fi încărcată.");
                 return;
             }
 
@@ -137,21 +148,41 @@ namespace JobCv.Mobile.Pages
 
         private void SetStatusPickerValue(string? status)
         {
-            if (string.IsNullOrWhiteSpace(status))
-            {
-                StatusPicker.SelectedIndex = 0;
-                return;
-            }
+            var normalizedStatus = NormalizeStatusForApi(status);
 
-            var normalizedStatus = status.Trim();
-
-            var index = StatusPicker.Items
-                .Select((item, itemIndex) => new { item, itemIndex })
-                .FirstOrDefault(x =>
-                    string.Equals(x.item, normalizedStatus, StringComparison.OrdinalIgnoreCase))
-                ?.itemIndex ?? -1;
+            var index = _statuses.FindIndex(item =>
+                string.Equals(item, normalizedStatus, StringComparison.OrdinalIgnoreCase));
 
             StatusPicker.SelectedIndex = index >= 0 ? index : 0;
+        }
+
+        private string GetSelectedStatusForApi()
+        {
+            var index = StatusPicker.SelectedIndex;
+
+            if (index >= 0 && index < _statuses.Count)
+                return _statuses[index];
+
+            return "Saved";
+        }
+
+        private static string NormalizeStatusForApi(string? status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+                return "Saved";
+
+            var value = status.Trim();
+
+            return value switch
+            {
+                "Salvat" => "Saved",
+                "Aplicat" => "Applied",
+                "Interviu programat" => "Interview Scheduled",
+                "Interviu finalizat" => "Interview Done",
+                "Ofertă" => "Offer",
+                "Respins" => "Rejected",
+                _ => value
+            };
         }
 
         private void OnUseAppliedDateChanged(object sender, CheckedChangedEventArgs e)
@@ -178,7 +209,7 @@ namespace JobCv.Mobile.Pages
         private bool IsCurrentStatus(string status)
         {
             return string.Equals(
-                StatusPicker.SelectedItem?.ToString(),
+                GetSelectedStatusForApi(),
                 status,
                 StringComparison.OrdinalIgnoreCase);
         }
@@ -194,7 +225,7 @@ namespace JobCv.Mobile.Pages
 
             if (string.IsNullOrWhiteSpace(url))
             {
-                await DisplayAlert("Missing link", "This application does not have a job link.", "OK");
+                await DisplayAlertLocalized(this, "Missing link", "Link lipsă", "This application does not have a job link.", "Această aplicare nu are link către job.");
                 return;
             }
 
@@ -204,7 +235,7 @@ namespace JobCv.Mobile.Pages
             }
             catch
             {
-                await DisplayAlert("Error", "The job link could not be opened.", "OK");
+                await DisplayAlertLocalized(this, "Error", "Eroare", "The job link could not be opened.", "Linkul jobului nu a putut fi deschis.");
             }
         }
 
@@ -241,14 +272,14 @@ namespace JobCv.Mobile.Pages
             if (string.IsNullOrWhiteSpace(jobTitle))
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Job title is required.";
+                MessageLabel.Text = Txt("Job title is required.", "Titlul jobului este obligatoriu.");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(company))
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Company is required.";
+                MessageLabel.Text = Txt("Company is required.", "Compania este obligatorie.");
                 return;
             }
 
@@ -257,7 +288,7 @@ namespace JobCv.Mobile.Pages
             if (CvPicker.SelectedItem is CvDto selectedCv && selectedCv.Id > 0)
                 selectedCvId = selectedCv.Id;
 
-            var selectedStatus = StatusPicker.SelectedItem?.ToString() ?? "Saved";
+            var selectedStatus = GetSelectedStatusForApi();
 
             var request = new UpdateJobApplicationRequest
             {
@@ -283,7 +314,7 @@ namespace JobCv.Mobile.Pages
                 if (updated == null)
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "The application could not be updated.";
+                    MessageLabel.Text = Txt("The application could not be updated.", "Aplicarea nu a putut fi actualizată.");
                     return;
                 }
 
@@ -291,12 +322,12 @@ namespace JobCv.Mobile.Pages
                 BindApplication();
 
                 MessageLabel.TextColor = Colors.Green;
-                MessageLabel.Text = "Application saved successfully.";
+                MessageLabel.Text = Txt("Application saved successfully.", "Aplicarea a fost salvată cu succes.");
             }
             catch (Exception ex)
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = ex.Message;
+                MessageLabel.Text = UiTranslationService.TranslateText(ex.Message);
             }
         }
         private async void OnGenerateCoverLetterClicked(object sender, EventArgs e)
@@ -309,13 +340,13 @@ namespace JobCv.Mobile.Pages
 
             if (string.IsNullOrWhiteSpace(jobTitle))
             {
-                await DisplayAlert("Missing job title", "Please add a job title before generating the cover letter.", "OK");
+                await DisplayAlertLocalized(this, "Missing job title", "Titlu job lipsă", "Please add a job title before generating the cover letter.", "Adaugă titlul jobului înainte de a genera scrisoarea de intenție.");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(company))
             {
-                await DisplayAlert("Missing company", "Please add a company before generating the cover letter.", "OK");
+                await DisplayAlertLocalized(this, "Missing company", "Companie lipsă", "Please add a company before generating the cover letter.", "Adaugă compania înainte de a genera scrisoarea de intenție.");
                 return;
             }
 
@@ -339,7 +370,7 @@ namespace JobCv.Mobile.Pages
             try
             {
                 MessageLabel.TextColor = Colors.Gray;
-                MessageLabel.Text = "Generating cover letter...";
+                MessageLabel.Text = Txt("Generating cover letter...", "Se generează scrisoarea de intenție...");
 
                 CoverLetterSubjectLabel.IsVisible = false;
                 CoverLetterEditor.IsVisible = false;
@@ -350,11 +381,11 @@ namespace JobCv.Mobile.Pages
                 if (result == null || string.IsNullOrWhiteSpace(result.Letter))
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "The cover letter could not be generated.";
+                    MessageLabel.Text = Txt("The cover letter could not be generated.", "Scrisoarea de intenție nu a putut fi generată.");
                     return;
                 }
 
-                CoverLetterSubjectLabel.Text = $"Subject: {result.Subject}";
+                CoverLetterSubjectLabel.Text = $"{Txt("Subject", "Subiect")}: {result.Subject}";
                 CoverLetterEditor.Text = result.Letter;
 
                 CoverLetterSubjectLabel.IsVisible = true;
@@ -362,14 +393,15 @@ namespace JobCv.Mobile.Pages
                 CopyCoverLetterButton.IsVisible = true;
 
                 MessageLabel.TextColor = Colors.Green;
-                MessageLabel.Text = result.IsMock
-                    ? "Demo cover letter generated."
-                    : "Cover letter generated with AI.";
+
+                MessageLabel.Text = Txt(
+                    "Cover letter generated successfully.",
+                    "Scrisoarea de intenție a fost generată cu succes.");
             }
             catch (Exception ex)
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = ex.Message;
+                MessageLabel.Text = UiTranslationService.TranslateText(ex.Message);
             }
         }
 
@@ -379,14 +411,14 @@ namespace JobCv.Mobile.Pages
 
             if (string.IsNullOrWhiteSpace(text))
             {
-                await DisplayAlert("Nothing to copy", "Generate a cover letter first.", "OK");
+                await DisplayAlertLocalized(this, "Nothing to copy", "Nimic de copiat", "Generate a cover letter first.", "Generează mai întâi o scrisoare de intenție.");
                 return;
             }
 
             await Clipboard.Default.SetTextAsync(text);
 
             MessageLabel.TextColor = Colors.Green;
-            MessageLabel.Text = "Cover letter copied to clipboard.";
+            MessageLabel.Text = Txt("Cover letter copied to clipboard.", "Scrisoarea de intenție a fost copiată.");
         }
 
         private string BuildJobContextForCoverLetter()

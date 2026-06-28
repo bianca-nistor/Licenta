@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using JobCv.Mobile.Models;
 using JobCv.Mobile.Services;
 
@@ -11,6 +11,8 @@ namespace JobCv.Mobile.Pages
         private readonly JobSearchResultDto _job;
 
         private readonly List<CvSelectionOption> _cvOptions = new();
+
+        private static string Txt(string en, string ro) => LanguageService.IsRomanian ? ro : en;
 
         public CvTailoringPage(
             UserDto user,
@@ -67,7 +69,7 @@ namespace JobCv.Mobile.Pages
                     {
                         SourceType = "Created",
                         Title = title,
-                        Subtitle = $"Created CV � {language}",
+                        Subtitle = $"Created CV • {language}",
                         CvText = BuildReadableCvText(cv)
                     });
                 }
@@ -232,20 +234,12 @@ namespace JobCv.Mobile.Pages
 
                 ResultsLayout.IsVisible = true;
 
-                if (result.IsMock)
-                {
-                    AiSourceBanner.BackgroundColor = Color.FromArgb("#FEF3C7");
-                    AiSourceBanner.Stroke = Color.FromArgb("#FDE68A");
-                    AiSourceLabel.TextColor = Color.FromArgb("#92400E");
-                    AiSourceLabel.Text = UiTranslationService.TranslateText("Demo AI result: this is a mock response. Later it can be connected to OpenAI or a local LLM.");
-                }
-                else
-                {
-                    AiSourceBanner.BackgroundColor = Color.FromArgb("#ECFDF5");
-                    AiSourceBanner.Stroke = Color.FromArgb("#BBF7D0");
-                    AiSourceLabel.TextColor = Color.FromArgb("#166534");
-                    AiSourceLabel.Text = UiTranslationService.TranslateText("Generated with AI.");
-                }
+                AiSourceBanner.BackgroundColor = Color.FromArgb("#ECFDF5");
+                AiSourceBanner.Stroke = Color.FromArgb("#BBF7D0");
+                AiSourceLabel.TextColor = Color.FromArgb("#166534");
+                AiSourceLabel.Text = Txt(
+                    "Generated successfully.",
+                    "Generat cu succes.");
 
                 if (string.IsNullOrWhiteSpace(result.CvQualityWarning))
                 {

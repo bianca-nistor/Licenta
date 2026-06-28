@@ -17,9 +17,9 @@ namespace JobCv.Mobile.Pages
             _apiService = apiService;
         }
 
-        private async void OnBackClicked(object sender, EventArgs e)
+        private static string T(string value)
         {
-            await Navigation.PopAsync();
+            return UiTranslationService.TranslateText(value);
         }
 
         private async void OnStartFromScratchClicked(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace JobCv.Mobile.Pages
                 if (cv == null)
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "The CV could not be created.";
+                    MessageLabel.Text = T("The CV could not be created.");
                     return;
                 }
 
@@ -74,10 +74,10 @@ namespace JobCv.Mobile.Pages
 
                 if (cvs == null || cvs.Count == 0)
                 {
-                    await DisplayAlert(
+                    await UiTranslationService.DisplayAlertAsync(
+                        this,
                         "No CVs available",
-                        "You need to create a CV before you can duplicate one.",
-                        "OK");
+                        "You need to create a CV before you can copy one.");
 
                     return;
                 }
@@ -86,27 +86,34 @@ namespace JobCv.Mobile.Pages
                     .Select(cv => $"{cv.Id} - {cv.Title}")
                     .ToArray();
 
+                var cancelText = T("Cancel");
+
                 var selectedOption = await DisplayActionSheet(
-                    "Choose a CV to duplicate",
-                    "Cancel",
+                    T("Choose a CV to copy"),
+                    cancelText,
                     null,
                     options);
 
-                if (string.IsNullOrWhiteSpace(selectedOption) || selectedOption == "Cancel")
+                if (string.IsNullOrWhiteSpace(selectedOption) || selectedOption == cancelText)
                     return;
 
                 var selectedCv = cvs.FirstOrDefault(cv => selectedOption.StartsWith($"{cv.Id} - "));
 
                 if (selectedCv == null)
                 {
-                    await DisplayAlert("Error", "The selected CV could not be found.", "OK");
+                    await UiTranslationService.DisplayAlertAsync(
+                        this,
+                        "Error",
+                        "The selected CV could not be found.");
                     return;
                 }
 
+                var copySuffix = LanguageService.IsRomanian ? "copie" : "copy";
+
                 var newTitle = await DisplayPromptAsync(
-                    "Duplicate CV",
-                    "Enter a title for the new CV:",
-                    initialValue: $"{selectedCv.Title} copy");
+                    T("Copy CV"),
+                    T("Enter a title for the new CV:"),
+                    initialValue: $"{selectedCv.Title} {copySuffix}");
 
                 if (string.IsNullOrWhiteSpace(newTitle))
                     return;
@@ -122,7 +129,10 @@ namespace JobCv.Mobile.Pages
 
                 if (duplicatedCv == null)
                 {
-                    await DisplayAlert("Error", "The CV could not be duplicated.", "OK");
+                    await UiTranslationService.DisplayAlertAsync(
+                        this,
+                        "Error",
+                        "The CV could not be copied.");
                     return;
                 }
 

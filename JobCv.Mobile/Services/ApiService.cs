@@ -592,6 +592,26 @@ namespace JobCv.Mobile.Services
 
             return await response.Content.ReadAsByteArrayAsync();
         }
+        public async Task<CareerAiRecommendationsResponse> GenerateCareerAiRecommendationsAsync(
+    CareerAiRecommendationsRequest request)
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "api/CareerTest/ai-recommendations",
+                request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+
+                throw new Exception(string.IsNullOrWhiteSpace(error)
+                    ? "Could not generate AI recommendations."
+                    : error);
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<CareerAiRecommendationsResponse>();
+
+            return result ?? new CareerAiRecommendationsResponse();
+        }
 
     }
 }

@@ -402,7 +402,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Quick insight -->
+            <!-- Quick insight 
             <Border BackgroundColor="#0F172A"
                     Stroke="#0F172A"
                     StrokeShape="RoundRectangle 28"
@@ -422,7 +422,7 @@
                            LineBreakMode="WordWrap" />
 
                 </VerticalStackLayout>
-            </Border>
+            </Border>-->
 
             <!-- Quick actions card -->
             <Border BackgroundColor="#0F172A"
@@ -496,11 +496,10 @@
                        TextColor="#0F172A"
                        LineBreakMode="WordWrap" />
 
-                            <Label Text="Discover career directions that may fit your interests, strengths and preferred work style."
-                       FontSize="14"
-                       TextColor="#64748B"
-                       LineBreakMode="WordWrap" />
-
+                            <Label Text="Discover career directions that may match your interests and the types of work activities you prefer."
+       FontSize="11"
+       TextColor="#64748B"
+       LineBreakMode="WordWrap" />
                         </VerticalStackLayout>
 
                         <Border Grid.Column="1"
@@ -510,7 +509,7 @@
                     Padding="12,8"
                     VerticalOptions="Start">
 
-                            <Label Text="24 questions"
+                            <Label Text="60 questions"
                        FontSize="12"
                        FontAttributes="Bold"
                        TextColor="#6D28D9" />
@@ -538,12 +537,11 @@
                        FontSize="12"
                        TextColor="#64748B" />
 
-                            <Label Text="Interests, work style and strengths"
-                       FontSize="14"
-                       FontAttributes="Bold"
-                       TextColor="#0F172A"
-                       LineBreakMode="WordWrap" />
-
+                            <Label Text="Interests and preferred work activities"
+       FontSize="14"
+       FontAttributes="Bold"
+       TextColor="#0F172A"
+       LineBreakMode="WordWrap" />
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Column="1"
@@ -553,12 +551,11 @@
                        FontSize="12"
                        TextColor="#64748B" />
 
-                            <Label Text="Career profile + PDF report"
-                       FontSize="14"
-                       FontAttributes="Bold"
-                       TextColor="#0F172A"
-                       LineBreakMode="WordWrap" />
-
+                            <Label Text="RIASEC profile + PDF report"
+       FontSize="14"
+       FontAttributes="Bold"
+       TextColor="#0F172A"
+       LineBreakMode="WordWrap" />
                         </VerticalStackLayout>
                     </Grid>
 

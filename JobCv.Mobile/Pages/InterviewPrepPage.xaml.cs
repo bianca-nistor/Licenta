@@ -1,4 +1,4 @@
-using JobCv.Mobile.Models;
+﻿using JobCv.Mobile.Models;
 using JobCv.Mobile.Services;
 
 
@@ -9,6 +9,8 @@ namespace JobCv.Mobile.Pages
         private readonly UserDto _user;
         private readonly ApiService _apiService;
         private readonly JobSearchResultDto _job;
+
+        private static string Txt(string en, string ro) => LanguageService.IsRomanian ? ro : en;
 
         public InterviewPrepPage(
             UserDto user,
@@ -75,23 +77,14 @@ namespace JobCv.Mobile.Pages
                 TipsCollectionView.ItemsSource = result.BeforeInterviewTips;
 
                 ResultsLayout.IsVisible = true;
-                if (result.IsMock)
-                {
-                    AiSourceBanner.BackgroundColor = Color.FromArgb("#FEF3C7");
-                    AiSourceBanner.Stroke = Color.FromArgb("#FDE68A");
-                    AiSourceLabel.TextColor = Color.FromArgb("#92400E");
-                    AiSourceLabel.Text = UiTranslationService.TranslateText("Demo AI result: this is a mock response. Later it can be connected to OpenAI or a local LLM.");
-                }
-                else
-                {
-                    AiSourceBanner.BackgroundColor = Color.FromArgb("#ECFDF5");
-                    AiSourceBanner.Stroke = Color.FromArgb("#BBF7D0");
-                    AiSourceLabel.TextColor = Color.FromArgb("#166534");
-                    AiSourceLabel.Text = UiTranslationService.TranslateText("Generated with AI.");
-                }
-
+                AiSourceBanner.BackgroundColor = Color.FromArgb("#ECFDF5");
+                AiSourceBanner.Stroke = Color.FromArgb("#BBF7D0");
+                AiSourceLabel.TextColor = Color.FromArgb("#166534");
+                AiSourceLabel.Text = Txt(
+                    "Generated successfully.",
+                    "Generat cu succes.");
                 MessageLabel.TextColor = Colors.Green;
-                MessageLabel.Text = UiTranslationService.TranslateText("Interview preparation generated successfully.");
+                MessageLabel.Text = Txt("Interview preparation generated successfully.", "Pregătirea pentru interviu a fost generată cu succes.");
                 UiTranslationService.ApplyToPage(this);
             }
             catch (Exception ex)

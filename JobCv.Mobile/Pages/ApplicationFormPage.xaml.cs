@@ -11,6 +11,16 @@ namespace JobCv.Mobile.Pages
 
         private List<CvDto> _cvs = new();
 
+        private readonly List<string> _statuses = new()
+        {
+            "Saved",
+            "Applied",
+            "Interview Scheduled",
+            "Interview Done",
+            "Offer",
+            "Rejected"
+        };
+
         public ApplicationFormPage(UserDto user, ApiService apiService, JobSearchResultDto job)
         {
             InitializeComponent();
@@ -19,6 +29,7 @@ namespace JobCv.Mobile.Pages
             _apiService = apiService;
             _job = job;
 
+            SetupStatusPicker();
             StatusPicker.SelectedIndex = 0;
             AppliedDatePicker.Date = DateTime.Today;
             InterviewDatePicker.Date = DateTime.Today;
@@ -30,6 +41,27 @@ namespace JobCv.Mobile.Pages
         {
             base.OnAppearing();
             await LoadCvsAsync();
+            UiTranslationService.ApplyToPage(this);
+        }
+
+        private static string T(string value) => UiTranslationService.TranslateText(value);
+
+        private void SetupStatusPicker()
+        {
+            StatusPicker.Items.Clear();
+
+            foreach (var status in _statuses)
+                StatusPicker.Items.Add(T(status));
+        }
+
+        private string GetSelectedStatusForApi()
+        {
+            var index = StatusPicker.SelectedIndex;
+
+            if (index >= 0 && index < _statuses.Count)
+                return _statuses[index];
+
+            return "Saved";
         }
 
         private void LoadJobData()
@@ -50,7 +82,7 @@ namespace JobCv.Mobile.Pages
                 new CvDto
                 {
                     Id = 0,
-                    Title = "No CV selected"
+                    Title = T("No CV selected")
                 }
             };
 
@@ -85,14 +117,14 @@ namespace JobCv.Mobile.Pages
             if (string.IsNullOrWhiteSpace(jobTitle))
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Job title is required.";
+                MessageLabel.Text = T("Job title is required.");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(company))
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = "Company is required.";
+                MessageLabel.Text = T("Company is required.");
                 return;
             }
 
@@ -121,7 +153,7 @@ namespace JobCv.Mobile.Pages
                 Location = LocationEntry.Text?.Trim() ?? "",
                 JobUrl = JobUrlEntry.Text?.Trim() ?? "",
                 Source = SourceEntry.Text?.Trim() ?? "",
-                Status = StatusPicker.SelectedItem?.ToString() ?? "Saved",
+                Status = GetSelectedStatusForApi(),
                 AppliedAt = appliedAt,
                 InterviewAt = interviewAt,
                 Notes = NotesEditor.Text?.Trim() ?? "",
@@ -137,21 +169,21 @@ namespace JobCv.Mobile.Pages
                 if (saved == null)
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "The application could not be saved.";
+                    MessageLabel.Text = T("The application could not be saved.");
                     return;
                 }
 
-                await DisplayAlert(
+                await UiTranslationService.DisplayAlertAsync(
+                    this,
                     "Application saved",
-                    "This job application was saved successfully.",
-                    "OK");
+                    "This job application was saved successfully.");
 
                 await Navigation.PopAsync();
             }
             catch (Exception ex)
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = ex.Message;
+                MessageLabel.Text = T(ex.Message);
             }
         }
     }

@@ -31,11 +31,13 @@ namespace JobCv.Mobile.Services
             ["Career Dashboard"] = "Dashboard carieră",
             ["View profile"] = "Vezi profilul",
             ["Menu"] = "Meniu",
-            ["Applications"] = "Aplicații",
+            ["Applications"] = "Aplicări",
             ["Jobs"] = "Joburi",
             ["Logout"] = "Deconectare",
             ["Cancel"] = "Anulează",
             ["Delete"] = "Șterge",
+            ["Delete file"] = "Șterge fișierul",
+
             ["Edit"] = "Editează",
             ["Save changes"] = "Salvează modificările",
             ["Save"] = "Salvează",
@@ -90,7 +92,7 @@ namespace JobCv.Mobile.Services
             ["Untitled item"] = "Element fără titlu",
 
             // Login / register
-            ["Build better CVs, track applications and prepare for interviews."] = "Creează CV-uri mai bune, urmărește aplicațiile și pregătește-te pentru interviuri.",
+            ["Build better CVs, track applications and prepare for interviews."] = "Creează CV-uri mai bune, urmărește aplicările și pregătește-te pentru interviuri.",
             ["Welcome back"] = "Bine ai revenit",
             ["Sign in to continue your career progress."] = "Autentifică-te pentru a-ți continua progresul în carieră.",
             ["Email"] = "Email",
@@ -99,10 +101,10 @@ namespace JobCv.Mobile.Services
             ["Enter your password"] = "Introdu parola",
             ["Sign In"] = "Autentificare",
             ["Create new account"] = "Creează cont nou",
-            ["Your personal assistant for CVs, jobs, applications and interviews."] = "Asistentul tău personal pentru CV-uri, joburi, aplicații și interviuri.",
+            ["Your personal assistant for CVs, jobs, applications and interviews."] = "Asistentul tău personal pentru CV-uri, joburi, aplicări și interviuri.",
             ["Start building your career profile."] = "Începe să-ți construiești profilul de carieră.",
             ["Join Career Guide"] = "Alătură-te Career Guide",
-            ["Create your account and manage your CVs, jobs and applications."] = "Creează-ți contul și gestionează CV-urile, joburile și aplicațiile.",
+            ["Create your account and manage your CVs, jobs and applications."] = "Creează-ți contul și gestionează CV-urile, joburile și aplicările.",
             ["Create account"] = "Creează cont",
             ["Confirm password"] = "Confirmă parola",
             ["Back to sign in"] = "Înapoi la autentificare",
@@ -139,7 +141,7 @@ namespace JobCv.Mobile.Services
             ["Choose how you want to start your CV."] = "Alege cum vrei să începi CV-ul.",
             ["Start from scratch"] = "Începe de la zero",
             ["Create a new CV and add your personal information, photo, skills, education, experience and projects."] = "Creează un CV nou și adaugă informațiile personale, fotografia, competențele, educația, experiența și proiectele.",
-            ["Duplicate existing CV"] = "Duplică un CV existent",
+            ["Duplicate existing CV"] = "Copiază un CV existent",
             ["Create a new version based on one of your existing CVs."] = "Creează o versiune nouă pe baza unuia dintre CV-urile tale existente.",
             ["Start from your CV"] = "Pornește de la CV-ul tău",
             ["Upload a PDF CV and we’ll copy the information we can find into a new editable CV."] = "Încarcă un CV PDF și vom copia informațiile găsite într-un CV nou editabil.",
@@ -153,6 +155,7 @@ namespace JobCv.Mobile.Services
             ["New CV title"] = "Titlul noului CV",
             ["Imported CV"] = "CV importat",
             ["Choose PDF"] = "Alege PDF",
+            ["Choose your CV file"] = "Alege fișierul CV",
             ["Choose your file"] = "Alege fișierul",
             ["Choose file"] = "Alege fișier",
             ["Accepted formats: PDF, DOC, DOCX. Maximum size: 10 MB."] = "Formate acceptate: PDF, DOC, DOCX. Dimensiune maximă: 10 MB.",
@@ -232,6 +235,8 @@ namespace JobCv.Mobile.Services
             ["View, edit, preview and manage all your created and uploaded CVs."] = "Vizualizează, editează, previzualizează și gestionează toate CV-urile create și încărcate.",
             ["Organize CVs"] = "Organizează CV-urile",
             ["Created CVs"] = "CV-uri create",
+            ["Newest"] = "Cele mai noi",
+            ["Oldest"] = "Cele mai vechi",
             ["CVs built and edited inside the application."] = "CV-uri construite și editate în aplicație.",
             ["No created CVs yet"] = "Nu există CV-uri create încă",
             ["Create your first structured CV to edit sections and export it later."] = "Creează primul CV structurat pentru a-l edita și exporta mai târziu.",
@@ -256,34 +261,34 @@ namespace JobCv.Mobile.Services
             ["Showing activity for all time."] = "Se afișează activitatea pentru toată perioada.",
             ["Dashboard data could not be loaded."] = "Datele din dashboard nu au putut fi încărcate.",
             ["No insight available right now."] = "Nu există momentan o observație disponibilă.",
-            ["You have no saved or tracked applications yet. Start by searching jobs and saving the best opportunities."] = "Nu ai încă aplicații salvate sau urmărite. Începe prin a căuta joburi și a salva cele mai bune oportunități.",
-            ["Great progress. You have 1 offer(s). Review your applications and keep tracking the next steps."] = "Progres bun. Ai 1 ofertă. Revizuiește aplicațiile și urmărește pașii următori.",
+            ["You have no saved or tracked applications yet. Start by searching jobs and saving the best opportunities."] = "Nu ai încă aplicări salvate sau urmărite. Începe prin a căuta joburi și a salva cele mai bune oportunități.",
+            ["Great progress. You have 1 offer(s). Review your applications and keep tracking the next steps."] = "Progres bun. Ai 1 ofertă. Revizuiește aplicările și urmărește pașii următori.",
             ["Most of your opportunities are still saved. Choose the best matches and move them to Applied when you send your CV."] = "Majoritatea oportunităților sunt încă salvate. Alege cele mai potrivite și mută-le la Aplicat când trimiți CV-ul.",
-            ["You have several rejected applications. Review your CV Quality Check and use AI Match Score before applying again."] = "Ai mai multe aplicații respinse. Revizuiește verificarea calității CV-ului și folosește scorul de potrivire înainte să aplici din nou.",
-            ["Your activity is balanced. Keep creating targeted CVs and tracking each application."] = "Activitatea ta este echilibrată. Continuă să creezi CV-uri țintite și să urmărești fiecare aplicație.",
+            ["You have several rejected applications. Review your CV Quality Check and use AI Match Score before applying again."] = "Ai mai multe aplicări respinse. Revizuiește verificarea calității CV-ului și folosește scorul de potrivire înainte să aplici din nou.",
+            ["Your activity is balanced. Keep creating targeted CVs and tracking each application."] = "Activitatea ta este echilibrată. Continuă să creezi CV-uri țintite și să urmărești fiecare aplicare.",
             ["Choose a period to analyze your activity."] = "Alege o perioadă pentru analiza activității.",
             ["CVs created"] = "CV-uri create",
             ["CVs uploaded"] = "CV-uri încărcate",
-            ["Applications added"] = "Aplicații adăugate",
+            ["Applications added"] = "Aplicări adăugate",
             ["Interviews"] = "Interviuri",
-            ["Application pipeline"] = "Fluxul aplicațiilor",
-            ["See where your applications are in the recruitment process."] = "Vezi unde se află aplicațiile tale în procesul de recrutare.",
+            ["Application pipeline"] = "Fluxul aplicărilor",
+            ["See where your applications are in the recruitment process."] = "Vezi unde se află aplicările tale în procesul de recrutare.",
             ["Offers"] = "Oferte",
             ["Quick insight"] = "Observație rapidă",
             ["Your dashboard insights will appear here."] = "Observațiile pentru dashboard vor apărea aici.",
             ["Prepare your next application"] = "Pregătește următoarea aplicare",
             ["Create tailored CVs, search job opportunities and track your progress."] = "Creează CV-uri adaptate, caută oportunități și urmărește progresul.",
             ["Create new CV"] = "Creează CV nou",
-            ["My applications"] = "Aplicațiile mele",
-            ["Recent applications"] = "Aplicații recente",
-            ["Your latest tracked job applications."] = "Cele mai recente aplicații urmărite.",
+            ["My applications"] = "Aplicările mele",
+            ["Recent applications"] = "Aplicări recente",
+            ["Your latest tracked job applications."] = "Cele mai recente aplicări la joburi urmărite.",
             ["View all"] = "Vezi toate",
-            ["No applications tracked yet. Search jobs and save your first application."] = "Nu ai aplicații urmărite încă. Caută joburi și salvează prima aplicație.",
+            ["No applications tracked yet. Search jobs and save your first application."] = "Nu ai aplicări urmărite încă. Caută joburi și salvează prima aplicare.",
 
             // Applications
-            ["Application Details"] = "Detalii aplicație",
-            ["Edit the status, notes and interview details for this application."] = "Editează statusul, notițele și detaliile interviului pentru această aplicație.",
-            ["Application progress"] = "Progres aplicație",
+            ["Application Details"] = "Detalii aplicare",
+            ["Edit the status, notes and interview details for this application."] = "Editează statusul, notițele și detaliile interviului pentru această aplicare.",
+            ["Application progress"] = "Progres aplicare",
             ["Job information"] = "Informații job",
             ["Job title"] = "Titlu job",
             ["Company"] = "Companie",
@@ -296,27 +301,27 @@ namespace JobCv.Mobile.Services
             ["Job URL"] = "URL job",
             ["Choose status"] = "Alege statusul",
             ["AI cover letter"] = "Scrisoare de intenție AI",
-            ["Generate a short cover letter for this application using the selected CV and job details."] = "Generează o scrisoare scurtă de intenție folosind CV-ul selectat și detaliile jobului.",
+            ["Generate a short cover letter for this application using the selected CV and job details."] = "Generează o scrisoare scurtă de intenție pentru această aplicare, folosind CV-ul selectat și detaliile jobului.",
             ["Generate cover letter"] = "Generează scrisoarea",
             ["Copy cover letter"] = "Copiază scrisoarea",
             ["Open job"] = "Deschide jobul",
-            ["Prepare interview"] = "Pregătește interviul",
-            ["Track application"] = "Urmărește aplicația",
+            ["Prepare interview"] = "Pregătire interviu",
+            ["Track application"] = "Urmărește aplicarea",
             ["Save this job and keep notes about your application process."] = "Salvează acest job și păstrează notițe despre procesul de aplicare.",
-            ["Application details"] = "Detalii aplicație",
+            ["Application details"] = "Detalii aplicare",
             ["Add applied date"] = "Adaugă data aplicării",
             ["Add interview date"] = "Adaugă data interviului",
-            ["Save application"] = "Salvează aplicația",
+            ["Save application"] = "Salvează aplicarea",
             ["Salary range optional"] = "Interval salarial opțional",
             ["Contact person optional"] = "Persoană de contact opțională",
-            ["General notes about this job or application..."] = "Notițe generale despre acest job sau aplicație...",
+            ["General notes about this job or application..."] = "Notițe generale despre acest job sau aplicare...",
             ["Interview notes, questions, feedback..."] = "Notițe de interviu, întrebări, feedback...",
-            ["My Applications"] = "Aplicațiile mele",
-            ["Track saved jobs, applications and interview progress."] = "Urmărește joburile salvate, aplicațiile și progresul interviurilor.",
-            ["Applications overview"] = "Prezentare aplicații",
-            ["Showing all applications."] = "Se afișează toate aplicațiile.",
-            ["No applications found"] = "Nu au fost găsite aplicații",
-            ["You do not have applications for this filter yet."] = "Nu ai încă aplicații pentru acest filtru.",
+            ["My Applications"] = "Aplicările mele",
+            ["Track saved jobs, applications and interview progress."] = "Urmărește joburile salvate, aplicările și progresul interviurilor.",
+            ["Applications overview"] = "Prezentare aplicări",
+            ["Showing all applications."] = "Se afișează toate aplicările.",
+            ["No applications found"] = "Nu au fost găsite aplicări",
+            ["You do not have applications for this filter yet."] = "Nu ai încă aplicări pentru acest filtru.",
             ["Search by job title"] = "Caută după titlul jobului",
 
             // Jobs
@@ -327,22 +332,34 @@ namespace JobCv.Mobile.Services
             ["Enter a role and location, then refine results using filters."] = "Introdu un rol și o locație, apoi rafinează rezultatele folosind filtre.",
             ["Keyword"] = "Cuvânt-cheie",
             ["Work mode"] = "Mod de lucru",
+            ["Remote"] = "La distanță",
+            ["Hybrid"] = "Hibrid",
+            ["On-site"] = "La birou",
+            ["Any"] = "Oricare",
+            ["With salary"] = "Cu salariu",
+            ["No salary specified"] = "Fără salariu specificat",
+            ["Default"] = "Implicit",
+            ["Salary available first"] = "Salariile disponibile primele",
+            ["Company A-Z"] = "Companie A-Z",
+            ["Title A-Z"] = "Titlu A-Z",
+            ["Source"] = "Sursă",
             ["Apply filters"] = "Aplică filtrele",
             ["Reset filters"] = "Resetează filtrele",
             ["No jobs loaded yet"] = "Nu au fost încărcate joburi încă",
             ["Search for a role to see job offers here."] = "Caută un rol pentru a vedea oferte de job aici.",
+            ["Filters are applied after a search."] = "Filtrele se aplică după o căutare.",
             ["View details"] = "Vezi detalii",
             ["Load more jobs"] = "Încarcă mai multe joburi",
             ["e.g. .NET developer"] = "ex. .NET developer",
             ["e.g. Bucharest"] = "ex. București",
             ["Job Details"] = "Detalii job",
-            ["Review the job, prepare your CV and track your application."] = "Revizuiește jobul, pregătește CV-ul și urmărește aplicația.",
+            ["Review the job, prepare your CV and track your application."] = "Revizuiește jobul, pregătește CV-ul și urmărește aplicarea.",
             ["View full job post"] = "Vezi anunțul complet",
             ["Actions"] = "Acțiuni",
             ["Choose what you want to do with this job."] = "Alege ce vrei să faci cu acest job.",
             ["Apply"] = "Aplică",
             ["Save Job"] = "Salvează jobul",
-            ["Track Application"] = "Urmărește aplicația",
+            ["Track Application"] = "Urmărește aplicarea",
             ["Posted"] = "Publicat",
             ["Salary"] = "Salariu",
             ["Salary range"] = "Interval salarial",
@@ -352,6 +369,7 @@ namespace JobCv.Mobile.Services
 
             // AI / assistance pages
             ["AI Match Score"] = "Scor potrivire AI",
+            ["AI Match"] = "Potrivire AI",
             ["Compare one of your CVs with the selected job and get an explainable score."] = "Compară unul dintre CV-urile tale cu jobul selectat și primește un scor explicabil.",
             ["Selected job"] = "Job selectat",
             ["Job description"] = "Descriere job",
@@ -364,6 +382,25 @@ namespace JobCv.Mobile.Services
             ["Missing / weak areas"] = "Zone lipsă / slabe",
             ["What to improve"] = "Ce trebuie îmbunătățit",
             ["Paste your CV text here..."] = "Lipește textul CV-ului aici...",
+            ["CV quality"] = "Calitate CV",
+            ["The CV quality check could not be generated."] = "Verificarea calității CV-ului nu a putut fi generată.",
+            ["Created CV"] = "CV creat",
+            ["Created inside the app"] = "CV creat în aplicație",
+            ["Uploaded CV"] = "CV încărcat",
+            ["Uploaded CV file."] = "Fișier CV încărcat.",
+            ["Write or paste CV text manually."] = "Scrie sau lipește manual textul CV-ului.",
+            ["Match score generated successfully."] = "Scorul de potrivire a fost generat cu succes.",
+            ["Match score generated with explainable demo logic."] = "Scorul de potrivire a fost generat cu logică demonstrativă explicabilă.",
+            ["Generated with AI."] = "Generat cu AI.",
+            ["Interview preparation generated successfully."] = "Pregătirea pentru interviu a fost generată cu succes.",
+            ["Demo AI result: this is a mock response. Later it can be connected to OpenAI or a local LLM."] = "Rezultat demonstrativ: răspuns generat local pentru testare.",
+            ["Loading application..."] = "Se încarcă aplicarea...",
+            ["The application could not be loaded."] = "Aplicarea nu a putut fi încărcată.",
+            ["Subject"] = "Subiect",
+            ["Cover letter generated with AI."] = "Scrisoarea de intenție a fost generată cu AI.",
+            ["Demo cover letter generated."] = "Scrisoare de intenție generată demonstrativ.",
+            ["Cover letter copied to clipboard."] = "Scrisoarea de intenție a fost copiată în clipboard.",
+            ["No CVs available"] = "Nu există CV-uri disponibile",
             ["CV Quality Check"] = "Verificare calitate CV",
             ["Check how complete and professional this CV is."] = "Verifică cât de complet și profesional este acest CV.",
             ["Not checked yet"] = "Nu a fost verificat încă",
@@ -371,7 +408,7 @@ namespace JobCv.Mobile.Services
             ["Check CV quality"] = "Verifică calitatea CV-ului",
             ["Problems found"] = "Probleme găsite",
             ["Recommendations"] = "Recomandări",
-            ["Tailor CV"] = "Adaptează CV-ul",
+            ["Tailor CV"] = "Ajustează CV",
             ["Generate suggestions to adapt your CV for this job."] = "Generează sugestii pentru adaptarea CV-ului la acest job.",
             ["Choose a CV to tailor"] = "Alege un CV de adaptat",
             ["Select one of your created or uploaded CVs. You can also add manual CV text if needed."] = "Selectează un CV creat sau încărcat. Poți adăuga și text manual dacă este nevoie.",
@@ -385,6 +422,7 @@ namespace JobCv.Mobile.Services
             ["CV improvement suggestions"] = "Sugestii de îmbunătățire a CV-ului",
             ["Paste your profile, skills or experience section here..."] = "Lipește aici profilul, competențele sau secțiunea de experiență...",
             ["Interview Preparation"] = "Pregătire interviu",
+            ["Interview Prep"] = "Pregătire interviu",
             ["Generate interview questions and preparation tips for this job."] = "Generează întrebări de interviu și sfaturi de pregătire pentru acest job.",
             ["Generate interview prep"] = "Generează pregătirea",
             ["Preparation summary"] = "Rezumat pregătire",
@@ -394,10 +432,9 @@ namespace JobCv.Mobile.Services
 
             // Career test, kept available if you decide to keep it
             ["Career Orientation Test"] = "Test de orientare în carieră",
-            ["Answer 24 questions to discover career directions that may fit your interests, strengths and work style."] = "Răspunde la 24 de întrebări pentru a descoperi direcții de carieră potrivite intereselor, punctelor forte și stilului tău de lucru.",
             ["Important"] = "Important",
             ["Your answers and result are not saved automatically. If you want to keep the result, download the PDF report at the end of the test."] = "Răspunsurile și rezultatul nu sunt salvate automat. Dacă vrei să păstrezi rezultatul, descarcă raportul PDF la finalul testului.",
-            ["Question 1 of 24"] = "Întrebarea 1 din 24",
+            ["Question 1 of 60"] = "Întrebarea 1 din 60",
             ["Work style"] = "Stil de lucru",
             ["Question text"] = "Textul întrebării",
             ["Strongly disagree"] = "Dezacord total",
@@ -417,11 +454,16 @@ namespace JobCv.Mobile.Services
             ["Suggested next steps"] = "Pași următori sugerați",
             ["Download PDF report"] = "Descarcă raportul PDF",
             ["Start career test"] = "Începe testul de carieră",
-            ["24 questions"] = "24 de întrebări",
-            ["Focus"] = "Focus",
-            ["Interests, work style and strengths"] = "Interese, stil de lucru și puncte forte",
+            ["60 questions"] = "60 întrebări",
+            ["Discover career directions that may match your interests and the types of work activities you prefer."] =
+    "Descoperă direcții de carieră care se pot potrivi intereselor tale și tipurilor de activități pe care le preferi.",
+            ["Focus"] = "Se evaluează",
+            ["Result"] = "Rezultat",
+            ["Interests and preferred work activities"] =
+    "Interese și activități de lucru preferate",
             ["Output"] = "Rezultat",
-            ["Career profile + PDF report"] = "Profil de carieră + raport PDF",
+            ["RIASEC profile + PDF report"] =
+    "Profil RIASEC + raport PDF",
 
             // Edit profile/password
             ["Edit Profile"] = "Editează profilul",
@@ -492,10 +534,10 @@ namespace JobCv.Mobile.Services
             ["Please enter a job keyword before searching."] = "Introdu un cuvânt-cheie pentru job înainte de căutare.",
             ["Searching jobs..."] = "Se caută joburi...",
             ["Loading more jobs..."] = "Se încarcă mai multe joburi...",
-            ["Application saved successfully."] = "Aplicația a fost salvată cu succes.",
-            ["The application could not be saved."] = "Aplicația nu a putut fi salvată.",
-            ["The application could not be updated."] = "Aplicația nu a putut fi actualizată.",
-            ["The application could not be deleted."] = "Aplicația nu a putut fi ștearsă.",
+            ["Application saved successfully."] = "Aplicarea a fost salvată cu succes.",
+            ["The application could not be saved."] = "Aplicarea nu a putut fi salvată.",
+            ["The application could not be updated."] = "Aplicarea nu a putut fi actualizată.",
+            ["The application could not be deleted."] = "Aplicarea nu a putut fi ștearsă.",
             ["Generating cover letter..."] = "Se generează scrisoarea de intenție...",
             ["The cover letter could not be generated."] = "Scrisoarea de intenție nu a putut fi generată.",
             ["Generating match score..."] = "Se generează scorul de potrivire...",
@@ -510,13 +552,12 @@ namespace JobCv.Mobile.Services
             ["Password changed"] = "Parolă schimbată",
             ["Your password was changed successfully."] = "Parola a fost schimbată cu succes.",
             ["Password could not be changed."] = "Parola nu a putut fi schimbată.",
-            ["Discover career directions that may fit your interests, strengths and preferred work style."] = "Descoperă direcții de carieră care se pot potrivi intereselor, punctelor forte și stilului tău de lucru preferat.",
+            ["Discover career directions that may fit your interests, strengths and preferred work style."] = "Descoperă direcții de carieră care se pot potrivi intereselor tale și tipurilor de activități pe care le preferi.",
             ["Your result is not saved automatically. Download the PDF report at the end if you want to keep it."] = "Rezultatul nu este salvat automat. Descarcă raportul PDF la final dacă vrei să îl păstrezi.",
-            ["Result"] = "Rezultat",
-            ["All applications"] = "Toate aplicațiile",
-            ["You have not saved or tracked any applications yet."] = "Nu ai salvat sau urmărit încă nicio aplicație.",
-            ["Delete application"] = "Șterge aplicația",
-            ["Are you sure you want to delete this application?"] = "Sigur vrei să ștergi această aplicație?",
+            ["All applications"] = "Toate aplicările",
+            ["You have not saved or tracked any applications yet."] = "Nu ai salvat sau urmărit încă nicio aplicare.",
+            ["Delete application"] = "Șterge aplicarea",
+            ["Are you sure you want to delete this application?"] = "Sigur vrei să ștergi această aplicare?",
             ["Delete CV"] = "Șterge CV-ul",
             ["Delete uploaded CV"] = "Șterge CV-ul încărcat",
             ["The file could not be opened. Please make sure your phone has an app that can open this file type."] = "Fișierul nu a putut fi deschis. Asigură-te că telefonul are o aplicație care poate deschide acest tip de fișier.",
@@ -569,6 +610,68 @@ namespace JobCv.Mobile.Services
             ["Example: Career Guide Mobile App"] = "Exemplu: Aplicația mobilă Career Guide",
             ["Example: C#, .NET MAUI, ASP.NET Core, SQLite"] = "Exemplu: C#, .NET MAUI, ASP.NET Core, SQLite",
             ["Describe what the project does and your contribution..."] = "Descrie ce face proiectul și contribuția ta...",
+
+            ["Choose your PDF CV"] = "Alege CV-ul PDF",
+            ["Please choose a PDF file."] = "Te rog alege un fișier PDF.",
+            ["Please choose a PDF file first."] = "Te rog alege mai întâi un fișier PDF.",
+            ["Imported CV"] = "CV importat",
+            ["Uploading and extracting information..."] = "Se încarcă și se extrag informațiile...",
+            ["The PDF could not be uploaded."] = "PDF-ul nu a putut fi încărcat.",
+            ["The CV could not be created from this PDF."] = "CV-ul nu a putut fi creat din acest PDF.",
+            ["CV created"] = "CV creat",
+            ["The information found in your PDF was copied into a new editable CV. Please review and complete any missing fields."] =
+    "Informațiile găsite în PDF au fost copiate într-un CV nou editabil. Verifică și completează câmpurile lipsă.",
+            ["An error occurred while choosing the PDF file."] = "A apărut o eroare la alegerea fișierului PDF.",
+            ["An error occurred while importing the CV."] = "A apărut o eroare la importarea CV-ului.",
+            ["OK"] = "OK",
+
+            ["Choose a CV to copy"] = "Alege un CV de copiat",
+            ["The selected CV could not be found."] = "CV-ul selectat nu a putut fi găsit.",
+            ["Copy CV"] = "Copiază CV-ul",
+            ["Enter a title for the new CV:"] = "Introdu un titlu pentru noul CV:",
+            ["This is your base CV."] = "Acesta este CV-ul tău de bază.",
+            ["The PDF could not be opened."] = "PDF-ul nu a putut fi deschis.",
+            ["No description available for this job."] = "Nu există descriere disponibilă pentru acest job.",
+            ["The preview could not be loaded inside the app. You can still use Export to open the PDF."] = "Previzualizarea nu a putut fi încărcată în aplicație. Poți folosi în continuare Export pentru a deschide PDF-ul.",
+            ["Already saved"] = "Deja salvat",
+            ["This job is already saved or tracked in My Applications."] = "Acest job este deja salvat sau urmărit în Aplicările mele.",
+            ["This job was saved successfully. You can find it in My Applications with status Saved."] = "Acest job a fost salvat cu succes. Îl găsești în Aplicările mele cu statusul Salvat.",
+            ["Success"] = "Succes",
+            ["Application saved"] = "Aplicare salvată",
+            ["This job application was saved successfully."] = "Această aplicare a fost salvată cu succes.",
+            ["This job is already saved or tracked."] = "Acest job este deja salvat sau urmărit.",
+            ["The job could not be saved."] = "Jobul nu a putut fi salvat.",
+            ["Job saved"] = "Job salvat",
+            ["Job saved successfully."] = "Job salvat cu succes.",
+            ["The job was saved successfully."] = "Jobul a fost salvat cu succes.",
+            ["Missing link"] = "Link lipsă",
+            ["This job does not have an application link."] = "Acest job nu are link de aplicare.",
+            ["This job does not have a link to the full post."] = "Acest job nu are link către anunțul complet.",
+            ["The job link could not be opened."] = "Linkul jobului nu a putut fi deschis.",
+            ["The full job post could not be opened."] = "Anunțul complet nu a putut fi deschis.",
+            ["The file could not be deleted."] = "Fișierul nu a putut fi șters.",
+            ["PDF preview loaded."] = "Previzualizarea PDF a fost încărcată.",
+            ["PDF preview is not available for this file type."] = "Previzualizarea PDF nu este disponibilă pentru acest tip de fișier.",
+            ["The selected CV could not be loaded."] = "CV-ul selectat nu a putut fi încărcat.",
+            ["Choose a CV or paste CV text first."] = "Alege un CV sau lipește mai întâi textul CV-ului.",
+            ["CV suggestions generated successfully."] = "Sugestiile pentru CV au fost generate cu succes.",
+            ["All password fields are required."] = "Toate câmpurile pentru parolă sunt obligatorii.",
+            ["New password must have at least 6 characters."] = "Parola nouă trebuie să aibă cel puțin 6 caractere.",
+            ["New password and confirmation do not match."] = "Parola nouă și confirmarea nu coincid.",
+            ["New password must be different from the current password."] = "Parola nouă trebuie să fie diferită de parola curentă.",
+            ["Full name is required."] = "Numele complet este obligatoriu.",
+            ["Generating recommendations..."] = "Se generează recomandările...",
+            ["AI recommendations generated."] = "Recomandările AI au fost generate.",
+            ["Could not generate AI recommendations."] = "Recomandările AI nu au putut fi generate.",
+            ["Downloading PDF report..."] = "Se descarcă raportul PDF...",
+            ["PDF report downloaded."] = "Raportul PDF a fost descărcat.",
+            ["PDF report could not be downloaded."] = "Raportul PDF nu a putut fi descărcat.",
+            ["Leave result?"] = "Părăsești rezultatul?",
+            ["Your result is not saved automatically. Leave this page without downloading the PDF report?"] = "Rezultatul nu este salvat automat. Părăsești pagina fără să descarci raportul PDF?",
+            ["Stay"] = "Rămâi",
+            ["Leave"] = "Părăsește",
+            ["Use local fallback"] = "Folosește rezultat local",
+            ["Gemini did not return a valid response. Local recommendations are shown instead."] = "Gemini nu a returnat un răspuns valid. Sunt afișate recomandări locale.",
             ["Example: Microsoft Azure Fundamentals"] = "Exemplu: Microsoft Azure Fundamentals",
         };
 
@@ -604,33 +707,33 @@ namespace JobCv.Mobile.Services
         {
             var welcomeMatch = Regex.Match(value, @"^Welcome, (.+)\. Manage your CVs, jobs and applications in one place\.$");
             if (welcomeMatch.Success)
-                return $"Bun venit, {welcomeMatch.Groups[1].Value}. Gestionează CV-urile, joburile și aplicațiile într-un singur loc.";
+                return $"Bun venit, {welcomeMatch.Groups[1].Value}. Gestionează CV-urile, joburile și aplicările într-un singur loc.";
 
             var allApplicationsMatch = Regex.Match(value, @"^Showing all applications \((\d+)\)\.$");
             if (allApplicationsMatch.Success)
-                return $"Se afișează toate aplicațiile ({allApplicationsMatch.Groups[1].Value}).";
+                return $"Se afișează toate aplicările ({allApplicationsMatch.Groups[1].Value}).";
 
             var filteredApplicationsMatch = Regex.Match(value, @"^Showing (.+) applications \((\d+)\)\.$");
             if (filteredApplicationsMatch.Success)
             {
                 var status = TranslateText(ToTitleCase(filteredApplicationsMatch.Groups[1].Value));
-                return $"Se afișează aplicațiile cu statusul {status.ToLower()} ({filteredApplicationsMatch.Groups[2].Value}).";
+                return $"Se afișează aplicările cu statusul {status.ToLower()} ({filteredApplicationsMatch.Groups[2].Value}).";
             }
 
             var missingStatusMatch = Regex.Match(value, @"^You do not have applications with the status (.+) yet\.$");
             if (missingStatusMatch.Success)
             {
                 var status = TranslateText(missingStatusMatch.Groups[1].Value);
-                return $"Nu ai încă aplicații cu statusul {status.ToLower()}.";
+                return $"Nu ai încă aplicări cu statusul {status.ToLower()}.";
             }
 
             var interviewInsightMatch = Regex.Match(value, @"^You have (\d+) application\(s\) in the interview stage\. Use Interview Prep to prepare before the next meeting\.$");
             if (interviewInsightMatch.Success)
-                return $"Ai {interviewInsightMatch.Groups[1].Value} aplicație/aplicații în etapa de interviu. Folosește pregătirea pentru interviu înainte de următoarea întâlnire.";
+                return $"Ai {interviewInsightMatch.Groups[1].Value} aplicare/aplicări în etapa de interviu. Folosește pregătirea pentru interviu înainte de următoarea întâlnire.";
 
             var offerInsightMatch = Regex.Match(value, @"^Great progress\. You have (\d+) offer\(s\)\. Review your applications and keep tracking the next steps\.$");
             if (offerInsightMatch.Success)
-                return $"Progres bun. Ai {offerInsightMatch.Groups[1].Value} ofertă/oferte. Revizuiește aplicațiile și urmărește pașii următori.";
+                return $"Progres bun. Ai {offerInsightMatch.Groups[1].Value} ofertă/oferte. Revizuiește aplicările și urmărește pașii următori.";
 
             var periodMatch = Regex.Match(value, @"^Showing activity for (last 7 days|last 30 days|last 90 days|all time)\.$", RegexOptions.IgnoreCase);
             if (periodMatch.Success)
@@ -663,6 +766,18 @@ namespace JobCv.Mobile.Services
 
 
 
+            var searchCompletedMatch = Regex.Match(value, @"^Search completed\. Found (\d+) visible jobs\.$");
+            if (searchCompletedMatch.Success)
+                return $"Căutare finalizată. Au fost găsite {searchCompletedMatch.Groups[1].Value} joburi vizibile.";
+
+            var loadedMoreJobsMatch = Regex.Match(value, @"^Loaded more jobs\. Showing (\d+) jobs after filters\.$");
+            if (loadedMoreJobsMatch.Success)
+                return $"Au fost încărcate mai multe joburi. Se afișează {loadedMoreJobsMatch.Groups[1].Value} joburi după filtre.";
+
+            var loadedJobsSummaryMatch = Regex.Match(value, @"^Showing (\d+) of (\d+) loaded jobs\.$");
+            if (loadedJobsSummaryMatch.Success)
+                return $"Se afișează {loadedJobsSummaryMatch.Groups[1].Value} din {loadedJobsSummaryMatch.Groups[2].Value} joburi încărcate.";
+
             var templatePreviewMatch = Regex.Match(value, @"^Template preview - (.+)$");
             if (templatePreviewMatch.Success)
                 return $"Previzualizare șablon - {templatePreviewMatch.Groups[1].Value}";
@@ -676,11 +791,11 @@ namespace JobCv.Mobile.Services
 
         private static string? TranslateDynamicRomanianToEnglish(string value)
         {
-            var welcomeMatch = Regex.Match(value, @"^Bun venit, (.+)\. Gestionează CV-urile, joburile și aplicațiile într-un singur loc\.$");
+            var welcomeMatch = Regex.Match(value, @"^Bun venit, (.+)\. Gestionează CV-urile, joburile și aplicările într-un singur loc\.$");
             if (welcomeMatch.Success)
                 return $"Welcome, {welcomeMatch.Groups[1].Value}. Manage your CVs, jobs and applications in one place.";
 
-            var allApplicationsMatch = Regex.Match(value, @"^Se afișează toate aplicațiile \((\d+)\)\.$");
+            var allApplicationsMatch = Regex.Match(value, @"^Se afișează toate aplicările \((\d+)\)\.$");
             if (allApplicationsMatch.Success)
                 return $"Showing all applications ({allApplicationsMatch.Groups[1].Value}).";
 
@@ -691,6 +806,18 @@ namespace JobCv.Mobile.Services
                 ["Se afișează activitatea pentru ultimele 90 de zile."] = "Showing activity for last 90 days.",
                 ["Se afișează activitatea pentru toată perioada."] = "Showing activity for all time."
             };
+
+            var searchCompletedMatch = Regex.Match(value, @"^Căutare finalizată\. Au fost găsite (\d+) joburi vizibile\.$");
+            if (searchCompletedMatch.Success)
+                return $"Search completed. Found {searchCompletedMatch.Groups[1].Value} visible jobs.";
+
+            var loadedMoreJobsMatch = Regex.Match(value, @"^Au fost încărcate mai multe joburi\. Se afișează (\d+) joburi după filtre\.$");
+            if (loadedMoreJobsMatch.Success)
+                return $"Loaded more jobs. Showing {loadedMoreJobsMatch.Groups[1].Value} jobs after filters.";
+
+            var loadedJobsSummaryMatch = Regex.Match(value, @"^Se afișează (\d+) din (\d+) joburi încărcate\.$");
+            if (loadedJobsSummaryMatch.Success)
+                return $"Showing {loadedJobsSummaryMatch.Groups[1].Value} of {loadedJobsSummaryMatch.Groups[2].Value} loaded jobs.";
 
             return periodMap.TryGetValue(value, out var english) ? english : null;
         }

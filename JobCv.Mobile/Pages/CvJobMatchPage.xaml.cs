@@ -10,6 +10,8 @@ namespace JobCv.Mobile.Pages
         private readonly JobSearchResultDto _job;
         private readonly List<CvSelectionOption> _cvOptions = new();
 
+        private static string Txt(string en, string ro) => LanguageService.IsRomanian ? ro : en;
+
         public CvJobMatchPage(UserDto user, ApiService apiService, JobSearchResultDto job)
         {
             InitializeComponent();
@@ -44,8 +46,8 @@ namespace JobCv.Mobile.Pages
                     _cvOptions.Add(new CvSelectionOption
                     {
                         SourceType = "Created",
-                        Title = string.IsNullOrWhiteSpace(cv.Title) ? "Created CV" : cv.Title,
-                        Subtitle = $"Created CV • {cv.Language}",
+                        Title = string.IsNullOrWhiteSpace(cv.Title) ? Txt("Created CV", "CV creat") : cv.Title,
+                        Subtitle = Txt("Created inside the app", "CV creat în aplicație"),
                         CvText = BuildReadableCvText(cv)
                     });
                 }
@@ -53,14 +55,14 @@ namespace JobCv.Mobile.Pages
                 foreach (var uploaded in uploadedCvs)
                 {
                     var fileName = string.IsNullOrWhiteSpace(uploaded.OriginalFileName)
-                        ? "Uploaded CV"
+                        ? Txt("Uploaded CV", "CV încărcat")
                         : uploaded.OriginalFileName;
 
                     _cvOptions.Add(new CvSelectionOption
                     {
                         SourceType = "Uploaded",
                         Title = fileName,
-                        Subtitle = "Uploaded CV file. Full text extraction can be added later.",
+                        Subtitle = Txt("Uploaded CV file.", "Fișier CV încărcat."),
                         CvText =
                             $"The user selected an uploaded CV file named {fileName}. " +
                             "The full file content is not extracted yet, so estimate the match mainly from the job description and give cautious advice."
@@ -70,8 +72,8 @@ namespace JobCv.Mobile.Pages
                 _cvOptions.Add(new CvSelectionOption
                 {
                     SourceType = "Manual",
-                    Title = "Manual CV text",
-                    Subtitle = "Write or paste CV text manually.",
+                    Title = Txt("Manual CV text", "Text CV introdus manual"),
+                    Subtitle = Txt("Write or paste CV text manually.", "Scrie sau lipește manual textul CV-ului."),
                     CvText = string.Empty
                 });
 
@@ -212,9 +214,9 @@ namespace JobCv.Mobile.Pages
                 ResultsLayout.IsVisible = true;
                 UiTranslationService.ApplyToPage(this);
                 MessageLabel.TextColor = Colors.Green;
-                MessageLabel.Text = result.IsMock
-                    ? UiTranslationService.TranslateText("Match score generated with explainable demo logic.")
-                    : UiTranslationService.TranslateText("Match score generated successfully.");
+                MessageLabel.Text = Txt(
+                    "Match score generated successfully.",
+                    "Scorul de potrivire a fost generat cu succes.");
             }
             catch (Exception ex)
             {
