@@ -155,7 +155,10 @@ namespace JobCv.Mobile.Pages
                 _ => UiTranslationService.TranslateText(value)
             };
         }
-
+        private async void OnBackClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
         private static string NormalizeInterviewText(string? text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -164,9 +167,6 @@ namespace JobCv.Mobile.Pages
             return UiTranslationService.TranslateText(text.Trim());
         }
 
-        private async void OnBackClicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
+       
     }
 }
