@@ -22,7 +22,7 @@ namespace JobCv.Api.Controllers
             "Accepted",
             "Withdrawn",
 
-            // Older names kept so existing database rows are still counted correctly.
+           
             "InterviewScheduled",
             "InterviewCompleted",
             "OfferReceived"
@@ -83,8 +83,7 @@ namespace JobCv.Api.Controllers
                 CreatedCvsCount = await createdCvsCountQuery.CountAsync(),
                 UploadedCvsCount = await uploadedCvsCountQuery.CountAsync(),
 
-                // This means job-application records added in the selected period.
-                // It includes Saved, Applied, Interview, Rejected, Offer, etc.
+                
                 ApplicationsCount = await applicationsAddedCountQuery.CountAsync(),
                 InterviewsCount = await interviewsCountQuery.CountAsync()
             });

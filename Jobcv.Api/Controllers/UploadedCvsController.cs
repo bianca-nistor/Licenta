@@ -130,7 +130,7 @@ namespace JobCv.Api.Controllers
             return Ok(files);
         }
 
-        // Păstrăm rutele vechi ca să nu stricăm aplicația MAUI existentă acum.
+        
         [HttpGet("{fileId}/download")]
         public async Task<IActionResult> DownloadUploadedCv(int fileId)
         {
