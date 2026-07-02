@@ -128,16 +128,13 @@ namespace JobCv.Mobile.Pages
 
         private void UpdatePipelineStats()
         {
-            var savedCount = _applications.Count(x => IsStatus(x, "Saved"));
+            var applicationsForSelectedPeriod = GetApplicationsForSelectedPeriod();
 
-            var appliedCount = _applications.Count(x =>
-                IsStatus(x, "Applied") ||
-                x.AppliedAt.HasValue);
-
-            var interviewCount = _applications.Count(IsInterviewApplication);
-
-            var offerCount = _applications.Count(x => IsStatus(x, "Offer"));
-            var rejectedCount = _applications.Count(x => IsStatus(x, "Rejected"));
+            var savedCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Saved);
+            var appliedCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Applied);
+            var interviewCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Interview);
+            var offerCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Offer);
+            var rejectedCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Rejected);
 
             SetLabelText("SavedJobsCountLabel", savedCount.ToString());
             SetLabelText("AppliedJobsCountLabel", appliedCount.ToString());
@@ -156,8 +153,13 @@ namespace JobCv.Mobile.Pages
             var uploadedCvCount = CountByPeriod(_uploadedCvs, x => x.UploadedAt, startDate);
             var applicationCount = CountByPeriod(_applications, x => x.CreatedAt, startDate);
             var interviewCount = _applications.Count(application =>
-                application.InterviewAt.HasValue &&
-                IsInPeriod(application.InterviewAt.Value, startDate));
+            {
+                if (application.InterviewAt.HasValue)
+                    return IsInPeriod(application.InterviewAt.Value, startDate);
+
+                return GetApplicationStage(application) == ApplicationStage.Interview &&
+                       IsInPeriod(application.CreatedAt, startDate);
+            });
 
             SetLabelText("PeriodCreatedCvCountLabel", createdCvCount.ToString());
             SetLabelText("PeriodUploadedCvCountLabel", uploadedCvCount.ToString());
@@ -220,6 +222,17 @@ namespace JobCv.Mobile.Pages
             return date.Date >= startDate.Value.Date;
         }
 
+        private List<JobApplicationDto> GetApplicationsForSelectedPeriod()
+        {
+            var selectedPeriod = PeriodPicker?.SelectedItem?.ToString() ?? "Last 30 days";
+            var normalizedPeriod = NormalizePeriod(selectedPeriod);
+            var startDate = GetPeriodStartDate(normalizedPeriod);
+
+            return _applications
+                .Where(application => IsInPeriod(application.CreatedAt, startDate))
+                .ToList();
+        }
+
         private void UpdateQuickInsight()
         {
             if (_applications.Count == 0)
@@ -230,11 +243,13 @@ namespace JobCv.Mobile.Pages
                 return;
             }
 
-            var savedCount = _applications.Count(x => IsStatus(x, "Saved"));
-            var appliedCount = _applications.Count(x => IsStatus(x, "Applied") || x.AppliedAt.HasValue);
-            var interviewCount = _applications.Count(IsInterviewApplication);
-            var offerCount = _applications.Count(x => IsStatus(x, "Offer"));
-            var rejectedCount = _applications.Count(x => IsStatus(x, "Rejected"));
+            var applicationsForSelectedPeriod = GetApplicationsForSelectedPeriod();
+
+            var savedCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Saved);
+            var appliedCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Applied);
+            var interviewCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Interview);
+            var offerCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Offer);
+            var rejectedCount = applicationsForSelectedPeriod.Count(x => GetApplicationStage(x) == ApplicationStage.Rejected);
 
             if (interviewCount > 0)
             {
@@ -293,21 +308,82 @@ namespace JobCv.Mobile.Pages
                 emptyLabel.IsVisible = recentApplications.Count == 0;
         }
 
-        private static bool IsStatus(JobApplicationDto application, string status)
+        private enum ApplicationStage
         {
-            return string.Equals(
-                application.Status?.Trim(),
-                status,
-                StringComparison.OrdinalIgnoreCase);
+            Saved,
+            Applied,
+            Interview,
+            Offer,
+            Rejected
+        }
+
+        private static ApplicationStage GetApplicationStage(JobApplicationDto application)
+        {
+            var status = NormalizeStatus(application.Status);
+
+            if (status == "Rejected")
+                return ApplicationStage.Rejected;
+
+            if (status == "Offer")
+                return ApplicationStage.Offer;
+
+            if (status == "Interview" || application.InterviewAt.HasValue)
+                return ApplicationStage.Interview;
+
+            if (status == "Applied" || application.AppliedAt.HasValue)
+                return ApplicationStage.Applied;
+
+            return ApplicationStage.Saved;
+        }
+
+        private static string NormalizeStatus(string? status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+                return "Saved";
+
+            var value = status.Trim();
+            var compactValue = value.Replace(" ", string.Empty);
+
+            if (value.Equals("Salvat", StringComparison.OrdinalIgnoreCase))
+                return "Saved";
+
+            if (value.Equals("Aplicat", StringComparison.OrdinalIgnoreCase))
+                return "Applied";
+
+            if (value.Equals("Respins", StringComparison.OrdinalIgnoreCase))
+                return "Rejected";
+
+            if (value.Equals("Ofertă", StringComparison.OrdinalIgnoreCase) ||
+                value.Equals("Oferta", StringComparison.OrdinalIgnoreCase) ||
+                compactValue.Equals("OfferReceived", StringComparison.OrdinalIgnoreCase) ||
+                compactValue.Equals("Offered", StringComparison.OrdinalIgnoreCase) ||
+                value.Equals("Offer", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Offer";
+            }
+
+            if (value.Contains("Interview", StringComparison.OrdinalIgnoreCase) ||
+                value.Contains("Interviu", StringComparison.OrdinalIgnoreCase) ||
+                compactValue.Equals("InterviewScheduled", StringComparison.OrdinalIgnoreCase) ||
+                compactValue.Equals("InterviewCompleted", StringComparison.OrdinalIgnoreCase) ||
+                compactValue.Equals("InterviewDone", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Interview";
+            }
+
+            if (value.Equals("Applied", StringComparison.OrdinalIgnoreCase))
+                return "Applied";
+
+            if (value.Equals("Rejected", StringComparison.OrdinalIgnoreCase))
+                return "Rejected";
+
+            return "Saved";
         }
 
         private static bool IsInterviewApplication(JobApplicationDto application)
         {
             return application.InterviewAt.HasValue ||
-                   (
-                       !string.IsNullOrWhiteSpace(application.Status) &&
-                       application.Status.Contains("Interview", StringComparison.OrdinalIgnoreCase)
-                   );
+                   NormalizeStatus(application.Status) == "Interview";
         }
 
         private void OnPeriodChanged(object sender, EventArgs e)
@@ -320,6 +396,8 @@ namespace JobCv.Mobile.Pages
             }
 
             UpdatePeriodStats();
+            UpdatePipelineStats();
+            UpdateQuickInsight();
         }
 
         private void OnMenuClicked(object sender, EventArgs e)

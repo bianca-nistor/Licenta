@@ -40,8 +40,7 @@
 
                 <VerticalStackLayout Spacing="14">
 
-                    <Grid ColumnDefinitions="*,Auto"
-                          ColumnSpacing="12">
+                    <Grid ColumnDefinitions="*">
 
                         <VerticalStackLayout Spacing="5">
 
@@ -63,19 +62,6 @@
 
                         </VerticalStackLayout>
 
-                        <Border Grid.Column="1"
-                                BackgroundColor="#EFF6FF"
-                                Stroke="#BFDBFE"
-                                StrokeShape="RoundRectangle 16"
-                                Padding="12,8"
-                                VerticalOptions="Start">
-
-                            <Label x:Name="SourceLabel"
-                                   FontSize="12"
-                                   FontAttributes="Bold"
-                                   TextColor="#1D4ED8" />
-
-                        </Border>
                     </Grid>
 
                     <Grid ColumnDefinitions="*,*"

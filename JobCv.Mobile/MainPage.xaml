@@ -21,7 +21,7 @@
                        TextColor="#0F172A"
                        HorizontalTextAlignment="Center" />
 
-                <Label Text="Creează CV-uri mai bune, urmărește aplicațiile și pregătește-te pentru interviuri."
+                <Label Text="Creează CV-uri mai bune, urmărește aplicările și pregătește-te pentru interviuri."
                        FontSize="15"
                        TextColor="#64748B"
                        HorizontalTextAlignment="Center"
@@ -106,7 +106,7 @@
                             CornerRadius="16"
                             HeightRequest="52" />
 
-                    <Label Text="Asistentul tău personal pentru CV-uri, joburi, aplicații și interviuri."
+                    <Label Text="Asistentul tău personal pentru CV-uri, joburi, aplicări și interviuri."
                            FontSize="13"
                            TextColor="#64748B"
                            HorizontalTextAlignment="Center"

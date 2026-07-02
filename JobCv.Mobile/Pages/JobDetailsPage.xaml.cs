@@ -37,13 +37,8 @@ namespace JobCv.Mobile.Pages
                 ? "Location not available"
                 : _job.Location;
 
-            SourceLabel.Text = string.IsNullOrWhiteSpace(_job.Source)
-                ? "Source"
-                : _job.Source;
 
-            SalaryLabel.Text = string.IsNullOrWhiteSpace(_job.Salary)
-                ? "Not specified"
-                : _job.Salary;
+            SalaryLabel.Text = _job.DisplaySalary;
 
             PostedLabel.Text = string.IsNullOrWhiteSpace(_job.PostedText)
                 ? "Not available"
@@ -63,7 +58,10 @@ namespace JobCv.Mobile.Pages
         {
             if (string.IsNullOrWhiteSpace(_job.ApplyUrl))
             {
-                await DisplayAlert("Missing link", "This job does not have an application link.", "OK");
+                await UiTranslationService.DisplayAlertAsync(
+                    this,
+                    "Missing link",
+                    "This job does not have an application link.");
                 return;
             }
 
@@ -73,7 +71,10 @@ namespace JobCv.Mobile.Pages
             }
             catch
             {
-                await DisplayAlert("Error", "The job link could not be opened.", "OK");
+                await UiTranslationService.DisplayAlertAsync(
+                    this,
+                    "Error",
+                    "The job link could not be opened.");
             }
         }
 
@@ -97,7 +98,7 @@ namespace JobCv.Mobile.Pages
             await Navigation.PushAsync(new CvJobMatchPage(_user, _apiService, _job));
         }
 
-        
+
 
         private async void OnTrackApplicationClicked(object sender, EventArgs e)
         {
@@ -122,13 +123,13 @@ namespace JobCv.Mobile.Pages
 
                 if (alreadySavedOrTracked)
                 {
-                    await DisplayAlert(
+                    await UiTranslationService.DisplayAlertAsync(
+                        this,
                         "Already saved",
-                        "This job is already saved or tracked in My Applications.",
-                        "OK");
+                        "This job is already saved or tracked in My Applications.");
 
                     MessageLabel.TextColor = Color.FromArgb("#FDE68A");
-                    MessageLabel.Text = "This job is already saved or tracked.";
+                    MessageLabel.Text = UiTranslationService.TranslateText("This job is already saved or tracked.");
                     return;
                 }
 
@@ -151,7 +152,7 @@ namespace JobCv.Mobile.Pages
                     InterviewAt = null,
                     Notes = "Saved from Job Details.",
                     InterviewNotes = string.Empty,
-                    SalaryRange = _job.Salary?.Trim() ?? string.Empty,
+                    SalaryRange = _job.DisplaySalary,
                     ContactPerson = string.Empty
                 };
 
@@ -160,22 +161,22 @@ namespace JobCv.Mobile.Pages
                 if (saved == null)
                 {
                     MessageLabel.TextColor = Colors.Red;
-                    MessageLabel.Text = "The job could not be saved.";
+                    MessageLabel.Text = UiTranslationService.TranslateText("The job could not be saved.");
                     return;
                 }
 
-                await DisplayAlert(
+                await UiTranslationService.DisplayAlertAsync(
+                    this,
                     "Job saved",
-                    "This job was saved successfully. You can find it in My Applications with status Saved.",
-                    "OK");
+                    "This job was saved successfully. You can find it in My Applications with status Saved.");
 
                 MessageLabel.TextColor = Color.FromArgb("#BBF7D0");
-                MessageLabel.Text = "Job saved successfully.";
+                MessageLabel.Text = UiTranslationService.TranslateText("Job saved successfully.");
             }
             catch (Exception ex)
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = ex.Message;
+                MessageLabel.Text = UiTranslationService.TranslateText(ex.Message);
             }
             finally
             {
@@ -234,7 +235,10 @@ namespace JobCv.Mobile.Pages
         {
             if (string.IsNullOrWhiteSpace(_job.ApplyUrl))
             {
-                await DisplayAlert("Missing link", "This job does not have a link to the full post.", "OK");
+                await UiTranslationService.DisplayAlertAsync(
+                    this,
+                    "Missing link",
+                    "This job does not have a link to the full post.");
                 return;
             }
 
@@ -244,7 +248,10 @@ namespace JobCv.Mobile.Pages
             }
             catch
             {
-                await DisplayAlert("Error", "The full job post could not be opened.", "OK");
+                await UiTranslationService.DisplayAlertAsync(
+                    this,
+                    "Error",
+                    "The full job post could not be opened.");
             }
         }
     }

@@ -23,20 +23,22 @@ namespace JobCv.Mobile.Pages
             _apiService = apiService;
             _job = job;
 
+            UiTranslationService.ApplyToPage(this);
+
             JobTitleLabel.Text = string.IsNullOrWhiteSpace(_job.Title)
-                ? "Selected job"
+                ? Txt("Selected job", "Job selectat")
                 : _job.Title;
 
             CompanyLabel.Text = string.IsNullOrWhiteSpace(_job.Company)
-                ? "Unknown company"
+                ? Txt("Unknown company", "Companie necunoscută")
                 : _job.Company;
 
             LocationLabel.Text = string.IsNullOrWhiteSpace(_job.Location)
-                ? "Location not specified"
+                ? Txt("Location not specified", "Locație nespecificată")
                 : _job.Location;
 
             DescriptionLabel.Text = string.IsNullOrWhiteSpace(_job.Description)
-                ? "No job description available."
+                ? Txt("No job description available.", "Nu există o descriere disponibilă pentru job.")
                 : _job.Description;
         }
 
@@ -70,6 +72,8 @@ namespace JobCv.Mobile.Pages
                     return;
                 }
 
+                NormalizeInterviewResult(result);
+
                 SummaryLabel.Text = result.Summary;
 
                 SkillsCollectionView.ItemsSource = result.KeySkills;
@@ -97,6 +101,67 @@ namespace JobCv.Mobile.Pages
                 LoadingIndicator.IsVisible = false;
                 LoadingIndicator.IsRunning = false;
             }
+        }
+
+
+        private static void NormalizeInterviewResult(InterviewPrepResponse result)
+        {
+            result.Summary = UiTranslationService.TranslateText(result.Summary);
+
+            if (result.KeySkills != null)
+                result.KeySkills = result.KeySkills.Select(NormalizeInterviewText).ToList();
+
+            if (result.BeforeInterviewTips != null)
+                result.BeforeInterviewTips = result.BeforeInterviewTips.Select(NormalizeInterviewText).ToList();
+
+            if (result.Questions == null)
+                return;
+
+            foreach (var question in result.Questions)
+            {
+                question.Category = NormalizeInterviewCategory(question.Category);
+                question.Question = NormalizeInterviewText(question.Question);
+                question.SuggestedAnswer = NormalizeInterviewText(question.SuggestedAnswer);
+            }
+        }
+
+        private static string NormalizeInterviewCategory(string? category)
+        {
+            if (string.IsNullOrWhiteSpace(category))
+                return string.Empty;
+
+            var value = category.Trim();
+
+            if (!LanguageService.IsRomanian)
+            {
+                return value switch
+                {
+                    "Tehnic" => "Technical",
+                    "Comportamental" => "Behavioural",
+                    "Final" => "Closing",
+                    "Testare" => "Testing",
+                    _ => value
+                };
+            }
+
+            return value.ToLowerInvariant() switch
+            {
+                "technical" => "Tehnic",
+                "tehnical" => "Tehnic",
+                "behavioral" => "Comportamental",
+                "behavioural" => "Comportamental",
+                "closing" => "Final",
+                "testing" => "Testare",
+                _ => UiTranslationService.TranslateText(value)
+            };
+        }
+
+        private static string NormalizeInterviewText(string? text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            return UiTranslationService.TranslateText(text.Trim());
         }
 
         private async void OnBackClicked(object sender, EventArgs e)

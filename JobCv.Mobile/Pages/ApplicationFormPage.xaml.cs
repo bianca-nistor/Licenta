@@ -71,6 +71,7 @@ namespace JobCv.Mobile.Pages
             LocationEntry.Text = _job.Location;
             JobUrlEntry.Text = _job.ApplyUrl;
             SourceEntry.Text = _job.Source;
+            SalaryRangeEntry.Text = _job.DisplaySalary;
         }
 
         private async Task LoadCvsAsync()
@@ -95,11 +96,60 @@ namespace JobCv.Mobile.Pages
         private void OnUseAppliedDateChanged(object sender, CheckedChangedEventArgs e)
         {
             AppliedDatePicker.IsEnabled = e.Value;
+
+            if (e.Value && IsCurrentStatus("Saved"))
+            {
+                SetStatusPickerValue("Applied");
+            }
         }
 
         private void OnUseInterviewDateChanged(object sender, CheckedChangedEventArgs e)
         {
             InterviewDatePicker.IsEnabled = e.Value;
+
+            if (e.Value &&
+                (IsCurrentStatus("Saved") || IsCurrentStatus("Applied")))
+            {
+                SetStatusPickerValue("Interview Scheduled");
+            }
+        }
+
+        private void SetStatusPickerValue(string status)
+        {
+            var index = _statuses.FindIndex(item =>
+                string.Equals(item, status, StringComparison.OrdinalIgnoreCase));
+
+            if (index >= 0)
+                StatusPicker.SelectedIndex = index;
+        }
+
+        private bool IsCurrentStatus(string status)
+        {
+            return string.Equals(
+                GetSelectedStatusForApi(),
+                status,
+                StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string NormalizeStatusForDates(
+            string selectedStatus,
+            DateTime? appliedAt,
+            DateTime? interviewAt)
+        {
+            if (interviewAt.HasValue &&
+                (string.Equals(selectedStatus, "Saved", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(selectedStatus, "Applied", StringComparison.OrdinalIgnoreCase)))
+            {
+                return "Interview Scheduled";
+            }
+
+            if (appliedAt.HasValue &&
+                string.Equals(selectedStatus, "Saved", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Applied";
+            }
+
+            return selectedStatus;
         }
 
         private async void OnBackClicked(object sender, EventArgs e)
@@ -143,6 +193,11 @@ namespace JobCv.Mobile.Pages
                 ? InterviewDatePicker.Date
                 : null;
 
+            var selectedStatus = NormalizeStatusForDates(
+                GetSelectedStatusForApi(),
+                appliedAt,
+                interviewAt);
+
             var request = new CreateJobApplicationRequest
             {
                 UserId = _user.Id,
@@ -153,7 +208,7 @@ namespace JobCv.Mobile.Pages
                 Location = LocationEntry.Text?.Trim() ?? "",
                 JobUrl = JobUrlEntry.Text?.Trim() ?? "",
                 Source = SourceEntry.Text?.Trim() ?? "",
-                Status = GetSelectedStatusForApi(),
+                Status = selectedStatus,
                 AppliedAt = appliedAt,
                 InterviewAt = interviewAt,
                 Notes = NotesEditor.Text?.Trim() ?? "",
