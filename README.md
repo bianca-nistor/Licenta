@@ -125,7 +125,7 @@ Pentru compilare:
    - Android Emulator;
    - dispozitiv Android conectat.
 4. Se rulează comanda:
-Build → Rebuild Solution
+Build -> Rebuild Solution
 
 ## Lansarea aplicației
 
@@ -140,4 +140,4 @@ Pentru lansarea aplicației mobile din Visual Studio:
 
 Aplicația utilizează o bază de date Azure SQL Database. Accesul la baza de date este realizat prin backend, folosind Entity Framework Core.
 Aplicația mobilă nu accesează direct baza de date. Fluxul de comunicare este:
-JobCv.Mobile → Jobcv.Api → Azure SQL Database
+JobCv.Mobile -> Jobcv.Api -> Azure SQL Database
