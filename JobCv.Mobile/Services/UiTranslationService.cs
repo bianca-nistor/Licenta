@@ -193,7 +193,7 @@ namespace JobCv.Mobile.Services
             ["LinkedIn URL"] = "URL LinkedIn",
             ["GitHub URL"] = "URL GitHub",
             ["Portfolio URL"] = "URL portofoliu",
-            ["Professional summary"] = "Rezumat profesional",
+            ["Professional summary"] = "Profil profesional",
             ["Skills"] = "Competențe",
             ["Education"] = "Educație",
             ["Experience"] = "Experiență",
@@ -564,7 +564,7 @@ namespace JobCv.Mobile.Services
 
             // Edit CV and CV section forms - extra labels, placeholders and messages
             ["Profile"] = "Profil",
-            ["Professional Summary"] = "Rezumat profesional",
+            ["Professional Summary"] = "Profil profesional",
             ["My CVs"] = "CV-urile mele",
             ["Skill name:"] = "Numele competenței:",
             ["Language name:"] = "Numele limbii:",

@@ -14,6 +14,7 @@ namespace JobCv.Mobile.Pages
 
         private static string Txt(string en, string ro) => LanguageService.IsRomanian ? ro : en;
 
+
         public CvTailoringPage(
             UserDto user,
             ApiService apiService,
@@ -26,19 +27,19 @@ namespace JobCv.Mobile.Pages
             _job = job;
 
             JobTitleLabel.Text = string.IsNullOrWhiteSpace(_job.Title)
-                ? "Selected job"
+                ? Txt("Selected job", "Job selectat")
                 : _job.Title;
 
             CompanyLabel.Text = string.IsNullOrWhiteSpace(_job.Company)
-                ? "Unknown company"
+                ? Txt("Unknown company", "Companie necunoscută")
                 : _job.Company;
 
             LocationLabel.Text = string.IsNullOrWhiteSpace(_job.Location)
-                ? "Location not specified"
+                ? Txt("Location not specified", "Locație nespecificată")
                 : _job.Location;
 
             DescriptionLabel.Text = string.IsNullOrWhiteSpace(_job.Description)
-                ? "No job description available."
+                ? Txt("No job description available.", "Nu există descriere pentru acest job.")
                 : _job.Description;
         }
 
@@ -46,6 +47,7 @@ namespace JobCv.Mobile.Pages
         {
             base.OnAppearing();
             await LoadCvOptionsAsync();
+            UiTranslationService.ApplyToPage(this);
         }
 
         private async Task LoadCvOptionsAsync()
@@ -61,15 +63,15 @@ namespace JobCv.Mobile.Pages
                 {
                     var title = GetPropertyValue(cv, "Title")
                         ?? GetPropertyValue(cv, "Name")
-                        ?? "Created CV";
+                        ?? Txt("Created CV", "CV creat");
 
-                    var language = GetPropertyValue(cv, "Language") ?? "Created inside the app";
+                    var language = cv.LanguageDisplay;
 
                     _cvOptions.Add(new CvSelectionOption
                     {
                         SourceType = "Created",
                         Title = title,
-                        Subtitle = $"Created CV • {language}",
+                        Subtitle = $"{Txt("Created CV", "CV creat")} • {language}",
                         CvText = BuildReadableCvText(cv)
                     });
                 }
@@ -79,24 +81,26 @@ namespace JobCv.Mobile.Pages
                     var fileName = GetPropertyValue(uploaded, "FileName")
                         ?? GetPropertyValue(uploaded, "OriginalFileName")
                         ?? GetPropertyValue(uploaded, "Name")
-                        ?? "Uploaded CV";
+                        ?? Txt("Uploaded CV", "CV încărcat");
 
                     _cvOptions.Add(new CvSelectionOption
                     {
                         SourceType = "Uploaded",
                         Title = fileName,
-                        Subtitle = "Uploaded CV file. Full file text extraction can be added later.",
-                        CvText =
-                            $"The user selected an uploaded CV file named {fileName}. " +
-                            "The full file content is not extracted yet, so generate general tailoring advice based on the job description."
+                        Subtitle = Txt(
+                            "Uploaded CV file.",
+                            "Fișier CV încărcat."),
+                        CvText = LanguageService.IsRomanian
+                            ? $"Utilizatorul a selectat un fișier CV încărcat, numit {fileName}. Conținutul complet al fișierului nu este extras încă, așa că generează recomandări generale pe baza descrierii jobului."
+                            : $"The user selected an uploaded CV file named {fileName}. The full file content is not extracted yet, so generate general tailoring advice based on the job description."
                     });
                 }
 
                 _cvOptions.Add(new CvSelectionOption
                 {
                     SourceType = "Manual",
-                    Title = "Manual CV text",
-                    Subtitle = "Write or paste CV text manually.",
+                    Title = Txt("Manual CV text", "Text CV introdus manual"),
+                    Subtitle = Txt("Write or paste CV text manually.", "Scrie sau lipește manual textul CV-ului."),
                     CvText = string.Empty
                 });
 
@@ -109,18 +113,19 @@ namespace JobCv.Mobile.Pages
             catch (Exception ex)
             {
                 MessageLabel.TextColor = Colors.Red;
-                MessageLabel.Text = $"CV list could not be loaded: {ex.Message}";
+                MessageLabel.Text = $"{Txt("CV list could not be loaded", "Lista de CV-uri nu a putut fi încărcată")}: {ex.Message}";
             }
         }
+
         private static string BuildReadableCvText(object cv)
         {
             var ignoredProperties = new HashSet<string>
-    {
-        "Id",
-        "UserId",
-        "CreatedAt",
-        "UpdatedAt"
-    };
+            {
+                "Id",
+                "UserId",
+                "CreatedAt",
+                "UpdatedAt"
+            };
 
             var parts = new List<string>();
 
@@ -230,7 +235,14 @@ namespace JobCv.Mobile.Pages
                 KeywordsCollectionView.ItemsSource = result.ImportantKeywords;
                 SkillsCollectionView.ItemsSource = result.SkillsToHighlight;
                 ExperienceCollectionView.ItemsSource = result.ExperienceToEmphasize;
-                SuggestionsCollectionView.ItemsSource = result.Suggestions;
+                SuggestionsCollectionView.ItemsSource = result.Suggestions
+      .Select(s => new
+      {
+          Section = LocalizeTailoringSection(s.Section),
+          s.Suggestion,
+          s.Reason
+      })
+      .ToList();
 
                 ResultsLayout.IsVisible = true;
 
@@ -272,6 +284,30 @@ namespace JobCv.Mobile.Pages
         {
             await Navigation.PopAsync();
         }
+        private static string LocalizeTailoringSection(string? section)
+        {
+            if (string.IsNullOrWhiteSpace(section))
+                return string.Empty;
 
+            if (!LanguageService.IsRomanian)
+                return section;
+
+            return section.Trim() switch
+            {
+                "Profile" => "Profil",
+                "Summary" => "Rezumat",
+                "Professional profile" => "Profil profesional",
+                "Professional summary" => "Profil profesional",
+                "Skills" => "Competențe",
+                "Experience" => "Experiență",
+                "Education" => "Educație",
+                "Projects" => "Proiecte",
+                "Languages" => "Limbi străine",
+                "Certifications" => "Certificări",
+                "Contact" => "Contact",
+                "General" => "General",
+                _ => section
+            };
+        }
     }
 }

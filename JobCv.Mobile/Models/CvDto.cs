@@ -1,4 +1,5 @@
-﻿namespace JobCv.Mobile.Models
+﻿using JobCv.Mobile.Services;
+namespace JobCv.Mobile.Models
 {
     public class CvDto
     {
@@ -55,10 +56,13 @@
         {
             get
             {
-                return Language switch
+                var cvLanguage = Language?.Trim().ToLowerInvariant();
+                var appLanguage = LanguageService.CurrentLanguage?.Trim().ToLowerInvariant();
+
+                return cvLanguage switch
                 {
-                    "en" => "English",
-                    "ro" => "Romanian",
+                    "ro" => appLanguage == "ro" ? "Română" : "Romanian",
+                    "en" => appLanguage == "ro" ? "Engleză" : "English",
                     _ => string.IsNullOrWhiteSpace(Language) ? "-" : Language
                 };
             }

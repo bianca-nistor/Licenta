@@ -19,12 +19,12 @@
                 <VerticalStackLayout Grid.Column="0"
                                      Spacing="4">
 
-                    <Label Text="Tailor CV"
+                    <Label Text="Adaptare CV"
                            FontSize="34"
                            FontAttributes="Bold"
                            TextColor="#0F172A" />
 
-                    <Label Text="Generate suggestions to adapt your CV for this job."
+                    <Label Text="Generează sugestii pentru adaptarea CV-ului la acest job."
                            FontSize="16"
                            TextColor="#64748B"
                            LineBreakMode="WordWrap" />
@@ -70,18 +70,18 @@
 
                 <VerticalStackLayout Spacing="12">
 
-                    <Label Text="Choose a CV to tailor"
+                    <Label Text="Alege un CV pentru adaptare"
                FontSize="20"
                FontAttributes="Bold"
                TextColor="#0F172A" />
 
-                    <Label Text="Select one of your created or uploaded CVs. You can also add manual CV text if needed."
+                    <Label Text="Selectează unul dintre CV-urile create sau încărcate. Poți adăuga și textul CV-ului manual, dacă este necesar."
                FontSize="14"
                TextColor="#64748B"
                LineBreakMode="WordWrap" />
 
                     <Picker x:Name="CvPicker"
-                Title="Select a CV"
+                Title="Selectează un CV"
                 ItemDisplayBinding="{Binding Title}"
                 TextColor="#0F172A"
                 TitleColor="#94A3B8"
@@ -110,7 +110,7 @@
                         </VerticalStackLayout>
                     </Border>
 
-                    <Button Text="Use manual CV text instead"
+                    <Button Text="Folosește text CV introdus manual"
                 Clicked="OnToggleManualTextClicked"
                 BackgroundColor="White"
                 TextColor="#1D4ED8"
@@ -124,13 +124,13 @@
                              IsVisible="False"
                              Spacing="8">
 
-                        <Label Text="Manual CV text"
+                        <Label Text="Text CV introdus manual"
                    FontSize="16"
                    FontAttributes="Bold"
                    TextColor="#0F172A" />
 
                         <Editor x:Name="CvTextEditor"
-                    Placeholder="Paste your profile, skills or experience section here..."
+                    Placeholder="Lipește aici profilul, competențele sau experiența din CV..."
                     AutoSize="TextChanges"
                     HeightRequest="160"
                     BackgroundColor="#F8FAFC"
@@ -142,7 +142,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="Generate CV suggestions"
+            <Button Text="Generează sugestii pentru CV"
                     Clicked="OnGenerateClicked"
                     BackgroundColor="#1D4ED8"
                     TextColor="White"
@@ -187,7 +187,7 @@
 
                     <VerticalStackLayout Spacing="6">
 
-                        <Label Text="CV needs more information"
+                        <Label Text="CV-ul are nevoie de mai multe informații"
                FontSize="15"
                FontAttributes="Bold"
                TextColor="#92400E" />
@@ -209,7 +209,7 @@
 
                     <VerticalStackLayout Spacing="10">
 
-                        <Label Text="Tailored profile summary"
+                        <Label Text="Profil profesional adaptat"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
@@ -230,7 +230,7 @@
 
                     <VerticalStackLayout Spacing="12">
 
-                        <Label Text="Important keywords"
+                        <Label Text="Cuvinte-cheie importante"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
@@ -271,7 +271,7 @@
 
                     <VerticalStackLayout Spacing="12">
 
-                        <Label Text="Skills to highlight"
+                        <Label Text="Competențe de evidențiat"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
@@ -312,7 +312,7 @@
 
                     <VerticalStackLayout Spacing="12">
 
-                        <Label Text="Experience to emphasize"
+                        <Label Text="Experiență de evidențiat"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />
@@ -353,7 +353,7 @@
 
                     <VerticalStackLayout Spacing="12">
 
-                        <Label Text="CV improvement suggestions"
+                        <Label Text="Sugestii pentru îmbunătățirea CV-ului"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#0F172A" />

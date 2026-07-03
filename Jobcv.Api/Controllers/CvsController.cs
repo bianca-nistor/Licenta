@@ -20,7 +20,6 @@ namespace JobCv.Api.Controllers
         }
 
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> CreateCv(CreateCvDto dto)
         {
             var userExists = await _context.Users.AnyAsync(x => x.Id == dto.UserId);
@@ -159,22 +158,57 @@ namespace JobCv.Api.Controllers
         [HttpDelete("{cvId:int}")]
         public async Task<IActionResult> DeleteCv(int cvId)
         {
-            var cv = await _context.Cvs.FindAsync(cvId);
+            var cv = await _context.Cvs
+                .Include(x => x.Skills)
+                .Include(x => x.Experiences)
+                .Include(x => x.Educations)
+                .Include(x => x.Projects)
+                .Include(x => x.Languages)
+                .Include(x => x.Certifications)
+                .FirstOrDefaultAsync(x => x.Id == cvId);
 
             if (cv == null)
                 return NotFound("CV was not found.");
 
-            if (!string.IsNullOrWhiteSpace(cv.PhotoPath) && System.IO.File.Exists(cv.PhotoPath))
+            var childCvs = await _context.Cvs
+                .Where(x => x.ParentCvId == cvId)
+                .ToListAsync();
+
+            foreach (var childCv in childCvs)
             {
-                System.IO.File.Delete(cv.PhotoPath);
+                childCv.ParentCvId = null;
             }
+
+            var applications = await _context.JobApplications
+                .Where(x => x.CvId == cvId)
+                .ToListAsync();
+
+            foreach (var application in applications)
+            {
+                application.CvId = null;
+            }
+
+            _context.CvSkills.RemoveRange(cv.Skills);
+            _context.CvExperiences.RemoveRange(cv.Experiences);
+            _context.CvEducations.RemoveRange(cv.Educations);
+            _context.CvProjects.RemoveRange(cv.Projects);
+            _context.CvLanguages.RemoveRange(cv.Languages);
+            _context.CvCertifications.RemoveRange(cv.Certifications);
+
+            var photoPath = cv.PhotoPath;
 
             _context.Cvs.Remove(cv);
             await _context.SaveChangesAsync();
 
+            if (!string.IsNullOrWhiteSpace(photoPath)
+                && System.IO.File.Exists(photoPath)
+                && !await _context.Cvs.AnyAsync(x => x.PhotoPath == photoPath))
+            {
+                System.IO.File.Delete(photoPath);
+            }
+
             return Ok(new { Message = "CV deleted successfully." });
         }
-
         [HttpPost("{cvId:int}/skills")]
         public async Task<IActionResult> AddSkill(int cvId, AddSkillDto dto)
         {

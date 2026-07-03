@@ -15,11 +15,11 @@
 
                 <VerticalStackLayout Grid.Column="0"
                                      Spacing="4">
-                    <Label Text="Application Details"
+                    <Label Text="Detalii aplicare"
                            FontSize="34"
                            FontAttributes="Bold"
                            TextColor="#0F172A" />
-                    <Label Text="Edit the status, notes and interview details for this application."
+                    <Label Text="Editează statusul, notițele și detaliile de interviu pentru această aplicare."
                            FontSize="15"
                            TextColor="#64748B" />
                 </VerticalStackLayout>
@@ -30,34 +30,34 @@
                     StrokeShape="RoundRectangle 28"
                     Padding="20">
                 <VerticalStackLayout Spacing="14">
-                    <Label Text="Job information"
+                    <Label Text="Informații job"
                            FontSize="22"
                            FontAttributes="Bold"
                            TextColor="#0F172A" />
 
                     <Entry x:Name="JobTitleEntry"
-                           Placeholder="Job title"
+                           Placeholder="Titlu job"
                            BackgroundColor="#F8FAFC"
                            TextColor="#0F172A" />
 
                     <Entry x:Name="CompanyEntry"
-                           Placeholder="Company"
+                           Placeholder="Companie"
                            BackgroundColor="#F8FAFC"
                            TextColor="#0F172A" />
 
                     <Entry x:Name="LocationEntry"
-                           Placeholder="Location"
+                           Placeholder="Locație"
                            BackgroundColor="#F8FAFC"
                            TextColor="#0F172A" />
 
                     <Entry x:Name="JobUrlEntry"
-                           Placeholder="Job URL"
+                           Placeholder="Link job"
                            Keyboard="Url"
                            BackgroundColor="#F8FAFC"
                            TextColor="#0F172A" />
 
                     <Entry x:Name="SourceEntry"
-                           Placeholder="Source"
+                           Placeholder="Sursă"
                            BackgroundColor="#F8FAFC"
                            TextColor="#0F172A" />
                 </VerticalStackLayout>
@@ -68,7 +68,7 @@
                     StrokeShape="RoundRectangle 28"
                     Padding="20">
                 <VerticalStackLayout Spacing="14">
-                    <Label Text="Application progress"
+                    <Label Text="Progres aplicare"
                            FontSize="22"
                            FontAttributes="Bold"
                            TextColor="#0F172A" />
@@ -83,24 +83,24 @@
         Padding="12,4">
 
                         <Picker x:Name="StatusPicker"
-            Title="Choose status"
+            Title="Alege statusul"
             BackgroundColor="Transparent"
             TextColor="#0F172A"
             TitleColor="#64748B">
 
                             <Picker.Items>
-                                <x:String>Saved</x:String>
-                                <x:String>Applied</x:String>
-                                <x:String>Interview Scheduled</x:String>
-                                <x:String>Interview Done</x:String>
-                                <x:String>Offer</x:String>
-                                <x:String>Rejected</x:String>
+                                <x:String>Salvat</x:String>
+                                <x:String>Aplicat</x:String>
+                                <x:String>Interviu programat</x:String>
+                                <x:String>Interviu finalizat</x:String>
+                                <x:String>Ofertă</x:String>
+                                <x:String>Respins</x:String>
                             </Picker.Items>
 
                         </Picker>
 
                     </Border>
-                    <Label Text="CV used"
+                    <Label Text="CV utilizat"
                            FontAttributes="Bold"
                            TextColor="#0F172A" />
 
@@ -110,12 +110,12 @@
                             TextColor="#0F172A" />
 
                     <Entry x:Name="SalaryRangeEntry"
-                           Placeholder="Salary range"
+                           Placeholder="Interval salarial"
                            BackgroundColor="#F8FAFC"
                            TextColor="#0F172A" />
 
                     <Entry x:Name="ContactPersonEntry"
-                           Placeholder="Recruiter / contact person"
+                           Placeholder="Recrutor / persoană de contact"
                            BackgroundColor="#F8FAFC"
                            TextColor="#0F172A" />
 
@@ -127,7 +127,7 @@
                             <HorizontalStackLayout Spacing="10">
                                 <CheckBox x:Name="UseAppliedDateCheckBox"
                                           CheckedChanged="OnUseAppliedDateChanged" />
-                                <Label Text="Applied date"
+                                <Label Text="Data aplicării"
                                        VerticalOptions="Center"
                                        TextColor="#0F172A" />
                             </HorizontalStackLayout>
@@ -147,7 +147,7 @@
                             <HorizontalStackLayout Spacing="10">
                                 <CheckBox x:Name="UseInterviewDateCheckBox"
                                           CheckedChanged="OnUseInterviewDateChanged" />
-                                <Label Text="Interview date"
+                                <Label Text="Data interviului"
                                        VerticalOptions="Center"
                                        TextColor="#0F172A" />
                             </HorizontalStackLayout>
@@ -166,20 +166,20 @@
                     StrokeShape="RoundRectangle 28"
                     Padding="20">
                 <VerticalStackLayout Spacing="14">
-                    <Label Text="Notes"
+                    <Label Text="Notițe"
                            FontSize="22"
                            FontAttributes="Bold"
                            TextColor="#0F172A" />
 
                     <Editor x:Name="NotesEditor"
-                            Placeholder="General notes: what you sent, recruiter contact, next steps..."
+                            Placeholder="Notițe generale: ce ai trimis, contact recrutor, pași următori..."
                             HeightRequest="130"
                             AutoSize="TextChanges"
                             BackgroundColor="#F8FAFC"
                             TextColor="#0F172A" />
 
                     <Editor x:Name="InterviewNotesEditor"
-                            Placeholder="Interview preparation notes..."
+                            Placeholder="Notițe pentru pregătirea interviului..."
                             HeightRequest="130"
                             AutoSize="TextChanges"
                             BackgroundColor="#F8FAFC"
@@ -193,17 +193,17 @@
 
                 <VerticalStackLayout Spacing="14">
 
-                    <Label Text="AI cover letter"
+                    <Label Text="Scrisoare de intenție AI"
                FontSize="22"
                FontAttributes="Bold"
                TextColor="#0F172A" />
 
-                    <Label Text="Generate a short cover letter for this application using the selected CV and job details."
+                    <Label Text="Generează o scrisoare de intenție scurtă pentru această aplicare, folosind CV-ul selectat și detaliile jobului."
                FontSize="14"
                TextColor="#64748B"
                LineBreakMode="WordWrap" />
 
-                    <Button Text="Generate cover letter"
+                    <Button Text="Generează scrisoarea de intenție"
                 Clicked="OnGenerateCoverLetterClicked"
                 BackgroundColor="#7C3AED"
                 FontSize="13"
@@ -222,7 +222,7 @@
                LineBreakMode="WordWrap" />
 
                     <Editor x:Name="CoverLetterEditor"
-                Placeholder="The generated cover letter will appear here..."
+                Placeholder="Scrisoarea de intenție generată va apărea aici..."
                 HeightRequest="220"
                 AutoSize="TextChanges"
                 BackgroundColor="#F8FAFC"
@@ -230,7 +230,7 @@
                 IsVisible="False" />
 
                     <Button x:Name="CopyCoverLetterButton"
-                Text="Copy cover letter"
+                Text="Copiază scrisoarea de intenție"
                 Clicked="OnCopyCoverLetterClicked"
                 BackgroundColor="#EFF6FF"
                 FontSize="13"
@@ -249,7 +249,7 @@
                   RowDefinitions="Auto,Auto"
                   ColumnSpacing="12"
                   RowSpacing="12">
-                <Button Text="Open job"
+                <Button Text="Deschide jobul"
                         Clicked="OnOpenJobClicked"
                         BackgroundColor="White"
                         FontSize="13"
@@ -262,7 +262,7 @@
                         HeightRequest="54" />
 
                 <Button Grid.Column="1"
-                        Text="Prepare interview"
+                        Text="Pregătire interviu"
                         Clicked="OnPrepareInterviewClicked"
                         BackgroundColor="#16A34A"
                         FontSize="13"
@@ -274,7 +274,7 @@
 
                 <Button Grid.Row="1"
                         Grid.ColumnSpan="2"
-                        Text="Save changes"
+                        Text="Salvează modificările"
                         Clicked="OnSaveClicked"
                         BackgroundColor="#1D4ED8"
                         FontSize="13"
