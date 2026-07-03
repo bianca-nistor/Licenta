@@ -36,7 +36,7 @@ namespace JobCv.Mobile.Pages
                 {
                     UserId = _user.Id,
                     Title = "Untitled CV",
-                    Language = "en",
+                    Language = LanguageService.CurrentLanguage,
                     Summary = string.Empty,
                     TemplateName = "modern-blue",
                     IsBaseCv = false

@@ -20,6 +20,7 @@ namespace JobCv.Api.Controllers
         }
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> CreateCv(CreateCvDto dto)
         {
             var userExists = await _context.Users.AnyAsync(x => x.Id == dto.UserId);
@@ -30,11 +31,15 @@ namespace JobCv.Api.Controllers
             if (string.IsNullOrWhiteSpace(dto.Title))
                 return BadRequest("CV title is required.");
 
+            var language = dto.Language?.Trim().ToLowerInvariant() == "en"
+                ? "en"
+                : "ro";
+
             var cv = new Cv
             {
                 UserId = dto.UserId,
                 Title = dto.Title.Trim(),
-                Language = string.IsNullOrWhiteSpace(dto.Language) ? "en" : dto.Language.Trim(),
+                Language = language,
                 Summary = dto.Summary?.Trim() ?? string.Empty,
                 FullName = dto.FullName?.Trim() ?? string.Empty,
                 Email = dto.Email?.Trim() ?? string.Empty,
